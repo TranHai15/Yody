@@ -11,14 +11,27 @@
 <body>
     <?php require_once(HF . "header.php")  ?>
     <div>
-        <a href="?clt=event">
-            <section class="banner banner__one grid wide">
-                <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
-                    alt="" />
-                <span class="slide__show pre "><img src="Frontend/public/svg/pre.svg" alt="Pre"></span>
-                <span class="slide__show next"><img src="Frontend/public/svg/next.svg" alt="Next"></span>
-            </section>
-        </a>
+
+        <section class="banner banner__one grid wide" data-carousel>
+            <ul data-slides>
+                <li class="slide" data-active>
+
+                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
+                        alt="" />
+                </li>
+                <li class="slide">
+                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2wotote0per2gcotuqa1800x833%20PC%20hero%20banner%2011.png"
+                        alt="" />
+                </li>
+                <li class="slide">
+                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2x4rdsb1ctzpyb9jii3110_1800x833-07.png"
+                        alt="" />
+                </li>
+            </ul>
+            <button class="slide__show pre " data-carousel-button="prev"><img src="Frontend/public/svg/pre.svg" alt="Pre"></button>
+            <button class="slide__show next" data-carousel-button="next"><img src="Frontend/public/svg/next.svg" alt="Next"></button>
+        </section>
+
         <main>
             <div class="grid wide ">
                 <h2 class="title text-align-center">Sản phẩm ưa chuộng</h2>
@@ -525,5 +538,6 @@
 
     <?php require_once(HF . "footer.php")  ?>
 </body>
+<script src="Frontend/Js/home.js" defer></script>
 
 </html>
