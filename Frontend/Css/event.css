@@ -1,0 +1,8 @@
+.banner__one > img {
+  object-fit: cover;
+  height: 45rem;
+}
+
+.banner {
+  height: 45rem;
+}

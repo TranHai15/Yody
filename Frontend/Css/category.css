@@ -1,0 +1,252 @@
+a {
+  text-decoration: none;
+}
+
+.past__product {
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.past__icon--next img {
+  width: 1.2rem;
+  object-fit: cover;
+  margin: 0 0.7rem;
+}
+
+.past__product--category {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.name__category {
+  font-size: 30px;
+  font-weight: 600;
+  padding: 3rem 0;
+}
+
+.intro__products {
+  position: sticky;
+  background-color: #fff;
+<<<<<<< HEAD
+  z-index: 10;
+=======
+  z-index: 5;
+>>>>>>> 8edabf051089daef8b42f3ed7c0f6ee9248ce422
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  top: 7rem;
+}
+
+.intro__products > span:first-child {
+  color: #394960;
+  font-size: 16;
+  font-weight: 500;
+}
+
+.category__left > div > span {
+  font-size: 20px;
+  padding: 0.2rem 0;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 20px;
+  color: #000;
+}
+
+.category__left {
+  padding-right: 1rem;
+  height: 45rem;
+  position: sticky;
+  top: 10rem;
+}
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #cfcfcf;
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+.scollosss {
+  height: 55rem;
+  overflow-y: auto;
+}
+.scollosss::-webkit-scrollbar-thumb {
+  height: 2px;
+}
+
+.list__sex,
+.list__color,
+.list__size,
+.list__price {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.4);
+  color: rgb(28, 36, 48);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 1.5rem 0;
+}
+
+.list__name {
+  padding: 1rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list__content--none {
+  width: 100%;
+  margin-top: 2rem;
+  animation: all 0.5s ease 0.2s;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  gap: 2rem;
+  list-style-type: none;
+  padding: 0;
+}
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  gap: 1.5rem 1.5rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.color-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.color-item > a > p {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(28, 36, 48);
+}
+
+.color-circle {
+  display: block;
+  font-size: 14px;
+  color: var(--text);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.size-circle {
+  font-size: 14px;
+  color: var(--text);
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+
+.checkbox-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.checkbox-item {
+  margin-bottom: 10px;
+}
+
+.checkbox-item a {
+  text-decoration: none;
+  color: rgb(57, 73, 96);
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.list__content--none > a {
+  font-size: 16px;
+  color: rgb(28, 36, 48);
+  display: block;
+  width: 100%;
+  font-weight: 500;
+  padding: 0.8rem 1rem;
+}
+
+/* /////////// */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.icon__bottom img {
+  width: 1.7rem;
+  object-fit: cover;
+  margin: 0 1rem;
+}
+
+.dropbtn > span {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.dropbtn {
+  background-color: white;
+  padding: 1rem 1rem 1rem 2rem;
+  border: 1px solid rgb(38, 38, 38);
+  cursor: pointer;
+  border-radius: 14px;
+}
+
+.dropdown__content {
+  /* display: none; */
+  top: 120%;
+  right: 0;
+  position: absolute;
+  background-color: white;
+  min-width: 22rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: 1px solid gray;
+
+  border-radius: 5px;
+}
+
+.display__none {
+  transition: all 1s ease-in-out;
+  display: none;
+}
+
+.dropdown__content a {
+  color: var(--text);
+  font-size: 1.4rem;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown__content a:hover {
+  background-color: #f1f1f1;
+}
+
+.xoay {
+  transform: rotate(180deg);
+  transition: all 0.4s ease-in;
+}
