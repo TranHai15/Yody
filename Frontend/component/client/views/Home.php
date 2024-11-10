@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    anh em ơi
+
     <?php require_once(HF . "header.php")  ?>
     <div>
 
