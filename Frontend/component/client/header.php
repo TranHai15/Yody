@@ -1,29 +1,3 @@
-<?php
-
-
-// echo "<pre>";
-// var_dump($category);
-// echo "</pre>";
-// echo "<pre>";
-// var_dump($child);
-// echo "</pre>";
-// echo "<pre>";
-// var_dump($common);
-// echo "</pre>";
-// echo "<pre>";
-// var_dump($category__image);
-// echo "</pre>";
-
-
-
-// checkloi($category);
-// checkloi($child);
-// checkloi($common);
-// checkloi($category__image);
-
-
-?>
-
 <link rel="stylesheet" href="Frontend/Css/hf.css?ver=434">
 <div class="header__kc">
     <header>
@@ -35,36 +9,51 @@
                     </div>
                 </a>
                 <div class="menu">
-                    <?php foreach ($category as $cap1):     ?>
-                        <span class="menu-item menu-item-hover"><a href="?clt=category"
-                                class="menu-item-a "><?= $cap1['categoryName'] ?> </a>
-                            <?php foreach ($child as $cap2): ?>
-                                <?php if ($cap1['categoryId'] == $cap2['categoryId']):  ?>
-                                    <div class="menu__list--cha">
-                                        <div class="menu__list grid wide row">
-                                            <div class="item__list ">
-                                                <div class="child__category"> <a href="#"><?= $cap2['childcategoryName']  ?></a>
+                    <?php foreach ($category as $cap1): ?>
+                        <?php
+                        // Kiểm tra xem mục cha này có mục con nào không
+                        $hasSubmenu = false;
+                        foreach ($child as $cap2) {
+                            if ($cap1['categoryId'] == $cap2['categoryId']) {
+                                $hasSubmenu = true;
+                                break;
+                            }
+                        }
+                        ?>
+                        <!-- Thêm lớp 'has-submenu' nếu có mục con -->
+                        <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
+                            <a href="?clt=category" class="menu-item-a"><?= $cap1['categoryName'] ?></a>
+                            <?php if ($hasSubmenu): ?>
+                                <div class="menu__list--cha">
+                                    <div class="menu__list grid wide row">
+                                        <?php foreach ($child as $cap2): ?>
+                                            <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
+                                                <div class="item__list">
+                                                    <div class="child__category"><a href="#"><?= $cap2['childcategoryName'] ?></a></div>
+                                                    <?php foreach ($common as $cap3): ?>
+                                                        <?php if ($cap2['childcategoryId'] == $cap3['childcategoryId']): ?>
+                                                            <div>
+                                                                <div class="commont__category"><a href="#"><?= $cap3['comName'] ?></a></div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
                                                 </div>
-                                                <div>
-                                                    <?php foreach ($common as $cap3):  ?>
-                                                        <?php if ($cap2['childcategoryId'] == $cap3['childcategoryId']):  ?>
-                                                            <div class="commont__category"><a href="#"><?= $cap3['comName']   ?></a></div>
-                                                        <?php endif;  ?>
-                                                    <?php endforeach;  ?>
-                                                </div>
-                                            </div>
-                                            <div class="item__list--img">
-                                                <!-- <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/media/ecom/2023-06-12-08-48-19_a5b00606-d7c0-4ba0-9611-33867680f45b.webp"
-                                                    alt=""> -->
-                                            </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <div class="item__list--img">
+                                            <?php foreach ($category__image as $image): ?>
+                                                <?php if ($cap1['categoryId'] == $image['categoryId']): ?>
+                                                    <img src="<?= $image['categoryimageUrl'] ?>" alt="">
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
-                                <?php endif  ?>
-                            <?php endforeach;  ?>
+                                </div>
+                            <?php endif; ?>
                         </span>
-                    <?php endforeach;  ?>
-
+                    <?php endforeach; ?>
                 </div>
+
             </nav>
             <span class="header__right row align-items-center">
                 <span class="header__search">
@@ -82,8 +71,8 @@
                         <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
                                 alt="Yody-user"></span>
                     </a>
-                    <!-- 
-                    <div class="header__user if_login_ok ">
+
+                    <!-- <div class="header__user if_login_ok ">
                         <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
                     </div> -->
 
