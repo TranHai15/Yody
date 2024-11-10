@@ -158,7 +158,7 @@ a {
   padding-bottom: 4rem;
   background-color: #fff;
   opacity: 0;
-  transform: translateY(-130%);
+  transform: translateY(-170%);
   /* Độ trễ trước khi hoạt ảnh bắt đầu */
 }
 
@@ -173,21 +173,9 @@ a {
   }
 }
 
-.overlay {
-  position: fixed;
-  top: 7.1rem;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  z-index: 10;
-}
-
 .menu-item:hover .menu__list--cha {
   animation: menuHover 0.2s ease-in-out forwards;
-  animation-delay: 0.1s;
+  animation-delay: 0.2s;
 }
 
 .overlay {
@@ -463,17 +451,9 @@ a {
   padding: 0 0.2rem; /* Padding để che đi viền của input */
 }
 
-.error__con {
-  position: absolute;
-  bottom: -100%;
-  color: red; /* Màu chữ cho thông báo lỗi */
-  font-size: 13px; /* Kích thước chữ cho thông báo lỗi */
-  left: 1.5rem;
-}
-
 .baoboc {
   width: 50rem;
-  height: 58rem;
+  height: 60rem;
   /* border: 1px solid gray; */
   margin: 1rem auto 3rem auto;
   padding: 2rem;
@@ -484,7 +464,7 @@ a {
 }
 
 .input-container {
-  margin: 4rem 0;
+  margin: 4rem 0 5rem 0;
 }
 
 .btn__summit {
@@ -570,6 +550,19 @@ a {
   background-color: var(--keyB);
   animation: all 2s ease-in-out 0.2s;
 }
+
+.form_input.error {
+  border: 1px solid red;
+}
+
+.error__con {
+  position: absolute;
+  bottom: -120%;
+  color: red; /* Màu chữ cho thông báo lỗi */
+  font-size: 13px; /* Kích thước chữ cho thông báo lỗi */
+  left: 0.5rem;
+}
+
 /* """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""END"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" */
 
 /* Chung 

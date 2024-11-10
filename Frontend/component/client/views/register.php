@@ -4,34 +4,39 @@
         <div class="content">
             <p class="text-align-center">Chào mừng bạn đến với Yody</p>
             <h1 class="text-align-center"><span>ĐĂNG</span><span>KÍ</span></h1>
-            <form action="?clt=user&active=dangki" method="post" onsubmit="return validate__login()"
+            <form action="?clt=user&active=dangki" method="post" onsubmit="return validate__register()"
                 class="form__login">
                 <div class="input-container">
                     <div class="form">
                         <input type="text" name="userName" id="userName" class="form_input" autocomplete="off"
-                            placeholder=" ">
+                            placeholder=" " onchange="validateInput('userName')" onfocus="clearError('userName')"
+                            onblur="validateInput('userName')">
                         <label for="userName" class="form_label">Name</label>
-                        <div class="error__con"></div>
+                        <div class="error__con" id="error__userName"></div>
                     </div>
                 </div>
                 <div class="input-container">
                     <div class="form">
-                        <input type="email" name="email" id="email" class="form_input" autocomplete="off"
-                            placeholder=" ">
+                        <input type="text" name="email" id="email" class="form_input" autocomplete="off" placeholder=" "
+                            onchange="validateInput('email')" onfocus="clearError('email')"
+                            onblur="validateInput('email')">
                         <label for="email" class="form_label">Email</label>
-                        <div class="error__con"></div>
+                        <div class="error__con" id="error__email"></div>
                     </div>
                 </div>
                 <div class="input-container">
                     <div class="form">
                         <input type="password" name="password" id="password" class="form_input" autocomplete="off"
-                            placeholder=" ">
+                            placeholder=" " onchange="validateInput('password')" onfocus="clearError('password')"
+                            onblur="validateInput('password')">
                         <label for="password" class="form_label">Password</label>
-                        <div class="error__con"></div>
+                        <div class="error__con" id="error__password"></div>
                     </div>
                 </div>
                 <button class="btn__summit" type="submit">Đăng Kí</button>
             </form>
+
+
             <div class="layout ">
                 <hr>
                 <p>Hoặc đăng kí bằng</p>
@@ -53,4 +58,7 @@
         </div>
     </div>
     <?php require_once(HF . "footer.php") ?>
+    <script src="Frontend/Js/form.js">
+
+    </script>
 </body>
