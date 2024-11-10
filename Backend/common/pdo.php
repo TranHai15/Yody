@@ -1,6 +1,5 @@
-<!-- kết nối database -->
 <?php
-require_once("config.php");
+
 function Connect()
 {
     try {
@@ -9,7 +8,7 @@ function Connect()
         // echo "Ket NOi Thanh cong <br>";
         return $conn;
     } catch (PDOException $th) {
-        echo "Ket NOi That Bai <br>";
+        echo "a Ket NOi That Bai <br>";
         $th->getMessage();
         die;
     }

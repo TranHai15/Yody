@@ -1,3 +1,29 @@
+<?php
+
+
+// echo "<pre>";
+// var_dump($category);
+// echo "</pre>";
+// echo "<pre>";
+// var_dump($child);
+// echo "</pre>";
+// echo "<pre>";
+// var_dump($common);
+// echo "</pre>";
+// echo "<pre>";
+// var_dump($category__image);
+// echo "</pre>";
+
+
+
+// checkloi($category);
+// checkloi($child);
+// checkloi($common);
+// checkloi($category__image);
+
+
+?>
+
 <link rel="stylesheet" href="Frontend/Css/hf.css?ver=434">
 <div class="header__kc">
     <header>
@@ -9,204 +35,35 @@
                     </div>
                 </a>
                 <div class="menu">
-                    <span class="menu-item"><a href="#" class="menu-item-a ">SALE</a></span>
-                    <span class="menu-item"><a href="#" class="menu-item-a ">Mới về</a></span>
-                    <span class="menu-item menu-item-hover"><a href="?clt=category" class="menu-item-a ">Nam </a>
-                        <div class="menu__list--cha">
-                            <div class="menu__list grid wide row">
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
+                    <?php foreach ($category as $cap1):     ?>
+                        <span class="menu-item menu-item-hover"><a href="?clt=category"
+                                class="menu-item-a "><?= $cap1['categoryName'] ?> </a>
+                            <?php foreach ($child as $cap2): ?>
+                                <?php if ($cap1['categoryId'] == $cap2['categoryId']):  ?>
+                                    <div class="menu__list--cha">
+                                        <div class="menu__list grid wide row">
+                                            <div class="item__list ">
+                                                <div class="child__category"> <a href="#"><?= $cap2['childcategoryName']  ?></a>
+                                                </div>
+                                                <div>
+                                                    <?php foreach ($common as $cap3):  ?>
+                                                        <?php if ($cap2['childcategoryId'] == $cap3['childcategoryId']):  ?>
+                                                            <div class="commont__category"><a href="#"><?= $cap3['comName']   ?></a></div>
+                                                        <?php endif;  ?>
+                                                    <?php endforeach;  ?>
+                                                </div>
+                                            </div>
+                                            <div class="item__list--img">
+                                                <!-- <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/media/ecom/2023-06-12-08-48-19_a5b00606-d7c0-4ba0-9611-33867680f45b.webp"
+                                                    alt=""> -->
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
+                                <?php endif  ?>
+                            <?php endforeach;  ?>
+                        </span>
+                    <?php endforeach;  ?>
 
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list--img">
-                                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/media/ecom/2023-06-12-08-48-19_a5b00606-d7c0-4ba0-9611-33867680f45b.webp"
-                                        alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </span>
-                    <span class="menu-item menu-item-hover"><a href="#" class="menu-item-a ">Nữ</a>
-                        <div class="menu__list--cha">
-                            <div class="menu__list grid wide row">
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Nu</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list--img">
-                                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/media/ecom/2023-06-12-08-48-19_a5b00606-d7c0-4ba0-9611-33867680f45b.webp"
-                                        alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </span>
-                    <span class="menu-item menu-item-hover"><a href="#" class="menu-item-a ">Trẻ em</a>
-                        <div class="menu__list--cha">
-                            <div class="menu__list grid wide row">
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Tre em</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list ">
-                                    <div class="child__category"> <a href="#">Ao</a></div>
-                                    <div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                        <div class="commont__category"><a href="#">Ao Polo</a></div>
-                                    </div>
-                                </div>
-                                <div class="item__list--img">
-                                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/media/ecom/2023-06-12-08-48-19_a5b00606-d7c0-4ba0-9611-33867680f45b.webp"
-                                        alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </span>
-                    <span class="menu-item"><a href="#" class="menu-item-a ">Bộ sưu tập</a></span>
                 </div>
             </nav>
             <span class="header__right row align-items-center">
@@ -221,14 +78,14 @@
                     </span>
                 </a>
                 <div class="user">
-                    <!-- <a href="?clt=auth&action=login">
+                    <a href="?clt=auth&action=login">
                         <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
                                 alt="Yody-user"></span>
-                    </a> -->
-
+                    </a>
+                    <!-- 
                     <div class="header__user if_login_ok ">
                         <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
-                    </div>
+                    </div> -->
 
                     <div class="user-info-dropdown ">
                         <div class="user-info">
