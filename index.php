@@ -7,22 +7,18 @@ require_once("config.php");
 
 require_once("./Backend/controller/client/client.php");
 
-$url = $_GET['clt'] ?? "";
-
+$url = $_GET['clt'] ?? "/";
+$Client = new Controller_Client;
+$Client->Header("header");
 switch ($url) {
     case "/":
-        $Client = new Controller_Client;
-        $Client->List();
-        break;
-    case "":
-        require_once FRONTEND__VIEW . "Home.php";
-        echo "<script>getCategorys();</script>";
+        $Client->List("Home");
         break;
     case "category":
         require_once FRONTEND__VIEW . "category.php";
         break;
     case "detail":
-        require_once FRONTEND__VIEW . "detail.php";
+        $Client->detail("detail");
         break;
     case "cart":
         require_once FRONTEND__VIEW . "cart.php";

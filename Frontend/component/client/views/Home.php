@@ -1,11 +1,3 @@
-<?php
-
-// var_dump($child)
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 

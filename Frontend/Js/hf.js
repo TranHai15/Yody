@@ -1,17 +1,18 @@
-const item__menu = document.querySelectorAll(".menu-item-hover");
-
+const itemMenu = document.querySelectorAll(".menu-item-hover.has-submenu");
 const overlay = document.querySelector(".overlay");
-// console.log(item__menu, overlay);
 
-item__menu.forEach((item) => {
+itemMenu.forEach((item) => {
   item.addEventListener("mouseover", function () {
-    overlay.style.display = "block";
+    overlay.style.display = "block"; // Hiển thị overlay khi có submenu
+    // item.classList.add("overflow"); // Thêm class overflow
   });
 
   item.addEventListener("mouseout", function () {
-    overlay.style.display = "none";
+    overlay.style.display = "none"; // Ẩn overlay khi không hover
+    // item.classList.remove("overflow"); // Bỏ class overflow
   });
 });
+
 // Search
 const search = document.querySelector(".header__search--input");
 

@@ -132,13 +132,21 @@ a {
   text-align: start;
   font-size: 14px;
   color: var(--text);
-  margin: 1rem 0 3rem 0;
+  display: block;
+  margin: 1rem 0 2.5rem 0;
 }
 .commont__category > a {
   font-weight: 400;
   text-align: start;
   font-size: 14px;
   color: var(--text);
+  display: block;
+  transition: all 0.1s ease;
+  margin: 1.5rem 0;
+}
+
+.commont__category > a:hover {
+  color: var(--key);
 }
 
 .commont__category {
@@ -151,31 +159,33 @@ a {
 
 .menu__list--cha {
   position: fixed;
-  top: 7.1rem;
+  top: 7rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.3);
   left: 0;
   right: 0;
   z-index: 20;
   padding-bottom: 4rem;
   background-color: #fff;
   opacity: 0;
-  transform: translateY(-170%);
+  /* transform: translateZ(-100%); */
   /* Độ trễ trước khi hoạt ảnh bắt đầu */
+  display: none;
 }
 
 @keyframes menuHover {
   0% {
-    transform: translateY(-130%);
     opacity: 0;
   }
   100% {
-    transform: translateY(0%);
+    transform: translateZ(0%);
     opacity: 1;
   }
 }
 
 .menu-item:hover .menu__list--cha {
-  animation: menuHover 0.2s ease-in-out forwards;
-  animation-delay: 0.2s;
+  display: block;
+  animation: menuHover 0.2s ease-out forwards;
+  /* animation-delay: 0.1s; */
 }
 
 .overlay {
@@ -238,7 +248,8 @@ a {
   font-size: 16px;
 }
 .panding_fame {
-  margin-top: 2px;
+  /* margin-top: 2px; */
+  border-top: 1px solid rgba(128, 128, 128, 0.3);
   height: 2rem;
   width: 100%;
   padding: 3rem;
