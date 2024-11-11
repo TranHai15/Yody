@@ -34,18 +34,18 @@
                         ?>
                         <!-- Thêm lớp 'has-submenu' nếu có mục con -->
                         <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
-                            <a href="?clt=category" class="menu-item-a"><?= $cap1['categoryName'] ?></a>
+                            <a href="?clt=category" class="menu-item-a"><?= $cap1['name'] ?></a>
                             <?php if ($hasSubmenu): ?>
                                 <div class="menu__list--cha">
                                     <div class="menu__list grid wide row">
                                         <?php foreach ($child as $cap2): ?>
                                             <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
                                                 <div class="item__list">
-                                                    <div class="child__category"><a href="#"><?= $cap2['childcategoryName'] ?></a></div>
+                                                    <div class="child__category"><a href="#"><?= $cap2['name'] ?></a></div>
                                                     <?php foreach ($common as $cap3): ?>
-                                                        <?php if ($cap2['childcategoryId'] == $cap3['childcategoryId']): ?>
+                                                        <?php if ($cap2['childId'] == $cap3['childId']): ?>
                                                             <div>
-                                                                <div class="commont__category"><a href="#"><?= $cap3['comName'] ?></a></div>
+                                                                <div class="commont__category"><a href="#"><?= $cap3['name'] ?></a></div>
                                                             </div>
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
@@ -54,11 +54,7 @@
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                         <div class="item__list--img">
-                                            <?php foreach ($category__image as $image): ?>
-                                                <?php if ($cap1['categoryId'] == $image['categoryId']): ?>
-                                                    <img src="<?= $image['categoryimageUrl'] ?>" alt="">
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
+                                            <img src="<?= $cap1['image'] ?>" alt="">
                                         </div>
                                     </div>
                                 </div>

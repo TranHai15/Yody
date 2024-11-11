@@ -18,7 +18,7 @@ switch ($url) {
         require_once FRONTEND__VIEW . "category.php";
         break;
     case "detail":
-        require_once FRONTEND__VIEW . "detail.php";
+        $Client->detail("detail");
         break;
     case "cart":
         require_once FRONTEND__VIEW . "cart.php";
