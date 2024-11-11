@@ -30,7 +30,7 @@ class Controller_Client
 
 
 
-        View(FRONTEND, $file, []);
+        View(FRONTEND__VIEW, $file, []);
     }
 
     public function detail($file = "detail")

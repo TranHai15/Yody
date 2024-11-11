@@ -19,38 +19,6 @@
 CREATE DATABASE IF NOT EXISTS `duanyody` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `duanyody`;
 
--- Dumping structure for table duanyody.cartitems
-CREATE TABLE IF NOT EXISTS `cartitems` (
-  `cartitemId` int NOT NULL AUTO_INCREMENT,
-  `cartId` int DEFAULT NULL,
-  `variationId` int DEFAULT NULL,
-  `sizeId` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
-  PRIMARY KEY (`cartitemId`),
-  KEY `FK__carts` (`cartId`),
-  KEY `FK_cartitems_variatinos` (`variationId`),
-  KEY `FK_cartitems_sizevariations` (`sizeId`),
-  CONSTRAINT `FK__carts` FOREIGN KEY (`cartId`) REFERENCES `carts` (`cartId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_cartitems_sizevariations` FOREIGN KEY (`sizeId`) REFERENCES `sizevariations` (`sizeId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_cartitems_variatinos` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chi tiet san pham trong gio hang';
-
--- Dumping data for table duanyody.cartitems: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.carts
-CREATE TABLE IF NOT EXISTS `carts` (
-  `cartId` int NOT NULL,
-  `userId` int DEFAULT NULL,
-  `createAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`cartId`),
-  KEY `FK__users` (`userId`),
-  CONSTRAINT `FK__users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bangr gior hangf mooix nguoiwf sex co mot gio hang';
-
--- Dumping data for table duanyody.carts: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.categorys
 CREATE TABLE IF NOT EXISTS `categorys` (
   `categoryId` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -96,25 +64,7 @@ INSERT INTO `childcategorys` (`childId`, `name`, `past`, `categoryId`) VALUES
 	(17, 'Đồ mặc trong trẻ em', 'Example', 5),
 	(18, 'Đầm và chân váy bé gái', 'Example', 5),
 	(19, 'Phụ kiện trẻ em', 'Example', 5);
-
--- Dumping structure for table duanyody.comments
-CREATE TABLE IF NOT EXISTS `comments` (
-  `commentId` int NOT NULL AUTO_INCREMENT,
-  `productId` int DEFAULT NULL,
-  `userId` int DEFAULT NULL,
-  `content` text COLLATE utf8mb4_vietnamese_ci,
-  `image` varchar(500) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `createAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`commentId`),
-  KEY `FK_comments_products` (`productId`),
-  KEY `FK_comments_users` (`userId`),
-  CONSTRAINT `FK_comments_products` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_comments_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chua cac comment nguoi dung ve san pham';
-
--- Dumping data for table duanyody.comments: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.commoncategorys
+    -- Dumping structure for table duanyody.commoncategorys
 CREATE TABLE IF NOT EXISTS `commoncategorys` (
   `commonId` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -211,134 +161,6 @@ INSERT INTO `commoncategorys` (`commonId`, `name`, `past`, `childId`) VALUES
 	(90, 'Tất trẻ em', 'Example', 19),
 	(91, 'Giày dép trẻ em', 'Example', 19);
 
--- Dumping structure for table duanyody.orderitems
-CREATE TABLE IF NOT EXISTS `orderitems` (
-  `orderitemId` int NOT NULL AUTO_INCREMENT,
-  `orderId` int DEFAULT NULL,
-  `variationId` int DEFAULT NULL,
-  `sizeId` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
-  PRIMARY KEY (`orderitemId`),
-  KEY `FK__orders` (`orderId`),
-  KEY `FK__sizevariations` (`sizeId`),
-  KEY `FK_orderitems_variatinos` (`variationId`),
-  CONSTRAINT `FK__orders` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK__sizevariations` FOREIGN KEY (`sizeId`) REFERENCES `sizevariations` (`sizeId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_orderitems_variatinos` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chua cac don hang chi tiet';
-
--- Dumping data for table duanyody.orderitems: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.orders
-CREATE TABLE IF NOT EXISTS `orders` (
-  `orderId` int NOT NULL AUTO_INCREMENT,
-  `statusId` int DEFAULT NULL,
-  `userId` int DEFAULT NULL,
-  `sumPrice` decimal(10,0) DEFAULT NULL,
-  `address` varchar(200) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `phone` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `paySelect` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL COMMENT 'phuong thucws thanh toan',
-  `updateAt` datetime DEFAULT NULL,
-  `createAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`orderId`),
-  KEY `FK_orders_orderstatus` (`statusId`),
-  KEY `FK_orders_users` (`userId`),
-  CONSTRAINT `FK_orders_orderstatus` FOREIGN KEY (`statusId`) REFERENCES `orderstatus` (`statusId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_orders_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='Bangr hoa don cua tung san pham khi mua';
-
--- Dumping data for table duanyody.orders: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.orderstatus
-CREATE TABLE IF NOT EXISTS `orderstatus` (
-  `statusId` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_vietnamese_ci,
-  PRIMARY KEY (`statusId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='luu cac trang thai don hang';
-
--- Dumping data for table duanyody.orderstatus: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.productrivews
-CREATE TABLE IF NOT EXISTS `productrivews` (
-  `reviewsId` int NOT NULL AUTO_INCREMENT,
-  `productId` int DEFAULT NULL,
-  `userId` int DEFAULT NULL,
-  `rating` int DEFAULT NULL,
-  `reviewText` text COLLATE utf8mb4_vietnamese_ci,
-  `createAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`reviewsId`),
-  KEY `FK_productrivews_products` (`productId`),
-  KEY `FK_productrivews_users` (`userId`),
-  CONSTRAINT `FK_productrivews_products` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_productrivews_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang danh gia sao khi mua san pham';
-
--- Dumping data for table duanyody.productrivews: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.products
-CREATE TABLE IF NOT EXISTS `products` (
-  `productId` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `productCode` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `createAt` datetime DEFAULT NULL,
-  `categoryId` int DEFAULT NULL,
-  `childId` int DEFAULT NULL,
-  PRIMARY KEY (`productId`),
-  KEY `FK_products_categorys` (`categoryId`),
-  KEY `FK_products_childcategorys` (`childId`),
-  CONSTRAINT `FK_products_categorys` FOREIGN KEY (`categoryId`) REFERENCES `categorys` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_products_childcategorys` FOREIGN KEY (`childId`) REFERENCES `childcategorys` (`childId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bangr chuaws sanr pham';
-
--- Dumping data for table duanyody.products: ~0 rows (approximately)
-INSERT INTO `products` (`productId`, `name`, `productCode`, `createAt`, `categoryId`, `childId`) VALUES
-	(1, 'Áo thun nam', 'P001', '2024-11-11 00:00:00', 3, 1),
-	(2, 'Quần kaki nam', 'P002', '2024-11-11 00:00:00', 3, 2),
-	(3, 'Áo khoác nữ', 'P003', '2024-11-10 00:00:00', 4, 7),
-	(4, 'Quần jeans trẻ em', 'P004', '2024-11-09 00:00:00', 5, 5),
-	(5, 'Áo len trẻ em', 'P005', '2024-11-08 00:00:00', 5, 5);
-
--- Dumping structure for table duanyody.replies
-CREATE TABLE IF NOT EXISTS `replies` (
-  `repliesId` int NOT NULL AUTO_INCREMENT,
-  `commentId` int DEFAULT NULL,
-  `userId` int DEFAULT NULL,
-  `content` text COLLATE utf8mb4_vietnamese_ci,
-  `image` varchar(555) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `createAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`repliesId`),
-  KEY `FK_replies_comments` (`commentId`),
-  KEY `FK_replies_users` (`userId`),
-  CONSTRAINT `FK_replies_comments` FOREIGN KEY (`commentId`) REFERENCES `comments` (`commentId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_replies_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang tra loi cac comment';
-
--- Dumping data for table duanyody.replies: ~0 rows (approximately)
-
--- Dumping structure for table duanyody.sizevariations
-CREATE TABLE IF NOT EXISTS `sizevariations` (
-  `sizeId` int NOT NULL AUTO_INCREMENT,
-  `sizeCode` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `size` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  `variationId` int DEFAULT NULL,
-  PRIMARY KEY (`sizeId`),
-  KEY `FK_sizevariations_variations` (`variationId`),
-  CONSTRAINT `FK_sizevariations_variations` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bangr chuas size va so luong moi buien the';
-
--- Dumping data for table duanyody.sizevariations: ~0 rows (approximately)
-INSERT INTO `sizevariations` (`sizeId`, `sizeCode`, `size`, `quantity`, `variationId`) VALUES
-	(1, 'S001', 'S', 50, 1),
-	(2, 'S002', 'M', 40, 1),
-	(3, 'L', 'L', 30, 2),
-	(4, 'M', 'M', 20, 2),
-	(5, 'S005', 'L', 25, 4),
-	(6, 'XL', 'XL', 15, 2);
-
--- Dumping structure for table duanyody.slides
 CREATE TABLE IF NOT EXISTS `slides` (
   `sildeId` int NOT NULL AUTO_INCREMENT,
   `url` varchar(555) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -362,29 +184,30 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bảng người dùng';
 
--- Dumping data for table duanyody.users: ~0 rows (approximately)
 
--- Dumping structure for table duanyody.variationimages
-CREATE TABLE IF NOT EXISTS `variationimages` (
-  `variationimageId` int NOT NULL AUTO_INCREMENT,
-  `image` varchar(555) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `variationId` int DEFAULT NULL,
-  PRIMARY KEY (`variationimageId`),
-  KEY `FK_variationimages_variations` (`variationId`),
-  CONSTRAINT `FK_variationimages_variations` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chua cac anh bien the san pham';
+CREATE TABLE IF NOT EXISTS `products` (
+  `productId` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `productCode` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  `categoryId` int DEFAULT NULL,
+  `childId` int DEFAULT NULL,
+  PRIMARY KEY (`productId`),
+  KEY `FK_products_categorys` (`categoryId`),
+  KEY `FK_products_childcategorys` (`childId`),
+  CONSTRAINT `FK_products_categorys` FOREIGN KEY (`categoryId`) REFERENCES `categorys` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_products_childcategorys` FOREIGN KEY (`childId`) REFERENCES `childcategorys` (`childId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bangr chuaws sanr pham';
 
--- Dumping data for table duanyody.variationimages: ~0 rows (approximately)
-INSERT INTO `variationimages` (`variationimageId`, `image`, `variationId`) VALUES
-	(1, 'img/ao-thun-nam-s.jpg', 1),
-	(2, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(12).JPG', 2),
-	(3, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(16).JPG', 2),
-	(4, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(11).JPG', 2),
-	(5, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(14).JPG', 2),
-	(6, 'img/quan-jeans-tre-em-xanh.jpg', 4),
-	(7, 'img/ao-len-tre-em-do.jpg', 5);
+-- Dumping data for table duanyody.products: ~0 rows (approximately)
+INSERT INTO `products` (`productId`, `name`, `productCode`, `createAt`, `categoryId`, `childId`) VALUES
+	(1, 'Áo thun nam', 'P001', '2024-11-11 00:00:00', 3, 1),
+	(2, 'Quần kaki nam', 'P002', '2024-11-11 00:00:00', 3, 2),
+	(3, 'Áo khoác nữ', 'P003', '2024-11-10 00:00:00', 4, 7),
+	(4, 'Quần jeans trẻ em', 'P004', '2024-11-09 00:00:00', 5, 5),
+	(5, 'Áo len trẻ em', 'P005', '2024-11-08 00:00:00', 5, 5);
 
--- Dumping structure for table duanyody.variations
+
 CREATE TABLE IF NOT EXISTS `variations` (
   `variationId` int NOT NULL AUTO_INCREMENT,
   `variationCode` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -413,3 +236,210 @@ INSERT INTO `variations` (`variationId`, `variationCode`, `image`, `color`, `anh
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
+
+
+
+
+
+-- Dumping structure for table duanyody.sizevariations
+CREATE TABLE IF NOT EXISTS `sizevariations` (
+  `sizeId` int NOT NULL AUTO_INCREMENT,
+  `sizeCode` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `size` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `variationId` int DEFAULT NULL,
+  PRIMARY KEY (`sizeId`),
+  KEY `FK_sizevariations_variations` (`variationId`),
+  CONSTRAINT `FK_sizevariations_variations` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bangr chuas size va so luong moi buien the';
+
+-- Dumping data for table duanyody.sizevariations: ~0 rows (approximately)
+INSERT INTO `sizevariations` (`sizeId`, `sizeCode`, `size`, `quantity`, `variationId`) VALUES
+	(1, 'S001', 'S', 50, 1),
+	(2, 'S002', 'M', 40, 1),
+	(3, 'L', 'L', 30, 2),
+	(4, 'M', 'M', 20, 2),
+	(5, 'S005', 'L', 25, 4),
+	(6, 'XL', 'XL', 15, 2);
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `variationimages` (
+  `variationimageId` int NOT NULL AUTO_INCREMENT,
+  `image` varchar(555) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `variationId` int DEFAULT NULL,
+  PRIMARY KEY (`variationimageId`),
+  KEY `FK_variationimages_variations` (`variationId`),
+  CONSTRAINT `FK_variationimages_variations` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chua cac anh bien the san pham';
+
+-- Dumping data for table duanyody.variationimages: ~0 rows (approximately)
+INSERT INTO `variationimages` (`variationimageId`, `image`, `variationId`) VALUES
+	(1, 'img/ao-thun-nam-s.jpg', 1),
+	(2, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(12).JPG', 2),
+	(3, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(16).JPG', 2),
+	(4, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(11).JPG', 2),
+	(5, 'https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-TSN7301-DEN%20(14).JPG', 2),
+	(6, 'img/quan-jeans-tre-em-xanh.jpg', 4),
+	(7, 'img/ao-len-tre-em-do.jpg', 5);
+
+-- Dumping structure for table duanyody.variations
+
+CREATE TABLE IF NOT EXISTS `carts` (
+  `cartId` int NOT NULL,
+  `userId` int DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`cartId`),
+  KEY `FK__users` (`userId`),
+  CONSTRAINT `FK__users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bangr gior hangf mooix nguoiwf sex co mot gio hang';
+
+-- Dumping data for table duanyody.carts: ~0 rows (approximately)
+
+
+
+
+
+
+
+
+
+
+-- Dumping structure for table duanyody.cartitems
+CREATE TABLE IF NOT EXISTS `cartitems` (
+  `cartitemId` int NOT NULL AUTO_INCREMENT,
+  `cartId` int DEFAULT NULL,
+  `variationId` int DEFAULT NULL,
+  `sizeId` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`cartitemId`),
+  KEY `FK__carts` (`cartId`),
+  KEY `FK_cartitems_variatinos` (`variationId`),
+  KEY `FK_cartitems_sizevariations` (`sizeId`),
+  CONSTRAINT `FK__carts` FOREIGN KEY (`cartId`) REFERENCES `carts` (`cartId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_cartitems_sizevariations` FOREIGN KEY (`sizeId`) REFERENCES `sizevariations` (`sizeId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_cartitems_variatinos` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chi tiet san pham trong gio hang';
+
+CREATE TABLE IF NOT EXISTS `orderstatus` (
+  `statusId` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_vietnamese_ci,
+  PRIMARY KEY (`statusId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='luu cac trang thai don hang';
+
+
+
+CREATE TABLE IF NOT EXISTS `orders` (
+  `orderId` int NOT NULL AUTO_INCREMENT,
+  `statusId` int DEFAULT NULL,
+  `userId` int DEFAULT NULL,
+  `sumPrice` decimal(10,0) DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `phone` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `paySelect` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL COMMENT 'phuong thucws thanh toan',
+  `updateAt` datetime DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`orderId`),
+  KEY `FK_orders_orderstatus` (`statusId`),
+  KEY `FK_orders_users` (`userId`),
+  CONSTRAINT `FK_orders_orderstatus` FOREIGN KEY (`statusId`) REFERENCES `orderstatus` (`statusId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_orders_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='Bangr hoa don cua tung san pham khi mua';
+
+
+
+CREATE TABLE IF NOT EXISTS `orderitems` (
+  `orderitemId` int NOT NULL AUTO_INCREMENT,
+  `orderId` int DEFAULT NULL,
+  `variationId` int DEFAULT NULL,
+  `sizeId` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`orderitemId`),
+  KEY `FK__orders` (`orderId`),
+  KEY `FK__sizevariations` (`sizeId`),
+  KEY `FK_orderitems_variatinos` (`variationId`),
+  CONSTRAINT `FK__orders` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK__sizevariations` FOREIGN KEY (`sizeId`) REFERENCES `sizevariations` (`sizeId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_orderitems_variatinos` FOREIGN KEY (`variationId`) REFERENCES `variations` (`variationId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chua cac don hang chi tiet';
+
+-- Dumping data for table duanyody.orderitems: ~0 rows (approximately)
+
+CREATE TABLE IF NOT EXISTS `productrivews` (
+  `reviewsId` int NOT NULL AUTO_INCREMENT,
+  `productId` int DEFAULT NULL,
+  `userId` int DEFAULT NULL,
+  `rating` int DEFAULT NULL,
+  `reviewText` text COLLATE utf8mb4_vietnamese_ci,
+  `createAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`reviewsId`),
+  KEY `FK_productrivews_products` (`productId`),
+  KEY `FK_productrivews_users` (`userId`),
+  CONSTRAINT `FK_productrivews_products` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_productrivews_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang danh gia sao khi mua san pham';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Dumping structure for table duanyody.comments
+CREATE TABLE IF NOT EXISTS `comments` (
+  `commentId` int NOT NULL AUTO_INCREMENT,
+  `productId` int DEFAULT NULL,
+  `userId` int DEFAULT NULL,
+  `content` text COLLATE utf8mb4_vietnamese_ci,
+  `image` varchar(500) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`commentId`),
+  KEY `FK_comments_products` (`productId`),
+  KEY `FK_comments_users` (`userId`),
+  CONSTRAINT `FK_comments_products` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_comments_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang chua cac comment nguoi dung ve san pham';
+
+
+CREATE TABLE IF NOT EXISTS `replies` (
+  `repliesId` int NOT NULL AUTO_INCREMENT,
+  `commentId` int DEFAULT NULL,
+  `userId` int DEFAULT NULL,
+  `content` text COLLATE utf8mb4_vietnamese_ci,
+  `image` varchar(555) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`repliesId`),
+  KEY `FK_replies_comments` (`commentId`),
+  KEY `FK_replies_users` (`userId`),
+  CONSTRAINT `FK_replies_comments` FOREIGN KEY (`commentId`) REFERENCES `comments` (`commentId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_replies_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci COMMENT='bang tra loi cac comment';
+
+-- Dumping data for table duanyody.replies: ~0 rows (approximately)
+
+
+-- Dumping structure for table duanyody.slides
+
+-- Dumping data for table duanyody.users: ~0 rows (approximately)
+
+-- Dumping structure for table duanyody.variationimages
+

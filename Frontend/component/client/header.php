@@ -47,8 +47,7 @@
                         </div>
                         <?php endif; ?>
                     </span>
-                    <?php endforeach ?>
-
+                    <?php endforeach; ?>
                 </div>
 
             </nav>
