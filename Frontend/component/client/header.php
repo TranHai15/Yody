@@ -35,7 +35,8 @@
                     </div>
                 </a>
                 <div class="menu">
-                    <?php foreach ($category as $cap1):     ?>
+                    <?php var_dump($category);
+                    foreach ($category as $cap1):     ?>
                         <span class="menu-item menu-item-hover"><a href="?clt=category"
                                 class="menu-item-a "><?= $cap1['categoryName'] ?> </a>
                             <?php foreach ($child as $cap2): ?>
@@ -62,7 +63,7 @@
                                 <?php endif  ?>
                             <?php endforeach;  ?>
                         </span>
-                    <?php endforeach;  ?>
+                    <?php endforeach ?>
 
                 </div>
             </nav>
