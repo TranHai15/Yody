@@ -167,24 +167,25 @@ a {
   padding-bottom: 4rem;
   background-color: #fff;
   opacity: 0;
-  transform: translateY(-300%);
+  /* transform: translateZ(-100%); */
   /* Độ trễ trước khi hoạt ảnh bắt đầu */
+  display: none;
 }
 
 @keyframes menuHover {
   0% {
-    transform: translateY(-130%);
     opacity: 0;
   }
   100% {
-    transform: translateY(0%);
+    transform: translateZ(0%);
     opacity: 1;
   }
 }
 
 .menu-item:hover .menu__list--cha {
-  animation: menuHover 0.2s ease-in-out forwards;
-  animation-delay: 0.2s;
+  display: block;
+  animation: menuHover 0.2s ease-out forwards;
+  /* animation-delay: 0.1s; */
 }
 
 .overlay {
