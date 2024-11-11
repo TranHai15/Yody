@@ -16,21 +16,21 @@
         <section class="banner banner__one grid wide" data-carousel>
             <ul data-slides>
                 <li class="slide" data-active>
-                    <a href="#">
+                    <a href="?clt=event">
                         <img
                             src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
                             alt="Slide 1" />
                     </a>
                 </li>
                 <li class="slide">
-                    <a href="#">
+                    <a href="?clt=event">
                         <img
                             src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2wotote0per2gcotuqa1800x833%20PC%20hero%20banner%2011.png"
                             alt="Slide 2" />
                     </a>
                 </li>
                 <li class="slide">
-                    <a href="#">
+                    <a href="?clt=event">
                         <img
                             src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2x4rdsb1ctzpyb9jii3110_1800x833-07.png"
                             alt="Slide 3" />

@@ -9,18 +9,6 @@
                     </div>
                 </a>
                 <div class="menu">
-<<<<<<< HEAD
-                    <?php var_dump($category);
-                    foreach ($category as $cap1):     ?>
-                        <span class="menu-item menu-item-hover"><a href="?clt=category"
-                                class="menu-item-a "><?= $cap1['categoryName'] ?> </a>
-                            <?php foreach ($child as $cap2): ?>
-                                <?php if ($cap1['categoryId'] == $cap2['categoryId']):  ?>
-                                    <div class="menu__list--cha">
-                                        <div class="menu__list grid wide row">
-                                            <div class="item__list ">
-                                                <div class="child__category"> <a href="#"><?= $cap2['childcategoryName']  ?></a>
-=======
                     <?php foreach ($category as $cap1): ?>
                         <?php
                         // Kiểm tra xem mục cha này có mục con nào không
@@ -49,7 +37,6 @@
                                                             </div>
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
->>>>>>> 6b943b39e1d949fafcdd97c65ffbf4b7b113ce8a
                                                 </div>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -60,12 +47,7 @@
                                 </div>
                             <?php endif; ?>
                         </span>
-<<<<<<< HEAD
-                    <?php endforeach ?>
-
-=======
                     <?php endforeach; ?>
->>>>>>> 6b943b39e1d949fafcdd97c65ffbf4b7b113ce8a
                 </div>
 
             </nav>
