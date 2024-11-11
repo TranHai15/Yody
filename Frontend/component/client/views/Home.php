@@ -1,11 +1,3 @@
-<?php
-
-// var_dump($child)
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,22 +16,36 @@
         <section class="banner banner__one grid wide" data-carousel>
             <ul data-slides>
                 <li class="slide" data-active>
-
-                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
-                        alt="" />
+                    <a href="#">
+                        <img
+                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
+                            alt="Slide 1" />
+                    </a>
                 </li>
                 <li class="slide">
-                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2wotote0per2gcotuqa1800x833%20PC%20hero%20banner%2011.png"
-                        alt="" />
+                    <a href="#">
+                        <img
+                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2wotote0per2gcotuqa1800x833%20PC%20hero%20banner%2011.png"
+                            alt="Slide 2" />
+                    </a>
                 </li>
                 <li class="slide">
-                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2x4rdsb1ctzpyb9jii3110_1800x833-07.png"
-                        alt="" />
+                    <a href="#">
+                        <img
+                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2x4rdsb1ctzpyb9jii3110_1800x833-07.png"
+                            alt="Slide 3" />
+                    </a>
                 </li>
             </ul>
-            <button class="slide__show pre " data-carousel-button="prev"><img src="Frontend/public/svg/pre.svg" alt="Pre"></button>
-            <button class="slide__show next" data-carousel-button="next"><img src="Frontend/public/svg/next.svg" alt="Next"></button>
+            <button class="slide__show pre" data-carousel-button="prev">
+                <img src="Frontend/public/svg/pre.svg" alt="Previous" />
+            </button>
+            <button class="slide__show next" data-carousel-button="next">
+                <img src="Frontend/public/svg/next.svg" alt="Next" />
+            </button>
         </section>
+
+
 
         <main>
             <div class="grid wide ">

@@ -6,7 +6,7 @@ require_once("Backend/model/client/client.php");
 
 class Controller_Client
 {
-    public function List($file = "Home")
+    public function Header($file = "header")
     {
         $Client = new Model_Client;
         // lay toàn bộ category
@@ -18,11 +18,22 @@ class Controller_Client
         $common = $Client->getAllCommonCategories();
         // lay toan bo anh category
         $category__image = $Client->getAllCategoryImages();
-        View(FRONTEND__VIEW, $file, [
+        View(FRONTEND, $file, [
             "category" => $category,
             "child" => $child,
             "common" => $common,
             "category__image" => $category__image,
         ]);
+    }
+    public function List($file = "Home")
+    {
+        $Client = new Model_Client;
+
+        View(
+            FRONTEND__VIEW,
+            $file,
+            []
+
+        );
     }
 }

@@ -9,18 +9,32 @@
   position: relative;
   width: 100%;
   height: 90vh;
+  overflow: hidden; /* Ẩn phần ảnh tràn ra ngoài */
 }
+
 .banner__one ul {
+  display: flex; /* Dùng flexbox để các ảnh xếp hàng ngang */
   margin: 0;
   padding: 0;
   list-style: none;
+  transition: transform 0.5s ease-in-out; /* Hiệu ứng chuyển động */
 }
+
 .slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: 200ms opactity ease-in-out;
-  transition-delay: 200ms;
+  min-width: 100%; /* Mỗi slide chiếm 100% chiều rộng */
+  height: 100%;
+}
+.slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.slide a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .slide > img {
   display: block;
@@ -28,10 +42,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-}
-.slide[data-active] {
-  opacity: 1;
-  transition-delay: 0;
 }
 
 .slide__show {
@@ -48,28 +58,17 @@
   justify-content: center;
   cursor: pointer;
 }
+
 .slide__show > img {
   display: inline-block;
   width: 70%;
   object-fit: cover;
 }
-.slide-show {
-  /* width: 1200px; */
-  /* margin: auto; */
-  overflow: hidden;
-}
-.list-images {
-  width: 100%;
-  display: flex;
-  transition: 0.5s;
-}
-.list-images > img {
-  max-width: 100%;
-  object-fit: cover;
-}
+
 .next {
   right: 2rem;
 }
+
 .pre {
   left: 2rem;
 }
