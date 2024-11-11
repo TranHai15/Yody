@@ -10,7 +10,7 @@
                 </a>
                 <div class="menu">
                     <?php foreach ($category as $cap1): ?>
-                        <?php
+                    <?php
                         // Kiểm tra xem mục cha này có mục con nào không
                         $hasSubmenu = false;
                         foreach ($child as $cap2) {
@@ -20,34 +20,35 @@
                             }
                         }
                         ?>
-                        <!-- Thêm lớp 'has-submenu' nếu có mục con -->
-                        <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
-                            <a href="?clt=category" class="menu-item-a"><?= $cap1['name'] ?></a>
-                            <?php if ($hasSubmenu): ?>
-                                <div class="menu__list--cha">
-                                    <div class="menu__list grid wide row">
-                                        <?php foreach ($child as $cap2): ?>
-                                            <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
-                                                <div class="item__list">
-                                                    <div class="child__category"><a href="#"><?= $cap2['name'] ?></a></div>
-                                                    <?php foreach ($common as $cap3): ?>
-                                                        <?php if ($cap2['childId'] == $cap3['childId']): ?>
-                                                            <div>
-                                                                <div class="commont__category"><a href="#"><?= $cap3['name'] ?></a></div>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                        <div class="item__list--img">
-                                            <img src="<?= $cap1['image'] ?>" alt="">
-                                        </div>
+                    <!-- Thêm lớp 'has-submenu' nếu có mục con -->
+                    <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
+                        <a href="?clt=category" class="menu-item-a"><?= $cap1['name'] ?></a>
+                        <?php if ($hasSubmenu): ?>
+                        <div class="menu__list--cha">
+                            <div class="menu__list grid wide row">
+                                <?php foreach ($child as $cap2): ?>
+                                <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
+                                <div class="item__list">
+                                    <div class="child__category"><a href="#"><?= $cap2['name'] ?></a></div>
+                                    <?php foreach ($common as $cap3): ?>
+                                    <?php if ($cap2['childId'] == $cap3['childId']): ?>
+                                    <div>
+                                        <div class="commont__category"><a href="#"><?= $cap3['name'] ?></a></div>
                                     </div>
+                                    <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </div>
-                            <?php endif; ?>
-                        </span>
-                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+                                <div class="item__list--img">
+                                    <img src="<?= $cap1['image'] ?>" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </span>
+                    <?php endforeach ?>
+
                 </div>
 
             </nav>

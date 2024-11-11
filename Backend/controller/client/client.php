@@ -11,6 +11,7 @@ class Controller_Client
         $Client = new Model_Client;
         // lay toàn bộ category
         $category = $Client->getAllCategories();
+        // var_dump($category)
         // lấy toàn bộ child category
         $child = $Client->getAllChildCategories();
         // lấy toàn bộ common category

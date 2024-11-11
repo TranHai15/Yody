@@ -22,6 +22,7 @@ class Model_Client
         $sql = "SELECT * FROM categorys";
         $value = getRaw($sql);
         return $value;
+        // var_dump($value);
     }
 
     // Get all records from the childcategoryes table
