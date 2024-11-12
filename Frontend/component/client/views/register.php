@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="location">
-                <h1>Bạn đã có tài khoản? <a href="?clt=auth&action=login">Đăng Nhập Ngay!</a></h1>
+                <h1>Bạn đã có tài khoản? <a href="<?= P ?>/auth/login">Đăng Nhập Ngay!</a></h1>
             </div>
         </div>
     </div>
