@@ -15,6 +15,7 @@
 
         <section class="banner banner__one grid wide" data-carousel>
             <ul data-slides>
+<<<<<<< HEAD
                 <li class="slide" data-active>
 <<<<<<< HEAD
 
@@ -50,6 +51,18 @@
                     </a>
 >>>>>>> 7233a64 (Bang day code)
                 </li>
+=======
+                <?php foreach ($slides as $slide) : ?>
+                    <li class="slide">
+                        <a href="?clt=<?= 'event&name=' . $slide['past'] ?> " title="<?= $slide['title']  ?>">
+                            <img loading="lazy"
+                                src="<?= $slide['url'] ?>"
+                                alt="<?= $slide['title'] ?>" />
+                        </a>
+                    </li>
+                <?php endforeach ?>
+
+>>>>>>> 284ae33 (hoan thanh banner)
             </ul>
             <button class="slide__show pre " data-carousel-button="prev"><img src="Frontend/public/svg/pre.svg" alt="Pre"></button>
             <button class="slide__show next" data-carousel-button="next"><img src="Frontend/public/svg/next.svg" alt="Next"></button>

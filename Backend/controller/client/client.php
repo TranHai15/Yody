@@ -28,9 +28,9 @@ class Controller_Client
     {
         $Client = new Model_Client;
 
+        $slides =  $Client->get_Slide_imgs();
 
-
-        View(FRONTEND__VIEW, $file, []);
+        View(FRONTEND__VIEW, $file, ["slides" => $slides]);
     }
 
     public function detail($file = "detail")

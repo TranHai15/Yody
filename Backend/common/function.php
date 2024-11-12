@@ -183,7 +183,7 @@ function insert($table, $data)
     // cung noi nhung them dau  ,:
     $value = ":" . implode(',:', $keys);
     // cau lenh truy van
-    $sql = 'INSERT INTO ' . $table . '(' . $truong . ')' . 'VALUES(' . $value . ')';
+    $sql = "INSERT INTO ' . $table . '(' . $truong . ')' . 'VALUES(' . $value . ')";
     $kq = query($sql, $data);
     return $kq;
 }
@@ -276,4 +276,15 @@ function password_hasd_check($passwordinput, $email)
     $password = $pass['password'];
     $kiemtra = password_verify($passwordinput, $password);
     return $kiemtra;
+}
+
+function push_img($file, $folder)
+{
+    if ($file['size'] > 0) {
+        $anh = "images/" . $folder . "/" . $file['name'];
+        move_uploaded_file($file['tmp_name'], $anh);
+        return $anh;
+    }
+
+    return "";
 }

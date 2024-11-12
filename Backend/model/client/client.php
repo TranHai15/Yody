@@ -73,5 +73,13 @@ class Model_Client
     {
         $sql = "SELECT *
         FROM variations WHERE productId = 3";
+        return getRaw($sql);
+    }
+    public function get_Slide_imgs()
+    {
+        $sql = "SELECT * FROM slides";
+        $value = getRaw($sql);
+        return $value;
+        // var_dump($value);
     }
 }
