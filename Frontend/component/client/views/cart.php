@@ -54,12 +54,77 @@
                         </div>
 
                     </article>
-                </div>
-                <div class="cart__product--items">
-                    <div class="products__check--all row align-items-center">
-                        <input type="checkbox" class="check" name="" id="check__sale">
-                        <p>Sản phẩm nguyên giá</p>
-                    </div>
+                    <hr>
+                    <article class="product__item row  ">
+                        <div class="cart__product--item">
+                            <input type="checkbox" class="check" name="" id="">
+                            <div class="item">
+                                <div class="cart__img">
+                                    <img loading="lazy"
+                                        src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/apn6430-xlo-5-of-9.jpg"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart__information">
+                            <div>
+                                <p class="cart__name">Áo Polo Nữ Cafe Dệt Tổ Ong In Hình Mickey</p>
+                                <div class="cart__price row">
+                                    <p class="cart__price--new">149.000 đ</p>
+                                    <p class="cart__price--old">249.000 đ</p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <select name="" id="cart__select">
+                                    <option value="">Xanh lo, S</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item__quantity">
+                            <div class="cart__quantity">
+                                <button>-</button>
+                                <span>2</span>
+                                <button>+</button>
+                            </div>
+                        </div>
+
+                    </article>
+                    <hr>
+                    <article class="product__item row  ">
+                        <div class="cart__product--item">
+                            <input type="checkbox" class="check" name="" id="">
+                            <div class="item">
+                                <div class="cart__img">
+                                    <img loading="lazy"
+                                        src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/apn6430-xlo-5-of-9.jpg"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart__information">
+                            <div>
+                                <p class="cart__name">Áo Polo Nữ Cafe Dệt Tổ Ong In Hình Mickey</p>
+                                <div class="cart__price row">
+                                    <p class="cart__price--new">149.000 đ</p>
+                                    <p class="cart__price--old">249.000 đ</p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <select name="" id="cart__select">
+                                    <option value="">Xanh lo, S</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item__quantity">
+                            <div class="cart__quantity">
+                                <button>-</button>
+                                <span>2</span>
+                                <button>+</button>
+                            </div>
+                        </div>
+
+                    </article>
+                    <hr>
                     <article class="product__item row  ">
                         <div class="cart__product--item">
                             <input type="checkbox" class="check" name="" id="">
