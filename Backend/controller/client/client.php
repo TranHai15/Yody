@@ -4,6 +4,7 @@ require_once("Backend/common/function.php");
 require_once("Backend/model/client/client.php");
 
 
+
 class Controller_Client
 {
     public function Header($file = "header")
@@ -30,15 +31,25 @@ class Controller_Client
 
         $slides =  $Client->get_Slide_imgs();
 
+<<<<<<< HEAD
         View(FRONTEND__VIEW, $file, ["slides" => $slides]);
+=======
+
+        View(FRONTEND__VIEW, $file, []);
+>>>>>>> 8d1ae2d (duong past moi)
     }
 
     public function detail($file = "detail")
     {
+        $idProduct = $_GET['product'] ?? "";
+        $idVariation = $_GET['color'] ?? "";
+        $idVariation = $_GET['size'] ?? "";
         $Client = new Model_Client;
-        $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId(2);
-        $AllSizeVariations = $Client->getAllSizeVariationsWhereVariationId(2);
-        $AllVariationsImage = $Client->getAllImageVariationsWhereVariationId(2);
+        $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idProduct, $idVariation);
+        $AllSizeVariations = $Client->getAllSizeVariationsWhereVariationId($idVariation);
+        $AllVariationsImage = $Client->getAllImageVariationsWhereVariationId($idVariation);
+        $AllVariationsColor = $Client->getAllVariationColor($idVariation);
+        $AllVariationsSize = $Client->getAllVariationSize($idVariation);
 
         View(
             FRONTEND__VIEW,
@@ -46,10 +57,10 @@ class Controller_Client
             [
                 "OneVariations" => $OneVariations,
                 "AllVariationsImage" => $AllVariationsImage,
+                "AllVariationsColor" => $AllVariationsColor,
+                "AllVariationsSize" => $AllVariationsSize,
                 "AllSizeVariations" => $AllSizeVariations
-
             ]
-
         );
     }
 }

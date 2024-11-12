@@ -12,6 +12,7 @@
 
     <?php require_once(HF . "header.php")  ?>
     <div>
+<<<<<<< HEAD
 
         <section class="banner banner__one grid wide" data-carousel>
             <ul data-slides>
@@ -68,6 +69,16 @@
             <button class="slide__show next" data-carousel-button="next"><img src="Frontend/public/svg/next.svg" alt="Next"></button>
         </section>
 
+=======
+        <a href="/duan1/event">
+            <section class="banner banner__one grid wide">
+                <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
+                    alt="" />
+                <span class="slide__show pre "><img src="Frontend/public/svg/pre.svg" alt="Pre"></span>
+                <span class="slide__show next"><img src="Frontend/public/svg/next.svg" alt="Next"></span>
+            </section>
+        </a>
+>>>>>>> 8d1ae2d (duong past moi)
         <main>
             <div class="grid wide ">
                 <h2 class="title text-align-center">Sản phẩm ưa chuộng</h2>
@@ -85,7 +96,7 @@
                 <section class="products row  justify-content-between grid wide">
 
                     <article class="product l-3 m-4 c-12">
-                        <a href="?clt=detail">
+                        <a href="/duan1/detail?product=2&color=2&size=2">
                             <div class="product__image">
                                 <img loading="lazy"
                                     src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"

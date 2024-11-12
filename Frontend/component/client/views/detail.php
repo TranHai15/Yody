@@ -26,7 +26,8 @@
     <!-- main -->
     <div>
         <?php foreach ($OneVariations as $product):  ?>
-            <main class=" detail  grid wide row justify-content-between mt-4">
+            <main class=" detail  grid wide row justify-content-between mt-4 "
+                data-productId="<?= $product['productId']  ?>" data-variationId="<?= $product['variationId']  ?>">
                 <div class="l-6-2 row">
                     <div class="l-1 m-0 c-0"></div>
                     <div class="detail__left l-11 ">
@@ -55,8 +56,9 @@
                             <?= $product['name'] ?>
                         </div>
                         <div class="detail__right-info">
-                            <span
-                                class="detail__right-code"><?= $product['productCode'] ?>-<?= $product['variationCode']  ?>-S</span>
+                            <span class="detail__right-code"><?= $product['productCode'] ?>- <span
+                                    class="value__color"><?= $product['variationCode']  ?></span> -
+                                <span class="value__size"></span> </span>
                             <span class="stars">
                                 <span class="icon__stars"><img src="Frontend/public/svg/start.svg" alt=""></span>
                                 <span class="icon__stars"><img src="Frontend/public/svg/start.svg" alt=""></span>
@@ -91,17 +93,26 @@
                         <div class="color__selector mt-4">
                             <span class="color-label">Màu sắc: <?= $product['color'] ?></span>
                             <div class="row align-items-center">
-                                <div class="color-option color-blue selected"></div>
-
+                                <!-- <div class="color-option color-blue selected"></div> -->
+                                <?php foreach ($AllVariationsColor as $color):  ?>
+                                    <div style="background-color: <?= $color['anhColor'] ?>;"
+                                        data-colorCode="<?= $color['variationCode']  ?>"
+                                        data-variationId="<?= $color['variationId']  ?>"
+                                        class="color-option <?= $color['variationId'] == $product['variationId'] ? "selected" : ""    ?>  ">
+                                    </div>
+                                <?php endforeach  ?>
                             </div>
                         </div>
                         <div class="size__selector ">
-                            <span class="size-label">Kích thước: XL</span>
+                            <span class="size-label">Kích thước: <span
+                                    class="size__value"><?= $product['size'] ?></span></span>
                             <div class="row align-items-center">
-                                <div class="size-option active__size ">S</div>
-                                <div class="size-option ">M</div>
-                                <div class="size-option ">L</div>
-                                <div class="size-option ">XL</div>
+                                <!-- active__size -->
+                                <?php foreach ($AllVariationsSize as $size):  ?>
+                                    <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
+                                        class="size-option <?= $size['sizeId'] == $product['sizeId'] ? "active__size" : ""    ?>  ">
+                                        <?= $size['size'] ?></div>
+                                <?php endforeach  ?>
 
                             </div>
                         </div>
@@ -269,6 +280,7 @@
         </section>
     </div>
     <?php require_once(HF . "footer.php")  ?>
+    <script src="Frontend/Js/detail.js"></script>
 </body>
 
 

@@ -3,7 +3,7 @@
     <header>
         <div class="header grid wide">
             <nav class="header__left row align-items-center">
-                <a href="?clt=/">
+                <a href="<?= P ?>/">
                     <div class="header__logo">
                         <img src="Frontend/public/svg/logo.svg" alt="Yody">
                     </div>
@@ -20,6 +20,7 @@
                             }
                         }
                         ?>
+<<<<<<< HEAD
                     <!-- Thêm lớp 'has-submenu' nếu có mục con -->
                     <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
                         <a href="?clt=category" class="menu-item-a"><?= $cap1['name'] ?></a>
@@ -34,6 +35,31 @@
                                     <?php if ($cap2['childId'] == $cap3['childId']): ?>
                                     <div>
                                         <div class="commont__category"><a href="#"><?= $cap3['name'] ?></a></div>
+=======
+                        <!-- Thêm lớp 'has-submenu' nếu có mục con -->
+                        <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
+                            <a href="<?= P ?>/category" class="menu-item-a"><?= $cap1['name'] ?></a>
+                            <?php if ($hasSubmenu): ?>
+                                <div class="menu__list--cha">
+                                    <div class="menu__list grid wide row">
+                                        <?php foreach ($child as $cap2): ?>
+                                            <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
+                                                <div class="item__list">
+                                                    <div class="child__category"><a href="#"><?= $cap2['name'] ?></a></div>
+                                                    <?php foreach ($common as $cap3): ?>
+                                                        <?php if ($cap2['childId'] == $cap3['childId']): ?>
+                                                            <div>
+                                                                <div class="commont__category"><a href="#"><?= $cap3['name'] ?></a></div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <div class="item__list--img">
+                                            <img src="<?= $cap1['image'] ?>" alt="">
+                                        </div>
+>>>>>>> 8d1ae2d (duong past moi)
                                     </div>
                                     <?php endif; ?>
                                     <?php endforeach; ?>
@@ -57,13 +83,13 @@
                     <input type="text" id="header__search--input " class="header__search--input"
                         placeholder="Tìm kiếm ">
                 </span>
-                <a href="?clt=cart">
+                <a href="<?= P ?>/cart">
                     <span class="header__cart">
                         <img loading="lazy" src="Frontend/public/svg/cart.svg" alt="Yody-cart">
                     </span>
                 </a>
                 <div class="user">
-                    <a href="?clt=auth&action=login">
+                    <a href="<?= P ?>/auth?login">
                         <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
                                 alt="Yody-user"></span>
                     </a>
