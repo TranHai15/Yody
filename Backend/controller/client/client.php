@@ -35,8 +35,12 @@ class Controller_Client
         View(FRONTEND__VIEW, $file, ["slides" => $slides]);
 =======
 
+<<<<<<< HEAD
         View(FRONTEND__VIEW, $file, []);
 >>>>>>> 8d1ae2d (duong past moi)
+=======
+        View(FRONTEND__CLIENT, $file, []);
+>>>>>>> 058d150 (tich hop admin vao)
     }
 
     public function detail($file = "detail")
@@ -52,7 +56,7 @@ class Controller_Client
         $AllVariationsSize = $Client->getAllVariationSize($idVariation);
 
         View(
-            FRONTEND__VIEW,
+            FRONTEND__CLIENT,
             $file,
             [
                 "OneVariations" => $OneVariations,
