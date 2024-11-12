@@ -30,7 +30,7 @@ class Controller_Client
 
 
 
-        View(FRONTEND__VIEW, $file, []);
+        View(FRONTEND__CLIENT, $file, []);
     }
 
     public function detail($file = "detail")
@@ -46,7 +46,7 @@ class Controller_Client
         $AllVariationsSize = $Client->getAllVariationSize($idVariation);
 
         View(
-            FRONTEND__VIEW,
+            FRONTEND__CLIENT,
             $file,
             [
                 "OneVariations" => $OneVariations,
