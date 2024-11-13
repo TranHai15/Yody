@@ -28,9 +28,11 @@ class Controller_Client
     public function List($file = "Home")
     {
         $Client = new Model_Client;
+        $TopProduct = $Client->getAllProducts();
 
         $slides =  $Client->get_Slide_imgs();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         View(FRONTEND__VIEW, $file, ["slides" => $slides]);
 =======
@@ -41,6 +43,11 @@ class Controller_Client
 =======
         View(FRONTEND__CLIENT, $file, []);
 >>>>>>> 058d150 (tich hop admin vao)
+=======
+        View(FRONTEND__CLIENT, $file, [
+            "TopProduct" => $TopProduct,
+        ]);
+>>>>>>> 425a6b6 (do san pham)
     }
 
     public function detail($file = "detail")
