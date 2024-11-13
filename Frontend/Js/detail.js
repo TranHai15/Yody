@@ -1,32 +1,9 @@
-const sizeoption = document.querySelectorAll(".size-option");
-
-sizeoption.forEach((e) => {
-  e.addEventListener("click", () => {
-    // Remove 'active__size' class from all elements
-    sizeoption.forEach((el) => el.classList.remove("active__size"));
-
-    // Add 'active__size' class to the clicked element
-    e.classList.add("active__size");
-
-    // Get size and sizeId attributes of the clicked element
-    const size = e.getAttribute("data-size");
-
-    // Update the displayed size in the `.value__size` element
-    const value__size = document.querySelector(".value__size");
-    const size__value = document.querySelector(".size__value");
-    value__size.innerText = size;
-    size__value.innerText = size;
-  });
-});
-
-// color and size options
-
 document.querySelectorAll(".color-option, .size-option").forEach((element) => {
   element.addEventListener("click", () => {
-    // Check if the clicked element is a color or size option
+    // Kiểm tra xem phần tử được nhấn là color hay size
     const isColor = element.classList.contains("color-option");
 
-    // Update selected state for the chosen option
+    // Cập nhật trạng thái 'selected' cho phần tử chọn
     const options = document.querySelectorAll(
       isColor ? ".color-option" : ".size-option"
     );
@@ -35,7 +12,7 @@ document.querySelectorAll(".color-option, .size-option").forEach((element) => {
     );
     element.classList.add(isColor ? "selected" : "active__size");
 
-    // Get necessary values
+    // Lấy giá trị cần thiết
     const dataVariationId = document
       .querySelector(".color-option.selected")
       .getAttribute("data-variationId");
@@ -46,10 +23,13 @@ document.querySelectorAll(".color-option, .size-option").forEach((element) => {
       .querySelector(".detail")
       .getAttribute("data-productId");
 
-    //localhost/duan1/?clt=detail&product=2&color=2&size=2
-    // Fetch updated data from the server
-    http: fetch(
-      `http://localhost/duan1/Backend/controller/client/clientAjax.php?product=${dataProductId}&color=${dataVariationId}&size=${dataSizeId}`
+    // Cập nhật URL mà không tải lại trang
+    const newUrl = `http://localhost/duan1/detail?product=${dataProductId}&color=${dataVariationId}&size=${dataSizeId}`;
+    history.pushState(null, "", newUrl); // Cập nhật URL
+
+    // Fetch dữ liệu mới từ server
+    fetch(
+      `http://localhost/duan1/Backend/controller/client/clientAjax.php?product=${dataProductId}&color=${dataVariationId}`
     )
       .then((res) => {
         if (!res.ok) {
@@ -60,14 +40,33 @@ document.querySelectorAll(".color-option, .size-option").forEach((element) => {
       .then((data) => {
         console.log("Updated data:", data);
 
-        // Update HTML based on the new data
+        // Cập nhật HTML dựa trên dữ liệu mới
+        // Cập nhật màu sắc
         document.querySelector(".value__color").innerText = data.color;
+
+        // Cập nhật kích thước
         document.querySelector(".value__size").innerText = data.size;
+
+        // Cập nhật giá mới
         document.querySelector(
           ".detail__right--price--new"
         ).innerText = `${data.price} đ`;
+
+        // Cập nhật giá cũ nếu có
         document.querySelector(".detail__right--price--old").innerText =
           data.old_price ? `${data.old_price} đ` : "";
+
+        // Cập nhật hình ảnh sản phẩm
+        document
+          .querySelector(".detail__right--img img")
+          .setAttribute("src", data.image);
+
+        // Cập nhật tên và mã sản phẩm
+        document.querySelector(".detail__right--name").innerText =
+          data.productName;
+        document.querySelector(".detail__right-code .value__color").innerText =
+          data.variationCode;
+        document.querySelector(".value__size").innerText = data.size;
       })
       .catch((error) => {
         console.error("Error connecting to server:", error);

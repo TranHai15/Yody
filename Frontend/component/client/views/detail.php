@@ -25,25 +25,18 @@
     </div>
     <!-- main -->
     <div>
-        <?php foreach ($OneVariations as $product):  ?>
-            <main class=" detail  grid wide row justify-content-between mt-4 "
-                data-productId="<?= $product['productId']  ?>" data-variationId="<?= $product['variationId']  ?>">
+        <?php foreach ($OneVariations as $product): ?>
+            <main class="detail grid wide row justify-content-between mt-4" data-productId="<?= $product['productId'] ?>"
+                data-variationId="<?= $product['variationId'] ?>">
                 <div class="l-6-2 row">
                     <div class="l-1 m-0 c-0"></div>
-                    <div class="detail__left l-11 ">
+                    <div class="detail__left l-11">
                         <div class="detail__left--img l-1">
-                            <!-- <div class="detail__left--item active--detail__left--item">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/quan-jean-nam-qjm7019-xdm-1-yodyvn.jpg"
-                                alt="">
-                        </div> -->
-                            <?php foreach ($AllVariationsImage as $variation_img):  ?>
+                            <?php foreach ($AllVariationsImage as $variation_img): ?>
                                 <div class="detail__left--item active--detail__left--item">
-                                    <img loading="lazy" src="<?= $variation_img['variation_image']  ?>" alt="">
+                                    <img loading="lazy" src="<?= $variation_img['variation_image'] ?>" alt="">
                                 </div>
-
-                            <?php endforeach;  ?>
-
+                            <?php endforeach; ?>
                         </div>
                         <div class="detail__right--img l-10-9">
                             <img src="<?= $product['image'] ?>" alt="">
@@ -51,20 +44,14 @@
                     </div>
                 </div>
                 <div class="l-6-2 row">
-                    <div class="detail__right l-11 ">
-                        <div class="detail__right--name">
-                            <?= $product['name'] ?>
-                        </div>
+                    <div class="detail__right l-11">
+                        <div class="detail__right--name"><?= $product['name'] ?></div>
                         <div class="detail__right-info">
                             <span class="detail__right-code"><?= $product['productCode'] ?>- <span
-                                    class="value__color"><?= $product['variationCode']  ?></span> -
-                                <span class="value__size"></span> </span>
+                                    class="value__color"><?= $product['variationCode'] ?></span> - <span
+                                    class="value__size"><?= $product['size'] ?></span> </span>
                             <span class="stars">
-                                <span class="icon__stars"><img src="Frontend/public/svg/start.svg" alt=""></span>
-                                <span class="icon__stars"><img src="Frontend/public/svg/start.svg" alt=""></span>
-                                <span class="icon__stars"><img src="Frontend/public/svg/start.svg" alt=""></span>
-                                <span class="icon__stars"><img src="Frontend/public/svg/start.svg" alt=""></span>
-                                <span class="icon__stars"><img src="Frontend/public/svg/start.svg" alt=""></span>
+                                <!-- Stars code -->
                             </span>
                             <span class="rating">4.8</span>
                             <a href="#" class="rating-count">(120)</a>
@@ -73,103 +60,44 @@
                         <div class="detail__right--price row align-items-center">
                             <div class="detail__right--price--new">
                                 <?php $sale = $product["price"] - ($product["price"] * ($product["sale"] / 100)); ?>
-                                <?= $product['sale'] > 0 ? number_format($sale, 0, ',', '.') . "đ" :  $product["price"] ?>
+                                <?= $product['sale'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : $product["price"] ?>
                                 <span>đ</span>
                             </div>
                             <div class="detail__right--price--old">
                                 <?= $product['sale'] > 0 ? number_format($product['price'], 0, ',', '.') . "đ" : "" ?>
                             </div>
-                            <?= $product['sale'] > 0 ? " <div class=detail__right--price--sale><span> - $product[sale] </span></div>" : ""  ?>
-                        </div>
-                        <div class="detail__right--view row align-items-center">
-                            <div class="icon__view">
-                                <img src="Frontend/public/svg/view.svg" alt="">
-                            </div>
-                            <div class="view__number">45</div>
-                            <div>
-                                người đang xem sản phẩm này
-                            </div>
+                            <?= $product['sale'] > 0 ? "<div class=detail__right--price--sale><span> - $product[sale] </span></div>" : "" ?>
                         </div>
                         <div class="color__selector mt-4">
                             <span class="color-label">Màu sắc: <?= $product['color'] ?></span>
                             <div class="row align-items-center">
-                                <!-- <div class="color-option color-blue selected"></div> -->
-                                <?php foreach ($AllVariationsColor as $color):  ?>
-                                    <div style="background-color: <?= $color['anhColor'] ?>;"
-                                        data-colorCode="<?= $color['variationCode']  ?>"
-                                        data-variationId="<?= $color['variationId']  ?>"
-                                        class="color-option <?= $color['variationId'] == $product['variationId'] ? "selected" : ""    ?>  ">
+                                <?php foreach ($AllVariationsColor as $color): ?>
+                                    <div style="background-color: <?= $color['anhColor'] ?>"
+                                        data-colorCode="<?= $color['variationCode'] ?>"
+                                        data-variationId="<?= $color['variationId'] ?>"
+                                        class="color-option <?= $color['variationId'] == $product['variationId'] ? "selected" : "" ?>">
                                     </div>
-                                <?php endforeach  ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
-                        <div class="size__selector ">
+                        <div class="size__selector">
                             <span class="size-label">Kích thước: <span
                                     class="size__value"><?= $product['size'] ?></span></span>
                             <div class="row align-items-center">
-                                <!-- active__size -->
-                                <?php foreach ($AllVariationsSize as $size):  ?>
+                                <?php foreach ($AllVariationsSize as $size): ?>
                                     <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
-                                        class="size-option <?= $size['sizeId'] == $product['sizeId'] ? "active__size" : ""    ?>  ">
+                                        class="size-option <?= $size['sizeId'] == $product['sizeId'] ? "active__size" : "" ?>">
                                         <?= $size['size'] ?></div>
-                                <?php endforeach  ?>
-
+                                <?php endforeach; ?>
                             </div>
                         </div>
-                        <!--  -->
-                        <div>
-                            <h3 class="detail__number">Số lượng</h3>
-                            <div class="row justify-content-between align-items-center">
-                                <div class="number  row align-items-center">
-                                    <span><img loading="lazy" src="Frontend/public/svg/tru.svg" alt=""></span>
-                                    <span id="number">1</span>
-                                    <span><img loading="lazy" src="Frontend/public/svg/cong.svg" alt=""></span>
-                                </div>
-                                <div class="add__cart l-9 ">
-                                    Thêm giỏ hàng
-                                </div>
-                            </div>
-                            <div class="cate__new">
-                                Mua Ngay
-                            </div>
-                            <div class="payment-methods">
-                                <div class="">
-                                    <div><img src="https://yody.vn/icons/zalopay.png" alt="ZaloPay"></div>
-                                    <div><img src="https://yody.vn/icons/visa-card.png" alt="Visa"></div>
-                                    <div><img src="https://yody.vn/icons/master-card.png" alt="MasterCard"></div>
-                                    <div><img src="https://yody.vn/icons/vnpay-qr.png" alt="VNPay"></div>
-                                    <div><img src="https://yody.vn/icons/momo.png" alt="MoMo"></div>
-                                </div>
-                                <p class="text-align-center">Đảm bảo thanh toán an toàn và bảo mật</p>
-                            </div>
-                            <div class="info__ship">
-                                <div>
-                                    <span><img loading="lazy" src="Frontend/public/svg/car.svg" alt=""></span>
-                                    <span> Miễn phí vận chuyển: Đơn hàng từ 498k</span>
-                                </div>
-                                <div>
-                                    <span><img loading="lazy" src="Frontend/public/svg/times.svg" alt=""></span>
-                                    <span> Giao hàng: Từ 3 - 5 ngày trên cả nước</span>
-                                </div>
-                                <div>
-                                    <span><img loading="lazy" src="Frontend/public/svg/traodoi.svg" alt=""></span>
-                                    <span> Miễn phí đổi trả: Tại 267+ cửa hàng trong 15 ngày</span>
-                                </div>
-                                <div>
-                                    <span><img loading="lazy" src="Frontend/public/svg/mac.svg" alt=""></span>
-                                    <span> Sử dụng mã giảm giá ở bước thanh toán</span>
-                                </div>
-                                <div>
-                                    <span><img loading="lazy" src="Frontend/public/svg/baove.svg" alt=""></span>
-                                    <span> Thông tin bảo mật và mã hóa</span>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="detail__number">Số lượng</div>
+                        <!-- Other content here -->
                     </div>
-                    <div class="l-1"></div>
                 </div>
             </main>
-        <?php endforeach;  ?>
+        <?php endforeach; ?>
+
 
         <!-- Cos theer ban se thich -->
         <section class="canyoulikeit     grid wide">

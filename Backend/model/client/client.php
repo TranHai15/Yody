@@ -39,7 +39,7 @@ class Model_Client
         $value = getRaw($sql);
         return $value;
     }
-
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public function getAllVariationsWhereProductIdWhereVariationId($idProducts, $idVariations)
     {
         $sql = "SELECT p.*, 
@@ -52,14 +52,12 @@ class Model_Client
         v.sale, 
         s.sizeId, 
         s.size
- FROM products AS p
- JOIN variations AS v ON p.productId = v.productId
- JOIN sizevariations AS s ON s.variationId = v.variationId
- WHERE p.productId = $idProducts
-   AND v.variationId = $idVariations
-   AND s.sizeId = (SELECT MIN(sizeId) FROM sizevariations WHERE variationId = 2);
-        
- ";
+        FROM products AS p
+        JOIN variations AS v ON p.productId = v.productId
+        JOIN sizevariations AS s ON s.variationId = v.variationId
+        WHERE p.productId = $idProducts
+        AND v.variationId = $idVariations
+        AND s.sizeId = (SELECT MIN(sizeId) FROM sizevariations WHERE variationId = $idVariations)";
         return getRaw($sql);
     }
 
@@ -87,6 +85,33 @@ class Model_Client
     public function getAllVariationSize($idVariations)
     {
         $sql = "SELECT * FROM sizevariations Where variationId = $idVariations";
+        return getRaw($sql);
+    }
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    public function getAllProducts()
+    {
+        $sql = "SELECT p.productId,
+        p.name,
+        MIN(v.price) AS new_price,
+        MIN(v.sale) AS old_price,
+        MIN(v.image) AS ImageMain,
+        MIN(v.variationId) AS colorId,
+        JSON_ARRAYAGG(
+            JSON_OBJECT(
+                'anhColor', v.anhColor,
+                'image', v.image,
+                'variationId', v.variationId
+            )
+        ) AS variations
+ FROM products AS p
+ JOIN variations AS v ON p.productId = v.productId
+ GROUP BY p.productId
+ ORDER BY p.productId
+ LIMIT 4;
+ ";
+
         return getRaw($sql);
     }
 }

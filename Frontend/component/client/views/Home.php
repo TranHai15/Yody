@@ -35,35 +35,39 @@
 
                 <section class="products row  justify-content-between grid wide">
 
-                    <article class="product l-3 m-4 c-12">
-                        <a href="/duan1/detail?product=2&color=2&size=2">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+                    <?php foreach ($TopProduct as $Product): ?>
+                        <?php $name = replaceSpacesWithHyphen($Product['name']); ?>
+                        <article class="product l-3 m-4 c-12">
+                            <a href="/duan1/product?<?= $name ?>&color=<?= $Product['colorId'] ?>">
+                                <div class="product__image">
+                                    <img loading="lazy" src="<?= $Product['ImageMain'] ?>" alt="" />
                                 </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </a>
-                    </article>
+                                <span class="product__name"><?= $Product['name'] ?></span>
+                                <div class="product__price row align-items-center">
+                                    <?php $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100)); ?>
+                                    <?= $Product['old_price'] > 0 ? "<span class=price__new>$sale đ</span>" : $Product['new_price'] . "đ" ?>
+                                    <?= $Product['old_price'] > 0 ? "<span class=price__old>{$Product['new_price']}đ</span>" : "" ?>
+                                </div>
+                                <div class="product__variation row align-items-center">
 
-                    <article class="product l-3 m-4 c-12">
+                                    <?php
+                                    $variations = json_decode($Product['variations'], true); ?>
+                                    <?php foreach ($variations as $key => $variation) : ?>
+                                        <a href="/duan1/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
+                                            data-images="<?= $variation['image'] ?>">
+                                            <span
+                                                class="product__variation--item <?= $variation['variationId'] == $Product['colorId'] ? 'active__product--variation' : '' ?>"
+                                                style="background-color: <?= $variation['anhColor'] ?>">
+                                            </span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?= $Product['old_price'] > 0 ? "<div class='product__logo--sale row align-items-center justify-content-center'><span>-$Product[old_price]%</span></div>" : "" ?>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
+
+                    <!-- <article class="product l-3 m-4 c-12">
                         <div class="product__image">
                             <img loading="lazy"
                                 src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
@@ -129,7 +133,7 @@
                         <div class="product__logo--sale row align-items-center justify-content-center">
                             <span>-</span>5%
                         </div>
-                    </article>
+                    </article> -->
 
 
                 </section>
@@ -483,7 +487,8 @@
                         alt="" /></a>
                 <a href="#">
                     <img src="https://m.yodycdn.com/fit-in/filters:format(webp)//products/YODY_XANH%20SM_893x598.jpg"
-                        alt="" /> </a>
+                        alt="" />
+                </a>
                 <a href="#">
                     <img src="https://m.yodycdn.com/fit-in/filters:format(webp)//products/Frame%2032%201.jpg"
                         alt="" /></a>

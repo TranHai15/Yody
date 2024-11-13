@@ -27,10 +27,12 @@ class Controller_Client
     public function List($file = "Home")
     {
         $Client = new Model_Client;
+        $TopProduct = $Client->getAllProducts();
 
 
-
-        View(FRONTEND__CLIENT, $file, []);
+        View(FRONTEND__CLIENT, $file, [
+            "TopProduct" => $TopProduct,
+        ]);
     }
 
     public function detail($file = "detail")
