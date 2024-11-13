@@ -253,6 +253,7 @@ function getRows($sql)
     }
 }
 
+
 // lay du lieu va dem dong 
 function get_user_data($email, $check = 0)
 {

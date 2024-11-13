@@ -1,9 +1,9 @@
 <?php
-// <!-- file chua cac hang so -->
-const FRONTEND__VIEW = "./Frontend/component/client/views/";
+const FRONTEND__CLIENT = "./Frontend/component/client/views/";
+const FRONTEND__ADMIN = "./Frontend/component/admin/";
 const FRONTEND = "./Frontend/component/client/";
 const HF = "./Frontend/component/client/";
-
+const P = "/duan1";
 
 // Kết nối database
 const _HOST = "localhost";

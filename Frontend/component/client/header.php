@@ -3,7 +3,7 @@
     <header>
         <div class="header grid wide">
             <nav class="header__left row align-items-center">
-                <a href="?clt=/">
+                <a href="<?= P ?>/">
                     <div class="header__logo">
                         <img src="Frontend/public/svg/logo.svg" alt="Yody">
                     </div>
@@ -22,7 +22,7 @@
                         ?>
                         <!-- Thêm lớp 'has-submenu' nếu có mục con -->
                         <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
-                            <a href="?clt=category" class="menu-item-a"><?= $cap1['name'] ?></a>
+                            <a href="<?= P ?>/category" class="menu-item-a"><?= $cap1['name'] ?></a>
                             <?php if ($hasSubmenu): ?>
                                 <div class="menu__list--cha">
                                     <div class="menu__list grid wide row">
@@ -57,13 +57,13 @@
                     <input type="text" id="header__search--input " class="header__search--input"
                         placeholder="Tìm kiếm ">
                 </span>
-                <a href="?clt=cart">
+                <a href="<?= P ?>/cart">
                     <span class="header__cart">
                         <img loading="lazy" src="Frontend/public/svg/cart.svg" alt="Yody-cart">
                     </span>
                 </a>
                 <div class="user">
-                    <a href="?clt=auth&action=login">
+                    <a href="<?= P ?>/auth?login">
                         <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
                                 alt="Yody-user"></span>
                     </a>

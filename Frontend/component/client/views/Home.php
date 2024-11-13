@@ -13,6 +13,7 @@
     <?php require_once(HF . "header.php")  ?>
     <div>
 
+
         <section class="banner banner__one grid wide" data-carousel>
             <ul data-slides>
                 <?php foreach ($slides as $slide) : ?>
@@ -33,9 +34,6 @@
                 <img src="Frontend/public/svg/next.svg" alt="Next" />
             </button>
         </section>
-
-
-
         <main>
             <div class="grid wide ">
                 <h2 class="title text-align-center">Sản phẩm ưa chuộng</h2>
@@ -53,7 +51,7 @@
                 <section class="products row  justify-content-between grid wide">
 
                     <article class="product l-3 m-4 c-12">
-                        <a href="?clt=detail">
+                        <a href="/duan1/detail?product=2&color=2&size=2">
                             <div class="product__image">
                                 <img loading="lazy"
                                     src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"

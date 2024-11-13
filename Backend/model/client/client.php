@@ -41,45 +41,58 @@ class Model_Client
         return $value;
     }
 
-    public function getAllVariationsWhereProductIdWhereVariationId($id)
+    public function getAllVariationsWhereProductIdWhereVariationId($idProducts, $idVariations)
     {
-        $sql = "SELECT p.* , v.variationId,v.image,v.color,v.price,v.descripe,v.variationCode ,v.sale
-        FROM products AS p
-        JOIN variations AS v ON p.productId = v.productId
-        
-        WHERE p.productId = 2 AND v.variationId = 3
+        $sql = "SELECT p.*, 
+        v.variationId, 
+        v.image, 
+        v.color, 
+        v.price, 
+        v.descripe, 
+        v.variationCode, 
+        v.sale, 
+        s.sizeId, 
+        s.size
+ FROM products AS p
+ JOIN variations AS v ON p.productId = v.productId
+ JOIN sizevariations AS s ON s.variationId = v.variationId
+ WHERE p.productId = $idProducts
+   AND v.variationId = $idVariations
+   AND s.sizeId = (SELECT MIN(sizeId) FROM sizevariations WHERE variationId = 2);
         
  ";
         return getRaw($sql);
     }
 
-    public function getAllSizeVariationsWhereVariationId($id)
+    public function getAllSizeVariationsWhereVariationId($idVariations)
     {
         $sql = "SELECT s.sizeCode, s.size, s.quantity
         FROM sizevariations AS s
-        WHERE s.variationId = 2;
+        WHERE s.variationId = $idVariations;
         ";
         return getRaw($sql);
     }
-    public function getAllImageVariationsWhereVariationId($id)
+    public function getAllImageVariationsWhereVariationId($idVariations)
     {
         $sql = "SELECT i.image AS variation_image
         FROM variationimages AS i
-        WHERE i.variationId = 2;
+        WHERE i.variationId = $idVariations;
         ";
         return getRaw($sql);
     }
-    public function getAllVariationColor($id)
+    public function getAllVariationColor($idVariations)
     {
-        $sql = "SELECT *
-        FROM variations WHERE productId = 3";
+        $sql = "SELECT * FROM variations Where productId = $idVariations";
+        return getRaw($sql);
+    }
+    public function getAllVariationSize($idVariations)
+    {
+        $sql = "SELECT * FROM sizevariations Where variationId = $idVariations";
         return getRaw($sql);
     }
     public function get_Slide_imgs()
     {
         $sql = "SELECT * FROM slides";
-        $value = getRaw($sql);
-        return $value;
-        // var_dump($value);
+        return getRaw($sql);
     }
 }
