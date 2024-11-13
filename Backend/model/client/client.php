@@ -62,44 +62,11 @@ class Model_Client
         return getRaw($sql);
     }
 
-    public function getAllSizeVariationsWhereVariationId($idVariations)
-    {
-        $sql = "SELECT s.sizeCode, s.size, s.quantity
-        FROM sizevariations AS s
-        WHERE s.variationId = $idVariations;
-        ";
-        return getRaw($sql);
-    }
-    public function getAllImageVariationsWhereVariationId($idVariations)
-    {
-        $sql = "SELECT i.image AS variation_image
-        FROM variationimages AS i
-        WHERE i.variationId = $idVariations;
-        ";
-        return getRaw($sql);
-    }
-    public function getAllVariationColor($idVariations)
-    {
-<<<<<<< HEAD
-        $sql = "SELECT *
-        FROM variations WHERE productId = 3";
-        return getRaw($sql);
-    }
     public function get_Slide_imgs()
     {
         $sql = "SELECT * FROM slides";
         $value = getRaw($sql);
         return $value;
-        // var_dump($value);
-=======
-        $sql = "SELECT * FROM variations Where productId = $idVariations";
-        return getRaw($sql);
-    }
-    public function getAllVariationSize($idVariations)
-    {
-        $sql = "SELECT * FROM sizevariations Where variationId = $idVariations";
-        return getRaw($sql);
->>>>>>> 8d1ae2d (duong past moi)
     }
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

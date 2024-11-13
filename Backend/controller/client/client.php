@@ -32,22 +32,8 @@ class Controller_Client
 
         $slides =  $Client->get_Slide_imgs();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        View(FRONTEND__VIEW, $file, ["slides" => $slides]);
-=======
 
-<<<<<<< HEAD
-        View(FRONTEND__VIEW, $file, []);
->>>>>>> 8d1ae2d (duong past moi)
-=======
-        View(FRONTEND__CLIENT, $file, []);
->>>>>>> 058d150 (tich hop admin vao)
-=======
-        View(FRONTEND__CLIENT, $file, [
-            "TopProduct" => $TopProduct,
-        ]);
->>>>>>> 425a6b6 (do san pham)
+        View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct]);
     }
 
     public function detail($file = "detail")
@@ -57,20 +43,11 @@ class Controller_Client
         $idVariation = $_GET['size'] ?? "";
         $Client = new Model_Client;
         $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idProduct, $idVariation);
-        $AllSizeVariations = $Client->getAllSizeVariationsWhereVariationId($idVariation);
-        $AllVariationsImage = $Client->getAllImageVariationsWhereVariationId($idVariation);
-        $AllVariationsColor = $Client->getAllVariationColor($idVariation);
-        $AllVariationsSize = $Client->getAllVariationSize($idVariation);
-
         View(
             FRONTEND__CLIENT,
             $file,
             [
                 "OneVariations" => $OneVariations,
-                "AllVariationsImage" => $AllVariationsImage,
-                "AllVariationsColor" => $AllVariationsColor,
-                "AllVariationsSize" => $AllVariationsSize,
-                "AllSizeVariations" => $AllSizeVariations
             ]
         );
     }

@@ -12,73 +12,22 @@
 
     <?php require_once(HF . "header.php")  ?>
     <div>
-<<<<<<< HEAD
+
 
         <section class="banner banner__one grid wide" data-carousel>
-            <ul data-slides>
-<<<<<<< HEAD
-                <li class="slide" data-active>
-<<<<<<< HEAD
 
-                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
-                        alt="" />
-                </li>
+            <?php foreach ($slides as $slide) : ?>
                 <li class="slide">
-                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2wotote0per2gcotuqa1800x833%20PC%20hero%20banner%2011.png"
-                        alt="" />
-                </li>
-                <li class="slide">
-                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2x4rdsb1ctzpyb9jii3110_1800x833-07.png"
-                        alt="" />
-=======
-                    <a href="?clt=event">
-                        <img
-                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
-                            alt="Slide 1" />
+                    <a href="?clt=<?= 'event&name=' . $slide['past'] ?> " title="<?= $slide['title']  ?>">
+                        <img loading="lazy" src="<?= $slide['url'] ?>" alt="<?= $slide['title'] ?>" />
                     </a>
                 </li>
-                <li class="slide">
-                    <a href="?clt=event">
-                        <img
-                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2wotote0per2gcotuqa1800x833%20PC%20hero%20banner%2011.png"
-                            alt="Slide 2" />
-                    </a>
-                </li>
-                <li class="slide">
-                    <a href="?clt=event">
-                        <img
-                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2x4rdsb1ctzpyb9jii3110_1800x833-07.png"
-                            alt="Slide 3" />
-                    </a>
->>>>>>> 7233a64 (Bang day code)
-                </li>
-=======
-                <?php foreach ($slides as $slide) : ?>
-                    <li class="slide">
-                        <a href="?clt=<?= 'event&name=' . $slide['past'] ?> " title="<?= $slide['title']  ?>">
-                            <img loading="lazy"
-                                src="<?= $slide['url'] ?>"
-                                alt="<?= $slide['title'] ?>" />
-                        </a>
-                    </li>
-                <?php endforeach ?>
-
->>>>>>> 284ae33 (hoan thanh banner)
-            </ul>
-            <button class="slide__show pre " data-carousel-button="prev"><img src="Frontend/public/svg/pre.svg" alt="Pre"></button>
-            <button class="slide__show next" data-carousel-button="next"><img src="Frontend/public/svg/next.svg" alt="Next"></button>
+            <?php endforeach ?>
+            <button class="slide__show pre " data-carousel-button="prev"><img src="Frontend/public/svg/pre.svg"
+                    alt="Pre"></button>
+            <button class="slide__show next" data-carousel-button="next"><img src="Frontend/public/svg/next.svg"
+                    alt="Next"></button>
         </section>
-
-=======
-        <a href="/duan1/event">
-            <section class="banner banner__one grid wide">
-                <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
-                    alt="" />
-                <span class="slide__show pre "><img src="Frontend/public/svg/pre.svg" alt="Pre"></span>
-                <span class="slide__show next"><img src="Frontend/public/svg/next.svg" alt="Next"></span>
-            </section>
-        </a>
->>>>>>> 8d1ae2d (duong past moi)
         <main>
             <div class="grid wide ">
                 <h2 class="title text-align-center">Sản phẩm ưa chuộng</h2>
@@ -126,76 +75,6 @@
                             </a>
                         </article>
                     <?php endforeach; ?>
-
-                    <!-- <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                            <div class="overlay__image">
-                                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png"
-                                    alt="">
-                            </div>
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article> -->
-
-
                 </section>
                 <button class="row btn__view">Xem thêm</button>
             </div>
