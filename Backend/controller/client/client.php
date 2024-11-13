@@ -28,11 +28,12 @@ class Controller_Client
     public function List($file = "Home")
     {
         $Client = new Model_Client;
+        $TopProduct = $Client->getAllProducts();
 
         $slides =  $Client->get_Slide_imgs();
 
 
-        View(FRONTEND__CLIENT, $file, ["slides" => $slides]);
+        View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct,]);
     }
 
     public function detail($file = "detail")

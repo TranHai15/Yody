@@ -658,15 +658,13 @@ a {
   display: inline-block;
 }
 
-.product__variation {
-  gap: 0.7rem;
-}
-
 .product__variation--item {
   background-color: #4d4d;
   width: 2.2rem;
   height: 2.2rem;
+  display: block;
   border-radius: 50%;
+  margin-right: 5px;
 }
 
 .active__product--variation {
@@ -678,8 +676,10 @@ a {
 }
 
 .product__logo--sale {
-  padding: 0.6rem 2.3rem;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   right: 1rem;
   top: 1rem;
   width: 4rem;
