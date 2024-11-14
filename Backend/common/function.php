@@ -468,6 +468,7 @@ function removespace($strings)
 // ham insert into 
 function insert($table, $data)
 {
+
     //lay ra ca tu khoa ki cua mang
     $keys = array_keys($data);
     // noi cac tu khoa key lai thanh mot mang
@@ -475,8 +476,10 @@ function insert($table, $data)
     // cung noi nhung them dau  ,:
     $value = ":" . implode(',:', $keys);
     // cau lenh truy van
-    $sql = "INSERT INTO ' . $table . '(' . $truong . ')' . 'VALUES(' . $value . ')";
+
+    $sql = "INSERT INTO  $table ( $truong )VALUES( $value )";
     $kq = query($sql, $data);
+
     return $kq;
 }
 

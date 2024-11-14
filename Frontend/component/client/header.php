@@ -3,7 +3,7 @@
     <header>
         <div class="header grid wide">
             <nav class="header__left row align-items-center">
-                <a href="<?= P ?>/">
+                <a href="<?= P ?>">
                     <div class="header__logo">
                         <img src="Frontend/public/svg/logo.svg" alt="Yody">
                     </div>
@@ -47,7 +47,8 @@
                                 </div>
                             <?php endif; ?>
                         </span>
-                    <?php endforeach; ?>
+                    <?php endforeach ?>
+
                 </div>
 
             </nav>

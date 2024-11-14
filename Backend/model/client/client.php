@@ -62,37 +62,14 @@ class Model_Client
         return getRaw($sql);
     }
 
-    public function getAllSizeVariationsWhereVariationId($idVariations)
-    {
-        $sql = "SELECT s.sizeCode, s.size, s.quantity
-        FROM sizevariations AS s
-        WHERE s.variationId = $idVariations;
-        ";
-        return getRaw($sql);
-    }
-    public function getAllImageVariationsWhereVariationId($idVariations)
-    {
-        $sql = "SELECT i.image AS variation_image
-        FROM variationimages AS i
-        WHERE i.variationId = $idVariations;
-        ";
-        return getRaw($sql);
-    }
-    public function getAllVariationColor($idVariations)
-    {
-        $sql = "SELECT * FROM variations Where productId = $idVariations";
-        return getRaw($sql);
-    }
-    public function getAllVariationSize($idVariations)
-    {
-        $sql = "SELECT * FROM sizevariations Where variationId = $idVariations";
-        return getRaw($sql);
-    }
     public function get_Slide_imgs()
     {
         $sql = "SELECT * FROM slides";
-        return getRaw($sql);
+        $value = getRaw($sql);
+        return $value;
     }
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     public function getAllProducts()
     {
@@ -108,13 +85,13 @@ class Model_Client
                 'image', v.image,
                 'variationId', v.variationId
             )
-             ) AS variations
-            FROM products AS p
-            JOIN variations AS v ON p.productId = v.productId
-            GROUP BY p.productId
-            ORDER BY p.productId
-            LIMIT 4;
-            ";
+        ) AS variations
+ FROM products AS p
+ JOIN variations AS v ON p.productId = v.productId
+ GROUP BY p.productId
+ ORDER BY p.productId
+ LIMIT 4;
+ ";
 
         return getRaw($sql);
     }
