@@ -1,0 +1,4 @@
+<?php
+
+
+echo "Hoame admin ";
