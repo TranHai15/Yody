@@ -42,6 +42,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/pay" => fn() => require_once FRONTEND__CLIENT . "pay.php",
         $urlPath === "{$basePath}/auth" && $query === "login" => fn() => require_once FRONTEND__CLIENT . "login.php",
         $urlPath === "{$basePath}/auth" && $query === "register" => fn() => require_once FRONTEND__CLIENT . "register.php",
+        $urlPath === "{$basePath}/auth" && $query === "dangki" => fn() => $Client->register(),
         default => fn() => print("Client page not found!"),
     };
 }
