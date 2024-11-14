@@ -11,7 +11,9 @@
   height: 90vh;
   overflow: hidden; /* Ẩn phần ảnh tràn ra ngoài */
 }
-
+li {
+  list-style: none;
+}
 .banner__one ul {
   display: flex; /* Dùng flexbox để các ảnh xếp hàng ngang */
   margin: 0;

@@ -14,7 +14,7 @@
     <?php require_once(HF . "header.php")  ?>
     <div>
         <div class="grid wide row align-items-center">
-            <span> <a class="past__product" href="?clt=/">Trang Chủ </a></span>
+            <span> <a class="past__product" href="<?= P ?>/">Trang Chủ </a></span>
             <span class="past__icon--next"><img src="Frontend/public/svg/next.svg" alt=""></span>
             <span class="past__product--category"> Nam</span>
         </div>
