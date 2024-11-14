@@ -51,18 +51,15 @@ class Controller_Client
         $idVariation = $_GET['size'] ?? "";
         $Client = new Model_Client;
         $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idProduct, $idVariation);
-        $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idProduct, $idVariation);
-        $AllSizeVariations = $Client->getAllSizeVariationsWhereVariationId($idVariation);
-        $AllVariationsImage = $Client->getAllImageVariationsWhereVariationId($idVariation);
-        $AllVariationsColor = $Client->getAllVariationColor($idVariation);
-        $AllVariationsSize = $Client->getAllVariationSize($idVariation);
+
+
 
         View(
             FRONTEND__CLIENT,
-            FRONTEND__CLIENT,
+
             $file,
             [
-                "OneVariations" => $OneVariations,
+                "OneVariations" => $OneVariations
             ]
         );
     }
@@ -130,11 +127,5 @@ class Controller_Client
                 View(FRONTEND__CLIENT, 'register', []);
             }
         }
-                "AllVariationsImage" => $AllVariationsImage,
-                "AllVariationsColor" => $AllVariationsColor,
-                "AllVariationsSize" => $AllVariationsSize,
-                "AllSizeVariations" => $AllSizeVariations
-            ]
-        );
     }
 }
