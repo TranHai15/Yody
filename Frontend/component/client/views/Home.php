@@ -47,7 +47,7 @@
                     <?php foreach ($TopProduct as $Product): ?>
                         <?php $name = replaceSpacesWithHyphen($Product['name']); ?>
                         <article class="product l-3 m-4 c-12">
-                            <a href="/duan1/product?<?= $name ?>&color=<?= $Product['colorId'] ?>">
+                            <a href="<?= P ?>/product?<?= $name ?>&color=<?= $Product['colorId'] ?>">
                                 <div class="product__image">
                                     <img loading="lazy" src="<?= $Product['ImageMain'] ?>" alt="" />
                                 </div>
