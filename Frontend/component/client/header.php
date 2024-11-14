@@ -112,4 +112,9 @@
     </div>
     <div class="overlay"></div>
 </div>
+<section class="notification">
+    <div>
+        <p>Tao tai khoan thanh cong</p>
+    </div>
+</section>
 <script src="Frontend/Js/hf.js"></script>
