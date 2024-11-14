@@ -31,7 +31,7 @@
                 <section class="products row  justify-content-between grid wide">
 
                     <article class="product l-3 m-4 c-12">
-                        <a href="?clt=detail">
+                        <a href="<?= P ?>/detail">
                             <div class="product__image">
                                 <img loading="lazy"
                                     src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
@@ -152,7 +152,7 @@
                 <section class="products row  justify-content-between grid wide">
 
                     <article class="product l-3 m-4 c-12">
-                        <a href="?clt=detail">
+                        <a href="<?= P ?>/detail">
                             <div class="product__image">
                                 <img loading="lazy"
                                     src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
@@ -272,7 +272,7 @@
                 <section class="products row  justify-content-between grid wide">
 
                     <article class="product l-3 m-4 c-12">
-                        <a href="?clt=detail">
+                        <a href="<?= P ?>/detail">
                             <div class="product__image">
                                 <img loading="lazy"
                                     src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"

@@ -18,16 +18,8 @@ $Client = new Controller_Client;
 if (strpos($urlPath, "{$basePath}/admin") === 0) {
     // Admin routes using match
     $page = match (true) {
-        $urlPath === "{$basePath}/adminIndex" => fn() => $Admin->List("index"),
-        $urlPath === "{$basePath}/adminAccount" => fn() => $Admin->List("account"),
-        $urlPath === "{$basePath}/adminCategory" => fn() => $Admin->List("category"),
-        $urlPath === "{$basePath}/adminComment" => fn() => $Admin->List("comment"),
-        $urlPath === "{$basePath}/adminEditProduct" => fn() => $Admin->List("EditProducts"),
-        $urlPath === "{$basePath}/adminListProducts" => fn() => $Admin->List("ListProducts"),
-        $urlPath === "{$basePath}/adminAddProduct" => fn() => $Admin->List("addProducts"),
-        $urlPath === "{$basePath}/adminAddCategory" => fn() => $Admin->List("addCategory"),
-        $urlPath === "{$basePath}/adminMain" => fn() => $Admin->List("main"),
-        default => fn() => print("Admin page not found!"),
+        $urlPath === "{$basePath}/admin" => fn() => $Admin->List("index"),
+        default => fn() => print("Admin page not found! sssss"),
     };
 } else {
     // Client routes using match

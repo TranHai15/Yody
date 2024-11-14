@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="Frontend/component/admin/assets/img/favicon.png" rel="icon">
-    <link href="Frontend/component/admin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/img/favicon.png" rel="icon">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -20,16 +20,16 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="Frontend/component/admin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Frontend/component/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="Frontend/component/admin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="Frontend/component/admin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="Frontend/component/admin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="Frontend/component/admin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="Frontend/component/admin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="Frontend/component/admin/assets/css/style.css" rel="stylesheet">
+    <link href="<?= FRONTEND__ADMIN ?>/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -38,7 +38,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="<?= P ?>/adminIndex" class="logo d-flex align-items-center">
+            <a href="<?= P ?>/admin?Index" class="logo d-flex align-items-center">
                 <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-Yody.png" alt="">
                 <span class="d-none d-lg-block">Admin</span>
             </a>
@@ -154,7 +154,7 @@
 
                         <li class="message-item">
                             <a href="#">
-                                <img src="Frontend/component/admin/assets/img/messages-1.jpg" alt=""
+                                <img src="<?= FRONTEND__ADMIN ?>/assets/img/messages-1.jpg" alt=""
                                     class="rounded-circle">
                                 <div>
                                     <h4>Maria Hudson</h4>
@@ -169,7 +169,7 @@
 
                         <li class="message-item">
                             <a href="#">
-                                <img src="Frontend/component/admin/assets/img/messages-2.jpg" alt=""
+                                <img src="<?= FRONTEND__ADMIN ?>/assets/img/messages-2.jpg" alt=""
                                     class="rounded-circle">
                                 <div>
                                     <h4>Anna Nelson</h4>
@@ -184,7 +184,7 @@
 
                         <li class="message-item">
                             <a href="#">
-                                <img src="Frontend/component/admin/assets/img/messages-3.jpg" alt=""
+                                <img src="<?= FRONTEND__ADMIN ?>/assets/img/messages-3.jpg" alt=""
                                     class="rounded-circle">
                                 <div>
                                     <h4>David Muldon</h4>
@@ -208,7 +208,7 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="Frontend/component/admin/assets/img/profile-img.jpg" alt="Profile"
+                        <img src="<?= FRONTEND__ADMIN ?>/assets/img/profile-img.jpg" alt="Profile"
                             class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
                     </a><!-- End Profile Iamge Icon -->
@@ -273,7 +273,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="<?= P ?>/adminIndex">
+                <a class="nav-link " href="<?= P ?>/admin?Index">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -286,13 +286,13 @@
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="<?=P?>/adminCategory">
+                        <a href="<?= P ?>/admin?Category">
                             <i class="bi bi-circle"></i><span>Danh mục sản phẩm</span>
                         </a>
                     </li>
 
                 </ul>
-            </li><!-- End Components Nav -->
+            </li><!-- End Danh muc Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
@@ -300,46 +300,65 @@
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="<?= P ?>/adminAddProduct">
+                        <a href="<?= P ?>/admin?AddProduct">
                             <i class="bi bi-circle"></i><span>Thêm mới sản phẩm</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?=P?>/adminListProducts">
+                        <a href="<?= P ?>/admin?ListProducts">
                             <i class="bi bi-circle"></i><span>Danh sách sản phẩm</span>
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Forms Nav -->
-
+            </li><!-- End San pham  Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Tài khoản</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="account-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="<?=P?>/adminAccount">
+                        <a href="<?= P ?>/admin?Account">
                             <i class="bi bi-circle"></i><span>Quản lí tài khoản</span>
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Tables Nav -->
+            </li> <!-- End Tài khoản Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="<?=P?>/adminComment">
+                <a class="nav-link collapsed" data-bs-target="#slide-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Slides</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="slide-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="<?= P ?>/admin?Slides">
+                            <i class="bi bi-circle"></i><span>Quản lí Slide</span>
+                        </a>
+                    </li>
+                </ul>
+            </li> <!-- End Slides Nav -->
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= P ?>/admin?Comment">
                     <i class="bi bi-person"></i>
                     <span>Bình luận</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
-
+            </li><!-- End Binh luán Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= P ?>/admin?Order">
+                    <i class="bi bi-person"></i>
+                    <span>Quản lý đơn hàng</span>
+                </a>
+            </li><!-- End Đon hang  Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#">
                     <i class="bi bi-card-list"></i>
                     <span>Register</span>
                 </a>
-            </li><!-- End Register Page Nav -->
+            </li><!-- End dang ki Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#">
@@ -353,7 +372,38 @@
         </ul>
 
     </aside><!-- End Sidebar-->
+    <?php
+    $basePath = P;
+    $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $query = $_SERVER['QUERY_STRING'] ?? '';
+    if (strpos($urlPath, "{$basePath}/admin") === 0) {
+        $page = match (true) {
+            $urlPath === "{$basePath}/admin"  && $query === "Index" => fn() => require_once("Frontend/component/admin/home.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "Account" => fn() => require_once("Frontend/component/admin/account.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "Category" => fn() => require_once("Frontend/component/admin/category.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "Comment" => fn() => require_once("Frontend/component/admin/comment.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "Order" => fn() => require_once("Frontend/component/admin/order.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "EditProduct" => fn() => require_once("Frontend/component/admin/editProducts.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "ListProducts" => fn() =>  require_once("Frontend/component/admin/listProducts.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "AddProduct" => fn() => require_once("Frontend/component/admin/addProducts.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "Slides" => fn() => require_once("Frontend/component/admin/slides.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "EditCategory" => fn() => require_once("Frontend/component/admin/editCategory.php"),
+            $urlPath === "{$basePath}/admin"  && $query === "AddCategory" => fn() => require_once("Frontend/component/admin/addCategory.php"),
+            default => fn() => print("Admin page not found! onweonafdg"),
+        };
+    }
 
+    $page();
+
+
+
+
+
+
+
+
+
+    ?>
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
 
@@ -363,17 +413,17 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="Frontend/component/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="Frontend/component/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="Frontend/component/admin/assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="Frontend/component/admin/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="Frontend/component/admin/assets/vendor/quill/quill.js"></script>
-    <script src="Frontend/component/admin/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="Frontend/component/admin/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="Frontend/component/admin/assets/vendor/php-email-form/validate.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/quill/quill.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="Frontend/component/admin/assets/js/admin.js"></script>
+    <script src="<?= FRONTEND__ADMIN ?>/assets/js/admin.js"></script>
 
 </body>
 

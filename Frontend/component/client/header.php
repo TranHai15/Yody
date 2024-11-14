@@ -82,7 +82,7 @@
                             <div class="username">Ngoc Nho</div>
                         </div>
                         <ul class="user-options">
-                            <li><a href="?clt=history">Lịch sử mua hàng</a></li>
+                            <li><a href="<?= P ?>/history">Lịch sử mua hàng</a></li>
                             <li><a href="/change-password">Thay đổi mật khẩu</a></li>
                             <li><a href="/settings">Cài đặt</a></li>
                             <li><a href="/logout">Đăng xuất</a></li>

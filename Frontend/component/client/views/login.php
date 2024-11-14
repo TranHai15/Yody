@@ -4,7 +4,7 @@
         <div class="content">
             <p class="text-align-center">Chào mừng bạn đến với Yody</p>
             <h1 class="text-align-center"><span>ĐĂNG</span><span>NHẬP</span></h1>
-            <form action="?clt=user&active=dangki" method="" onsubmit="return validate__login()" class="form__login">
+            <form action="<?= P ?>/auth?dangnhap" method="POST" onsubmit="return validate__login()" class="form__login">
                 <div class="input-container">
                     <div class="form">
                         <input type="text" name="email" id="email" class="form_input" autocomplete="off" placeholder=" "
