@@ -64,29 +64,46 @@
                     </span>
                 </a>
                 <div class="user">
-                    <a href="<?= P ?>/auth?login">
-                        <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
-                                alt="Yody-user"></span>
-                    </a>
 
-                    <!-- <div class="header__user if_login_ok ">
-                        <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
-                    </div> -->
+
+
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] >= 0): ?>
+                        <div class="header__user if_login_ok ">
+                            <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
+                        </div>
+                    <?php else: ?>
+                        <a href="<?= P ?>/auth?login">
+                            <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
+                                    alt="Yody-user"></span>
+                        </a>
+                    <?php endif; ?>
+                    <?php $name = $_SESSION["nameUser"] ?? "";
+                    $avata = $_SESSION['avataUser']  ?? ''  ?>
 
                     <div class="user-info-dropdown ">
                         <div class="user-info">
                             <div class="avatar">
-                                <img src="https://i.pinimg.com/736x/e2/01/7e/e2017e0b5a4f89b98b8611a5e82c3fbb.jpg"
-                                    alt="User Avatar" />
+                                <img src="<?= $avata ?>" alt="User Avatar" />
                             </div>
-                            <div class="username">Ngoc Nho</div>
+                            <div class="username"><?= $name ?></div>
                         </div>
-                        <ul class="user-options">
-                            <li><a href="<?= P ?>/history">Lịch sử mua hàng</a></li>
-                            <li><a href="/change-password">Thay đổi mật khẩu</a></li>
-                            <li><a href="/settings">Cài đặt</a></li>
-                            <li><a href="/logout">Đăng xuất</a></li>
-                        </ul>
+
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1): ?>
+                            <ul class="user-options">
+                                <li><a href="<?= P ?>/admin">Vào trang quản trị</a></li>
+                                <li><a href="/change-password">Thay đổi mật khẩu</a></li>
+                                <li><a href="/settings">Cài đặt</a></li>
+                                <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
+                            </ul>
+                        <?php else: ?>
+                            <ul class="user-options">
+                                <li><a href="<?= P ?>/history">Lịch sử mua hàng</a></li>
+                                <li><a href="/change-password">Thay đổi mật khẩu</a></li>
+                                <li><a href="/settings">Cài đặt</a></li>
+                                <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
+                            </ul>
+                        <?php endif; ?>
+
                     </div>
 
                 </div>

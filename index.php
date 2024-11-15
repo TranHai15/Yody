@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="Frontend/Css/reset.css?ver=2">
 <link rel="stylesheet" href="Frontend/Css/grid.css?ver=3">
 <?php
+session_start();
+
 require_once("config.php");
 require_once("./Backend/controller/client/client.php");
 require_once("./Backend/controller/admin/admin.php");
@@ -10,6 +12,8 @@ $basePath = P;
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $query = $_SERVER['QUERY_STRING'] ?? '';
 
+
+
 // Initialize controllers
 $Admin = new Controller__Admin;
 $Client = new Controller_Client;
@@ -18,7 +22,7 @@ $Client = new Controller_Client;
 if (strpos($urlPath, "{$basePath}/admin") === 0) {
     // Admin routes using match
     $page = match (true) {
-        $urlPath === "{$basePath}/admin" => fn() => $Admin->List("index"),
+        $urlPath === "{$basePath}/admin" => fn() => $Admin->List("role"),
         default => fn() => print("Admin page not found! sssss"),
     };
 } else {
@@ -35,6 +39,8 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/auth" && $query === "login" => fn() => require_once FRONTEND__CLIENT . "login.php",
         $urlPath === "{$basePath}/auth" && $query === "register" => fn() => require_once FRONTEND__CLIENT . "register.php",
         $urlPath === "{$basePath}/auth" && $query === "dangki" => fn() => $Client->register(),
+        $urlPath === "{$basePath}/auth" && $query === "dangnhap" => fn() => $Client->login(),
+        $urlPath === "{$basePath}/logout" => fn() => $Client->logout(),
         default => fn() => print("Client page not found!"),
     };
 }
