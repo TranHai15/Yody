@@ -4,7 +4,7 @@
 
         <!-- Thêm mới sản phẩm -->
         <div class="mb-3">
-            <a href="<?= P ?>/adminAddProduct" class="btn btn-primary">Thêm Sản Phẩm Mới</a>
+            <a href="<?= P ?>/admin?AddProduct" class="btn btn-primary">Thêm Sản Phẩm Mới</a>
         </div>
 
         <!-- Bảng sản phẩm -->
