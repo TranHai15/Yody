@@ -2,6 +2,7 @@
 require_once("Backend/common/pdo.php");
 require_once("Backend/common/function.php");
 require_once("Backend/model/client/client.php");
+require_once("Backend/model/admin/admin.php");
 
 
 
@@ -31,6 +32,12 @@ class Controller__Admin
 
 
         View(FRONTEND__ADMIN, $file, []);
+    }
+    public function admSlides($file = "slides")
+    {
+        $getAll = new Model_Admin;
+        $slides = $getAll->get_All_Img();
+        View(FRONTEND__ADMIN, $file, ['slides' => $slides]);
     }
 
     // public function detail($file = "detail")
