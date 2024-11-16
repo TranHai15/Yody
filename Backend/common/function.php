@@ -432,9 +432,9 @@ function query($sql, $data = [], $check = false)
     } catch (PDOException $e) {
         // Hiển thị thông báo lỗi chi tiết
         echo "Lỗi: " . $e->getMessage() . "<br>";
-        echo "Dòng: " . $e->getLine() . "<br>";
-        echo "Tập tin: " . $e->getFile() . "<br>";
-        echo "Mã lỗi: " . $e->getCode() . "<br>";
+        // echo "Dòng: " . $e->getLine() . "<br>";
+        // echo "Tập tin: " . $e->getFile() . "<br>";
+        // echo "Mã lỗi: " . $e->getCode() . "<br>";
         return false;
     }
 
@@ -569,18 +569,35 @@ function get_user_data($email, $check = 0)
 function password_hasd_check($passwordinput, $email)
 {
     $pass = get_user_data($email, 33);
-    $password = $pass['password'];
-    $kiemtra = password_verify($passwordinput, $password);
-    return $kiemtra;
-}
 
-function push_img($file, $folder)
-{
-    if ($file['size'] > 0) {
-        $anh = "images/" . $folder . "/" . $file['name'];
-        move_uploaded_file($file['tmp_name'], $anh);
-        return $anh;
+    if (!$pass || !isset($pass['password'])) {
+        return false; // Trả về false nếu không tìm thấy người dùng hoặc không có mật khẩu
     }
 
-    return "";
+    $password = $pass['password'];
+    return password_verify($passwordinput, $password);
+}
+
+function xuLyUploadFile($file, $thuMucLuu = 'Image/', $duongDanMacDinh = null)
+{
+    // Kiểm tra xem file có được tải lên không
+    if (isset($file) && $file['size'] > 0) {
+        // Đảm bảo thư mục lưu trữ tồn tại
+        if (!is_dir($thuMucLuu)) {
+            mkdir($thuMucLuu, 0777, true);
+        }
+
+        $duongDanFile = $thuMucLuu . '/' . basename($file['name']);
+
+        // Di chuyển file vào thư mục đích
+        if (move_uploaded_file($file['tmp_name'], $duongDanFile)) {
+            return $duongDanFile; // Trả về đường dẫn của file vừa upload
+        } else {
+            echo "Có lỗi xảy ra khi upload file.";
+            return null;
+        }
+    } else {
+        // Nếu không có file mới, trả về đường dẫn mặc định
+        return $duongDanMacDinh;
+    }
 }

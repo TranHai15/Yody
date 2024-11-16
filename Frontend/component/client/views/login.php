@@ -9,9 +9,9 @@
                     <div class="form">
                         <input type="text" name="email" id="email" class="form_input" autocomplete="off" placeholder=" "
                             onchange="validateInput('email')" onfocus="clearError('email')"
-                            onblur="validateInput('email')">
+                            onblur="validateInput('email')" value="<?= getsession('login__email') ?? ""  ?>">
                         <label for="email" class="form_label">Email</label>
-                        <div class="error__con" id="error__email"></div>
+                        <div class="error__con" id="error__email"><?= getsession("login__emailError") ?? "" ?></div>
                     </div>
                 </div>
                 <div class="input-container">
@@ -20,7 +20,8 @@
                             placeholder=" " onchange="validateInput('password')" onfocus="clearError('password')"
                             onblur="validateInput('password')">
                         <label for="password" class="form_label">Password</label>
-                        <div class="error__con" id="error__password"></div>
+                        <div class="error__con" id="error__password"><?= getsession("login__passwordError") ?? "" ?>
+                        </div>
                     </div>
                 </div>
                 <button class="btn__summit" type="submit">Đăng Nhập</button>
