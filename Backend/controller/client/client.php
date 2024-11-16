@@ -5,7 +5,7 @@ require_once("Backend/model/client/client.php");
 
 
 
-
+ob_start();
 class Controller_Client
 {
     public function Header($file = "header")
@@ -36,9 +36,7 @@ class Controller_Client
         $slides =  $Client->get_Slide_Imgs();
         $slides =  $Client->get_Slide_Imgs();
 
-
         View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct]);
-        View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct,]);
     }
 
     public function detail($file = "detail")
@@ -100,7 +98,7 @@ class Controller_Client
                                 'name' => $name,
                                 'email' => $email,
                                 'password' => $pass,
-                                'avata' => "avata/avata.jpg",
+                                'avata' => "https://i.pinimg.com/736x/e6/bc/04/e6bc0435c6f92265c1de8697b17a521f.jpg",
                                 'active' => $active,
                                 'createAt' => (date('Y-m-d H:i:s')),
                                 'role' => $role,
@@ -127,5 +125,57 @@ class Controller_Client
                 View(FRONTEND__CLIENT, 'register', []);
             }
         }
+    }
+
+    public function login()
+    {
+        if (isPost()) {
+            $data = filter();
+            // var_dump($data);
+            $email = removespace($data['email']);
+            $pass = removespace($data['password']);
+            // var_dump($name, $email, $pass);
+
+            // kiểm tra tên có hợp lệ không
+            $check_email = isEmail($data['email']);
+            $check_pass = isEmpty($data['password']);
+
+            $check_ton_tai = get_user_data($email);
+
+            // var_dump($check_ton_tai);
+            if ($check_ton_tai < 0) {
+                setsession('errorEmail', 'Email không tồn tại');
+                View(FRONTEND__CLIENT, "login", []);
+            } else {
+                if ($check_email) {
+                    setsession("login__email", $email);
+                    if ($check_pass) {
+                        $check_password = password_hasd_check($pass, $email);
+                        if ($check_password) {
+                            $data__user = get_user_data($email, 77);
+                            $name = $data__user['name'];
+                            $avata = $data__user['avata'];
+                            $role = $data__user['role'];
+                            setsession('nameUser', $name);
+                            setsession('avataUser', $avata);
+                            setsession('role', $role);
+                            header(header: 'Location: /Yody/');
+                            exit;
+                        } else {
+                            setsession("login__passwordError", "sai mật khẩu");
+                        }
+                    } else {
+                        setsession("login__emailError", "Email không đúng định dạng");
+                    }
+                }
+                View(FRONTEND__CLIENT, "login", []);
+            }
+        }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header('Location: /Yody/');
     }
 }
