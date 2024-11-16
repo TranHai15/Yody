@@ -98,7 +98,7 @@ class Controller_Client
                                 'name' => $name,
                                 'email' => $email,
                                 'password' => $pass,
-                                'avata' => "avata/avata.jpg",
+                                'avata' => "https://i.pinimg.com/736x/e6/bc/04/e6bc0435c6f92265c1de8697b17a521f.jpg",
                                 'active' => $active,
                                 'createAt' => (date('Y-m-d H:i:s')),
                                 'role' => $role,
