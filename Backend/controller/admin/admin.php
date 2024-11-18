@@ -168,14 +168,121 @@ class Controller__Admin
         header('Location: /Yody/admin?Account');
         exit;
     }
+    // *******************************************************************************************
+    // ***************************************SLIDES**********************************************
+    // *******************************************************************************************
 
     public function Slide($file = "slides")
     {
         $Admin = new Model_Admin;
         // $dataAllUser = $Admin->getAllUsers();
-
-        View(FRONTEND__ADMIN, $file, []);
+        $slide = $Admin->get_All_Slide();
+        View(FRONTEND__ADMIN, $file, ["slide" => $slide]);
     }
+    public function addSlide()
+    {
+        // if (isPost()) {
+        //     $data = $_POST;
+        //     $anh = "";
+        //     $file_anh = $_FILES['url'];
+        //     //Kiem tra xem admin co upload hay k neu co thi tien hanh insert
+        //     if ($file_anh['size'] > 0) {
+        //         $anh = "Image/Sliders/" . $file_anh['name'];
+        //         //di chuyen anh den thu muc image
+        //         move_uploaded_file($file_anh['tmp_name'], $anh);
+        //     }
+        //     $data['url'] = $anh;
+        //     (new Model_Admin)->addSlide('Slides', $data);
+        //     header('Location: /Yody/admin?Slides');
+        // }
+        if (isPost()) {
+            $data = $_POST;
+            $anh = "";
+            $file_anh = $_FILES['url'];
+            $error = [];
+            if (trim($data['title']) == "") {
+                $error['title'] = "Hãy điền thông tin!!";
+            }
+            if (trim($data['past']) == "") {
+                $error['past'] = "Hãy điền thông tin!!";
+            }
+
+            if (!empty($error)) {
+
+                // $dataAllUser = $Admin->getAllUsers();
+
+                return   View(FRONTEND__ADMIN, 'addSlide', [
+                    'error' => $error,
+                    'data' => $data
+                ]);
+            }
+            //Kiem tra xem admin co upload hay k neu co thi tien hanh insert
+            if ($file_anh['size'] > 0) {
+                $anh = "Image/Sliders/" . $file_anh['name'];
+                //di chuyen anh den thu muc image
+                move_uploaded_file($file_anh['tmp_name'], $anh);
+            }
+
+            $data['url'] = $anh;
+            (new Model_Admin)->addSlide('Slides', $data);
+            header('Location: /Yody/admin?Slides');
+        }
+    }
+    //Xóa Slide
+    public function xoaSlide()
+    {
+        $idSlide = $_GET['DeleteSlide'] ?? '';
+        $dk = "sildeId=" . $idSlide;
+        $ketqua = delete('slides', $dk);
+        if ($ketqua === true) {
+            header("Location:/Yody/admin?Slides ");
+        };
+    }
+    public function SlideId($file = "editSlide")
+    {
+        $idSlide = $_GET['EditSlide'] ?? "";
+
+        $getAll = (new Model_Admin)->get_All_Slide();
+        $getOne = (new Model_Admin)->getOneSlideById($idSlide);
+
+        View(FRONTEND__ADMIN, $file, ["getAll" => $getAll, "getOne" => $getOne]);
+    }
+
+    public function UpdateSlide()
+    {
+        if (isPost()) {
+            $data = filter();
+            $url = $data['url'];
+            $title = $data['title'];
+            $past = $data['past'];
+            $sildeId = $data['sildeId'];
+            $new_url = $_FILES['url'];
+            $xulyurl = xuLyUploadFile($new_url, 'Image/Sliders/', $url);
+            $new_data = [
+                'url' => $xulyurl,
+                'title' => $title,
+                'past' => $past,
+            ];
+            $dk = 'sildeId=' . $sildeId;
+            $ketqua = (new Model_Admin)->updateOneSlideWhereID('slides', $new_data, $dk);
+            if ($ketqua === true) {
+                setsession('messageEditSlides', "Cập nhật thành công!");
+                header("Location: /Yody/admin?Slides");
+                exit;
+            } else {
+                setsession('messageEditSlides', "Cập nhật không thành công!");
+                header("Location: /Yody/admin?Slides");
+                exit;
+            }
+        }
+    }
+
+
+
+    // **************************************************************************************
+    // ****************************************END_SLIDES************************************
+    // **************************************************************************************
+
     public function Category($file = "category")
     {
         $Admin = new Model_Admin;

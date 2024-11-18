@@ -222,15 +222,15 @@
 
             $urlPath === "{$basePath}/admin"  && $query === "Slides" => fn() => $AdminCtl->Slide(),
             // Lấy ra người dùng muốn sửa
-            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditSlide']) => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditSlide']) => fn() => $AdminCtl->SlideId('editSlide'),
             // Cập nhật người dùng
-            $urlPath === "{$basePath}/admin"  && $query === "UpdateSlide" => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && $query === "UpdateSlide" => fn() => $AdminCtl->UpdateSlide(),
             // chueyern đến trang thêm người dùng
-            $urlPath === "{$basePath}/admin"  && $query === "AddSlide" => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && $query === "AddSlide" => fn() => $AdminCtl->Slide('addSlide'),
             // Thêm người dùng vào database
-            $urlPath === "{$basePath}/admin"  && $query === "themSlide" => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && $query === "themSlide" => fn() => $AdminCtl->addSlide(),
             // Xóa người dùng
-            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteSlide']) => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteSlide']) => fn() => $AdminCtl->xoaSlide(),
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Slide"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
