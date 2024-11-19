@@ -186,22 +186,142 @@ class Controller__Admin
     public function Product($file = "products")
     {
         $Admin = new Model_Admin;
+        $Client = new Model_Client;
+        $category = $Client->getAllCategories();
+        $child = $Client->getAllChildCategories();
+        $dataAllProduct = $Admin->getAllProducts();
         // $dataAllUser = $Admin->getAllUsers();
 
-        View(FRONTEND__ADMIN, $file, []);
+        View(FRONTEND__ADMIN, $file, [
+            'dataAllProduct' => $dataAllProduct,
+            "category" => $category,
+            "child" => $child,
+        ]);
+    }
+
+    public function ProductView($file = "viewProduct")
+    {
+        $Admin = new Model_Admin;
+        $id = $_GET['ViewProduct'] ?? "";
+        $dataAllVariation = $Admin->getAllVariationByProductId($id);
+
+
+        View(FRONTEND__ADMIN, $file, [
+            'dataAllVariation' => $dataAllVariation,
+            'idProduct' => $id
+        ]);
     }
     public function Order($file = "order")
     {
-        $Admin = new Model_Admin;
-        // $dataAllUser = $Admin->getAllUsers();
 
-        View(FRONTEND__ADMIN, $file, []);
+        $idUser = $_GET['OrderItem'] ?? '';
+        $Admin = new Model_Admin;
+        $dataAllOrders = $Admin->getAllOrder();
+        $dataAllOrderItem = $Admin->getAllOrderItems();
+        $dataAllOrderStatus = $Admin->getAllOrderStatus();
+        $dataAllPay = $Admin->getAllPay();
+        $dataAllPayStatus = $Admin->getAllPayStatus();
+
+        View(FRONTEND__ADMIN, $file, [
+            'dataAllOrders' => $dataAllOrders,
+            'dataAllOrderItem' => $dataAllOrderItem,
+            'dataAllOrderStatus' => $dataAllOrderStatus,
+            'dataAllPayStatus' => $dataAllPayStatus,
+            'dataAllPay' => $dataAllPay
+
+        ]);
     }
     public function Comment($file = "comment")
     {
         $Admin = new Model_Admin;
-        // $dataAllUser = $Admin->getAllUsers();
+        $dataAllComment = $Admin->getAllComments();
 
-        View(FRONTEND__ADMIN, $file, []);
+        View(FRONTEND__ADMIN, $file, ['dataAllComment' => $dataAllComment]);
+    }
+
+    public function DeleteComment()
+    {
+        $idUser = $_GET['DeleteComment'] ?? '';
+        $dk = "commentId=" . $idUser;
+
+        $data = [
+            "status" => 1
+        ];
+        $kq = (new Model_Admin)->DeleteComment('comments', $dk);
+
+        if ($kq === true) {
+
+            setsession('messageDeleteComment', "Xóa thành công");
+            header('Location: /Yody/admin?Comment');
+            exit;
+        } else {
+            setsession('messageDeleteComment', "Xóa thất bại");
+            header('Location: /Yody/admin?Comment');
+            exit;
+        }
+    }
+    public function DuyetComment()
+    {
+        $idUser = $_GET['DuyetComment'] ?? '';
+        $dk = "commentId=" . $idUser;
+
+        $data = [
+            "status" => 1
+        ];
+        $kq = (new Model_Admin)->DuyetComeent('comments', $data, $dk);
+        if ($kq === true) {
+
+            setsession('messageDuyetComment', "Cập nhật thành công");
+            header('Location: /Yody/admin?Comment');
+            exit;
+        } else {
+            setsession('messageDuyetComment', "Cập nhật thất bại");
+            header('Location: /Yody/admin?Comment');
+            exit;
+        }
+    }
+    public function addVariation()
+    {
+
+
+        // Kiểm tra và xử lý dữ liệu
+        $variationCode = $_POST['newVariationCode'] ?? '';
+        $variationAnhColor = $_POST['newVariationAnhColor'] ?? '';
+        $productId = $_POST['productId'] ?? '';
+        $variationColor = $_POST['newVariationColor'] ?? '';
+        $variationPrice = $_POST['newVariationPrice'] ?? '';
+        $variationSale = $_POST['newVariationSale'] ?? 0;
+        $variationDescripe = $_POST['newVariationDescripe'] ?? '';
+        $image = $_FILES['newVariationImage'] ?? null;
+
+        $image__new = xuLyUploadFile($image, "Image/products/", '');
+
+        if (empty($variationCode) || empty($variationColor) || empty($variationPrice) || !$image) {
+            echo json_encode(array('status' => 'error', 'message' => 'Thêm thất bại'));
+        } else {
+            $data__new = [
+                'variationCode' => $variationCode,
+                'image' => $image__new,
+                'color' => $variationColor,
+                'anhColor' => $variationAnhColor,
+                'price' => $variationPrice,
+                'sale' => $variationSale,
+                'descripe' => $variationDescripe,
+                'productId' => $productId,
+            ];
+
+            // checkloi($data__new);
+
+            $kq = (new Model_Admin)->addVariation('variations', $data__new);
+
+
+            if ($kq) {
+                setsession('messageDeleteComment', "Thêm thành công");
+                header('Location: /Yody/admin?ViewProduct=' . $productId);
+            } else {
+                setsession('messageDeleteComment', "Thêm thành công");
+                header('Location: /Yody/admin?ViewProduct=' . $productId);
+            }
+        }
     }
 }

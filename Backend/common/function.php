@@ -482,6 +482,22 @@ function insert($table, $data)
 
     return $kq;
 }
+function insertWhere($table, $data, $dk)
+{
+
+    //lay ra ca tu khoa ki cua mang
+    $keys = array_keys($data);
+    // noi cac tu khoa key lai thanh mot mang
+    $truong = implode(",", $keys);
+    // cung noi nhung them dau  ,:
+    $value = ":" . implode(',:', $keys);
+    // cau lenh truy van
+
+    $sql = "INSERT INTO  $table ( $truong )VALUES( $value ) WHERE $dk";
+    $kq = query($sql, $data);
+
+    return $kq;
+}
 
 // ham update
 
