@@ -38,6 +38,7 @@ class Model_Admin
         return insert($table, $data);
     }
 
+
     public function getAllComments()
     {
         $sql = "SELECT * FROM comments";
@@ -133,5 +134,23 @@ class Model_Admin
     public function DeleteImageVariation($table, $dk)
     {
         return delete($table, $dk);
+    }
+    public function get_All_Slide()
+    {
+        $sql = "SELECT * FROM slides";
+        return getRaw($sql);
+    }
+    public function addSlide($table, $data)
+    {
+        return insert($table, $data);
+    }
+    public function getOneSlideById($sildeId)
+    {
+        $sql = "SELECT * FROM slides WHERE sildeId = $sildeId ";
+        return getOne($sql);
+    }
+    public function updateOneSlideWhereID($table, $data, $Where)
+    {
+        return update($table, $data, $Where);
     }
 }
