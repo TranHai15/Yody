@@ -165,8 +165,9 @@
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Comment"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
             $urlPath === "{$basePath}/admin"  && $query === "Comment" => fn() => $AdminCtl->Comment(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DuyetComment']) => fn() => $AdminCtl->DuyetComment(),
             // Xóa người dùng
-            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteComment']) => fn() => $AdminCtl->Comment(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteComment']) => fn() => $AdminCtl->DeleteComment(),
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Order"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -175,8 +176,6 @@
 
             $urlPath === "{$basePath}/admin"  && $query === "Order" => fn() => $AdminCtl->Order(),
             // Lấy ra người dùng muốn sửa
-            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditOrder']) => fn() => $AdminCtl->Order(),
-            // Cập nhật người dùng
             $urlPath === "{$basePath}/admin"  && $query === "UpdateOrder" => fn() => $AdminCtl->Order(),
             // chueyern đến trang thêm người dùng
             $urlPath === "{$basePath}/admin"  && $query === "AddOrder" => fn() => $AdminCtl->Order(),
@@ -191,9 +190,9 @@
 
             $urlPath === "{$basePath}/admin"  && $query === "Product" => fn() => $AdminCtl->Product(),
             // Lấy ra người dùng muốn sửa
-            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditProduct']) => fn() => $AdminCtl->Product(),
+            $urlPath === "{$basePath}/admin"  && isset($queryParams['ViewProduct']) => fn() => $AdminCtl->ProductView(),
             // Cập nhật người dùng
-            $urlPath === "{$basePath}/admin"  && $query === "UpdateProduct" => fn() => $AdminCtl->Product(),
+            $urlPath === "{$basePath}/admin"  && $query === "themVariation" => fn() => $AdminCtl->addVariation(),
             // chueyern đến trang thêm người dùng
             $urlPath === "{$basePath}/admin"  && $query === "AddProduct" => fn() => $AdminCtl->Product('addProducts'),
             // Thêm người dùng vào database
