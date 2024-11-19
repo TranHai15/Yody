@@ -24,10 +24,21 @@
                         <td><?= $cap1['categoryId'] ?></td>
                         <td><?= $cap1['name'] ?></td>
                         <td><?= $cap1['past'] ?></td>
-                        <td><img src="<?= $cap1['image'] ?>" alt="Hình ảnh" style="width: 50px; height: 50px;"></td>
+
+                        <td>
+                            <?php if (!empty($cap1['image'])): ?>
+                                <img src="<?= $cap1['image'] ?>" alt="Hình ảnh" style="width: 50px; height: 50px;">
+                            <?php else: ?>
+
+                            <?php endif; ?>
+                        </td>
+
+                        </td>
                         <td class="action-buttons">
-                            <a href="<?= P ?>/admin?EditCategory=<?= $cap1['categoryId'] ?>" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
-                            <a href="<?= P ?>/admin?deleteCategory=<?= $cap1['categoryId'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
+                            <a href="<?= P ?>/admin?EditCategory=<?= $cap1['categoryId'] ?>"
+                                class="btn btn-primary btn-sm">Chỉnh Sửa</a>
+                            <a href="<?= P ?>/admin?deleteCategory=<?= $cap1['categoryId'] ?>"
+                                onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
                                 <button class="btn btn-danger btn-sm">Xóa</button>
                             </a>
 
@@ -44,7 +55,8 @@
                                 <td></td>
                                 <td class="action-buttons">
                                     <a href="#" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
-                                    <a href="<?= P ?>/admin?deleteChildCategory=<?= $cap2['childId'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
+                                    <a href="<?= P ?>/admin?deleteChildCategory=<?= $cap2['childId'] ?>"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
                                         <button class="btn btn-danger btn-sm">Xóa</button>
                                     </a>
 
@@ -61,7 +73,8 @@
                                         <td></td>
                                         <td class="action-buttons">
                                             <a href="#" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
-                                            <a href="<?= P ?>/admin?deleteCommontCategory=<?= $cap3['commonId'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
+                                            <a href="<?= P ?>/admin?deleteCommontCategory=<?= $cap3['commonId'] ?>"
+                                                onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
                                                 <button class="btn btn-danger btn-sm">Xóa</button>
                                             </a>
                                         </td>
