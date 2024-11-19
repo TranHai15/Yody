@@ -39,6 +39,7 @@ class Model_Admin
     }
 
 
+
     public function getAllComments()
     {
         $sql = "SELECT * FROM comments";
@@ -150,6 +151,40 @@ class Model_Admin
         return getOne($sql);
     }
     public function updateOneSlideWhereID($table, $data, $Where)
+    {
+        return update($table, $data, $Where);
+    }
+
+    public function deleteCategory($dieukien, $cap = 0)
+    {
+        if ($cap == 0) {
+            return delete("categorys", $dieukien);
+            die();
+        }
+        if ($cap == 1) {
+            return delete("childcategorys", $dieukien);
+            die();
+        }
+        if ($cap == 2) {
+            return delete("commoncategorys", $dieukien);
+            die();
+        }
+    }
+
+
+
+    // ============================================= Thắng mới làm ====================================
+    public function addCategory($table, $data)
+    {
+        return insert($table, $data);
+    }
+    public function getOneCategoryById($id)
+    {
+        $sql = "SELECT * From categorys WHere categoryId = $id";
+        return getOne($sql);
+    }
+
+    public function updateOneCategoryWhereById($table, $data, $Where)
     {
         return update($table, $data, $Where);
     }

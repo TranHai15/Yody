@@ -4,16 +4,23 @@
 
         <!-- Form thêm danh mục -->
         <div class="form-container">
-            <form action="your_action_url_here" method="POST">
+            <form action="<?= P ?>/admin?themCategory" method="POST" enctype="multipart/form-data">
                 <div class="form-group mb-4">
                     <label for="categoryName">Tên Danh Mục</label>
-                    <input type="text" class="form-control" id="categoryName" name="categoryName"
+                    <input type="text" class="form-control" id="categoryName" name="name"
                         placeholder="Nhập tên danh mục" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="categoryDescription">Mô Tả</label>
-                    <textarea class="form-control" id="categoryDescription" name="categoryDescription" rows="3"
-                        placeholder="Nhập mô tả cho danh mục" required></textarea>
+                    <label for="categoryName">Pass</label>
+                    <input type="text" class="form-control" id="categoryName" name="past"
+                        placeholder="Nhập mô tả danh mục" required>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="categoryDescription"></label>
+                    <input type="file" class="form-control" id="categoryName" name="image"
+                    placeholder="Nhập tên danh mục" required>
+
+
                 </div>
 
                 <!-- Nút hành động -->

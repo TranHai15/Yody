@@ -179,6 +179,7 @@ class Controller__Admin
         $slide = $Admin->get_All_Slide();
         View(FRONTEND__ADMIN, $file, ["slide" => $slide]);
     }
+
     public function addSlide()
     {
         // if (isPost()) {
@@ -283,13 +284,139 @@ class Controller__Admin
     // ****************************************END_SLIDES************************************
     // **************************************************************************************
 
+
+    // =============== category =====================
     public function Category($file = "category")
     {
         $Admin = new Model_Admin;
-        // $dataAllUser = $Admin->getAllUsers();
+        $Client = new Model_Client;
+        $category = $Client->getAllCategories();
+        // var_dump($category)
+        // var_dump($category)
+        // lấy toàn bộ child category
 
-        View(FRONTEND__ADMIN, $file, []);
+        $child = $Client->getAllChildCategories();
+        // lấy toàn bộ common category
+        $common = $Client->getAllCommonCategories();
+
+        View(FRONTEND__ADMIN, $file, [
+            "category" => $category,
+            "child" => $child,
+            "common" => $common,
+        ]);
     }
+    public function getCategoryById($file = 'editCategory')
+    {
+        $idCategory = $_GET['EditCategory'] ?? '';
+        $getOne = (new Model_Admin)->getOneCategoryById($idCategory);
+        View(FRONTEND__ADMIN, $file, ['getOne' => $getOne]);
+    }
+
+
+
+    public function deleteCategory()
+    {
+        $categoryId = $_GET['deleteCategory'] ?? '';
+        $categoryChildId = $_GET['deleteChildCategory'] ?? '';
+        $categoryCommontId = $_GET['deleteCommontCategory'] ?? '';
+        // echo $categoryId;
+        // echo $categoryChildId;
+        // echo $categoryCommontId;
+        if ($categoryId != '') {
+            $dk = 'categoryId=' . $categoryId;
+            $kq = (new Model_Admin)->deleteCategory($dk,);
+            if ($kq) {
+                setsession('messagedeleteCategory', 'Xóa thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            } else {
+                setsession('messagedeleteCategory', 'Xóa không thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            }
+        }
+        if ($categoryChildId != '') {
+            $dk = 'childId=' . $categoryChildId;
+            $kq = (new Model_Admin)->deleteCategory($dk, 1);
+            if ($kq) {
+                setsession('messagedeleteCategory', 'Xóa thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            } else {
+                setsession('messagedeleteCategory', 'Xóa không thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            }
+        }
+        if ($categoryCommontId != '') {
+            $dk = 'commonId=' . $categoryCommontId;
+            $kq = (new Model_Admin)->deleteCategory($dk, 2);
+            if ($kq) {
+                setsession('messagedeleteCategory', 'Xóa thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            } else {
+                setsession('messagedeleteCategory', 'Xóa không thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            }
+        }
+    }
+
+    // ============================================== mới làm ===========================
+    public function addCategory()
+    {
+        if (isPost()) {
+            $data = $_POST;
+            $anh = '';
+            $file_anh = $_FILES['image'];
+            if ($file_anh['size'] > 0) {
+                $anh = 'Image/category/' . $file_anh['name'];
+                move_uploaded_file($file_anh['tmp_name'], $anh);
+            }
+            $data['image'] = $anh;
+            (new Model_Admin)->addCategory('categorys', $data);
+            header('Location: /Yody/admin?Category');
+            exit;
+        }
+    }
+
+    public function UpdateCategory()
+    {
+        if (isPost()) {
+            $data = filter();
+            $image = $data['image'];
+            $name = $data['name'];
+            $past = $data['past'];
+            $categoryId = $data['categoryId'];
+            $new_image = $_FILES['image'];
+            $xulyImage = xuLyUploadFile($new_image, 'Image/category/', $image);
+            $new_data = [
+                'image' => $xulyImage,
+                'name' => $name,
+                'past' => $past,
+            ];
+            $dk = 'categoryId=' . $categoryId;
+            $ketqua = (new Model_Admin)->updateOneCategoryWhereById('categorys', $new_data, $dk);
+            if ($ketqua === true) {
+                setsession('messageEditSlides', "Cập nhật thành công!");
+                header("Location: /Yody/admin?Category");
+                exit;
+            } else {
+                setsession('messageEditSlides', "Cập nhật không thành công!");
+                header("Location: /Yody/admin?Category");
+                exit;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
     public function Product($file = "products")
     {
         $Admin = new Model_Admin;
