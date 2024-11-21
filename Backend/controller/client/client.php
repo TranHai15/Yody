@@ -33,8 +33,8 @@ class Controller_Client
         $TopProduct = $Client->getAllProducts();
         $TopProduct = $Client->getAllProducts();
 
-        $slides =  $Client->get_Slide_imgs();
-        $slides =  $Client->get_Slide_imgs();
+        $slides =  $Client->get_Slide_Imgs();
+        $slides =  $Client->get_Slide_Imgs();
 
         View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct]);
     }

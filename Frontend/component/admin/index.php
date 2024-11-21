@@ -153,10 +153,6 @@
     parse_str($query, $queryParams); // Chuyển query string thành mảng
 
 
-
-
-
-
     if ((strpos($urlPath, "{$basePath}/admin") === 0)) {
         $AdminCtl = new Controller__Admin;
         $page = match (true) {
@@ -207,15 +203,18 @@
 
             $urlPath === "{$basePath}/admin"  && $query === "Category" => fn() => $AdminCtl->Category(),
             // Lấy ra người dùng muốn sửa
-            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditCategory']) => fn() => $AdminCtl->Category(),
+            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditCategory']) => fn() => $AdminCtl->getCategoryById('editCategory'),
             // Cập nhật người dùng
-            $urlPath === "{$basePath}/admin"  && $query === "UpdateCategory" => fn() => $AdminCtl->Category(),
+            $urlPath === "{$basePath}/admin"  && $query === "UpdateCategory" => fn() => $AdminCtl->UpdateCategory(),
             // chueyern đến trang thêm người dùng
-            $urlPath === "{$basePath}/admin"  && $query === "AddCategory" => fn() => $AdminCtl->Category(),
+            $urlPath === "{$basePath}/admin"  && $query === "AddCategory" => fn() => $AdminCtl->Category('addCategory'),
             // Thêm người dùng vào database
-            $urlPath === "{$basePath}/admin"  && $query === "themCategory" => fn() => $AdminCtl->Category(),
+            $urlPath === "{$basePath}/admin"  && $query === "themCategory" => fn() => $AdminCtl->addCategory(),
             // Xóa người dùng
-            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteCategory']) => fn() => $AdminCtl->Category(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['deleteCategory']) => fn() => $AdminCtl->deleteCategory(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['deleteChildCategory']) => fn() => $AdminCtl->deleteCategory(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['deleteCommontCategory']) => fn() => $AdminCtl->deleteCategory(),
+
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Category"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -223,15 +222,15 @@
 
             $urlPath === "{$basePath}/admin"  && $query === "Slides" => fn() => $AdminCtl->Slide(),
             // Lấy ra người dùng muốn sửa
-            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditSlide']) => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && isset($queryParams['EditSlide']) => fn() => $AdminCtl->SlideId('editSlide'),
             // Cập nhật người dùng
-            $urlPath === "{$basePath}/admin"  && $query === "UpdateSlide" => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && $query === "UpdateSlide" => fn() => $AdminCtl->UpdateSlide(),
             // chueyern đến trang thêm người dùng
-            $urlPath === "{$basePath}/admin"  && $query === "AddSlide" => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && $query === "AddSlide" => fn() => $AdminCtl->Slide('addSlide'),
             // Thêm người dùng vào database
-            $urlPath === "{$basePath}/admin"  && $query === "themSlide" => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  && $query === "themSlide" => fn() => $AdminCtl->addSlide(),
             // Xóa người dùng
-            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteSlide']) => fn() => $AdminCtl->Slide(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteSlide']) => fn() => $AdminCtl->xoaSlide(),
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Slide"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

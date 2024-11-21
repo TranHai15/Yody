@@ -62,10 +62,11 @@ class Model_Client
         return getRaw($sql);
     }
 
-    public function get_Slide_imgs()
+    public function get_Slide_Imgs()
     {
         $sql = "SELECT * FROM slides";
         $value = getRaw($sql);
+        // var_dump($value);
         return $value;
     }
 
