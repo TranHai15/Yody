@@ -474,6 +474,97 @@ class Controller__Admin
             'idProduct' => $id
         ]);
     }
+    public function addProduct()
+    {
+        if (isPost()) {
+            $data = filter();
+            // checkloi($data);
+            $name = $data['name'] ?? '';
+            $productCode = $data['productCode'] ?? '';
+            $categoryId = $data['categoryId'] ?? '';
+            $childId = $data['childId'] ?? '';
+
+            $data__new = [
+                'name' => $name,
+                'productCode' => $productCode,
+                'categoryId' => $categoryId,
+                'childId' => $childId,
+            ];
+
+            // checkloi($data__new);
+            $kq = (new Model_Admin)->addProduct('products', $data__new);
+            $id = (new Model_Admin)->getproductIdNewByAdd();
+            // checkloi($id['maxProductId']);
+            $idp = $id['maxProductId'];
+
+            if ($kq) {
+                setsession('messageDeleteComment', "Thêm thành công");
+                header('Location: /Yody/admin?ViewProduct=' . $idp);
+            } else {
+                setsession('messageDeleteComment', "Thêm Khồng thành công");
+                header('Location: /Yody/admin?ViewProduct=' . $idp);
+            }
+        }
+    }
+
+    public function deleteProduct()
+    {
+        $id = $_GET['DeleteProduct'] ?? "";
+        $dk = 'productId=' . $id;
+        $kq = (new Model_Admin)->xoaProduct("products", $dk);
+        if ($kq) {
+            setsession('messageDeleteComment', "Xoa thành công");
+            header('Location: /Yody/admin?Product');
+        } else {
+            setsession('messageDeleteComment', "Xoa Khồng thành công");
+            header('Location: /Yody/admin?Product');
+        }
+    }
+
+    public function addVariation()
+    {
+
+
+        // Kiểm tra và xử lý dữ liệu
+        $variationCode = $_POST['newVariationCode'] ?? '';
+        $variationAnhColor = $_POST['newVariationAnhColor'] ?? '';
+        $productId = $_POST['productId'] ?? '';
+        $variationColor = $_POST['newVariationColor'] ?? '';
+        $variationPrice = $_POST['newVariationPrice'] ?? '';
+        $variationSale = $_POST['newVariationSale'] ?? 0;
+        $variationDescripe = $_POST['newVariationDescripe'] ?? '';
+        $image = $_FILES['newVariationImage'] ?? null;
+
+        $image__new = xuLyUploadFile($image, "Image/products/", '');
+
+        if (empty($variationCode) || empty($variationColor) || empty($variationPrice) || !$image) {
+            setsession('messageDeleteComment', "Thêm Khồng thành công");
+        } else {
+            $data__new = [
+                'variationCode' => $variationCode,
+                'image' => $image__new,
+                'color' => $variationColor,
+                'anhColor' => $variationAnhColor,
+                'price' => $variationPrice,
+                'sale' => 0,
+                'descripe' => $variationDescripe,
+                'productId' => $productId,
+            ];
+
+            // checkloi($data__new);
+
+            $kq = (new Model_Admin)->addVariation('variations', $data__new);
+
+
+            if ($kq) {
+                setsession('messageDeleteComment', "Thêm thành công");
+                header('Location: /Yody/admin?ViewProduct=' . $productId);
+            } else {
+                setsession('messageDeleteComment', "Thêm Khồng thành công");
+                header('Location: /Yody/admin?ViewProduct=' . $productId);
+            }
+        }
+    }
     public function Order($file = "order")
     {
 
@@ -541,50 +632,6 @@ class Controller__Admin
             setsession('messageDuyetComment', "Cập nhật thất bại");
             header('Location: /Yody/admin?Comment');
             exit;
-        }
-    }
-    public function addVariation()
-    {
-
-
-        // Kiểm tra và xử lý dữ liệu
-        $variationCode = $_POST['newVariationCode'] ?? '';
-        $variationAnhColor = $_POST['newVariationAnhColor'] ?? '';
-        $productId = $_POST['productId'] ?? '';
-        $variationColor = $_POST['newVariationColor'] ?? '';
-        $variationPrice = $_POST['newVariationPrice'] ?? '';
-        $variationSale = $_POST['newVariationSale'] ?? 0;
-        $variationDescripe = $_POST['newVariationDescripe'] ?? '';
-        $image = $_FILES['newVariationImage'] ?? null;
-
-        $image__new = xuLyUploadFile($image, "Image/products/", '');
-
-        if (empty($variationCode) || empty($variationColor) || empty($variationPrice) || !$image) {
-            setsession('messageDeleteComment', "Thêm Khồng thành công");
-        } else {
-            $data__new = [
-                'variationCode' => $variationCode,
-                'image' => $image__new,
-                'color' => $variationColor,
-                'anhColor' => $variationAnhColor,
-                'price' => $variationPrice,
-                'sale' => 0,
-                'descripe' => $variationDescripe,
-                'productId' => $productId,
-            ];
-
-            // checkloi($data__new);
-
-            $kq = (new Model_Admin)->addVariation('variations', $data__new);
-
-
-            if ($kq) {
-                setsession('messageDeleteComment', "Thêm thành công");
-                header('Location: /Yody/admin?ViewProduct=' . $productId);
-            } else {
-                setsession('messageDeleteComment', "Thêm Khồng thành công");
-                header('Location: /Yody/admin?ViewProduct=' . $productId);
-            }
         }
     }
 }

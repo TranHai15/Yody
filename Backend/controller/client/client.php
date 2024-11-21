@@ -41,15 +41,15 @@ class Controller_Client
 
     public function detail($file = "detail")
     {
-        $idProduct = $_GET['product'] ?? "";
         $idVariation = $_GET['color'] ?? "";
-        $idVariation = $_GET['size'] ?? "";
-        $idProduct = $_GET['product'] ?? "";
-        $idVariation = $_GET['color'] ?? "";
-        $idVariation = $_GET['size'] ?? "";
         $Client = new Model_Client;
-        $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idProduct, $idVariation);
-
+        $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idVariation);
+        $productId = $OneVariations['productId'];
+        $AllVariation = $Client->getAllVariationWhereProductId($productId);
+        $AllSize = $Client->getAllSizeWhereProductIdWhereVariationId($idVariation);
+        $AllImage = $Client->getAllImageWhereProductIdWhereVariationId($idVariation);
+        // checkloi($OneVariations);
+        // checkloi($OneVariations['productId']);
 
 
         View(
@@ -57,7 +57,10 @@ class Controller_Client
 
             $file,
             [
-                "OneVariations" => $OneVariations
+                "OneVariations" => $OneVariations,
+                "AllImage" => $AllImage,
+                "AllSize" => $AllSize,
+                "AllVariation" => $AllVariation,
             ]
         );
     }

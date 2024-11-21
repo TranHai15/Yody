@@ -191,10 +191,11 @@
             $urlPath === "{$basePath}/admin"  && $query === "themVariation" => fn() => $AdminCtl->addVariation(),
             // chueyern đến trang thêm người dùng
             $urlPath === "{$basePath}/admin"  && $query === "AddProduct" => fn() => $AdminCtl->Product('addProducts'),
+            $urlPath === "{$basePath}/admin"  && $query === "themproduct" => fn() => $AdminCtl->addProduct(),
             // Thêm người dùng vào database
             $urlPath === "{$basePath}/admin"  && $query === "themProduct" => fn() => $AdminCtl->Product(),
             // Xóa người dùng
-            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteProduct']) => fn() => $AdminCtl->Product(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteProduct']) => fn() => $AdminCtl->deleteProduct(),
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Product"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

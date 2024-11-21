@@ -40,7 +40,8 @@
                     <?php endforeach ?>
                     <td>
                         <!-- <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a> -->
-                        <a href="<?= P ?>/admin?DeleteProduct=<?= $product['productId'] ?>"
+                        <a onclick="return confirm('Ban co muon khong')"
+                            href="<?= P ?>/admin?DeleteProduct=<?= $product['productId'] ?>"
                             class="btn btn-danger btn-sm">Xóa</a>
                         <a href="<?= P ?>/admin?ViewProduct=<?= $product['productId'] ?>"
                             class="btn btn-success btn-sm">Chi tiết</a>

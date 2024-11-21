@@ -188,4 +188,22 @@ class Model_Admin
     {
         return update($table, $data, $Where);
     }
+    // 
+    public  function  addProduct($table, $data)
+    {
+        return insert($table, $data);
+    }
+    public function getproductIdNewByAdd()
+    {
+        $sql = "SELECT MAX(productId) AS maxProductId FROM products ";
+
+        return getOne($sql);
+    }
+
+    public function xoaProduct($table, $id)
+    {
+        return delete($table, $id);
+    }
 }
+
+// 
