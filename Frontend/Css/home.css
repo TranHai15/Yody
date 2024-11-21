@@ -74,6 +74,9 @@ li {
 .pre {
   left: 2rem;
 }
+.action-buttons {
+  align-items: center;
+}
 
 /* """"""""""""""""""""""""""""""""""""""End Banner"""""""""""""""""""""""""""""""""""""" */
 
