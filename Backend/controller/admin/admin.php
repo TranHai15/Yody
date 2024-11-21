@@ -57,12 +57,14 @@ class Controller__Admin
                             'avata' => $duliue,
                             'active' => $active,
                             'createAt' => (date('Y-m-d H:i:s')),
-                            'role' => $role,
+                            'role' => 0,
                         ];
+
                         $dieukien = "userId=" . $userId;
                         $ketqua = (new Model_Admin())->updateOneUserWhereById('users', $data_user_new, $dieukien);
-                        if ($ketqua === true) {
-
+                        // checkloi($ketqua);
+                        if ($ketqua) {
+                            // checkloi($data_user_new);
                             setsession('messageEditUser', "Cập nhật thành công");
                             header('Location: /Yody/admin?Account');
                             exit;
@@ -179,6 +181,7 @@ class Controller__Admin
         $slide = $Admin->get_All_Slide();
         View(FRONTEND__ADMIN, $file, ["slide" => $slide]);
     }
+
     public function addSlide()
     {
         // if (isPost()) {
@@ -283,13 +286,166 @@ class Controller__Admin
     // ****************************************END_SLIDES************************************
     // **************************************************************************************
 
+
+    // =============== category =====================
     public function Category($file = "category")
     {
-        $Admin = new Model_Admin;
-        // $dataAllUser = $Admin->getAllUsers();
+        $Client = new Model_Client;
+        $category = $Client->getAllCategories();
 
-        View(FRONTEND__ADMIN, $file, []);
+
+        $child = $Client->getAllChildCategories();
+        // lấy toàn bộ common category
+        $common = $Client->getAllCommonCategories();
+
+        View(FRONTEND__ADMIN, $file, [
+            "category" => $category,
+            "child" => $child,
+            "common" => $common,
+        ]);
     }
+
+    public function getCategoryById($file = 'editCategory')
+    {
+        $idCategory = $_GET['EditCategory'] ?? '';
+        $getOne = (new Model_Admin)->getOneCategoryById($idCategory);
+        View(FRONTEND__ADMIN, $file, ['getOne' => $getOne]);
+    }
+
+
+
+    public function deleteCategory()
+    {
+        $categoryId = $_GET['deleteCategory'] ?? '';
+        $categoryChildId = $_GET['deleteChildCategory'] ?? '';
+        $categoryCommontId = $_GET['deleteCommontCategory'] ?? '';
+        // echo $categoryId;
+        // echo $categoryChildId;
+        // echo $categoryCommontId;
+        if ($categoryId != '') {
+            $dk = 'categoryId=' . $categoryId;
+            $kq = (new Model_Admin)->deleteCategory($dk,);
+            if ($kq) {
+                setsession('messagedeleteCategory', 'Xóa thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            } else {
+                setsession('messagedeleteCategory', 'Xóa không thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            }
+        }
+        if ($categoryChildId != '') {
+            $dk = 'childId=' . $categoryChildId;
+            $kq = (new Model_Admin)->deleteCategory($dk, 1);
+            if ($kq) {
+                setsession('messagedeleteCategory', 'Xóa thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            } else {
+                setsession('messagedeleteCategory', 'Xóa không thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            }
+        }
+        if ($categoryCommontId != '') {
+            $dk = 'commonId=' . $categoryCommontId;
+            $kq = (new Model_Admin)->deleteCategory($dk, 2);
+            if ($kq) {
+                setsession('messagedeleteCategory', 'Xóa thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            } else {
+                setsession('messagedeleteCategory', 'Xóa không thành công');
+                header('Location: /Yody/admin?Category');
+                exit;
+            }
+        }
+    }
+
+    // ============================================== mới làm ===========================
+    public function addCategory()
+    {
+        $data = $_POST;
+        $name = trim($data['name']);
+        $past = trim($data['past']);
+        $file_anh = $_FILES['image'];
+        $image__new = '';
+
+        if (!empty($file_anh) && $file_anh['error'] == 0) {
+            $image__new = xuLyUploadFile($file_anh, 'Image/category');
+        }
+
+        // Validate name and past fields
+        if (strlen(removespace($name)) == 0) {
+            setsession('errorNameCategory', ' không được để trống.');
+            header('Location: /Yody/admin?AddCategory');
+            exit;
+        }
+
+        if (strlen(removespace($past)) == 0) {
+            setsession('errorPassCategory', ' không được để trống.');
+            header('Location: /Yody/admin?AddCategory');
+            exit;
+        }
+
+        // Prepare data for insertion
+        $data_new = [
+            'name' => $name,
+            'past' => $past,
+            'image' => $image__new,
+        ];
+
+        // Insert data into the database
+        $kq = (new Model_Admin)->addCategory('categorys', $data_new);
+
+        if ($kq) {
+            setsession('messageDuyetComment', "Thêm thành công");
+        } else {
+            setsession('messageDuyetComment', "Thêm thất bại");
+        }
+
+        // Redirect after completion
+        header('Location: /Yody/admin?Category');
+        exit;
+    }
+
+    public function UpdateCategory()
+    {
+        if (isPost()) {
+            $data = filter();
+            $image = $data['image'];
+            $name = $data['name'];
+            $past = $data['past'];
+            $categoryId = $data['categoryId'];
+            $new_image = $_FILES['image'];
+            $xulyImage = xuLyUploadFile($new_image, 'Image/category/', $image);
+            $new_data = [
+                'image' => $xulyImage,
+                'name' => $name,
+                'past' => $past,
+            ];
+            $dk = 'categoryId=' . $categoryId;
+            $ketqua = (new Model_Admin)->updateOneCategoryWhereById('categorys', $new_data, $dk);
+            if ($ketqua === true) {
+                setsession('messageEditSlides', "Cập nhật thành công!");
+                header("Location: /Yody/admin?Category");
+                exit;
+            } else {
+                setsession('messageEditSlides', "Cập nhật không thành công!");
+                header("Location: /Yody/admin?Category");
+                exit;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
     public function Product($file = "products")
     {
         $Admin = new Model_Admin;
@@ -356,7 +512,7 @@ class Controller__Admin
         ];
         $kq = (new Model_Admin)->DeleteComment('comments', $dk);
 
-        if ($kq === true) {
+        if ($kq) {
 
             setsession('messageDeleteComment', "Xóa thành công");
             header('Location: /Yody/admin?Comment');
@@ -404,7 +560,7 @@ class Controller__Admin
         $image__new = xuLyUploadFile($image, "Image/products/", '');
 
         if (empty($variationCode) || empty($variationColor) || empty($variationPrice) || !$image) {
-            echo json_encode(array('status' => 'error', 'message' => 'Thêm thất bại'));
+            setsession('messageDeleteComment', "Thêm Khồng thành công");
         } else {
             $data__new = [
                 'variationCode' => $variationCode,
@@ -412,7 +568,7 @@ class Controller__Admin
                 'color' => $variationColor,
                 'anhColor' => $variationAnhColor,
                 'price' => $variationPrice,
-                'sale' => $variationSale,
+                'sale' => 0,
                 'descripe' => $variationDescripe,
                 'productId' => $productId,
             ];
@@ -426,7 +582,7 @@ class Controller__Admin
                 setsession('messageDeleteComment', "Thêm thành công");
                 header('Location: /Yody/admin?ViewProduct=' . $productId);
             } else {
-                setsession('messageDeleteComment', "Thêm thành công");
+                setsession('messageDeleteComment', "Thêm Khồng thành công");
                 header('Location: /Yody/admin?ViewProduct=' . $productId);
             }
         }

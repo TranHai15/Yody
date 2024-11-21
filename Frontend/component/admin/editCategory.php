@@ -1,21 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<main id="main" class="main">
+    <!-- Tiêu đề -->
+    <div class="container my-5">
+        <h2 class="text-center">Edit Danh mục</h2>
+    </div>
+    <form action="<?= P ?>/admin?UpdateCategory" method="POST" enctype="multipart/form-data">
+        
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="<?= $getOne['name'] ?>">
+            <p class="text-danger"></p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        h1 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
-</head>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Pass</label>
+            <input type="text" class="form-control" id="name" name="past" value="<?= $getOne['past'] ?>">
+            <p class="text-danger"></p>
 
-<body>
-    <h1>Edit Danh muc</h1>
-</body>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Images</label>
+            <img src="<?= $getOne['image'] ?>" alt="" width="300px">
+            <input type="hidden" class="form-control" id="name" name="image" value="<?= $getOne['image'] ?>">
+            <input type="file" name="image">
+            <p class="text-danger"></p>
 
-</html>
+        </div>
+        <div class="mb-3">
+            <input type="hidden" class="form-control" id="categoryId" name="categoryId" value="<?= $getOne['categoryId'] ?>"
+                readonly>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</main>
