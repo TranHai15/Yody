@@ -69,12 +69,14 @@
                             <label for="newVariationCode">Mã Biến thể</label>
                             <input type="text" id="newVariationCode" class="form-control mb-2" name="newVariationCode"
                                 placeholder="Nhập mã Biến thể">
+                            <span style="font-size:9px ; color :red;"></span>
                         </div>
                         <input type="hidden" name="productId" value="<?= $idProduct ?>" id="">
                         <div class="col-md-3">
                             <label for="newVariationImage">Hình ảnh</label>
                             <input type="file" class="newVariationImage form-control mb-2" accept="image/*"
                                 name="newVariationImage">
+                            <span style="font-size:9px ; color :red;"></span>
                             <img class="previewImage" src="" alt="Preview"
                                 style="display: none; width: 100px; height: auto; margin-top: 10px;">
                         </div>
@@ -85,6 +87,7 @@
                             <label for="newVariationColor">Màu</label>
                             <input type="text" id="newVariationColor" class="form-control mb-2" placeholder="Nhập màu"
                                 name="newVariationColor">
+                            <span style="font-size:9px ; color :red;"></span>
                         </div>
 
                         <!-- Màu sắc (Preview) -->
@@ -92,6 +95,7 @@
                             <label for="newVariationAnhColor">Màu sắc (Preview)</label>
                             <input type="color" id="newVariationAnhColor" class="form-control mb-2"
                                 name="newVariationAnhColor">
+                            <span style="font-size:9px ; color :red;"></span>
                         </div>
                     </div>
 
@@ -101,6 +105,7 @@
                             <label for="newVariationPrice">Giá</label>
                             <input type="number" id="newVariationPrice" class="form-control mb-2" placeholder="Nhập giá"
                                 name="newVariationPrice">
+                            <span style="font-size:9px ; color :red;"></span>
                         </div>
 
                         <!-- Giảm giá -->
@@ -108,6 +113,7 @@
                             <label for="newVariationSale">Giảm giá (%)</label>
                             <input type="number" id="newVariationSale" class="form-control mb-2" name="newVariationSale"
                                 placeholder="Nhập giảm giá (%)">
+
                         </div>
 
                         <!-- Mô tả -->
@@ -216,23 +222,29 @@
             <button class="btn btn-primary" onclick="addSize()">Add New Size</button>
             <div id="addSize" style="display:none; margin-top: 20px;">
                 <h3>Thêm Biến thể mới</h3>
-                <form class="themsize" enctype="multipart/form-data">
+                <form class="themsize" enctype="multipart/form-data" onsubmit="validateForm2(event)">
                     <div class="row">
-                        <!-- Mã Biến thể -->
+                        <!-- Mã Size -->
                         <input type="hidden" name="variationId" id="sizevariation">
                         <div class="col-md-3">
                             <label for="sizeCode">Mã Size</label>
                             <input type="text" id="sizeCode" class="form-control mb-2" placeholder="Nhập mã Size">
+                            <span class="error-message" style="font-size:9px; color: red;"></span>
                         </div>
+
+                        <!-- Loại Size -->
                         <div class="col-md-3">
                             <label for="size">Size</label>
                             <input type="text" id="size" class="form-control mb-2" placeholder="Nhập Loại Size">
+                            <span class="error-message" style="font-size:9px; color: red;"></span>
                         </div>
+
+                        <!-- Số lượng -->
                         <div class="col-md-3">
                             <label for="quantity">Số lượng</label>
                             <input type="text" id="quantity" class="form-control mb-2" placeholder="Nhập số lượng">
+                            <span class="error-message" style="font-size:9px; color: red;"></span>
                         </div>
-
                     </div>
 
                     <div class="col-md-3">
@@ -242,6 +254,7 @@
                     </div>
                 </form>
             </div>
+
 
 
         </div>
@@ -298,49 +311,59 @@
     document.querySelector('#addSize').querySelector('form').addEventListener('submit', validateForm2);
 
     // Gắn sự kiện validate cho Form 3
-    document.querySelector('#addVariationForm').querySelector('form').addEventListener('submit', validateForm3);
+    document.querySelector('#addVariationForm').querySelector('form').addEventListener('submit', validateVariationForm);
 
-    function validateForm3(event) {
+    function validateVariationForm(event) {
         event.preventDefault(); // Ngừng gửi form để kiểm tra validate
 
-        const form = event.target;
-        const productId = document.getElementById("productId")
-        const id = productId.getAttribute('data-productId')
+        // Lấy các giá trị của các input
+        const newVariationCode = document.getElementById('newVariationCode');
+        const newVariationImage = document.querySelector('.newVariationImage');
+        const newVariationColor = document.getElementById('newVariationColor');
+        const newVariationPrice = document.getElementById('newVariationPrice');
 
-        console.log(id);
-        const newVariationCode = form.querySelector('#newVariationCode');
-        const newVariationImage = form.querySelector('.newVariationImage');
-        const newVariationColor = form.querySelector('#newVariationColor');
-        const newVariationPrice = form.querySelector('#newVariationPrice');
-        const newVariationSale = form.querySelector('#newVariationSale');
-        const newVariationDescripe = form.querySelector('#newVariationDescripe');
-        const newVariationAnhColor = document.querySelector('#newVariationAnhColor')
-        // Kiểm tra các trường yêu cầu nhập
+        // Lấy các phần tử span để hiển thị lỗi
+        const codeError = newVariationCode.nextElementSibling;
+        const imageError = newVariationImage.nextElementSibling;
+        const colorError = newVariationColor.nextElementSibling;
+        const priceError = newVariationPrice.nextElementSibling;
+
+        // Reset thông báo lỗi
+        codeError.textContent = '';
+        imageError.textContent = '';
+        colorError.textContent = '';
+        priceError.textContent = '';
+
+        let isValid = true;
+
+        // Kiểm tra mã biến thể
         if (!newVariationCode.value.trim()) {
-            alert('Vui lòng nhập mã biến thể');
-            newVariationCode.focus();
-            return;
+            codeError.textContent = 'Vui lòng nhập mã biến thể';
+            isValid = false;
         }
 
-        if (newVariationImage.files.length === 0) {
-            alert('Vui lòng chọn hình ảnh cho biến thể');
-            return;
+        // Kiểm tra hình ảnh
+        if (!newVariationImage.files || newVariationImage.files.length === 0) {
+            imageError.textContent = 'Vui lòng chọn một hình ảnh';
+            isValid = false;
         }
 
+        // Kiểm tra màu
         if (!newVariationColor.value.trim()) {
-            alert('Vui lòng chọn màu cho biến thể');
-            newVariationColor.focus();
-            return;
+            colorError.textContent = 'Vui lòng nhập màu sắc';
+            isValid = false;
         }
 
-        if (!newVariationPrice.value.trim() || isNaN(newVariationPrice.value.trim())) {
-            alert('Vui lòng nhập giá hợp lệ');
-            newVariationPrice.focus();
-            return;
+        // Kiểm tra giá
+        if (!newVariationPrice.value.trim() || isNaN(newVariationPrice.value.trim()) || newVariationPrice.value <= 0) {
+            priceError.textContent = 'Vui lòng nhập giá hợp lệ (số lớn hơn 0)';
+            isValid = false;
         }
-        toggleAddVariationForm();
-        form.submit();
 
+        // Nếu tất cả hợp lệ, gửi form
+        if (isValid) {
+            event.target.submit(); // Gửi form
+        }
     }
 
     function validateForm2(event) {
@@ -348,36 +371,45 @@
 
         const form = event.target;
 
+        // Xóa thông báo lỗi trước đó
+        form.querySelectorAll('.error-message').forEach((span) => {
+            span.textContent = '';
+        });
+
+        // Lấy các giá trị từ form
         const sizeCode = form.querySelector('#sizeCode');
-        const sizeCodenew = form.querySelector('#sizeCode').value
         const size = form.querySelector('#size');
-        const sizenew = form.querySelector('#size').value
-        const quantitynew = form.querySelector('#quantity').value
         const quantity = form.querySelector('#quantity');
+        const varriationId = document.getElementById('sizevariation').value;
 
-        // Kiểm tra tất cả các trường yêu cầu phải nhập
+        let isValid = true; // Đánh dấu trạng thái hợp lệ
+
+        // Kiểm tra mã size
         if (!sizeCode.value.trim()) {
-            alert('Vui lòng nhập mã size');
-            sizeCode.focus();
-            return false;
+            showError(sizeCode, 'Vui lòng nhập mã size');
+            isValid = false;
         }
 
+        // Kiểm tra loại size
         if (!size.value.trim()) {
-            alert('Vui lòng nhập loại size');
-            size.focus();
-            return false;
+            showError(size, 'Vui lòng nhập loại size');
+            isValid = false;
         }
 
+        // Kiểm tra số lượng
         if (!quantity.value.trim() || isNaN(quantity.value.trim())) {
-            alert('Vui lòng nhập số lượng hợp lệ');
-            quantity.focus();
-            return false;
+            showError(quantity, 'Vui lòng nhập số lượng hợp lệ');
+            isValid = false;
         }
-        const varriationId = document.getElementById("sizevariation").value
 
+        // Nếu không hợp lệ, dừng form
+        if (!isValid) {
+            return;
+        }
 
+        // Fetch API để xử lý backend
         fetch(
-                `Backend/controller/admin/adminAjax.php?addSize=${varriationId}&sizeCode=${sizeCodenew}&size=${sizenew}&soluong=${quantitynew}`
+                `Backend/controller/admin/adminAjax.php?addSize=${varriationId}&sizeCode=${sizeCode.value.trim()}&size=${size.value.trim()}&soluong=${quantity.value.trim()}`
             )
             .then((res) => {
                 if (!res.ok) {
@@ -386,22 +418,26 @@
                 return res.json();
             })
             .then((data) => {
-                console.log("Updated data:", data);
+                console.log('Updated data:', data);
                 // Hiển thị thông báo dựa trên phản hồi từ backend
                 if (data.status === 'success') {
                     alert(data.message); // Cập nhật thành công
+                    location.reload(); // Làm mới trang
                 } else {
                     alert(data.message); // Cập nhật thất bại
                 }
             })
             .catch((error) => {
-                console.error("Error connecting to server:", error);
+                console.error('Error connecting to server:', error);
             });
+    }
 
-        // Làm mới trang hiện tại
-        location.reload();
-        // Nếu tất cả đều hợp lệ, cho phép gửi form
-        // form.submit();
+    // Hàm hiển thị lỗi
+    function showError(inputElement, message) {
+        const errorSpan = inputElement.nextElementSibling; // Lấy thẻ <span> liền kề
+        if (errorSpan && errorSpan.classList.contains('error-message')) {
+            errorSpan.textContent = message;
+        }
     }
 
     function uploadVariationImages(event) {
