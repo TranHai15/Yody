@@ -53,52 +53,52 @@
     </form>
 </main>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector("form");
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
 
-    form.addEventListener("submit", function(event) {
-        let isValid = true;
+        form.addEventListener("submit", function(event) {
+            let isValid = true;
 
-        // Xóa thông báo lỗi cũ
-        document.querySelectorAll(".text-danger").forEach((p) => (p.textContent = ""));
+            // Xóa thông báo lỗi cũ
+            document.querySelectorAll(".text-danger").forEach((p) => (p.textContent = ""));
 
-        // Kiểm tra tên
-        if (nameInput.value.trim() === "") {
-            const error = nameInput.nextElementSibling;
-            error.textContent = "Tên không được để trống.";
-            isValid = false;
-        }
+            // Kiểm tra tên
+            if (nameInput.value.trim() === "") {
+                const error = nameInput.nextElementSibling;
+                error.textContent = "Tên không được để trống.";
+                isValid = false;
+            }
 
-        // Kiểm tra email
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (emailInput.value.trim() === "") {
-            const error = emailInput.nextElementSibling;
-            error.textContent = "Email không được để trống.";
-            isValid = false;
-        } else if (!emailPattern.test(emailInput.value.trim())) {
-            const error = emailInput.nextElementSibling;
-            error.textContent = "Email không đúng định dạng.";
-            isValid = false;
-        }
+            // Kiểm tra email
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (emailInput.value.trim() === "") {
+                const error = emailInput.nextElementSibling;
+                error.textContent = "Email không được để trống.";
+                isValid = false;
+            } else if (!emailPattern.test(emailInput.value.trim())) {
+                const error = emailInput.nextElementSibling;
+                error.textContent = "Email không đúng định dạng.";
+                isValid = false;
+            }
 
-        // Kiểm tra mật khẩu
-        if (passwordInput.value.trim() === "") {
-            const error = passwordInput.nextElementSibling;
-            error.textContent = "Mật khẩu không được để trống.";
-            isValid = false;
-        } else if (passwordInput.value.length <= 6) {
-            const error = passwordInput.nextElementSibling;
-            error.textContent = "Mật khẩu phải lớn hơn 6 ký tự.";
-            isValid = false;
-        }
+            // Kiểm tra mật khẩu
+            if (passwordInput.value.trim() === "") {
+                const error = passwordInput.nextElementSibling;
+                error.textContent = "Mật khẩu không được để trống.";
+                isValid = false;
+            } else if (passwordInput.value.length <= 6) {
+                const error = passwordInput.nextElementSibling;
+                error.textContent = "Mật khẩu phải lớn hơn 6 ký tự.";
+                isValid = false;
+            }
 
-        // Ngăn gửi biểu mẫu nếu không hợp lệ
-        if (!isValid) {
-            event.preventDefault();
-        }
+            // Ngăn gửi biểu mẫu nếu không hợp lệ
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
     });
-});
 </script>

@@ -8,18 +8,23 @@
             </div>
 
             <div class="mb-3">
-                <label for="productDescription" class="form-label">Mô Tả Sản Phẩm</label>
-                <textarea class="form-control" id="productDescription" rows="4"
-                    placeholder="Nhập mô tả sản phẩm"></textarea>
+                <label for="productDescription" class="form-label">Mã Sản Phẩm</label>
+                <input class="form-control" id="productDescription" rows="4" placeholder="Nhập mã sản phẩm"></input>
             </div>
 
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">Giá Sản Phẩm</label>
-                <input type="number" class="form-control" id="productPrice" placeholder="Nhập giá sản phẩm" required>
-            </div>
+
 
             <div class="mb-3">
-                <label for="productCategory" class="form-label">Danh Mục Sản Phẩm</label>
+                <label for="productCategory" class="form-label">Danh Mục Cha Sản Phẩm</label>
+                <select class="form-select" id="productCategory" required>
+                    <option selected>Chọn danh mục</option>
+                    <option value="1">Điện Thoại</option>
+                    <option value="2">Máy Tính</option>
+                    <option value="3">Phụ Kiện</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="productCategory" class="form-label">Danh Mục Con Sản Phẩm</label>
                 <select class="form-select" id="productCategory" required>
                     <option selected>Chọn danh mục</option>
                     <option value="1">Điện Thoại</option>
@@ -28,16 +33,7 @@
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label for="productImage" class="form-label">Hình Ảnh Sản Phẩm</label>
-                <input class="form-control" type="file" id="productImage" required>
-            </div>
 
-            <div class="mb-3">
-                <label for="productStock" class="form-label">Số Lượng Tồn Kho</label>
-                <input type="number" class="form-control" id="productStock" placeholder="Nhập số lượng tồn kho"
-                    required>
-            </div>
 
             <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
         </form>

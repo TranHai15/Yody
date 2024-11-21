@@ -12,90 +12,42 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Giá</th>
-                    <th>Số Lượng</th>
-                    <th>Hình Ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>MÃ sản phẩm</th>
+                    <th>Ngày tạo</th>
+                    <th>Category</th>
+                    <th>Child Category</th>
                     <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Mẫu dữ liệu -->
+                <?php foreach ($dataAllProduct as $product):  ?>
                 <tr>
-                    <td>1</td>
-                    <td>Sản phẩm A</td>
-                    <td>500,000 VND</td>
-                    <td>10</td>
-                    <td><img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/AKM6017-NAU%20SKM7003-NAV%20QKM7007-NAU%20(5).jpg"
-                            alt="Sản phẩm A" width="50" height="50"></td>
+                    <td><?= $product['productId'] ?></td>
+                    <td> <?= $product['name'] ?> </td>
+                    <td> <?= $product['productCode'] ?> </td>
+                    <td> <?= $product['createAt'] ?> </td>
+                    <?php foreach ($category as $cap1):  ?>
+                    <?php if ($product['categoryId'] == $cap1['categoryId']): ?>
+                    <td> <?= $cap1['name'] ?> </td>
+                    <?php endif ?>
+                    <?php endforeach ?>
+                    <?php foreach ($child as $cap2):  ?>
+                    <?php if ($product['childId'] == $cap2['childId']): ?>
+                    <td> <?= $product['name'] ?> </td>
+                    <?php endif ?>
+                    <?php endforeach ?>
                     <td>
-                        <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="#" class="btn btn-danger btn-sm">Xóa</a>
+                        <!-- <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a> -->
+                        <a href="<?= P ?>/admin?DeleteProduct=<?= $product['productId'] ?>"
+                            class="btn btn-danger btn-sm">Xóa</a>
+                        <a href="<?= P ?>/admin?ViewProduct=<?= $product['productId'] ?>"
+                            class="btn btn-success btn-sm">Chi tiết</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Sản phẩm A</td>
-                    <td>500,000 VND</td>
-                    <td>10</td>
-                    <td><img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/AKM6017-NAU%20SKM7003-NAV%20QKM7007-NAU%20(5).jpg"
-                            alt="Sản phẩm A" width="50" height="50"></td>
-                    <td>
-                        <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="#" class="btn btn-danger btn-sm">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Sản phẩm A</td>
-                    <td>500,000 VND</td>
-                    <td>10</td>
-                    <td><img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/AKM6017-NAU%20SKM7003-NAV%20QKM7007-NAU%20(5).jpg"
-                            alt="Sản phẩm A" width="50" height="50"></td>
-                    <td>
-                        <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="#" class="btn btn-danger btn-sm">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Sản phẩm A</td>
-                    <td>500,000 VND</td>
-                    <td>10</td>
-                    <td><img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/AKM6017-NAU%20SKM7003-NAV%20QKM7007-NAU%20(5).jpg"
-                            alt="Sản phẩm A" width="50" height="50"></td>
-                    <td>
-                        <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="#" class="btn btn-danger btn-sm">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Sản phẩm A</td>
-                    <td>500,000 VND</td>
-                    <td>10</td>
-                    <td><img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/AKM6017-NAU%20SKM7003-NAV%20QKM7007-NAU%20(5).jpg"
-                            alt="Sản phẩm A" width="50" height="50"></td>
-                    <td>
-                        <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="#" class="btn btn-danger btn-sm">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Sản phẩm A</td>
-                    <td>500,000 VND</td>
-                    <td>10</td>
-                    <td><img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/AKM6017-NAU%20SKM7003-NAV%20QKM7007-NAU%20(5).jpg"
-                            alt="Sản phẩm A" width="50" height="50"></td>
-                    <td>
-                        <a href="<?= P ?>/adminEditProduct" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="#" class="btn btn-danger btn-sm">Xóa</a>
-                    </td>
-                </tr>
+                <?php endforeach ?>
 
-
-                <!-- Thêm nhiều hàng dữ liệu sản phẩm tại đây -->
             </tbody>
         </table>
     </div>
