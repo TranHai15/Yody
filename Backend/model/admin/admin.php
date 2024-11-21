@@ -135,6 +135,8 @@ class Model_Admin
     {
         return delete($table, $dk);
     }
+
+    //*************************Bang lam Slide*******************
     public function get_All_Slide()
     {
         $sql = "SELECT * FROM slides";
@@ -154,6 +156,7 @@ class Model_Admin
         return update($table, $data, $Where);
     }
 
+    //*************************Bang lam Slide END*******************
     public function deleteCategory($dieukien, $cap = 0)
     {
         if ($cap == 0) {
