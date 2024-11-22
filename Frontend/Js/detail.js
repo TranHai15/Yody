@@ -15,7 +15,7 @@ document.querySelectorAll(".color-option, .size-option").forEach((element) => {
     // Lấy giá trị cần thiết
     const dataVariationId = document
       .querySelector(".color-option.selected")
-      .getAttribute("data-variationId");
+      .getAttribute("data-colorId"); // Thay thế 'data-variationId'
     const dataSizeId = document
       .querySelector(".size-option.active__size")
       .getAttribute("data-sizeId");

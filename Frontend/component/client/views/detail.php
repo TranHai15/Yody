@@ -257,6 +257,26 @@
     </div>
     <?php require_once(HF . "footer.php")  ?>
     <script src="Frontend/Js/detail.js"></script>
+    <script>
+        document.querySelectorAll(".detail__left--item img").forEach((thumbnail) => {
+            thumbnail.addEventListener("click", (event) => {
+                // Lấy ảnh lớn
+                const bigImage = document.querySelector(".detail__right--img img");
+
+                // Lấy src của ảnh con
+                const thumbnailSrc = event.target.getAttribute("src");
+
+                // Cập nhật src của ảnh lớn
+                bigImage.setAttribute("src", thumbnailSrc);
+
+                // Thêm hiệu ứng cho ảnh được chọn (nếu cần)
+                document.querySelectorAll(".detail__left--item").forEach((item) => {
+                    item.classList.remove("active--detail__left--item");
+                });
+                event.target.parentElement.classList.add("active--detail__left--item");
+            });
+        });
+    </script>
 </body>
 
 
