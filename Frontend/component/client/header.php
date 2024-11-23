@@ -72,7 +72,7 @@
                             <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
                         </div>
                     <?php else: ?>
-                        <a href="<?= P ?>/auth?login">
+                        <a href="<?= P ?>/auth?action=login">
                             <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
                                     alt="Yody-user"></span>
                         </a>
@@ -120,7 +120,7 @@
             </a>
             <form action="<?= P ?>/search" method="get">
                 <span class="header__search--fame row">
-                    <input type="text" name="tim" id="header__search--input--fame " class="header__search--input--fame"
+                    <input type="text" id="header__search--input--fame " name="sr" class="header__search--input--fame"
                         placeholder="Tìm kiếm ">
                     <button><img src="Frontend/public/svg/search.svg" alt="Yody-btn"></button>
                 </span>

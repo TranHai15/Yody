@@ -41,24 +41,45 @@ class Model_Client
         return $value;
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public function getAllVariationsWhereProductIdWhereVariationId($idProducts, $idVariations)
+    public function getAllVariationsWhereProductIdWhereVariationId($idVariations)
     {
-        $sql = "SELECT p.*, 
-        v.variationId, 
-        v.image, 
-        v.color, 
-        v.price, 
-        v.descripe, 
-        v.variationCode, 
-        v.sale, 
-        s.sizeId, 
-        s.size
-        FROM products AS p
-        JOIN variations AS v ON p.productId = v.productId
-        JOIN sizevariations AS s ON s.variationId = v.variationId
-        WHERE p.productId = $idProducts
-        AND v.variationId = $idVariations
-        AND s.sizeId = (SELECT MIN(sizeId) FROM sizevariations WHERE variationId = $idVariations)";
+        $sql = "
+        SELECT p.*, 
+               v.variationId, 
+               v.image, 
+               v.color, 
+               v.price, 
+               v.descripe, 
+               v.variationCode, 
+               v.sale, 
+               s.sizeId, 
+               s.size
+        FROM variations AS v
+        JOIN products AS p ON p.productId = v.productId
+        LEFT JOIN sizevariations AS s ON s.variationId = v.variationId
+        WHERE v.variationId = $idVariations
+        AND s.sizeId = (SELECT MIN(sizeId) 
+                        FROM sizevariations 
+                        WHERE variationId = $idVariations)";
+        return getOne($sql);
+    }
+
+    public function getAllSizeWhereProductIdWhereVariationId($idVariations)
+    {
+
+
+        $sql = "SELECT * FROM sizevariations WHERE variationId = $idVariations";
+        return getRaw($sql);
+    }
+    public function getAllVariationWhereProductId($productId)
+    {
+        $sql = "SELECT * FROM variations WHERE productId = $productId";
+        return getRaw($sql);
+    }
+
+    public function getAllImageWhereProductIdWhereVariationId($idVariations)
+    {
+        $sql = "SELECT * FROM variationimages WHERE variationId = $idVariations";
         return getRaw($sql);
     }
 

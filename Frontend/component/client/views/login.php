@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="location">
-                <h1>Bạn chưa có tài khoản? <a href="<?= P ?>/auth?register">Đăng Ký Ngay!</a></h1>
+                <h1>Bạn chưa có tài khoản? <a href="<?= P ?>/auth?action=register">Đăng Ký Ngay!</a></h1>
             </div>
         </div>
     </div>

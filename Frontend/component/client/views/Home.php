@@ -63,7 +63,7 @@
                                     <?php
                                     $variations = json_decode($Product['variations'], true); ?>
                                     <?php foreach ($variations as $key => $variation) : ?>
-                                        <a href="/duan1/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
+                                        <a href="<?= P ?>/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
                                             data-images="<?= $variation['image'] ?>">
                                             <span
                                                 class="product__variation--item <?= $variation['variationId'] == $Product['colorId'] ? 'active__product--variation' : '' ?>"
