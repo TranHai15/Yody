@@ -65,6 +65,11 @@ class Controller_Client
         );
     }
 
+    public function search()
+    {
+        $search = $_GET['sr'] ?? "";
+        checkloi($search);
+    }
     public function register()
     {
         if (isPost()) {

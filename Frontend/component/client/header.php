@@ -72,7 +72,7 @@
                             <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
                         </div>
                     <?php else: ?>
-                        <a href="<?= P ?>/auth?login">
+                        <a href="<?= P ?>/auth?action=login">
                             <span class="header__user"> <img loading="lazy" src="Frontend/public/svg/account.svg"
                                     alt="Yody-user"></span>
                         </a>
@@ -118,11 +118,13 @@
                     <img src="Frontend/public/svg/logo.svg" alt="Yody">
                 </div>
             </a>
-            <span class="header__search--fame row">
-                <input type="text" id="header__search--input--fame " class="header__search--input--fame"
-                    placeholder="Tìm kiếm ">
-                <button><img src="Frontend/public/svg/search.svg" alt="Yody-btn"></button>
-            </span>
+            <form action="<?= P ?>/search" method="get">
+                <span class="header__search--fame row">
+                    <input type="text" id="header__search--input--fame " name="sr" class="header__search--input--fame"
+                        placeholder="Tìm kiếm ">
+                    <button><img src="Frontend/public/svg/search.svg" alt="Yody-btn"></button>
+                </span>
+            </form>
             <span class="fame__close">Đóng</span>
         </div>
         <div class="panding_fame"></div>
