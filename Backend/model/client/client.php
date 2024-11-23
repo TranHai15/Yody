@@ -69,6 +69,18 @@ class Model_Client
         // var_dump($value);
         return $value;
     }
+    // =============================Thắng làm 21/11/2024==================
+    public function searchProducts($keyword){
+        $sql = "SELECT * FROM products WHERE name LIKE :keyword OR description LIKE :keyword";
+        $value = getRaw($sql);
+        return $value;
+
+    }
+
+
+
+    // ===============================================
+
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

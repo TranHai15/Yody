@@ -31,6 +31,10 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
     $page = match (true) {
         $urlPath === "{$basePath}/" => fn() => $Client->List("Home"),
         $urlPath === "{$basePath}/category" => fn() => require_once FRONTEND__CLIENT . "category.php",
+        // 
+        $urlPath === "{$basePath}/search" && $query === "tim" => fn() => require_once FRONTEND__CLIENT . "category.php",
+        
+        // 
         $urlPath === "{$basePath}/product" => fn() => $Client->detail("detail"),
         $urlPath === "{$basePath}/cart" => fn() => require_once FRONTEND__CLIENT . "cart.php",
         $urlPath === "{$basePath}/event" => fn() => require_once FRONTEND__CLIENT . "event.php",
@@ -45,6 +49,6 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
     };
 }
 
-// Execute the matched callback
+// Execute the matched callback. thêm điều hướng cho danhmucj
 $page();
 ?>

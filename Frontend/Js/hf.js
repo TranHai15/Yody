@@ -17,15 +17,15 @@ itemMenu.forEach((item) => {
 const search = document.querySelector(".header__search--input");
 
 // fame search
-
 const searchButton = document.querySelector(".header__search--input");
 const fameSearch = document.querySelector(".fame__search");
 const closeButton = document.querySelector(".fame__close");
 
-// Hiện menu tìm kiếm khi nhấn vào nút tìm kiếm
+// Hiện menu tìm kiếm khi nhấn vào nút tìm kiếm và focus vào input
 searchButton.addEventListener("click", function () {
   fameSearch.style.display = "block"; // Hiện menu tìm kiếm
   overlay.style.display = "block"; // Hiện overlay
+  search.focus(); // Focus vào input tìm kiếm
 });
 
 // Ẩn menu tìm kiếm khi nhấn vào nút đóng

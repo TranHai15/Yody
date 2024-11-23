@@ -31,13 +31,14 @@ class Controller_Client
     {
         $Client = new Model_Client;
         $TopProduct = $Client->getAllProducts();
-        $TopProduct = $Client->getAllProducts();
+        // $TopProduct = $Client->getAllProducts();
 
         $slides =  $Client->get_Slide_Imgs();
-        $slides =  $Client->get_Slide_Imgs();
+        // $slides =  $Client->get_Slide_Imgs();
 
         View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct]);
     }
+
 
     public function detail($file = "detail")
     {
@@ -61,6 +62,13 @@ class Controller_Client
             ]
         );
     }
+
+    // làm ngày 21/12 ====================================================
+    
+
+
+    // =================================================================
+
 
     public function register()
     {
