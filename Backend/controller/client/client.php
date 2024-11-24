@@ -66,13 +66,20 @@ class Controller_Client
         );
     }
 
-    public function search()
+    public function search($file = "category")
     {
-        $search = $_GET['sr'] ?? "";
-        // checkloi($search);
-        
+        $search = trim(htmlspecialchars($_GET['sr'] ?? ""));
+      
+        $kq = (new Model_Client)->searchProducts($search);
+
+
+        // checkloi($kq);
+        View(FRONTEND__CLIENT, $file, ["search" =>$search, "kq" =>$kq]);
+ 
 
     }
+
+
     public function register()
     {
         if (isPost()) {
@@ -189,4 +196,6 @@ class Controller_Client
         session_destroy();
         header('Location: /Yody/');
     }
+
+    // 
 }
