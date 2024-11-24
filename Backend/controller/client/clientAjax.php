@@ -9,11 +9,11 @@ require_once("../../model/client/client.php");
 
 if ($_GET['addcart']) {
 
-    $userId = $_GET['addcart'];
-    $variationId = $_GET['variationId'];
-    $sizeId = $_GET['sizeId'];
-    $quantity = $_GET['quantity'];
-    $price = $_GET['price'];
+    $userId = (int)$_GET['addcart'];
+    $variationId = (int)$_GET['variationId'];
+    $sizeId = (int)$_GET['sizeId'];
+    $quantity = (int)$_GET['quantity'];
+    $price = (int)$_GET['price'];
 
     $dateTime = (new DateTime())->format('Y-m-d H:i:s'); // Định dạng Năm-Tháng-Ngày Giờ:Phút:Giây
     // echo $dateTime; // Ví dụ: 2024-11-23 14:45:30
@@ -28,26 +28,36 @@ if ($_GET['addcart']) {
         // $idcart = $cart['cartId'];
         // checkloi($cart);
         $cartid = $cart['cartId'];
-
+        // checkloi($variationId);
         // checkloi($cartid);
         $dataOnDb = $gioHang->getCartId($cartid);
+        // $dataOnDb['variationId'];
+
         // checkloi($dataOnDb);
         foreach ($dataOnDb as $key => $value) {
-            // echo $value['variationId'] . "<br>";
-            if ($value['variationId'] == $variationId) {
-                if ($value['sizeId'] == $sizeId) {
-                    $quantity = $quantity + $value['quantity'];
-                    $price = $price + $value['price'];
+            $variationIdcheck = $value['variationId'];
+            $sizeIdcheck = $value['sizeId'];
+            // checkloi($variationIdcheck);
+            // checkloi($sizeId);
+            if ($variationIdcheck == $variationId) {
+                if ($sizeIdcheck == $sizeId) {
+                    // $test = "vaodayroi";
+                    $quantity_new = $quantity + $value['quantity'];
+                    $price_new = $price + $value['price'];
                     $data_new = [
                         'cartId' => $cartid,
                         'variationId' => $variationId,
                         'sizeId' => $sizeId,
-                        'quantity' => $quantity,
-                        'price' => $price
+                        'quantity' => $quantity_new,
+                        'price' => $price_new
                     ];
-                    checkloi($data_new);
+                    // checkloi($data_new);
                     $dk = 'cartitemId=' . $value['cartitemId'];
                     $kq = $gioHang->updateCartItem('cartitems', $data_new, $dk);
+                    // die;
+                    if ($kq) {
+                        exit;
+                    }
                     // checkloi($kq);
                 }
             }

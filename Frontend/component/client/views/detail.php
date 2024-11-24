@@ -64,7 +64,7 @@
                         <div class="detail__right--price--new">
                             <?php $sale = $OneVariations["price"] - ($OneVariations["price"] * ($OneVariations["sale"] / 100)); ?>
                             <?= $OneVariations['sale'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : $OneVariations["price"] ?>
-                            <span>đ</span><br>
+                            <span></span><br>
 
                         </div>
                         <div class="detail__right--price--old" data-price="<?= $sale ?>">

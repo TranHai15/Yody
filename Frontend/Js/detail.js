@@ -42,19 +42,34 @@ function updateSoLuongChon(change) {
 let getSizeValue = document
   .querySelector(".size-option")
   .getAttribute("data-sizeId");
+
 document.addEventListener("DOMContentLoaded", () => {
   const sizeOptions = document.querySelectorAll(".size-option");
-
   const sizeValue = document.querySelector(".value__size");
+  const sizeCodeSpan = document.querySelector(
+    ".detail__right-code .value__size"
+  );
+  const sizeLabelValue = document.querySelector(".size-label .size__value"); // Thêm dòng này
+
   sizeOptions.forEach((option) => {
     option.addEventListener("click", () => {
       // Lấy giá trị size và sizeId từ các thuộc tính data
       const sizeId = option.getAttribute("data-sizeId");
       const size = option.getAttribute("data-size");
+
+      // Cập nhật giá trị size của kích thước
       sizeValue.innerText = size;
+      if (sizeCodeSpan) {
+        sizeCodeSpan.innerText = size;
+      }
+      if (sizeLabelValue) {
+        sizeLabelValue.innerText = size; // Cập nhật .size__value
+      }
+
       getSizeValue = sizeId;
+
       // Hiển thị hoặc xử lý size được chọn
-      console.log(`SizeId: ${sizeId}, Size: ${size}`);
+      // console.log(`SizeId: ${sizeId}, Size: ${size}`);
 
       // Xử lý giao diện (thêm class active__size cho phần tử được chọn)
       sizeOptions.forEach((opt) => opt.classList.remove("active__size"));
@@ -62,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 //*********************************************** */
 document.querySelector(".add__cart").addEventListener("click", () => {
   // alert(soluongchon);
