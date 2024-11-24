@@ -23,9 +23,14 @@
     </div>
     <!-- main -->
     <div>
-
         <main class="detail grid wide row justify-content-between mt-4"
-            data-productId="<?= $OneVariations['productId'] ?>" data-variationId="<?= $OneVariations['variationId'] ?>">
+            data-productId="<?= $OneVariations['productId'] ?>"
+            data-variationId="<?= $OneVariations['variationId'] ?>"
+            data-name="<?= htmlspecialchars($OneVariations['name']) ?>"
+            data-productCode="<?= $OneVariations['productCode'] ?>"
+            data-variationCode="<?= $OneVariations['variationCode'] ?>"
+            data-userId="<?= $_SESSION['userId'] ?? null ?>">
+
             <div class="l-6-2 row">
                 <div class="l-1 m-0 c-0"></div>
                 <div class="detail__left l-11">
@@ -59,9 +64,10 @@
                         <div class="detail__right--price--new">
                             <?php $sale = $OneVariations["price"] - ($OneVariations["price"] * ($OneVariations["sale"] / 100)); ?>
                             <?= $OneVariations['sale'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : $OneVariations["price"] ?>
-                            <span>đ</span>
+                            <span>đ</span><br>
+
                         </div>
-                        <div class="detail__right--price--old">
+                        <div class="detail__right--price--old" data-price="<?= $sale ?>">
                             <?= $OneVariations['sale'] > 0 ? number_format($OneVariations['price'], 0, ',', '.') . "đ" : "" ?>
                         </div>
                         <?= $OneVariations['sale'] > 0 ? "<div class=detail__right--price--sale><span> - $OneVariations[sale] </span></div>" : "" ?>
@@ -82,8 +88,7 @@
                         </div>
                     </div>
                     <div class="size__selector">
-                        <span class="size-label">Kích thước: <span
-                                class="size__value"><?= $OneVariations['size'] ?></span></span>
+                        <span class="size-label">Kích thước: <span class="size__value"><?= $OneVariations['size'] ?></span></span>
                         <div class="row align-items-center">
                             <?php foreach ($AllSize as $size): ?>
                                 <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
@@ -95,10 +100,10 @@
                     <div>
                         <h3 class="detail__number">Số lượng</h3>
                         <div class="row justify-content-between align-items-center">
-                            <div class="number  row align-items-center">
-                                <span><img loading="lazy" src="Frontend/public/svg/tru.svg" alt=""></span>
-                                <span id="number">1</span>
-                                <span><img loading="lazy" src="Frontend/public/svg/cong.svg" alt=""></span>
+                            <div class="number row align-items-center">
+                                <button id="decrease" class="btn" onclick="updateSoLuongChon(-1)">-</button>
+                                <span id="soluongchon">1</span>
+                                <button id="increase" class="btn" onclick="updateSoLuongChon(1)">+</button>
                             </div>
                             <div class="add__cart l-9 ">
                                 Thêm giỏ hàng
@@ -257,26 +262,7 @@
     </div>
     <?php require_once(HF . "footer.php")  ?>
     <script src="Frontend/Js/detail.js"></script>
-    <script>
-        document.querySelectorAll(".detail__left--item img").forEach((thumbnail) => {
-            thumbnail.addEventListener("click", (event) => {
-                // Lấy ảnh lớn
-                const bigImage = document.querySelector(".detail__right--img img");
 
-                // Lấy src của ảnh con
-                const thumbnailSrc = event.target.getAttribute("src");
-
-                // Cập nhật src của ảnh lớn
-                bigImage.setAttribute("src", thumbnailSrc);
-
-                // Thêm hiệu ứng cho ảnh được chọn (nếu cần)
-                document.querySelectorAll(".detail__left--item").forEach((item) => {
-                    item.classList.remove("active--detail__left--item");
-                });
-                event.target.parentElement.classList.add("active--detail__left--item");
-            });
-        });
-    </script>
 </body>
 
 

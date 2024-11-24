@@ -1,81 +1,98 @@
 <?php
-
+header('Content-Type: application/json');
 require_once("../../../config.php");
-require_once("../../common/function.php");
+require_once("../../../Backend/common/pdo.php");
+require_once("../../../Backend/common/function.php");
+require_once("../../model/admin/admin.php");
 require_once("../../model/client/client.php");
 
-if (isset($_GET['product'], $_GET['color'], $_GET['size'])) {
-    $idProducts = $_GET['product'];
-    $idVariations = $_GET['color'];
-    // $sizeId = $_GET['size'];
-    $sizeId = 1;
 
-    // Kết nối database (sử dụng new mysqli trực tiếp nếu không có hàm Connect())
-    $conn = new mysqli(_HOST, _USER, _PASS, _DB, _PORT);
-    if ($conn->connect_error) {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-    $conn->set_charset("utf8");
+if ($_GET['addcart']) {
 
-    // Chuẩn bị câu truy vấn SQL với các tham số truyền vào
-    $sql = "SELECT p.*, 
-                   v.variationId, 
-                   v.image, 
-                   v.color, 
-                   v.price, 
-                   v.descripe, 
-                   v.variationCode, 
-                   v.sale, 
-                   s.sizeId, 
-                   s.size
-            FROM products AS p
-            JOIN variations AS v ON p.productId = v.productId
-            JOIN sizevariations AS s ON s.variationId = v.variationId
-            WHERE p.productId = ?
-              AND v.variationId = ?
-              AND s.sizeId = ?";
+    $userId = $_GET['addcart'];
+    $variationId = $_GET['variationId'];
+    $sizeId = $_GET['sizeId'];
+    $quantity = $_GET['quantity'];
+    $price = $_GET['price'];
 
-    // Chuẩn bị và thực hiện câu truy vấn
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        echo json_encode(['error' => 'Lỗi khi chuẩn bị câu truy vấn.']);
-        exit;
-    }
+    $dateTime = (new DateTime())->format('Y-m-d H:i:s'); // Định dạng Năm-Tháng-Ngày Giờ:Phút:Giây
+    // echo $dateTime; // Ví dụ: 2024-11-23 14:45:30
+    // checkloi($dateTime);
+    $gioHang = new Model_Client;
 
-    $stmt->bind_param("iii", $idProducts, $idVariations, $sizeId);
-    if (!$stmt->execute()) {
-        echo json_encode(['error' => 'Lỗi khi thực thi câu truy vấn.']);
-        exit;
-    }
+    $sql = "SELECT * FROM carts WHERE userId=$userId";
+    $number_col = getRows($sql);
+    // checkloi($number_col);
+    if ($number_col === 1) {
+        $cart = $gioHang->layCartIdByUserID($userId);
+        // $idcart = $cart['cartId'];
+        // checkloi($cart);
+        $cartid = $cart['cartId'];
 
-    $result = $stmt->get_result();
+        // checkloi($cartid);
+        $dataOnDb = $gioHang->getCartId($cartid);
+        // checkloi($dataOnDb);
+        foreach ($dataOnDb as $key => $value) {
+            // echo $value['variationId'] . "<br>";
+            if ($value['variationId'] == $variationId) {
+                if ($value['sizeId'] == $sizeId) {
+                    $quantity = $quantity + $value['quantity'];
+                    $price = $price + $value['price'];
+                    $data_new = [
+                        'cartId' => $cartid,
+                        'variationId' => $variationId,
+                        'sizeId' => $sizeId,
+                        'quantity' => $quantity,
+                        'price' => $price
+                    ];
+                    checkloi($data_new);
+                    $dk = 'cartitemId=' . $value['cartitemId'];
+                    $kq = $gioHang->updateCartItem('cartitems', $data_new, $dk);
+                    // checkloi($kq);
+                }
+            }
+        }
 
-    // Xử lý kết quả
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-
-        // Trả về dữ liệu dưới dạng JSON
-        echo json_encode([
-            'productId' => $row['productId'],
-            'variationId' => $row['variationId'],
-            'image' => $row['image'],
-            'color' => $row['color'],
-            'price' => $row['price'],
-            'descripe' => $row['descripe'],
-            'variationCode' => $row['variationCode'],
-            'sale' => $row['sale'],
-            'sizeId' => $row['sizeId'],
-            'size' => $row['size']
-        ]);
+        $data = [
+            'cartId' => $cartid,
+            'variationId' => $variationId,
+            'sizeId' => $sizeId,
+            'quantity' => $quantity,
+            'price' => $price
+        ];
+        $kq = $gioHang->cartItem('cartitems', $data);
+        // checkloi($kq);
     } else {
-        // Trả về lỗi nếu không có dữ liệu
-        echo json_encode(['error' => 'Không tìm thấy sản phẩm hoặc dữ liệu không hợp lệ.']);
-    }
 
-    // Đóng câu truy vấn và kết nối
-    $stmt->close();
-    $conn->close();
-} else {
-    // Trả về lỗi nếu thiếu tham số
-    echo json_encode(['error' => 'Thiếu tham số yêu cầu.']);
+        $data = [
+            'userId' => $userId,
+            'createAt' => $dateTime
+        ];
+        $kq = $gioHang->carts('carts', $data);
+        // checkloi($kq);/
+        if ($kq) {
+            $cart = $gioHang->layCartIdByUserID($userId);
+            $cartid = $cart['cartId'];
+
+            // checkloi($cartid);
+            // $cart['cartId'];
+            // checkloi($cart);
+            $data = [
+                'cartId' => $cartid,
+                'variationId' => $variationId,
+                'sizeId' => $sizeId,
+                'quantity' => $quantity,
+                'price' => $price
+            ];
+            $kq = $gioHang->cartItem('cartitems', $data);
+            // checkloi($kq);
+
+
+
+
+        } else {
+            echo " Khong them dc di ";
+        }
+        // var_dump($kq);
+    }
 }

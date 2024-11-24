@@ -159,9 +159,13 @@ class Controller_Client
                             $name = $data__user['name'];
                             $avata = $data__user['avata'];
                             $role = $data__user['role'];
+                            $userId = $data__user['userId'];
                             setsession('nameUser', $name);
                             setsession('avataUser', $avata);
                             setsession('role', $role);
+                            setsession('userId', $userId);
+
+
                             header(header: 'Location: /Yody/');
                             exit;
                         } else {

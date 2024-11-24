@@ -325,3 +325,15 @@
   position: sticky;
   top: 7.4rem;
 }
+
+.btn {
+  border: none;
+  background-color: #fff;
+  font-size: 20px;
+  line-height: 30px;
+}
+.btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
