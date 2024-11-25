@@ -67,7 +67,8 @@
         </div>
     </div>
 </main>
-<pre>
+<pre><?php var_dump($OneVariations) ?>
+
 
     <?php var_dump($OneVariations)    ?>
 </pre>
