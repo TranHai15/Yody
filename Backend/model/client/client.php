@@ -123,6 +123,32 @@ class Model_Client
     }
 
     // ===============================================
+    public function categoryLoc($idName)
+    {
+        $sql = "SELECT 
+        p.productId,
+        p.name,
+        p.categoryId,
+        MIN(v.price) AS new_price,
+        MIN(v.sale) AS old_price,
+        MIN(v.image) AS ImageMain,
+        MIN(v.variationId) AS colorId,
+        JSON_ARRAYAGG(
+            JSON_OBJECT(
+                'anhColor', v.anhColor,
+                'image', v.image,
+                'variationId', v.variationId
+            )
+        ) AS variations
+    FROM products AS p
+    JOIN variations AS v ON p.productId = v.productId
+    WHERE categoryId = $idName
+    GROUP BY p.productId
+    ORDER BY p.productId
+    LIMIT 12";
+    return getRaw($sql);
+    
+    }
 
 
 

@@ -76,6 +76,12 @@ class Controller_Client
         // checkloi($kq);
         View(FRONTEND__CLIENT, $file, ["search" => $search, "kq" => $kq]);
     }
+    public function locCategory($file = 'category'){
+        $id = $_GET['id'] ?? '';
+        $kq = (new Model_Client)->categoryLoc($id);
+
+        View(FRONTEND__CLIENT, $file, ["kq" => $kq]);
+    }
 
     public function dodulieuraCart($file = 'cart')
     {

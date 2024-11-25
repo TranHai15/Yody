@@ -34,7 +34,7 @@
 
                 <!-- Nút hành động -->
                 <button type="submit" class="btn btn-primary">Thêm Danh Mục</button>
-                <a href="danh-sach-danh-muc.php" class="btn btn-secondary">Quay Lại</a>
+                <a href="<?= P ?>/admin?Category" class="btn btn-secondary">Quay Lại</a>
             </form>
         </div>
     </div>
