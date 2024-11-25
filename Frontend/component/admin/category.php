@@ -54,7 +54,7 @@
                                 <td><?= $cap2['past'] ?></td>
                                 <td></td>
                                 <td class="action-buttons">
-                                    <a href="#" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
+                                    <a href="<?= P ?>/admin?EditCategory=<?= $cap2['childId'] ?>" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
                                     <a href="<?= P ?>/admin?deleteChildCategory=<?= $cap2['childId'] ?>"
                                         onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
                                         <button class="btn btn-danger btn-sm">Xóa</button>
@@ -72,7 +72,7 @@
                                         <td><?= $cap3['past'] ?></td>
                                         <td></td>
                                         <td class="action-buttons">
-                                            <a href="#" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
+                                            <a href="<?= P ?>/admin?EditCategory=<?= $cap2['childId'] ?>" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
                                             <a href="<?= P ?>/admin?deleteCommontCategory=<?= $cap3['commonId'] ?>"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
                                                 <button class="btn btn-danger btn-sm">Xóa</button>
