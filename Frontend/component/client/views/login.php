@@ -4,7 +4,12 @@
         <div class="content">
             <p class="text-align-center">Chào mừng bạn đến với Yody</p>
             <h1 class="text-align-center"><span>ĐĂNG</span><span>NHẬP</span></h1>
+<<<<<<< HEAD
+            <form action="<?= P ?>/auth?action=dangnhap" method="POST" onsubmit="return validate__login()"
+                class="form__login">
+=======
             <form action="<?= P ?>/auth?action=dangnhap" method="POST" onsubmit="return validate__login()" class="form__login">
+>>>>>>> b646ff53015b299403a4a01a867307c8fc51226e
                 <div class="input-container">
                     <div class="form">
                         <input type="text" name="email" id="email" class="form_input" autocomplete="off" placeholder=" "

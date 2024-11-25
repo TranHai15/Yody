@@ -91,7 +91,8 @@ class Model_Client
         return $value;
     }
     // =============================Thắng làm 21/11/2024==================
-    public function searchProducts($keyword) {
+    public function searchProducts($keyword)
+    {
         $sql = "
     SELECT 
         p.productId,
@@ -122,7 +123,7 @@ class Model_Client
     }
 
     // ===============================================
-    
+
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -151,22 +152,38 @@ class Model_Client
 
         return getRaw($sql);
     }
-   
+    // *********************Thêm giỏ hàng******************************************
+    // *********************Thêm giỏ hàng******************************************
+    // *********************Thêm giỏ hàng******************************************
+    public function carts($table, $data)
+    {
+        return  insert($table, $data);
+    }
+    public function cartItem($table, $data)
+    {
 
+        return insert($table, $data);
+    }
 
+    public function getCartId($cartid)
+    {
+        $sql = "SELECT * FROM `cartitems` WHERE cartId = $cartid";
+        return getRaw($sql);
+    }
+    public function layCartIdByUserID($userId)
+    {
+        $sql = "SELECT cartId FROM carts WHERE userId = $userId";
+        return getOne($sql);
+    }
+    //Đổ dữ liệu ra giỏ hàng
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function getCartItemsWithProductName($cartid)
+    {
+        $sql = " SELECT c.cartitemId, c.cartId, c.variationId, c.sizeId, c.quantity, c.price AS cart_price, v.color, v.price AS variation_price, p.name AS product_name FROM cartItems c JOIN variations v ON c.variationId = v.variationId JOIN products p ON v.productId = p.productId WHERE c.cartId = $cartid";
+        return getRaw($sql);
+    }
+    public function updateCartItem($table, $data, $Where)
+    {
+        return update($table, $data, $Where);
+    }
 }
