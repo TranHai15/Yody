@@ -20,41 +20,47 @@
                         <input type="checkbox" class="check" name="" id="check__sale">
                         <p>Sản phẩm nguyên giá</p>
                     </div>
-                    <article class="product__item row  ">
-                        <div class="cart__product--item">
-                            <input type="checkbox" class="check" name="" id="">
-                            <div class="item">
-                                <div class="cart__img">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/apn6430-xlo-5-of-9.jpg"
-                                        alt="">
+                    <?php foreach ($dulieu as $data): ?>
+                        <article class="product__item row  ">
+                            <div class="cart__product--item">
+                                <input type="checkbox" class="check" name="" id="">
+                                <div class="item">
+                                    <div class="cart__img">
+                                        <img loading="lazy"
+                                            src="<?= $data['image'] ?>"
+                                            alt="">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="cart__information">
-                            <div>
-                                <p class="cart__name">Áo Polo Nữ Cafe Dệt Tổ Ong In Hình Mickey</p>
-                                <div class="cart__price row">
-                                    <p class="cart__price--new">149.000 đ</p>
-                                    <p class="cart__price--old">249.000 đ</p>
-                                </div>
-                            </div>
-                            <div class="">
-                                <select name="" id="cart__select">
-                                    <option value="">Xanh lo, S</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="item__quantity">
-                            <div class="cart__quantity">
-                                <button>-</button>
-                                <span>2</span>
-                                <button>+</button>
-                            </div>
-                        </div>
+                            <div class="cart__information">
+                                <div>
+                                    <p class="cart__name"><?= $data['product_name'] ?></p>
+                                    <div class="cart__price row">
+                                        <p class="cart__price--new">
 
-                    </article>
-                    <hr>
+
+                                            <?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?>
+                                        </p>
+                                        <p class="cart__price--old"> <?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></p>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <select name="" id="cart__select">
+                                        <option value=""><?= $data['color'] ?>, <?= $data['size'] ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item__quantity">
+                                <div class="cart__quantity">
+                                    <button>-</button>
+                                    <span><?= $data['total_quantity'] ?> </span>
+                                    <button>+</button>
+                                </div>
+                            </div>
+
+                        </article>
+                        <hr>
+                    <?php endforeach ?>
 
                 </div>
 
@@ -64,7 +70,7 @@
                     <div class="cart-information-detail">
                         <p class="cart__title">Chi tiết đơn hàng</p>
                         <div class="cart__ship row justify-content-between align-items-center ">
-                            <p>Tổng giá trị sản phẩm </p><span>894.000 đ</span>
+                            <p>Tổng giá trị sản phẩm </p><span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?> </span>
                         </div>
                         <div class="cart__ship  row justify-content-between align-items-center">
                             <p>Vận chuyển </p><span>20.000 đ</span>
@@ -75,10 +81,10 @@
                     </div>
                     <hr>
                     <div class="cart__title row justify-content-between align-items-center  ">
-                        <p class="">Tổng thanh toán</p> <span>894.000 đ</span>
+                        <p class="">Tổng thanh toán</p> <span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?></span>
 
                     </div>
-                    <a href="<?= P ?>/pay"><button class="btn__confirm">Mua hàng ()</button></a>
+                    <a href="<?= P ?>/pay"><button class="btn__confirm">Mua hàng</button></a>
 
                 </div>
                 <div class="payment-methods">

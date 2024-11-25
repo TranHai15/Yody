@@ -67,18 +67,21 @@
                         <input type="text" class="checkout__address-note"
                             placeholder="Nhập ghi chú (không bắt buộc)">
                     </div>
-                    <div class="checkout__shippingmethod">
+                    <div class="phuongthucthanhtoan">
                         <h2 class="checkout__shippingmethod-title">Phương thức vận chuyển</h2>
-                        <span class="checkout__shippingmethod-span"><input type="checkbox"
-                                class="checkout__shippingmethod-standard">Tiêu chuẩn <br></span>
-                        <span class="checkout__shippingmethod-ensure">Đảm bảo nhận hàng từ 3 - 5 ngày</span>
-
-                    </div>
-                    <div class="checkout__paymentMethod">
-                        <h2 class="checkout__paymentMethod-title">Phương thức thanh toán</h2>
-                        <span class="checkout__paymentMethod-fit">Lựa chọn phương thức thanh toán phù hợp nhất
-                            cho bạn</span>
-                        <input type="checkbox" class="checkout__paymentMethod-cod">Tiền mặt
+                        <div class="checkout__shippingmethod">
+                            <div class="box1">
+                                <span class="checkout__shippingmethod-span"><input type="radio"
+                                        class="checkout__shippingmethod-standard">Tiêu chuẩn <br></span>
+                            </div>
+                            <div class="box2"><span class="checkout__shippingmethod-ensure">Đảm bảo nhận hàng từ 3 - 5 ngày</span></div>
+                        </div>
+                        <div class="checkout__paymentMethod">
+                            <h2 class="checkout__paymentMethod-title">Phương thức thanh toán</h2>
+                            <span class="checkout__paymentMethod-fit">Lựa chọn phương thức thanh toán phù hợp nhất
+                                cho bạn</span>
+                            <input type="checkbox" class="checkout__paymentMethod-cod">Tiền mặt
+                        </div>
                     </div>
                     <div class="checkout__pay">
                         <button class="checkout__pay-cod">

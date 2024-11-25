@@ -205,8 +205,40 @@ class Model_Client
 
     public function getCartItemsWithProductName($cartid)
     {
-        $sql = " SELECT c.cartitemId, c.cartId, c.variationId, c.sizeId, c.quantity, c.price AS cart_price, v.color, v.price AS variation_price, p.name AS product_name FROM cartItems c JOIN variations v ON c.variationId = v.variationId JOIN products p ON v.productId = p.productId WHERE c.cartId = $cartid";
+        $sql = " SELECT 
+    ci.cartitemId,
+    ci.cartId,
+    ci.quantity AS total_quantity,
+    ci.price AS total_price,
+    v.image,
+    v.price AS variation_price,
+    v.sale AS variation_sale,
+    v.color,
+    p.name AS product_name,
+    sv.size
+    FROM 
+        cartitems ci
+    JOIN 
+        variations v ON ci.variationId = v.variationId
+    JOIN 
+        products p ON v.productId = p.productId
+    JOIN 
+        sizevariations sv ON ci.sizeId = sv.sizeId
+    WHERE 
+        ci.cartId = $cartid;
+    ";
         return getRaw($sql);
+    }
+    public function tongtienTrongtotal_price()
+    {
+        $sql = " SELECT SUM(price) AS total
+    FROM cartitems";
+        return getOne($sql);
+    }
+    public function getRaCartIdTrongCart($id)
+    {
+        $sql = "SELECT cartid FROM carts WHERE userId= $id";
+        return getOne($sql);
     }
     public function updateCartItem($table, $data, $Where)
     {

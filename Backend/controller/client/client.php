@@ -69,14 +69,12 @@ class Controller_Client
     public function search($file = "category")
     {
         $search = trim(htmlspecialchars($_GET['sr'] ?? ""));
-      
+
         $kq = (new Model_Client)->searchProducts($search);
 
 
         // checkloi($kq);
-        View(FRONTEND__CLIENT, $file, ["search" =>$search, "kq" =>$kq]);
- 
-
+        View(FRONTEND__CLIENT, $file, ["search" => $search, "kq" => $kq]);
     }
     public function locCategory($file = 'category'){
         $id = $_GET['id'] ?? '';
@@ -85,7 +83,17 @@ class Controller_Client
         View(FRONTEND__CLIENT, $file, ["kq" => $kq]);
     }
 
+    public function dodulieuraCart($file = 'cart')
+    {
 
+        $giohang = new Model_Client;
+        $id = $_GET['id'] ?? "";
+        $cartId = $giohang->getRaCartIdTrongCart($id);
+        $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
+        // checkloi($cartId);
+        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price();
+        View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+    }
     public function register()
     {
         if (isPost()) {
