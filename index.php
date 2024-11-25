@@ -28,11 +28,15 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
     $page = match (true) {
         $urlPath === "{$basePath}/" => fn() => $Client->List("Home"),
         $urlPath === "{$basePath}/category" => fn() => require_once FRONTEND__CLIENT . "category.php",
+        // 
+        //  
         $urlPath === "{$basePath}/product" => fn() => $Client->detail("detail"),
         $urlPath === "{$basePath}/cart" => fn() => require_once FRONTEND__CLIENT . "cart.php",
         $urlPath === "{$basePath}/event" => fn() => require_once FRONTEND__CLIENT . "event.php",
         $urlPath === "{$basePath}/history" => fn() => require_once FRONTEND__CLIENT . "history.php",
         $urlPath === "{$basePath}/pay" => fn() => require_once FRONTEND__CLIENT . "pay.php",
+
+        
         // Kiểm tra query string với $_GET
         $urlPath === "{$basePath}/search" && $_GET['sr']  => fn() => $Client->search(),
         $urlPath === "{$basePath}/auth" && $_GET['action'] === "login" => fn() => require_once FRONTEND__CLIENT . "login.php",
@@ -44,5 +48,5 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
     };
 }
 
-// Execute the matched callback
+// Execute the matched callback. thêm điều hướng cho danhmucj
 $page();

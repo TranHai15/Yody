@@ -90,6 +90,41 @@ class Model_Client
         // var_dump($value);
         return $value;
     }
+    // =============================Thắng làm 21/11/2024==================
+    public function searchProducts($keyword)
+    {
+        $sql = "
+    SELECT 
+        p.productId,
+        p.name,
+        MIN(v.price) AS new_price,
+        MIN(v.sale) AS old_price,
+        MIN(v.image) AS ImageMain,
+        MIN(v.variationId) AS colorId,
+        JSON_ARRAYAGG(
+            JSON_OBJECT(
+                'anhColor', v.anhColor,
+                'image', v.image,
+                'variationId', v.variationId
+            )
+        ) AS variations
+    FROM products AS p
+    JOIN variations AS v ON p.productId = v.productId
+    WHERE p.name LIKE :keyword
+    GROUP BY p.productId
+    ORDER BY p.productId
+    LIMIT 12;
+";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // ===============================================
+
+
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

@@ -31,13 +31,14 @@ class Controller_Client
     {
         $Client = new Model_Client;
         $TopProduct = $Client->getAllProducts();
-        $TopProduct = $Client->getAllProducts();
+        // $TopProduct = $Client->getAllProducts();
 
         $slides =  $Client->get_Slide_Imgs();
-        $slides =  $Client->get_Slide_Imgs();
+        // $slides =  $Client->get_Slide_Imgs();
 
         View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct]);
     }
+
 
     public function detail($file = "detail")
     {
@@ -65,11 +66,20 @@ class Controller_Client
         );
     }
 
-    public function search()
+    public function search($file = "category")
     {
-        $search = $_GET['sr'] ?? "";
-        checkloi($search);
+        $search = trim(htmlspecialchars($_GET['sr'] ?? ""));
+      
+        $kq = (new Model_Client)->searchProducts($search);
+
+
+        // checkloi($kq);
+        View(FRONTEND__CLIENT, $file, ["search" =>$search, "kq" =>$kq]);
+ 
+
     }
+
+
     public function register()
     {
         if (isPost()) {
@@ -190,4 +200,6 @@ class Controller_Client
         session_destroy();
         header('Location: /Yody/');
     }
+
+    // 
 }

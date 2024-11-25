@@ -8,6 +8,10 @@ a {
   font-weight: 500;
 }
 
+.product{
+  margin-bottom: 35px;
+}
+
 .past__icon--next img {
   width: 1.2rem;
   object-fit: cover;
@@ -209,6 +213,11 @@ a {
   border: 1px solid rgb(38, 38, 38);
   cursor: pointer;
   border-radius: 14px;
+}
+
+.products{
+  flex-wrap: wrap;
+  
 }
 
 .dropdown__content {
