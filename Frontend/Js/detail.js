@@ -87,41 +87,80 @@ document.querySelector(".add__cart").addEventListener("click", () => {
   const name = detail.getAttribute("data-name");
   const productCode = detail.getAttribute("data-productCode");
   const variationCode = detail.getAttribute("data-variationCode");
-  const user_id = detail.getAttribute("data-userId");
-  // alert(user_id);
+  let user_id = detail.getAttribute("data-userId");
   //Lấy ra giá sale
   const detail_price = document.querySelector(".detail__right--price--old");
   const sale = detail_price.getAttribute("data-price");
   // alert(getSizeValue);
   // alert(sale);
   const tonggia = sale * soluongchon;
-  console.log(tonggia);
-
+  // console.log(tonggia);
+  // alert(user_id);
   const formatTongGia = new Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
   }).format(tonggia);
 
-  // alert(formatTongGia);
-  fetch(
-    `Backend/controller/client/clientAjax.php?addcart=${user_id}&variationId=${variationId}&sizeId=${getSizeValue}&quantity=${soluongchon}&price=${tonggia}`
-  )
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Fetch error: ${res.status}`);
-      }
-      return res.json();
-    })
-    .then((data) => {
-      console.log("Updated data:", data);
-      // Hiển thị thông báo dựa trên phản hồi từ backend
-      if (data.status === "success") {
-        alert(data.message); // Cập nhật thành công
-      } else {
-        alert(data.message); // Cập nhật thất bại
-      }
-    })
-    .catch((error) => {
-      console.error("Error connecting to server:", error);
-    });
+  if (!user_id) {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+
+    if (!cart) {
+      cart = [];
+    }
+
+    // Dữ liệu sản phẩm bạn đang xử lý
+    const productData = {
+      productId: productId,
+      variationId: variationId,
+      tonggia: tonggia, // Giá sản phẩm
+      soluong: soluongchon, // Số lượng người dùng chọn
+      sizeId: getSizeValue, // Size của sản phẩm
+    };
+
+    // Kiểm tra nếu sản phẩm đã có trong giỏ hàng, nếu có thì cập nhật số lượng
+    const existingProductIndex = cart.findIndex(
+      (item) =>
+        item.productId === productData.productId &&
+        item.variationId === productData.variationId &&
+        item.sizeId === productData.sizeId
+    );
+
+    if (existingProductIndex !== -1) {
+      // Cập nhật số lượng của sản phẩm đã có trong giỏ hàng
+      cart[existingProductIndex].soluong += productData.soluong;
+    } else {
+      // Thêm sản phẩm mới vào giỏ hàng
+      cart.push(productData);
+    }
+
+    // Lưu giỏ hàng vào localStorage sau khi cập nhật
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    console.log(cart); // Hiển thị giỏ hàng sau khi cập nhật
+
+    // Hiển thị thông báo thêm thành công
+    alert("Sản phẩm đã được thêm vào giỏ hàng!");
+  } else {
+    fetch(
+      `Backend/controller/client/clientAjax.php?addcart=${user_id}&variationId=${variationId}&sizeId=${getSizeValue}&quantity=${soluongchon}&price=${tonggia}`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Fetch error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Updated data:", data);
+        // Hiển thị thông báo dựa trên phản hồi từ backend
+        if (data.status === "success") {
+          alert(data.message); // Cập nhật thành công
+        } else {
+          alert(data.message); // Cập nhật thất bại
+        }
+      })
+      .catch((error) => {
+        console.error("Error connecting to server:", error);
+      });
+  }
 });
