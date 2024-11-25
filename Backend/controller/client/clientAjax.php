@@ -56,6 +56,10 @@ if ($_GET['addcart']) {
                     $kq = $gioHang->updateCartItem('cartitems', $data_new, $dk);
                     // die;
                     if ($kq) {
+                        // $data_cart = $gioHang->getCartItemsWithProductName($cartid);
+                        // // Encode data to JSON
+                        // $json_cart_data = json_encode($data_cart, JSON_UNESCAPED_UNICODE);
+                        // header('Location: Yody/cart.php?data=' . urlencode($json_cart_data));
                         exit;
                     }
                     // checkloi($kq);
