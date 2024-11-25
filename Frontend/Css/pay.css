@@ -168,3 +168,37 @@ main {
   font-weight: normal;
   font-size: 12px;
 }
+.checkout__shippingmethod {
+  border: 1px dotted gray;
+  margin: 10px 0 20px 0;
+  height: 90px;
+  border-radius: 5px;
+  display: block;
+  /* align-items: center; */
+}
+.box1 {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+.box2 {
+  width: 100%;
+  height: 50%;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+}
+.checkout__shippingmethod-standard {
+  transform: scale(1.5); /* Phóng to radio button */
+  accent-color: #1976d2; /* Thay đổi màu radio */
+  margin-right: 10px; /* Khoảng cách giữa radio và text */
+  cursor: pointer; /* Con trỏ dạng tay khi di chuột qua */
+}
+
+.checkout__shippingmethod-span {
+  margin-left: 5px;
+}
+.checkout__shippingmethod-ensure {
+  margin-left: 10px;
+}

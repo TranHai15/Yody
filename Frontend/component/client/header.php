@@ -59,7 +59,7 @@
                     <input type="text" id="header__search--input " class="header__search--input"
                         placeholder="Tìm kiếm ">
                 </span>
-                <a href="<?= P ?>/cart">
+                <a href="<?= P ?>/cart?id=<?= $_SESSION['userId'] ?>">
                     <span class="header__cart">
                         <img loading="lazy" src="Frontend/public/svg/cart.svg" alt="Yody-cart">
                     </span>
