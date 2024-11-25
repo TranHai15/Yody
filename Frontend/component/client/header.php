@@ -23,7 +23,7 @@
                         ?>
                         <!-- Thêm lớp 'has-submenu' nếu có mục con -->
                         <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
-                            <a href="<?= P ?>/category" class="menu-item-a"><?= $cap1['name'] ?></a>
+                            <a href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>" class="menu-item-a"><?= $cap1['name'] ?></a>
                             <?php if ($hasSubmenu): ?>
                                 <div class="menu__list--cha">
                                     <div class="menu__list grid wide row">

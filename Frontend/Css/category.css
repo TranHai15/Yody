@@ -255,3 +255,10 @@ a {
   transform: rotate(180deg);
   transition: all 0.4s ease-in;
 }
+
+.category__right-noProduct{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+}

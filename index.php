@@ -27,7 +27,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
     $Client->Header("header");
     $page = match (true) {
         $urlPath === "{$basePath}/" => fn() => $Client->List("Home"),
-        $urlPath === "{$basePath}/category" => fn() => require_once FRONTEND__CLIENT . "category.php",
+        $urlPath === "{$basePath}/category" && $_GET['id'] => fn() => $Client->locCategory(),
         // 
         //  
         $urlPath === "{$basePath}/product" => fn() => $Client->detail("detail"),

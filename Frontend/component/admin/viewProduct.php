@@ -421,7 +421,7 @@ function validateForm2(event) {
             console.log('Updated data:', data);
             // Hiển thị thông báo dựa trên phản hồi từ backend
             if (data.status === 'success') {
-                alert(data.message); // Cập nhật thành công
+                // alert(data.message); // Cập nhật thành công
 
             } else {
                 alert(data.message); // Cập nhật thất bại
@@ -455,8 +455,8 @@ function uploadVariationImages(event) {
         return;
     }
 
-    if (files.length > 4) { // Giới hạn 4 ảnh
-        alert('Bạn chỉ được chọn tối đa 4 hình ảnh mỗi lần tải lên');
+    if (files.length > 7) { // Giới hạn 4 ảnh
+        alert('Bạn chỉ được chọn tối đa 6 hình ảnh mỗi lần tải lên');
         return;
     }
 

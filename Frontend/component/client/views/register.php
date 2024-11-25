@@ -4,7 +4,7 @@
         <div class="content">
             <p class="text-align-center">Chào mừng bạn đến với Yody</p>
             <h1 class="text-align-center"><span>ĐĂNG</span><span>KÍ</span></h1>
-            <form action="<?= P ?>/auth?dangki" method="post" onsubmit="return validate__register()"
+            <form action="<?= P ?>/auth?action=dangki" method="post" onsubmit="return validate__register()"
                 class="form__login">
                 <div class="input-container">
                     <div class="form">

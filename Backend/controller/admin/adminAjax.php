@@ -94,7 +94,7 @@ if (isset($_POST) && isset($_FILES['images'])) {
     $totalFiles = count($_FILES['images']['tmp_name']);
 
     // Kiểm tra nếu số lượng tệp vượt quá 4
-    if ($totalFiles > 4) {
+    if ($totalFiles > 7) {
         echo json_encode([
             'status' => 'error',
             'message' => 'Bạn chỉ có thể tải lên tối đa 4 hình ảnh mỗi lần'
@@ -121,7 +121,7 @@ if (isset($_POST) && isset($_FILES['images'])) {
         }
 
         // Kiểm tra định dạng tệp
-        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         if (!in_array($fileType, $allowedTypes)) {
             $response['status'] = 'error';
             $response['message'] = "Tệp không hợp lệ: $fileName. Chỉ hỗ trợ JPEG, PNG, GIF.";

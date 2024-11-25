@@ -150,6 +150,11 @@
             </div>
         </main>
 
+        <!-- comment -->
+         <section class="comment grid wide">
+            <h2>Đánh giá sản phẩm</h2>
+         </section>
+
 
 
         <!-- Cos theer ban se thich -->

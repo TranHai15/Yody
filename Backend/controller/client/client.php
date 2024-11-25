@@ -78,6 +78,12 @@ class Controller_Client
  
 
     }
+    public function locCategory($file = 'category'){
+        $id = $_GET['id'] ?? '';
+        $kq = (new Model_Client)->categoryLoc($id);
+
+        View(FRONTEND__CLIENT, $file, ["kq" => $kq]);
+    }
 
 
     public function register()
