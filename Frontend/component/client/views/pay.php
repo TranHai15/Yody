@@ -78,14 +78,19 @@
                         </div>
                         <div class="checkout__paymentMethod">
                             <h2 class="checkout__paymentMethod-title">Phương thức thanh toán</h2>
-                            <span class="checkout__paymentMethod-fit">Lựa chọn phương thức thanh toán phù hợp nhất
-                                cho bạn</span>
-                            <input type="checkbox" class="checkout__paymentMethod-cod">Tiền mặt
+
+                            <label>
+                                <input type="radio" name="paymentMethod" value="cod" class="checkout__paymentMethod-cod"> Tiền mặt
+                            </label>
+                            <label>
+                                <input type="radio" name="paymentMethod" value="bank" class="checkout__paymentMethod-cod"> Chuyển khoản
+                            </label>
+
                         </div>
                     </div>
                     <div class="checkout__pay">
                         <button class="checkout__pay-cod">
-                            <p>Thanh toán bằng tiền mặt</p>
+                            <p>Thanh toán</p>
                         </button>
                     </div>
                     <div class="checkout__card">
@@ -109,29 +114,36 @@
                 <div class="checkout">
                     <div class="checkout__product-info">
                         <h2 class="checkout__product-info-title">Thông tin sản phẩm</h2>
-                        <div class="checkout__product">
-                            <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nu-yody-TSN7271-XAM-4.JPG"
-                                alt="T-shirt Nữ" class="checkout__product-image">
-                            <div class="checkout__product-details">
-                                <p class="checkout__product-name">T-shirt Nữ Cổ Rộng Croptop</p>
-                                <p class="checkout__product-color">Xám, S</p>
-                                <p class="checkout__product-price">49.500 đ <span
-                                        class="checkout__product-price--original">99.000 đ</span></p>
+                        <?php foreach ($dulieu as $data) : ?>
+                            <div class="checkout__product">
+                                <img src="<?= $data['image'] ?>"
+                                    alt="T-shirt Nữ" class="checkout__product-image">
+                                <div class="checkout__product-details">
+                                    <p class="checkout__product-name"><?= $data['product_name'] ?></p>
+                                    <p class="checkout__product-color"><?= $data['color'] . ',' . ' ' . $data['size'] ?> </p>
+                                    <div class="tongtien">
+                                        <p class="checkout__product-price"><?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?> <span
+                                                class="checkout__product-price--original"><?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></span>
+                                        </p>
+                                        <hr>
+                                        <p>
+                                            <?= number_format($data['total_price'], 0, ',', '.') . "đ" ?>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <span class="checkout__product-quantity">x<?= $data['total_quantity'] ?></span>
                             </div>
-                            <span class="checkout__product-quantity">x1</span>
-                        </div>
-                        <div class="checkout__product">
-                            <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-thun-nam-yody-TSM7177-TRA,%20QSM7031-TIT%20,(7).JPG"
-                                alt="T-shirt Nữ" class="checkout__product-image">
-                            <div class="checkout__product-details">
-                                <p class="checkout__product-name">T-shirt Nữ Cổ Rộng Croptop</p>
-                                <p class="checkout__product-color">Xám, S</p>
-                                <p class="checkout__product-price">49.500 đ <span
-                                        class="checkout__product-price--original">99.000 đ</span></p>
-                            </div>
-                            <span class="checkout__product-quantity">x1</span>
-                        </div>
+                            <hr>
+
+                        <?php endforeach ?>
                         <!-- Repeat similar structure for other products -->
+                    </div>
+
+                    <div class="thanhtoan">
+                        <p>Tổng thanh toán</p>
+                        <span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?></span>
+
                     </div>
                 </div>
 

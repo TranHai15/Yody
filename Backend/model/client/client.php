@@ -252,10 +252,10 @@ class Model_Client
     ";
         return getRaw($sql);
     }
-    public function tongtienTrongtotal_price()
+    public function tongtienTrongtotal_price($cartid)
     {
         $sql = " SELECT SUM(price) AS total
-    FROM cartitems";
+    FROM cartitems WHERE cartId = $cartid";
         return getOne($sql);
     }
     public function getRaCartIdTrongCart($id)

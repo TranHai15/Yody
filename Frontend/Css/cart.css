@@ -204,3 +204,43 @@ body {
   border-bottom: 2px solid rgb(143, 102, 27);
   border-radius: 10px;
 }
+.themgioHang {
+  display: flex;
+  flex-direction: column; /* Sắp xếp nội dung theo cột */
+  justify-content: center; /* Căn giữa theo chiều dọc */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  text-align: center; /* Căn giữa nội dung text */
+  min-height: 200px; /* Chiều cao tối thiểu */
+  background-color: #f9f9f9; /* Màu nền tùy chọn */
+  padding: 20px; /* Khoảng cách bên trong */
+  border-radius: 8px; /* Bo góc cho đẹp */
+  border: 1px solid #ddd; /* Viền nhạt */
+}
+
+.themgioHang p {
+  margin-bottom: 15px; /* Khoảng cách dưới thẻ p */
+  font-size: 18px; /* Kích thước chữ */
+  color: #1bdd5f; /* Màu chữ */
+}
+
+.btn-add {
+  display: inline-block; /* Hiển thị dưới dạng block ngang */
+  padding: 10px 20px; /* Khoảng cách trong */
+  font-size: 16px; /* Kích thước chữ */
+  font-weight: bold; /* In đậm chữ */
+  color: #fff; /* Màu chữ */
+  background-color: green; /* Màu nền (xanh) */
+  border: none; /* Không viền */
+  border-radius: 5px; /* Bo góc */
+  text-decoration: none; /* Bỏ gạch chân */
+  cursor: pointer; /* Thay đổi con trỏ thành hình tay */
+  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+.btn-add:hover {
+  background-color: #0056b3; /* Đổi màu nền khi hover */
+}
+
+.btn-add:active {
+  background-color: #003f7f; /* Màu nền khi nhấn */
+}

@@ -92,16 +92,22 @@ class Controller_Client
 
         $giohang = new Model_Client;
         $id = $_GET['id'] ?? "";
-        // checkloi($id);
-        if ($id === 'vodanh') {
-            View(FRONTEND__CLIENT, $file, []);
-        } else {
-            $cartId = $giohang->getRaCartIdTrongCart($id);
-            $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
-            // checkloi($cartId);
-            $tongTienPhaiTra = $giohang->tongtienTrongtotal_price();
-        }
+        $cartId = $giohang->getRaCartIdTrongCart($id);
+        $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
+        // checkloi($cartId);
+        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
+        View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+        // View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
 
+    }
+    public function dodulieuraPay($file = 'pay')
+    {
+        $giohang = new Model_Client;
+        $id = $_GET['id'] ?? "";
+        $cartId = $giohang->getRaCartIdTrongCart($id);
+        $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
+        // checkloi($cartId);
+        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
         View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
     }
     public function register()

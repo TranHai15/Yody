@@ -144,7 +144,9 @@ main {
   padding: 20px;
 }
 .checkout__product-image {
-  max-width: 100px;
+  max-width: 33%;
+  height: 160px;
+  object-fit: cover;
 }
 .checkout__product {
   display: flex;
@@ -201,4 +203,31 @@ main {
 }
 .checkout__shippingmethod-ensure {
   margin-left: 10px;
+  color: grey;
+}
+.checkout__paymentMethod-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.checkout__paymentMethod-title {
+  margin: 10 0;
+}
+.checkout__paymentMethod-cod {
+  margin-top: 10px;
+}
+.thanhtoan {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.thanhtoan p {
+  font-size: 20px;
+  font-weight: 600;
+}
+.thanhtoan span {
+  font-size: 20px;
+  font-weight: 600;
+  /* color: #e14337; */
+}
+.tongtien {
 }
