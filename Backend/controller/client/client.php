@@ -76,7 +76,8 @@ class Controller_Client
         // checkloi($kq);
         View(FRONTEND__CLIENT, $file, ["search" => $search, "kq" => $kq]);
     }
-    public function locCategory($file = 'category'){
+    public function locCategory($file = 'category')
+    {
         $id = $_GET['id'] ?? '';
         $kq = (new Model_Client)->categoryLoc($id);
 
@@ -91,7 +92,19 @@ class Controller_Client
         $cartId = $giohang->getRaCartIdTrongCart($id);
         $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
         // checkloi($cartId);
-        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price();
+        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
+        View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+        // View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+
+    }
+    public function dodulieuraPay($file = 'pay')
+    {
+        $giohang = new Model_Client;
+        $id = $_GET['id'] ?? "";
+        $cartId = $giohang->getRaCartIdTrongCart($id);
+        $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
+        // checkloi($cartId);
+        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
         View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
     }
     public function register()

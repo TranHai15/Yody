@@ -84,7 +84,7 @@
                         <p class="">Tổng thanh toán</p> <span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?></span>
 
                     </div>
-                    <a href="<?= P ?>/pay"><button class="btn__confirm">Mua hàng</button></a>
+                    <a href="<?= P ?>/pay?id=<?= $_SESSION['userId'] ?? "" ?>"><button class="btn__confirm">Mua hàng</button></a>
 
                 </div>
                 <div class="payment-methods">
