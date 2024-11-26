@@ -1,4 +1,5 @@
 <body>
+    <?php showNotification('acount')  ?>
     <?php require_once(HF . "header.php") ?>
     <div class="baoboc">
         <div class="content">

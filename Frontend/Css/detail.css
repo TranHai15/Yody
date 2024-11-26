@@ -338,8 +338,27 @@
   cursor: not-allowed;
 }
 
-
 /* =======================commetn======== */
-.comment{
+.comment {
   margin: 5rem 0;
+}
+
+/*  */
+
+.notification.error {
+  background-color: #f44336; /* Màu đỏ cho lỗi */
+}
+
+.notification div {
+  display: flex;
+  align-items: center;
+}
+
+.notification p {
+  margin: 0;
+}
+
+.notification.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
 }

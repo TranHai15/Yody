@@ -26,9 +26,7 @@
                                 <input type="checkbox" class="check" name="" id="">
                                 <div class="item">
                                     <div class="cart__img">
-                                        <img loading="lazy"
-                                            src="<?= $data['image'] ?>"
-                                            alt="">
+                                        <img loading="lazy" src="<?= $data['image'] ?>" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +39,8 @@
 
                                             <?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?>
                                         </p>
-                                        <p class="cart__price--old"> <?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></p>
+                                        <p class="cart__price--old">
+                                            <?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></p>
                                     </div>
                                 </div>
                                 <div class="">
@@ -70,7 +69,8 @@
                     <div class="cart-information-detail">
                         <p class="cart__title">Chi tiết đơn hàng</p>
                         <div class="cart__ship row justify-content-between align-items-center ">
-                            <p>Tổng giá trị sản phẩm </p><span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?> </span>
+                            <p>Tổng giá trị sản phẩm </p>
+                            <span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?> </span>
                         </div>
                         <div class="cart__ship  row justify-content-between align-items-center">
                             <p>Vận chuyển </p><span>20.000 đ</span>
@@ -81,7 +81,8 @@
                     </div>
                     <hr>
                     <div class="cart__title row justify-content-between align-items-center  ">
-                        <p class="">Tổng thanh toán</p> <span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?></span>
+                        <p class="">Tổng thanh toán</p>
+                        <span><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?></span>
 
                     </div>
                     <a href="<?= P ?>/pay"><button class="btn__confirm">Mua hàng</button></a>
@@ -104,5 +105,6 @@
     <?php require_once(HF . "footer.php")   ?>
 
 </body>
+<script src="Frontend/Js/cart.js"></script>
 
 </html>

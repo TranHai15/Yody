@@ -56,3 +56,11 @@ overlay.addEventListener("click", function () {
   overlay.style.display = "none"; // Ẩn overlay
   userInfoDropdown.style.display = "none";
 });
+
+const soluong = localStorage.getItem("cartNumber");
+if (soluong) {
+  document.querySelector(".soluongCart").style.display = "block";
+  console.log(soluong);
+  const aa = (document.querySelector(".numberCart").innerText = soluong);
+  console.log(aa);
+}

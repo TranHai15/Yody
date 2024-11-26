@@ -24,8 +24,7 @@
     <!-- main -->
     <div>
         <main class="detail grid wide row justify-content-between mt-4"
-            data-productId="<?= $OneVariations['productId'] ?>"
-            data-variationId="<?= $OneVariations['variationId'] ?>"
+            data-productId="<?= $OneVariations['productId'] ?>" data-variationId="<?= $OneVariations['variationId'] ?>"
             data-name="<?= htmlspecialchars($OneVariations['name']) ?>"
             data-productCode="<?= $OneVariations['productCode'] ?>"
             data-variationCode="<?= $OneVariations['variationCode'] ?>"
@@ -88,7 +87,8 @@
                         </div>
                     </div>
                     <div class="size__selector">
-                        <span class="size-label">Kích thước: <span class="size__value"><?= $OneVariations['size'] ?></span></span>
+                        <span class="size-label">Kích thước: <span
+                                class="size__value"><?= $OneVariations['size'] ?></span></span>
                         <div class="row align-items-center">
                             <?php foreach ($AllSize as $size): ?>
                                 <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
@@ -151,9 +151,9 @@
         </main>
 
         <!-- comment -->
-         <section class="comment grid wide">
+        <section class="comment grid wide">
             <h2>Đánh giá sản phẩm</h2>
-         </section>
+        </section>
 
 
 

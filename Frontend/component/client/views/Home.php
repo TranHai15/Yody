@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+    <?php showNotification('loginaccoun')  ?>
     <?php require_once(HF . "header.php")  ?>
     <div>
 
@@ -54,9 +54,23 @@
                                 </div>
                                 <span class="product__name"><?= $Product['name'] ?></span>
                                 <div class="product__price row align-items-center">
-                                    <?php $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100)); ?>
-                                    <?= $Product['old_price'] > 0 ? "<span class=price__new>$sale đ</span>" : $Product['new_price'] . "đ" ?>
-                                    <?= $Product['old_price'] > 0 ? "<span class=price__old>{$Product['new_price']}đ</span>" : "" ?>
+                                    <?php
+                                    $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100));
+
+                                    ?>
+                                    <span class='price__new'>
+                                        <?=
+                                        $Product['old_price'] > 0
+                                            ?  number_format($sale, 0, ',', '.') . "đ"
+                                            : number_format($Product['new_price'], 0, ',', '.') . "đ";
+                                        ?>
+                                    </span>
+                                    <?=
+                                    $Product['old_price'] > 0
+                                        ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>"
+                                        : "";
+                                    ?>
+
                                 </div>
                                 <div class="product__variation row align-items-center">
 

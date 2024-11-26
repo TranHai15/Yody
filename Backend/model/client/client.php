@@ -146,10 +146,33 @@ class Model_Client
     GROUP BY p.productId
     ORDER BY p.productId
     LIMIT 12";
-    return getRaw($sql);
-    
+        return getRaw($sql);
     }
 
+    public function getNumber($id)
+    {
+        $sql = "SELECT SUM(ca.quantity) as total_quantity FROM carts AS c JOIN cartitems AS ca ON c.cartId = ca.cartId  WHERE userId = $id";
+        return getRaw($sql);
+    }
+    public function viewProduct($id)
+    {
+        $sql = "SELECT p.productId FROM products as p JOIN variations as v on p.productId = v.productId WHERE v.variationId =$id ";
+        return getOne($sql);
+    }
+    public function updateViewProduct($id)
+    {
+        $sql = "SELECT p.view FROM products as p WHERE p.productId =$id";
+        $soluong = getOne($sql);
+
+        // $sql = "UPDATE products AS p SET p.`view` = $soluong+1 WHERE p.productId=$id";
+        $dk = 'productId=' . $id;
+        $view = (int)$soluong + 1;
+
+        $data = [
+            'view' => $view
+        ];
+        return update('products', $data, $dk);
+    }
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
