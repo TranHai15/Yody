@@ -18,13 +18,13 @@
                 <div class="cart__product--items">
                     <div class="products__check--all row align-items-center">
                         <input type="checkbox" class="check" name="" id="check__sale">
-                        <p>Sản phẩm nguyên giá</p>
+                        <p>Chọn toàn bộ</p>
                     </div>
                     <?php if (!empty($dulieu)) : ?>
                         <?php foreach ($dulieu as $data): ?>
                             <article class="product__item row">
                                 <div class="cart__product--item">
-                                    <input type="checkbox" class="check" name="" id="">
+                                    <input type="checkbox" class="check product-checkbox" name="" id="">
                                     <div class="item">
                                         <div class="cart__img">
                                             <img loading="lazy"
@@ -114,7 +114,38 @@
         </div>
     </main>
     <?php require_once(HF . "footer.php")   ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy checkbox "Chọn toàn bộ"
+            const checkAll = document.getElementById('check__sale');
 
+            // Lấy tất cả checkbox của sản phẩm
+            const productCheckboxes = document.querySelectorAll('.product-checkbox');
+
+            // Đặt sự kiện 'change' cho checkbox "Chọn toàn bộ"
+            checkAll.addEventListener('change', function() {
+                const isChecked = checkAll.checked; // Kiểm tra trạng thái tick của checkbox chính
+                productCheckboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked; // Gán trạng thái tick của checkbox chính cho các checkbox sản phẩm
+                });
+            });
+
+            // Đặt sự kiện 'change' cho từng checkbox sản phẩm
+            productCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Kiểm tra nếu tất cả checkbox sản phẩm đều được tick
+                    const allChecked = Array.from(productCheckboxes).every(cb => cb.checked);
+                    checkAll.checked = allChecked; // Gán trạng thái cho checkbox "Chọn toàn bộ"
+                });
+            });
+
+            // Đặt trạng thái mặc định khi vào trang (tích tất cả)
+            checkAll.checked = true;
+            productCheckboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+        });
+    </script>
 </body>
 
 </html>
