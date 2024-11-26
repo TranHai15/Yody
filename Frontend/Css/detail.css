@@ -307,7 +307,7 @@
 /*  */
 
 .canyoulikeit > h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 600;
   margin: 5rem 0 2rem 0;
 }
@@ -338,8 +338,129 @@
   cursor: not-allowed;
 }
 
-
 /* =======================commetn======== */
-.comment{
+/* .comment{
+  margin: 10rem 10rem;
+}
+.comment__detail{
+  font-size: 2rem;
+  font-weight: 600;
   margin: 5rem 0;
+}
+
+.comment__profile{
+  display: flex;
+}
+.comment__profile img{
+  max-width: 100px;
+  padding-right: 20px;
+} */
+/* Bố cục tổng thể */
+.comment{
+  margin: 10rem 10rem;
+}
+.comment__detail{
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 5rem 2rem 2rem 0;
+
+}
+.comment__item {
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Phần ảnh đại diện */
+.comment__profile {
+  flex-shrink: 0;
+  text-align: center;
+  width: 100px; /* Chiều rộng cố định */
+}
+
+.comment__profile img {
+  width: 80px; /* Kích thước ảnh đại diện */
+  height: 80px;
+  border-radius: 50%; /* Bo tròn ảnh */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.comment__profile-username {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Phần nội dung bình luận */
+.comment__body {
+  flex: 1; /* Chiếm phần còn lại */
+  display: flex;
+  flex-direction: column;
+}
+
+.comment__header {
+  margin-bottom: 10px;
+  color: #888;
+  font-size: 12px;
+}
+
+.comment__content {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Hình ảnh đính kèm */
+.comment__image {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.comment__image img:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.comment__image img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+@media (max-width: 768px) {
+  .comment__item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comment__profile {
+    width: auto;
+  }
+}
+/* Định dạng phần đánh giá sao */
+.comment__rating {
+  display: flex;
+  align-items: center;
+  margin: 5px 5px 5px 0;
+}
+
+.star {
+  font-size: 18px;
+  color: #ffd900; /* Màu vàng cho sao */
+  margin-right: 3px;
+}
+
+.star:last-child {
+  margin-right: 0; /* Sao cuối cùng không cần khoảng cách */
+}
+.star:hover,
+.star:hover ~ .star {
+    color: #FFA500; /* Màu cam khi hover */
 }
