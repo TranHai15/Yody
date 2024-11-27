@@ -231,5 +231,7 @@ class Controller_Client
         header('Location: /Yody/');
     }
 
+    public function order() {}
+
     // 
 }
