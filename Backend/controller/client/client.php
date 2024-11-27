@@ -231,5 +231,13 @@ class Controller_Client
         header('Location: /Yody/');
     }
 
-    // 
+    public function goiEvent($file = 'event')
+    {
+        $past = $_GET['name'];
+        // checkloi($past);
+        $event = new Model_Client;
+        $dulieulayra = $event->goiEventtheoPast($past);
+        // checkloi($dulieulayra);
+        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
+    }
 }

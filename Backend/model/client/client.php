@@ -333,4 +333,9 @@ class Model_Client
         $sql = "SELECT * FROM wards WHERE district_id = $id";
         return getRaw($sql);
     }
+    public function goiEventtheoPast($past)
+    {
+        $sql = "SELECT * FROM slides WHERE past = '$past' ";
+        return getOne($sql);
+    }
 }

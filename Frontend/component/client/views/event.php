@@ -11,11 +11,12 @@
     <title>Trang chu</title>
 </head>
 
+
 <body>
     <?php require_once(HF . "header.php")  ?>
     <div>
         <section class="banner banner__one grid wide">
-            <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/fit-in/filters:format(webp)/products/m2icqji8qcsbiegy6ildp-hlw-1800x833.png"
+            <img src="<?= $dulieulayra['url'] ?>"
                 alt="" />
         </section>
         <main>
