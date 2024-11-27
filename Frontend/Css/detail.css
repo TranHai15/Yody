@@ -356,14 +356,13 @@
   padding-right: 20px;
 } */
 /* Bố cục tổng thể */
-.comment{
+.comment {
   margin: 10rem 10rem;
 }
-.comment__detail{
+.comment__detail {
   font-size: 2rem;
   font-weight: 600;
   margin: 5rem 2rem 2rem 0;
-
 }
 .comment__item {
   display: flex;
@@ -462,5 +461,5 @@
 }
 .star:hover,
 .star:hover ~ .star {
-    color: #FFA500; /* Màu cam khi hover */
+  color: #ffa500; /* Màu cam khi hover */
 }

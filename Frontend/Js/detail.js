@@ -21,16 +21,24 @@ document.querySelectorAll(".detail__left--item img").forEach((thumbnail) => {
 //**********************************************Su ly so luong*************************************************************
 let soluongchon = 1; // Giá trị mặc định ban đầu
 
+let getNumberSanpham = document
+  .querySelector(".size-option")
+  .getAttribute("data-quantity");
+
 // Hàm cập nhật số lượng
 function updateSoLuongChon(change) {
   const soluongchonElement = document.getElementById("soluongchon");
   const decreaseButton = document.getElementById("decrease");
 
-  // Cập nhật số lượng (không cho phép số lượng nhỏ hơn 1)
-  soluongchon = Math.max(1, soluongchon + change);
+  if (soluongchon > getNumberSanpham) {
+    // Cập nhật số lượng (không cho phép số lượng nhỏ hơn 1)
+    soluongchon = Math.max(1, soluongchon + change);
 
-  // Hiển thị số lượng mới
-  soluongchonElement.textContent = soluongchon;
+    // Hiển thị số lượng mới
+    soluongchonElement.textContent = soluongchon;
+  } else {
+    alert("het hang");
+  }
 
   // Kiểm tra và cập nhật trạng thái của nút giảm
   if (soluongchon === 1) {
@@ -78,6 +86,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function showNotification(message, type = "success") {
+  // Tạo phần tử thông báo
+  const notification = document.createElement("section");
+  notification.className = `notification ${type}`;
+  notification.innerHTML = `
+    <div>
+      <p>${message}</p>
+    </div>
+  `;
+
+  // Thêm thông báo vào body
+  document.body.appendChild(notification);
+
+  // Tự động xóa thông báo sau 5 giây
+  setTimeout(() => {
+    notification.style.opacity = "0"; // Hiệu ứng mờ dần
+    setTimeout(() => notification.remove(), 500); // Xóa phần tử sau hiệu ứng
+  }, 5000);
+}
+
 //*********************************************** */
 document.querySelector(".add__cart").addEventListener("click", () => {
   // alert(soluongchon);
@@ -89,11 +117,11 @@ document.querySelector(".add__cart").addEventListener("click", () => {
   const variationCode = detail.getAttribute("data-variationCode");
   let user_id = detail.getAttribute("data-userId");
   //Lấy ra giá sale
-  const detail_price = document.querySelector(".detail__right--price--old");
+  const detail_price = document.querySelector(".detail__right--price--new");
   const sale = detail_price.getAttribute("data-price");
   // alert(getSizeValue);
-  // alert(sale);
-  const tonggia = sale * soluongchon;
+  alert(sale);
+  const tonggia = sale;
   // console.log(tonggia);
   // alert(user_id);
   const formatTongGia = new Intl.NumberFormat("vi-VN", {
@@ -102,43 +130,44 @@ document.querySelector(".add__cart").addEventListener("click", () => {
   }).format(tonggia);
 
   if (!user_id) {
-    let cart = JSON.parse(localStorage.getItem("cart"));
+    // let cart = JSON.parse(localStorage.getItem("cart"));
+    // let id = new Date.now() / 1000;
+    // localStorage.setItem("idvodanh", id);
+    // if (!cart) {
+    //   cart = [];
+    // }
 
-    if (!cart) {
-      cart = [];
-    }
+    // // Dữ liệu sản phẩm bạn đang xử lý
+    // const productData = {
+    //   productId: productId,
+    //   variationId: variationId,
+    //   tonggia: tonggia, // Giá sản phẩm
+    //   soluong: soluongchon, // Số lượng người dùng chọn
+    //   sizeId: getSizeValue, // Size của sản phẩm
+    // };
 
-    // Dữ liệu sản phẩm bạn đang xử lý
-    const productData = {
-      productId: productId,
-      variationId: variationId,
-      tonggia: tonggia, // Giá sản phẩm
-      soluong: soluongchon, // Số lượng người dùng chọn
-      sizeId: getSizeValue, // Size của sản phẩm
-    };
+    // // Kiểm tra nếu sản phẩm đã có trong giỏ hàng, nếu có thì cập nhật số lượng
+    // const existingProductIndex = cart.findIndex(
+    //   (item) =>
+    //     item.productId === productData.productId &&
+    //     item.variationId === productData.variationId &&
+    //     item.sizeId === productData.sizeId
+    // );
 
-    // Kiểm tra nếu sản phẩm đã có trong giỏ hàng, nếu có thì cập nhật số lượng
-    const existingProductIndex = cart.findIndex(
-      (item) =>
-        item.productId === productData.productId &&
-        item.variationId === productData.variationId &&
-        item.sizeId === productData.sizeId
-    );
+    // if (existingProductIndex !== -1) {
+    //   // Cập nhật số lượng của sản phẩm đã có trong giỏ hàng
+    //   cart[existingProductIndex].soluong += productData.soluong;
+    // } else {
+    //   // Thêm sản phẩm mới vào giỏ hàng
+    //   cart.push(productData);
+    // }
 
-    if (existingProductIndex !== -1) {
-      // Cập nhật số lượng của sản phẩm đã có trong giỏ hàng
-      cart[existingProductIndex].soluong += productData.soluong;
-    } else {
-      // Thêm sản phẩm mới vào giỏ hàng
-      cart.push(productData);
-    }
+    // // Lưu giỏ hàng vào localStorage sau khi cập nhật
+    // localStorage.setItem("cart", JSON.stringify(cart));
 
-    // Lưu giỏ hàng vào localStorage sau khi cập nhật
-    localStorage.setItem("cart", JSON.stringify(cart));
+    // console.log(cart);
+    // // Hiển thị thông báo thêm thành công
 
-    console.log(cart); // Hiển thị giỏ hàng sau khi cập nhật
-
-    // Hiển thị thông báo thêm thành công
     alert("Sản phẩm đã được thêm vào giỏ hàng!");
   } else {
     fetch(
@@ -154,9 +183,11 @@ document.querySelector(".add__cart").addEventListener("click", () => {
         console.log("Updated data:", data);
         // Hiển thị thông báo dựa trên phản hồi từ backend
         if (data.status === "success") {
-          alert(data.message); // Cập nhật thành công
+          // alert(data.message); // Cập nhật thành công
+          showNotification(data.message, data.status);
+          getnumber(user_id);
         } else {
-          alert(data.message); // Cập nhật thất bại
+          showNotification(data.message, data.status);
         }
       })
       .catch((error) => {
@@ -164,3 +195,32 @@ document.querySelector(".add__cart").addEventListener("click", () => {
       });
   }
 });
+
+const getnumber = (id) => {
+  fetch(`Backend/controller/client/clientAjax.php?soluong=${id}`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Fetch error: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Updated data:", data);
+      // Hiển thị thông báo dựa trên phản hồi từ backend
+      if (data.status === "success") {
+        // alert(data.message); // Cập nhật thành công
+        document.querySelector(".soluongCart").style.display = "block";
+        const numberData = data.soluong;
+        localStorage.setItem("cartNumber", numberData);
+        const soluong = localStorage.getItem("cartNumber");
+        document.querySelector(".numberCart").innerText = soluong;
+        // console.log(numberData);
+        // console.log(numberData.soluong);
+      } else {
+        showNotification(data.message, data.status);
+      }
+    })
+    .catch((error) => {
+      console.error("Error connecting to server:", error);
+    });
+};

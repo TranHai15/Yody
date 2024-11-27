@@ -146,10 +146,33 @@ class Model_Client
     GROUP BY p.productId
     ORDER BY p.productId
     LIMIT 12";
-    return getRaw($sql);
-    
+        return getRaw($sql);
     }
 
+    public function getNumber($id)
+    {
+        $sql = "SELECT SUM(ca.quantity) as total_quantity FROM carts AS c JOIN cartitems AS ca ON c.cartId = ca.cartId  WHERE userId = $id";
+        return getRaw($sql);
+    }
+    public function viewProduct($id)
+    {
+        $sql = "SELECT p.productId FROM products as p JOIN variations as v on p.productId = v.productId WHERE v.variationId =$id ";
+        return getOne($sql);
+    }
+    public function updateViewProduct($id)
+    {
+        $sql = "SELECT p.view FROM products as p WHERE p.productId =$id";
+        $soluong = getOne($sql);
+
+        // $sql = "UPDATE products AS p SET p.`view` = $soluong+1 WHERE p.productId=$id";
+        $dk = 'productId=' . $id;
+        $view = (int)$soluong + 1;
+
+        $data = [
+            'view' => $view
+        ];
+        return update('products', $data, $dk);
+    }
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -208,13 +231,16 @@ class Model_Client
         $sql = " SELECT 
     ci.cartitemId,
     ci.cartId,
+    ci.selects,
     ci.quantity AS total_quantity,
     ci.price AS total_price,
     v.image,
     v.price AS variation_price,
     v.sale AS variation_sale,
     v.color,
+    v.variationId,
     p.name AS product_name,
+    sv.sizeId,
     sv.size
     FROM 
         cartitems ci
@@ -225,14 +251,45 @@ class Model_Client
     JOIN 
         sizevariations sv ON ci.sizeId = sv.sizeId
     WHERE 
-        ci.cartId = $cartid;
+        ci.cartId = $cartid  ;
     ";
         return getRaw($sql);
     }
-    public function tongtienTrongtotal_price()
+    public function getCartItemsWithProductNameId($cartid)
     {
-        $sql = " SELECT SUM(price) AS total
-    FROM cartitems";
+        $sql = " SELECT 
+    ci.cartitemId,
+    ci.cartId,
+    ci.selects,
+    ci.quantity AS total_quantity,
+    ci.price AS total_price,
+    v.image,
+    v.price AS variation_price,
+    v.sale AS variation_sale,
+    v.color,
+    v.variationId,
+    p.name AS product_name,
+    sv.sizeId,
+    sv.size
+    FROM 
+        cartitems ci
+    JOIN 
+        variations v ON ci.variationId = v.variationId
+    JOIN 
+        products p ON v.productId = p.productId
+    JOIN 
+        sizevariations sv ON ci.sizeId = sv.sizeId
+    WHERE 
+        ci.cartId = $cartid AND ci.selects =1 ;
+    ";
+        return getRaw($sql);
+    }
+    public function tongtienTrongtotal_price($cartid)
+    {
+        $sql = "SELECT SUM(quantity * price) AS total
+        FROM cartitems
+        WHERE cartId = $cartid AND selects = 1;
+        ";
         return getOne($sql);
     }
     public function getRaCartIdTrongCart($id)
@@ -244,10 +301,43 @@ class Model_Client
     {
         return update($table, $data, $Where);
     }
-    public function rateProduct($table, $data){
+
+    public function rateProduct($table, $data)
+    {
         return insert($table, $data);
     }
 
 
-    
+    public function updateCheckCartitem($where, $check, $value)
+    {
+        if ($check === 'all') {
+            $data = [
+                'selects' => $value
+            ];
+            $dk = 'cartId=' . $where;
+            return update('cartitems', $data, $dk);
+        } else {
+            $data = [
+                'selects' => $value
+            ];
+            $dk = 'cartitemId=' . $where;
+            return update('cartitems', $data, $dk);
+        }
+    }
+    // 
+    public function getAllProvince()
+    {
+        $sql = "SELECT * FROM province";
+        return getRaw($sql);
+    }
+    public function getAllDistrict($id)
+    {
+        $sql = "SELECT * FROM district WHERE province_id = $id";
+        return getRaw($sql);
+    }
+    public function getAllWards($id)
+    {
+        $sql = "SELECT * FROM wards WHERE district_id = $id";
+        return getRaw($sql);
+    }
 }

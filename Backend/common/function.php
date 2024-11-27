@@ -97,6 +97,20 @@ function getsession($key)
     }
 }
 
+function showNotification($sessionKey)
+{
+    if (isset($_SESSION[$sessionKey])) {
+        $message = $_SESSION[$sessionKey];
+        unset($_SESSION[$sessionKey]); // Xóa thông báo sau khi hiển thị
+        echo "
+        <section class='notification'>
+            <div>
+                <p>{$message}</p>
+            </div>
+        </section>
+        ";
+    }
+}
 
 function replaceSpacesWithHyphen($string)
 {

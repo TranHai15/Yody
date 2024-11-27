@@ -44,6 +44,9 @@ class Controller_Client
     {
         $idVariation = $_GET['color'] ?? "";
         $Client = new Model_Client;
+        $idProduct = $Client->viewProduct($idVariation);
+        // checkloi($idProduct);
+        $Client->updateViewProduct($idProduct['productId']);
         $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idVariation);
         $productId = $OneVariations['productId'];
         $AllVariation = $Client->getAllVariationWhereProductId($productId);
@@ -76,7 +79,8 @@ class Controller_Client
         // checkloi($kq);
         View(FRONTEND__CLIENT, $file, ["search" => $search, "kq" => $kq]);
     }
-    public function locCategory($file = 'category'){
+    public function locCategory($file = 'category')
+    {
         $id = $_GET['id'] ?? '';
         $kq = (new Model_Client)->categoryLoc($id);
 
@@ -91,8 +95,20 @@ class Controller_Client
         $cartId = $giohang->getRaCartIdTrongCart($id);
         $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
         // checkloi($cartId);
-        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price();
+        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
+        // checkloi($tongTienPhaiTra);
         View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+    }
+    public function dodulieuraPay($file = 'pay')
+    {
+        $giohang = new Model_Client;
+        $id = $_GET['id'] ?? "";
+        $cartId = $giohang->getRaCartIdTrongCart($id);
+        $dulieu = $giohang->getCartItemsWithProductNameId($cartId['cartid']);
+        // checkloi($cartId);
+        $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
+        $dataAllProvince = $giohang->getAllProvince();
+        View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra, 'dataAllProvince' => $dataAllProvince]);
     }
     public function register()
     {
@@ -194,7 +210,7 @@ class Controller_Client
                             setsession('role', $role);
                             setsession('userId', $userId);
 
-
+                            setsession('loginaccoun', 'Đăng nhập thành công');
                             header(header: 'Location: /Yody/');
                             exit;
                         } else {
@@ -214,6 +230,8 @@ class Controller_Client
         session_destroy();
         header('Location: /Yody/');
     }
+
+    public function order() {}
 
     // 
     public function productView()

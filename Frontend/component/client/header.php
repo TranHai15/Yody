@@ -23,7 +23,8 @@
                         ?>
                         <!-- Thêm lớp 'has-submenu' nếu có mục con -->
                         <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
-                            <a href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>" class="menu-item-a"><?= $cap1['name'] ?></a>
+                            <a href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"
+                                class="menu-item-a"><?= $cap1['name'] ?></a>
                             <?php if ($hasSubmenu): ?>
                                 <div class="menu__list--cha">
                                     <div class="menu__list grid wide row">
@@ -59,9 +60,12 @@
                     <input type="text" id="header__search--input " class="header__search--input"
                         placeholder="Tìm kiếm ">
                 </span>
-                <a href="<?= P ?>/cart?id=<?= $_SESSION['userId'] ?? '' ?>">
+                <a href="<?= P ?>/cart?id=<?= $_SESSION['userId'] ?? 'vodanh' ?>">
                     <span class="header__cart">
                         <img loading="lazy" src="Frontend/public/svg/cart.svg" alt="Yody-cart">
+                        <div class="soluongCart">
+                            <div class="numberCart"></div>
+                        </div>
                     </span>
                 </a>
                 <div class="user">
@@ -132,9 +136,6 @@
     </div>
     <div class="overlay"></div>
 </div>
-<section class="notification">
-    <div>
-        <p>Tao tai khoan thanh cong</p>
-    </div>
-</section>
+
+
 <script src="Frontend/Js/hf.js"></script>

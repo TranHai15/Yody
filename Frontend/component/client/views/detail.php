@@ -12,6 +12,7 @@
 <body>
     <?php require_once(HF . "header.php")  ?>
     <!-- past -->
+
     <div class="grid wide row align-items-center">
         <span><a class="past__product" href="<?= P ?>/">Trang Chủ </a></span>
         <span class="past__icon--next"><img src="Frontend/public/svg/next.svg" alt=""></span>
@@ -24,8 +25,7 @@
     <!-- main -->
     <div>
         <main class="detail grid wide row justify-content-between mt-4"
-            data-productId="<?= $OneVariations['productId'] ?>"
-            data-variationId="<?= $OneVariations['variationId'] ?>"
+            data-productId="<?= $OneVariations['productId'] ?>" data-variationId="<?= $OneVariations['variationId'] ?>"
             data-name="<?= htmlspecialchars($OneVariations['name']) ?>"
             data-productCode="<?= $OneVariations['productCode'] ?>"
             data-variationCode="<?= $OneVariations['variationCode'] ?>"
@@ -60,18 +60,36 @@
                         <a href="#" class="rating-count">(120)</a>
                         <span class="sold-count">Đã bán 964</span>
                     </div>
-                    <div class="detail__right--price row align-items-center">
-                        <div class="detail__right--price--new">
-                            <?php $sale = $OneVariations["price"] - ($OneVariations["price"] * ($OneVariations["sale"] / 100)); ?>
-                            <?= $OneVariations['sale'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : $OneVariations["price"] ?>
-                            <span></span><br>
 
+                    <div class="detail__right--price row align-items-center">
+                        <?php
+                        // Tính giá sau khi giảm
+                        $hasSale = $OneVariations['sale'] > 0;
+                        $salePrice = $hasSale
+                            ? $OneVariations['price'] - ($OneVariations['price'] * ($OneVariations['sale'] / 100))
+                            : $OneVariations['price'];
+                        ?>
+
+                        <!-- Hiển thị giá mới -->
+                        <div class="detail__right--price--new" data-price="<?= $salePrice ?>">
+                            <?= number_format($salePrice, 0, ',', '.') . "đ" ?>
+                            <span></span><br>
                         </div>
-                        <div class="detail__right--price--old" data-price="<?= $sale ?>">
-                            <?= $OneVariations['sale'] > 0 ? number_format($OneVariations['price'], 0, ',', '.') . "đ" : "" ?>
-                        </div>
-                        <?= $OneVariations['sale'] > 0 ? "<div class=detail__right--price--sale><span> - $OneVariations[sale] </span></div>" : "" ?>
+
+                        <!-- Hiển thị giá cũ nếu có giảm giá -->
+                        <?php if ($hasSale): ?>
+                            <div class="detail__right--price--old" data-price="<?= $salePrice ?>">
+                                <?= number_format($OneVariations['price'], 0, ',', '.') . "đ" ?>
+                            </div>
+
+                            <!-- Hiển thị phần trăm giảm giá -->
+                            <div class="detail__right--price--sale">
+                                <span>-<?= $OneVariations['sale'] ?>%</span>
+                            </div>
+                        <?php endif; ?>
                     </div>
+
+
                     <div class="color__selector mt-4">
                         <span class="color-label">Màu sắc: <?= $OneVariations['color'] ?></span>
                         <div class="row align-items-center">
@@ -88,11 +106,13 @@
                         </div>
                     </div>
                     <div class="size__selector">
-                        <span class="size-label">Kích thước: <span class="size__value"><?= $OneVariations['size'] ?></span></span>
+                        <span class="size-label">Kích thước: <span
+                                class="size__value"><?= $OneVariations['size'] ?></span></span>
                         <div class="row align-items-center">
                             <?php foreach ($AllSize as $size): ?>
                                 <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
-                                    class="size-option <?= $size['sizeId'] == $OneVariations['sizeId'] ? "active__size" : "" ?>">
+                                    class="size-option <?= $size['sizeId'] == $OneVariations['sizeId'] ? "active__size" : "" ?>"
+                                    data-quantity="<?= $size['sizeId'] == $OneVariations['sizeId'] ? "$size[quantity]" : 0 ?>">
                                     <?= $size['size'] ?></div>
                             <?php endforeach; ?>
                         </div>
@@ -101,9 +121,9 @@
                         <h3 class="detail__number">Số lượng</h3>
                         <div class="row justify-content-between align-items-center">
                             <div class="number row align-items-center">
-                                <button id="decrease" class="btn" onclick="updateSoLuongChon(-1)">-</button>
-                                <span id="soluongchon">1</span>
-                                <button id="increase" class="btn" onclick="updateSoLuongChon(1)">+</button>
+                                <button id="decrease giam" class="btn" onclick="updateSoLuongChon(-1)">-</button>
+                                <span id="soluongchon" class="hienthi">1</span>
+                                <button id="increase " class="btn tang" onclick="updateSoLuongChon(1)">+</button>
                             </div>
                             <div class="add__cart l-9 ">
                                 Thêm giỏ hàng
@@ -155,7 +175,8 @@
             <h2 class="comment__detail">Đánh giá sản phẩm</h2>
             <article class="comment__item">
                 <div class="comment__profile">
-                    <img src="https://file.hstatic.net/200000503583/file/cach-tao-dang-diu-dang__3__1f0d93d7940c4a25adf1ceb1355b33eb.jpg" alt="User Profile">
+                    <img src="https://file.hstatic.net/200000503583/file/cach-tao-dang-diu-dang__3__1f0d93d7940c4a25adf1ceb1355b33eb.jpg"
+                        alt="User Profile">
                     <p class="comment__profile-username">Lê Trà My</p>
                 </div>
                 <div class="comment__body">
@@ -163,27 +184,36 @@
                         <p class="comment__profile-date">25-11-2024 17:23</p>
                     </div>
                     <div class="comment__rating">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9734;</span>
-                        </div>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9734;</span>
+                    </div>
                     <div class="comment__content">
-                        <p>"Mình rất hài lòng với sản phẩm của shop! Chất vải mềm mịn, mặc rất thoải mái, đường may chắc chắn và thiết kế lại cực kỳ đẹp mắt. Giá cả thì hợp lý, mà chất lượng thì vượt ngoài mong đợi. Giao hàng nhanh, đóng gói cẩn thận, đúng size và form, mặc lên tôn dáng vô cùng. Sau nhiều lần giặt vẫn không phai màu hay bị nhăn, cảm giác mặc cả ngày cũng rất dễ chịu. Mẫu mã hiện đại, trẻ trung, phối đồ cũng dễ dàng. Cảm ơn shop vì sản phẩm tuyệt vời!"
+                        <p>"Mình rất hài lòng với sản phẩm của shop! Chất vải mềm mịn, mặc rất thoải mái, đường may chắc
+                            chắn và thiết kế lại cực kỳ đẹp mắt. Giá cả thì hợp lý, mà chất lượng thì vượt ngoài mong
+                            đợi. Giao hàng nhanh, đóng gói cẩn thận, đúng size và form, mặc lên tôn dáng vô cùng. Sau
+                            nhiều lần giặt vẫn không phai màu hay bị nhăn, cảm giác mặc cả ngày cũng rất dễ chịu. Mẫu mã
+                            hiện đại, trẻ trung, phối đồ cũng dễ dàng. Cảm ơn shop vì sản phẩm tuyệt vời!"
                         </p>
                     </div>
                     <div class="comment__image">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp" alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
+                            alt="">
                     </div>
                 </div>
             </article>
-            <article class="comment__item"> 
+            <article class="comment__item">
                 <div class="comment__profile">
-                    <img src="https://i.pinimg.com/564x/83/85/82/838582f7cafcbb7c1cd596865ab8075c.jpg" alt="User Profile">
+                    <img src="https://i.pinimg.com/564x/83/85/82/838582f7cafcbb7c1cd596865ab8075c.jpg"
+                        alt="User Profile">
                     <p class="comment__profile-username">Nguyễn Hương Giang</p>
                 </div>
                 <div class="comment__body">
@@ -191,26 +221,35 @@
                         <p class="comment__profile-date">25-11-2024 17:23</p>
                     </div>
                     <div class="comment__rating">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9734;</span>
-                        </div>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9734;</span>
+                    </div>
                     <div class="comment__content">
-                        <p>"Chất lượng sản phẩm thực sự làm mình bất ngờ! Từ chất liệu vải co giãn tốt, mềm mại đến màu sắc sống động đúng như mô tả. Thiết kế cực kỳ đẹp, sang trọng và rất hợp thời trang, ai cũng hỏi mua ở đâu khi thấy mình mặc. Giá cả thì phải chăng mà dịch vụ chăm sóc khách hàng của shop cũng cực kỳ tốt, tư vấn nhiệt tình và giao hàng đúng hẹn. Lần tới mình sẽ tiếp tục ủng hộ và giới thiệu cho bạn bè mua nữa!"</p>
+                        <p>"Chất lượng sản phẩm thực sự làm mình bất ngờ! Từ chất liệu vải co giãn tốt, mềm mại đến màu
+                            sắc sống động đúng như mô tả. Thiết kế cực kỳ đẹp, sang trọng và rất hợp thời trang, ai cũng
+                            hỏi mua ở đâu khi thấy mình mặc. Giá cả thì phải chăng mà dịch vụ chăm sóc khách hàng của
+                            shop cũng cực kỳ tốt, tư vấn nhiệt tình và giao hàng đúng hẹn. Lần tới mình sẽ tiếp tục ủng
+                            hộ và giới thiệu cho bạn bè mua nữa!"</p>
                     </div>
                     <div class="comment__image">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp" alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
+                            alt="">
                     </div>
                 </div>
             </article>
             <article class="comment__item">
                 <div class="comment__profile">
-                    <img src="https://chontruong.org/wp-content/uploads/2024/09/anh-gai-xinh-che-mat-2.jpg" alt="User Profile">
+                    <img src="https://chontruong.org/wp-content/uploads/2024/09/anh-gai-xinh-che-mat-2.jpg"
+                        alt="User Profile">
                     <p class="comment__profile-username">Cao Thùy Dương</p>
                 </div>
                 <div class="comment__body">
@@ -218,24 +257,32 @@
                         <p class="comment__profile-date">25-11-2024 17:23</p>
                     </div>
                     <div class="comment__rating">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9734;</span>
-                        </div>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9734;</span>
+                    </div>
                     <div class="comment__content">
-                        <p>"Quần áo của shop thực sự quá tuyệt! Mình mua thử một chiếc nhưng khi nhận hàng thì bất ngờ với chất lượng, vải rất mềm, đường may tỉ mỉ, không có chỉ thừa, mặc cực kỳ vừa vặn và tôn dáng. Mẫu mã đẹp, đa dạng, màu sắc lại chuẩn không cần chỉnh. Đặc biệt, giá thành hợp lý, mua xong mà cảm thấy như săn được hàng chất lượng cao với giá rẻ. Giao hàng nhanh, đóng gói gọn gàng, rất hài lòng về dịch vụ của shop. Chắc chắn sẽ quay lại mua thêm!"</p>
+                        <p>"Quần áo của shop thực sự quá tuyệt! Mình mua thử một chiếc nhưng khi nhận hàng thì bất ngờ
+                            với chất lượng, vải rất mềm, đường may tỉ mỉ, không có chỉ thừa, mặc cực kỳ vừa vặn và tôn
+                            dáng. Mẫu mã đẹp, đa dạng, màu sắc lại chuẩn không cần chỉnh. Đặc biệt, giá thành hợp lý,
+                            mua xong mà cảm thấy như săn được hàng chất lượng cao với giá rẻ. Giao hàng nhanh, đóng gói
+                            gọn gàng, rất hài lòng về dịch vụ của shop. Chắc chắn sẽ quay lại mua thêm!"</p>
                     </div>
                     <div class="comment__image">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp" alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp" alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp"
+                            alt="">
+                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
+                            alt="">
                     </div>
                 </div>
             </article>
-          
+
         </section>
 
 

@@ -72,6 +72,26 @@ header {
   width: 2.6rem;
   object-fit: contain;
 }
+.header__cart {
+  position: relative;
+}
+.numberCart {
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  border-radius: 30px;
+  top: -13px;
+  background-color: rgb(163, 6, 6);
+  padding: 2px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  width: 15px;
+  font-weight: 600;
+  color: white;
+}
 
 /* """"""""""""""""""""""""""""""""Menu"""""""""""""""""""""""""""""""" */
 
@@ -648,6 +668,7 @@ a {
 .price__new {
   font-size: 16px;
   font-weight: 600;
+  color: #000;
 }
 
 .price__old {
@@ -696,9 +717,50 @@ a {
 
 .notification {
   position: fixed;
-  right: 0;
+  right: 1rem;
   background-color: #fff;
   box-shadow: 1px 1px 2px rgba(128, 128, 128, 0.3),
     -1px -1px 2px rgba(128, 128, 128, 0.3);
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.5rem;
+  border-radius: 5px;
+  z-index: 999;
+  animation: fadeOut 3s forwards 2s; /* Ẩn sau 5 giây */
+}
+.notification.error {
+  background-color: #f44336; /* Màu đỏ cho thông báo lỗi */
+}
+
+.notification div {
+  display: flex;
+  align-items: center;
+}
+.soluongCart {
+  display: none;
+}
+
+.notification p {
+  margin: 0;
+  font-size: 16px;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+.notification {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  background-color: #4caf50; /* Màu xanh cho thành công */
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  opacity: 1;
+  transition: opacity 0.5s, transform 0.5s;
 }

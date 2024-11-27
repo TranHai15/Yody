@@ -7,7 +7,8 @@ require_once("../../model/admin/admin.php");
 require_once("../../model/client/client.php");
 
 
-if ($_GET['addcart']) {
+
+if (isset($_GET['addcart'])) {
 
     $userId = (int)$_GET['addcart'];
     $variationId = (int)$_GET['variationId'];
@@ -25,57 +26,54 @@ if ($_GET['addcart']) {
     // checkloi($number_col);
     if ($number_col === 1) {
         $cart = $gioHang->layCartIdByUserID($userId);
-        // $idcart = $cart['cartId'];
-        // checkloi($cart);
         $cartid = $cart['cartId'];
-        // checkloi($variationId);
-        // checkloi($cartid);
         $dataOnDb = $gioHang->getCartId($cartid);
-        // $dataOnDb['variationId'];
 
-        // checkloi($dataOnDb);
+        $found = false; // Cờ kiểm tra
         foreach ($dataOnDb as $key => $value) {
             $variationIdcheck = $value['variationId'];
             $sizeIdcheck = $value['sizeId'];
-            // checkloi($variationIdcheck);
-            // checkloi($sizeId);
-            if ($variationIdcheck == $variationId) {
-                if ($sizeIdcheck == $sizeId) {
-                    // $test = "vaodayroi";
-                    $quantity_new = $quantity + $value['quantity'];
-                    $price_new = $price + $value['price'];
-                    $data_new = [
-                        'cartId' => $cartid,
-                        'variationId' => $variationId,
-                        'sizeId' => $sizeId,
-                        'quantity' => $quantity_new,
-                        'price' => $price_new
-                    ];
-                    // checkloi($data_new);
-                    $dk = 'cartitemId=' . $value['cartitemId'];
-                    $kq = $gioHang->updateCartItem('cartitems', $data_new, $dk);
-                    // die;
-                    if ($kq) {
-                        // $data_cart = $gioHang->getCartItemsWithProductName($cartid);
-                        // // Encode data to JSON
-                        // $json_cart_data = json_encode($data_cart, JSON_UNESCAPED_UNICODE);
-                        // header('Location: Yody/cart.php?data=' . urlencode($json_cart_data));
-                        exit;
-                    }
-                    // checkloi($kq);
-                }
+
+            if ($variationIdcheck == $variationId && $sizeIdcheck == $sizeId) {
+                // Nếu trùng, cập nhật số lượng và giá
+                $quantity_new = $quantity + $value['quantity'];
+                $price_new = $price;
+
+                $data_new = [
+                    'cartId' => $cartid,
+                    'variationId' => $variationId,
+                    'sizeId' => $sizeId,
+                    'quantity' => $quantity_new,
+                    'price' => $price_new,
+                    'selects' => 1,
+                ];
+
+                $dk = 'cartitemId=' . $value['cartitemId'];
+                $kq = $gioHang->updateCartItem('cartitems', $data_new, $dk);
+
+                $found = true; // Đánh dấu đã cập nhật
+                break; // Dừng vòng lặp
             }
         }
 
-        $data = [
-            'cartId' => $cartid,
-            'variationId' => $variationId,
-            'sizeId' => $sizeId,
-            'quantity' => $quantity,
-            'price' => $price
-        ];
-        $kq = $gioHang->cartItem('cartitems', $data);
-        // checkloi($kq);
+        if (!$found) {
+            // Nếu không tìm thấy sản phẩm trùng, thêm sản phẩm mới
+            $data = [
+                'cartId' => $cartid,
+                'variationId' => $variationId,
+                'sizeId' => $sizeId,
+                'quantity' => $quantity,
+                'price' => $price,
+                'selects' => 1,
+            ];
+            $kq = $gioHang->cartItem('cartitems', $data);
+        }
+
+        if ($kq) {
+            echo json_encode(['status' => 'success', 'message' => 'Thêm giỏ hàng thành công']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Thêm Không thành công']);
+        }
     } else {
 
         $data = [
@@ -100,13 +98,140 @@ if ($_GET['addcart']) {
             ];
             $kq = $gioHang->cartItem('cartitems', $data);
             // checkloi($kq);
-
-
-
-
+            if ($kq) {
+                echo json_encode(array('status' => 'success', 'message' => 'Thêm giỏ hàng thành công'));
+            } else {
+                echo json_encode(array('status' => 'error', 'message' => 'Thêm Không thành công'));
+            }
         } else {
             echo " Khong them dc di ";
         }
         // var_dump($kq);
+    }
+}
+
+if (isset($_GET['soluong'])) {
+    $id = $_GET['soluong'] ?? "";
+    $kq = (new Model_Client)->getNumber($id);
+    $sl = $kq[0]['total_quantity'];
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'soluong' => $sl));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
+    }
+}
+if (isPost()) {
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    // Tạo điều kiện lọc động
+    $where = [];
+
+    if (!empty($data['gender'])) {
+        $genderConditions = [];
+        foreach ($data['gender'] as $gender) {
+            $genderConditions[] = "p.name LIKE '%" . addslashes($gender) . "%'";
+        }
+        $where[] = '(' . implode(' OR ', $genderConditions) . ')';
+    }
+
+    if (!empty($data['colors'])) {
+        $colorConditions = [];
+        foreach ($data['colors'] as $color) {
+            $colorConditions[] = "v.color LIKE '%" . addslashes($color) . "%'";
+        }
+        $where[] = '(' . implode(' OR ', $colorConditions) . ')';
+    }
+
+    if (!empty($data['sizes'])) {
+        $sizeConditions = [];
+        foreach ($data['sizes'] as $size) {
+            $sizeConditions[] = "s.size LIKE '%" . addslashes($size) . "%'";
+        }
+        $where[] = '(' . implode(' OR ', $sizeConditions) . ')';
+    }
+
+    if (!empty($data['price'])) {
+        $priceConditions = [];
+        foreach ($data['price'] as $price) {
+            if ($price == 'below-350k') {
+                $priceConditions[] = "v.price < 350000";
+            } elseif ($price == 'between-350k-750k') {
+                $priceConditions[] = "(v.price BETWEEN 350000 AND 750000)";
+            } elseif ($price == 'above-750k') {
+                $priceConditions[] = "v.price > 750000";
+            }
+        }
+        if (!empty($priceConditions)) {
+            $where[] = '(' . implode(' OR ', $priceConditions) . ')';
+        }
+    }
+
+    // Ghép điều kiện lọc vào câu lệnh SQL chính
+    $sql = "
+        SELECT 
+            p.productId,
+            p.name,
+            p.categoryId,
+            MIN(v.price) AS new_price,
+            MIN(v.sale) AS old_price,
+            MIN(v.image) AS ImageMain,
+            MIN(v.variationId) AS colorId,
+            JSON_ARRAYAGG(
+                JSON_OBJECT(
+                    'anhColor', v.anhColor,
+                    'image', v.image,
+                    'variationId', v.variationId
+                )
+            ) AS variations
+        FROM products AS p
+        JOIN variations AS v ON p.productId = v.productId
+       
+    ";
+    if (!empty($data['sizes'])) {
+        $sql .= " JOIN sizevariations s ON v.variationId = s.variationId ";
+    }
+
+    // Nếu có điều kiện lọc thì thêm vào WHERE
+    if (!empty($where)) {
+        $sql .= " WHERE (p.name like '%a%') AND  " . implode(" OR ", $where);
+    } else {
+        // Không có điều kiện lọc thì chỉ thêm điều kiện cơ bản
+        $sql .= "";
+    }
+
+    $sql .= "
+        GROUP BY p.productId
+        ORDER BY p.productId
+        LIMIT 12
+    ";
+    // echo $sql;
+    $kq = getRaw($sql);
+
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'kq' => $kq));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'KHong có sản phẩm'));
+    }
+}
+
+
+if (isset($_GET['form2'])) {
+    $id = $_GET['form2'] ?? "";
+    $kq = (new Model_Client)->getAllDistrict($id);
+
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'data' => $kq));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
+    }
+}
+if (isset($_GET['form3'])) {
+    $id = $_GET['form3'] ?? "";
+    $kq = (new Model_Client)->getAllWards($id);
+
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'data' => $kq));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
     }
 }

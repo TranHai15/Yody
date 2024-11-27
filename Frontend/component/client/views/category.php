@@ -59,22 +59,22 @@
                                 <div class="list__content--none display__none">
                                     <ul class="checkbox-list">
                                         <li class="checkbox-item">
-                                            <a href="#">
-                                                <input type="checkbox" id="nam">
-                                                <label for="Nam">Nam</label>
-                                            </a>
+
+                                            <input type="checkbox" id="Nam">
+                                            <label for="Nam">Nam</label>
+
                                         </li>
                                         <li class="checkbox-item">
-                                            <a href="#">
-                                                <input type="checkbox" id="nu">
-                                                <label for="">Nữ</label>
-                                            </a>
+
+                                            <input type="checkbox" id="Nữ">
+                                            <label for="">Nữ</label>
+
                                         </li>
                                         <li class="checkbox-item">
-                                            <a href="#">
-                                                <input type="checkbox" id="treem">
-                                                <label for="treem">Trẻ Em</label>
-                                            </a>
+
+                                            <input type="checkbox" id="Em">
+                                            <label for="treem">Trẻ Em</label>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -89,68 +89,70 @@
                                 <div class="list__content--none">
                                     <ul class="color-grid grid">
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: black;"></div>
-                                                <p>Đen</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: black;" data-color="D">
+                                            </div>
+                                            <p>Đen</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: red;"></div>
-                                                <p>Đỏ</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: red;" data-color="D">
+                                            </div>
+                                            <p>Đỏ</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: yellow;"></div>
-                                                <p>Vàng</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: yellow;" data-color="V">
+                                            </div>
+                                            <p>Vàng</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: orange;"></div>
-                                                <p>Cam</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: orange;" data-color="C">
+                                            </div>
+                                            <p>Cam</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: gray;"></div>
-                                                <p>Xám</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: gray;" data-color="X">
+                                            </div>
+                                            <p>Xám</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: pink;"></div>
-                                                <p>Hồng</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: pink;" data-color="H">
+                                            </div>
+                                            <p>Hồng</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: purple;"></div>
-                                                <p>Tím</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: purple;" data-color="T">
+                                            </div>
+                                            <p>Tím</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle" style="background-color: brown;"></div>
-                                                <p>Nâu</p>
-                                            </a>
+
+                                            <div class="color-circle" style="background-color: brown;" data-color="N">
+                                            </div>
+                                            <p>Nâu</p>
+
                                         </li>
                                         <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle"
-                                                    style="background-color: white; border: 1px solid black;"></div>
-                                                <p>Trắng</p>
-                                            </a>
+
+                                            <div class="color-circle"
+                                                style="background-color: white; border: 1px solid black;"
+                                                data-color="T"></div>
+                                            <p>Trắng</p>
+
                                         </li>
-                                        <li class="color-item">
-                                            <a href="#">
-                                                <div class="color-circle"
-                                                    style="background: linear-gradient(to bottom, green, yellow);">
-                                                </div>
-                                                <p></p>
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -164,209 +166,209 @@
                                 <div class="list__content--none">
                                     <ul class="size-grid grid">
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">S</div>
-                                            </a>
+
+                                            <div class="size-circle">S</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">M</div>
 
-                                            </a>
+                                            <div class="size-circle">M</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">L</div>
 
-                                            </a>
+                                            <div class="size-circle">L</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">XL</div>
 
-                                            </a>
+                                            <div class="size-circle">XL</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">2XL</div>
 
-                                            </a>
+                                            <div class="size-circle">2XL</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">3XL</div>
 
-                                            </a>
+                                            <div class="size-circle">3XL</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">4XL</div>
 
-                                            </a>
+                                            <div class="size-circle">4XL</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">5XL</div>
 
-                                            </a>
+                                            <div class="size-circle">5XL</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">F</div>
 
-                                            </a>
+                                            <div class="size-circle">F</div>
+
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">XXX</div>
 
-                                            </a>
+                                            <div class="size-circle">XXX</div>
+
+
                                         </li>
 
                                     </ul>
                                     <ul class="size-grid grid mt-4">
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">1</div>
-                                            </a>
-                                        </li>
-                                        <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">2</div>
 
-                                            </a>
-                                        </li>
-                                        <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">3</div>
+                                            <div class="size-circle">1</div>
 
-                                            </a>
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">4</div>
 
-                                            </a>
-                                        </li>
-                                        <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">27</div>
+                                            <div class="size-circle">2</div>
 
-                                            </a>
-                                        </li>
-                                        <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">28</div>
 
-                                            </a>
                                         </li>
                                         <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">29</div>
 
-                                            </a>
-                                        </li>
-                                        <li class="size-item">
-                                            <a href="#">
-                                                <div class="size-circle">30</div>
+                                            <div class="size-circle">3</div>
 
-                                            </a>
+
+                                        </li>
+                                        <li class="size-item">
+
+                                            <div class="size-circle">4</div>
+
+
+                                        </li>
+                                        <li class="size-item">
+
+                                            <div class="size-circle">27</div>
+
+
+                                        </li>
+                                        <li class="size-item">
+
+                                            <div class="size-circle">28</div>
+
+
+                                        </li>
+                                        <li class="size-item">
+
+                                            <div class="size-circle">29</div>
+
+
+                                        </li>
+                                        <li class="size-item">
+
+                                            <div class="size-circle">30</div>
+
+
                                         </li>
 
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">31</div>
-                                            </a>
+
+                                            <div class="size-circle">31</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">32</div>
-                                            </a>
+
+                                            <div class="size-circle">32</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">33</div>
-                                            </a>
+
+                                            <div class="size-circle">33</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">34</div>
-                                            </a>
+
+                                            <div class="size-circle">34</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">35</div>
-                                            </a>
+
+                                            <div class="size-circle">35</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">36</div>
-                                            </a>
+
+                                            <div class="size-circle">36</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">37</div>
-                                            </a>
+
+                                            <div class="size-circle">37</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">38</div>
-                                            </a>
+
+                                            <div class="size-circle">38</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">39</div>
-                                            </a>
+
+                                            <div class="size-circle">39</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">40</div>
-                                            </a>
+
+                                            <div class="size-circle">40</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">41</div>
-                                            </a>
+
+                                            <div class="size-circle">41</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">42</div>
-                                            </a>
+
+                                            <div class="size-circle">42</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">43</div>
-                                            </a>
+
+                                            <div class="size-circle">43</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">44</div>
-                                            </a>
+
+                                            <div class="size-circle">44</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">110</div>
-                                            </a>
+
+                                            <div class="size-circle">110</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">115</div>
-                                            </a>
+
+                                            <div class="size-circle">115</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">120</div>
-                                            </a>
+
+                                            <div class="size-circle">120</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">125</div>
-                                            </a>
+
+                                            <div class="size-circle">125</div>
+
                                         </li>
                                         <li class="size-item">
-                                            <a href="">
-                                                <div class="size-circle">130</div>
-                                            </a>
+
+                                            <div class="size-circle">130</div>
+
                                         </li>
 
                                     </ul>
@@ -382,22 +384,22 @@
                                 <div class="list__content--none">
                                     <ul class="checkbox-list">
                                         <li class="checkbox-item">
-                                            <a href="#">
-                                                <input type="checkbox" id="below-350k">
-                                                <label for="below-350k">Dưới 350.000đ</label>
-                                            </a>
+
+                                            <input type="checkbox" id="below-350k">
+                                            <label for="below-350k">Dưới 350.000đ</label>
+
                                         </li>
                                         <li class="checkbox-item">
-                                            <a href="#">
-                                                <input type="checkbox" id="between-350k-750k">
-                                                <label for="between-350k-750k">Từ 350.000đ - 750.000đ</label>
-                                            </a>
+
+                                            <input type="checkbox" id="between-350k-750k">
+                                            <label for="between-350k-750k">Từ 350.000đ - 750.000đ</label>
+
                                         </li>
                                         <li class="checkbox-item">
-                                            <a href="#">
-                                                <input type="checkbox" id="above-750k">
-                                                <label for="above-750k">Trên 750.000đ</label>
-                                            </a>
+
+                                            <input type="checkbox" id="above-750k">
+                                            <label for="above-750k">Trên 750.000đ</label>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -421,9 +423,23 @@
                                         </div>
                                         <span class="product__name"><?= $Product['name'] ?></span>
                                         <div class="product__price row align-items-center">
-                                            <?php $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100)); ?>
-                                            <?= $Product['old_price'] > 0 ? "<span class=price__new>$sale đ</span>" : $Product['new_price'] . "đ" ?>
-                                            <?= $Product['old_price'] > 0 ? "<span class=price__old>{$Product['new_price']}đ</span>" : "" ?>
+                                            <?php
+                                            $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100));
+
+                                            ?>
+                                            <span class='price__new'>
+                                                <?=
+                                                $Product['old_price'] > 0
+                                                    ?  number_format($sale, 0, ',', '.') . "đ"
+                                                    : number_format($Product['new_price'], 0, ',', '.') . "đ";
+                                                ?>
+                                            </span>
+                                            <?=
+                                            $Product['old_price'] > 0
+                                                ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>"
+                                                : "";
+                                            ?>
+
                                         </div>
                                         <div class="product__variation row align-items-center">
 
@@ -456,32 +472,6 @@
     <?php require_once(HF . "footer.php")  ?>
 </body>
 
-
-<script>
-    const btn__drop = document.querySelector(".dropbtn")
-    btn__drop.addEventListener('click', () => {
-        const list__drop = document.querySelector(".dropdown__content")
-        list__drop.classList.toggle("display__none")
-        const icon__bottom = document.querySelector(".icon__bottom")
-        const icon__top = document.querySelector(".icon__top")
-        icon__top.classList.toggle("display__none")
-        icon__bottom.classList.toggle("display__none")
-    })
-
-
-
-    //  const 
-    const list__name = document.querySelectorAll('.list__name')
-    list__name.forEach((e) => {
-        e.addEventListener('click', () => {
-            const list__content__none = e.nextElementSibling
-            list__content__none.classList.toggle("display__none")
-            // console.log(icon__bottom)
-            // icon__bottom.classList.toggle("xoay")
-        })
-
-    })
-</script>
-
+<script src="Frontend/Js/category.js"></script>
 
 </html>
