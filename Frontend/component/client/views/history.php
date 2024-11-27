@@ -27,9 +27,8 @@
                         <div class="order-price">
                             125.000 đ <span><del>169.000 đ</del></span>
                         </div>
-                        <select>
-                            <option value="Vàng 4">Vàng 4</option>
-                        </select>
+                        <p>Màu: Vàng</p>
+
                         <p>Trạng thái: <span class="status">Đang chờ duyệt</span></p>
                     </div>
                     <button class="btn-detail" onclick="showDetails(event)">Chi tiết</button>
@@ -37,6 +36,8 @@
                         <p><strong>Trạng thái:</strong> Đang chờ xác nhận</p>
                         <p><strong>Ngày đặt hàng:</strong> 27/11/2024</p>
                         <p><strong>Tên sản phẩm:</strong> T-shirt Kid Bé In Khủng Long</p>
+                        <p><strong>Màu:</strong> Vàng</p>
+                        <p><strong>Size:</strong> XL</p>
                         <p><strong>Số lượng:</strong> 3</p>
                         <p><strong>Số tiền phải trả:</strong> 300.000đ</p>
                         <button class="close-btn" onclick="closePopup(event)">Đóng</button>

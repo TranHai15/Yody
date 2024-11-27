@@ -17,8 +17,8 @@
                 <div class="checkout">
 
                     <div class="checkout__receiver">
-                        <h2 class="checkout__receiver-title">Người nhận</h2>
                         <form class="checkout__receiver-form">
+                            <h2 class="checkout__receiver-title">Người nhận</h2>
                             <div>
                                 <div class="ooooo">
                                     <span class="checkout__receiver-user"><svg xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +29,8 @@
                                         </svg></span>
                                     <input type="text" class="checkout__receiver-input ooooo"
                                         placeholder="Tên khách hàng">
+                                    <span class="error-message"></span>
                                 </div>
-                                <span class="error-message"></span>
                             </div>
 
                             <div>
@@ -43,8 +43,8 @@
                                         </svg></span>
                                     <input type="text" class="checkout__receiver-input ooooo"
                                         placeholder="Số điện thoại">
+                                    <span class="error-message"></span>
                                 </div>
-                                <span class="error-message"></span>
                             </div>
                             <div class="ooooo">
                                 <span class="checkout__receiver-email"><svg xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +56,8 @@
                                 <input type="email" class="checkout__receiver-input ooooo"
                                     placeholder="Địa chỉ email (không bắt buộc)">
                             </div>
+
+
                         </form>
                     </div>
 
