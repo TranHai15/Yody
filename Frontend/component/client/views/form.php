@@ -6,82 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Frontend/Css/home.css">
     <link rel="stylesheet" href="Frontend/Css/form.css">
-    <title>category</title>
-
+    <title>Đánh giá sản phẩm</title>
 </head>
 
 <body>
-<section class="review-section grid wide">
-    <h2 class="review-title">Đánh giá sản phẩm</h2>
-    <div class="review-form-container">
-        <form id="reviewForm" class="review-form">
-            <div class="review-form-group">
-                <label for="reviewName" class="review-label">Họ và tên:</label>
-                <input type="text" id="reviewName" class="review-input" placeholder="Nhập tên của bạn...">
-            </div>
-            <div class="review-form-group">
-                <label for="reviewRating" class="review-label">Đánh giá:</label>
-                <div id="reviewRating" class="review-rating">
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9734;</span>
+    <?php 
+        $userId = $_GET['idUser'] ?? ''; 
+        $productId = $_GET['idProduct'] ?? ''; 
+    ?>
+    <section class="review-section grid wide">
+        <h2 class="review-title">Đánh giá sản phẩm</h2>
+        <div class="review-form-container">
+            <form id="reviewForm" class="review-form" action="<?= P ?>/formProductView" method="post" enctype="multipart/form-data">
+                <!-- Input hidden cho userId và productId -->
+                <input type="hidden" name="userId" value="<?= htmlspecialchars($userId) ?>">
+                <input type="hidden" name="productId" value="<?= htmlspecialchars($productId) ?>">
+                
+                <!-- Nhập đánh giá (rating) -->
+                <div class="review-form-group">
+                    <label for="reviewRating" class="review-label">Đánh giá:</label>
+                    <div id="reviewRating" class="review-rating">
+                        <span class="star" data-value="1">&#9734;</span>
+                        <span class="star" data-value="2">&#9734;</span>
+                        <span class="star" data-value="3">&#9734;</span>
+                        <span class="star" data-value="4">&#9734;</span>
+                        <span class="star" data-value="5">&#9734;</span>
+                    </div>
+                    <input type="hidden" name="rating" id="rating" value="">
                 </div>
-            </div>
-            <div class="review-form-group">
-                <label for="reviewComment" class="review-label">Nhận xét:</label>
-                <textarea id="reviewComment" class="review-textarea" placeholder="Viết nhận xét của bạn..."></textarea>
-            </div>
-            <!-- Thêm phần upload ảnh -->
-            <div class="review-form-group">
-                <label for="reviewImage" class="review-label">Chọn ảnh (Tối đa 3 ảnh):</label>
-                <input type="file" id="reviewImage" class="review-input" accept="image/*" multiple>
-                <div id="imagePreview" class="image-preview"></div>
-            </div>
-            <button type="submit" class="review-submit-btn">Gửi đánh giá</button>
-        </form>
-        <div id="reviewMessage" class="review-message"></div>
-    </div>
-</section>
 
+                <!-- Nhập nội dung đánh giá -->
+                <div class="review-form-group">
+                    <label for="reviewComment" class="review-label">Nhận xét:</label>
+                    <textarea name="content" id="reviewComment" class="review-textarea" placeholder="Viết nhận xét của bạn..."></textarea>
+                </div>
+
+                <!-- Upload ảnh -->
+                <div class="review-form-group">
+                    <label for="reviewImage" class="review-label">Chọn ảnh:</label>
+                    <input type="file" id="reviewImage" name="image" class="review-input" accept="image/*">
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+
+                <button type="submit" class="review-submit-btn">Gửi đánh giá</button>
+            </form>
+            <div id="reviewMessage" class="review-message"></div>
+        </div>
+    </section>
 
 </body>
 
-
 <script>
-    document.getElementById('reviewForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Ngăn submit form mặc định
+    let selectedRating = 0;
 
-        const name = document.getElementById('reviewName').value.trim();
-        const rating = document.querySelector('.review-rating .star.selected').length; // Số sao đã được chọn
-        const comment = document.getElementById('reviewComment').value.trim();
-
-        if (name === '' || comment === '' || rating === 0) {
-            document.getElementById('reviewMessage').style.backgroundColor = '#FF6B6B';
-            document.getElementById('reviewMessage').innerText = 'Vui lòng điền đầy đủ thông tin!';
-            document.getElementById('reviewMessage').style.display = 'block';
-        } else {
-            document.getElementById('reviewMessage').style.backgroundColor = '#28a745';
-            document.getElementById('reviewMessage').innerText = 'Đánh giá của bạn đã được gửi thành công!';
-            document.getElementById('reviewMessage').style.display = 'block';
-        }
-
-        // Reset form
-        setTimeout(function() {
-            document.getElementById('reviewMessage').style.display = 'none';
-            document.getElementById('reviewForm').reset();
-        }, 2000);
-    });
-
-    // Xử lý sự kiện click sao
+    // Xử lý click vào các sao
     document.querySelectorAll('.review-rating .star').forEach(star => {
         star.addEventListener('click', function() {
-            document.querySelectorAll('.review-rating .star').forEach(s => s.classList.remove('selected'));
-            this.classList.add('selected');
+            selectedRating = parseInt(this.getAttribute('data-value'));
+            document.querySelectorAll('.review-rating .star').forEach(s => {
+                s.innerHTML = '&#9734;';
+                s.classList.remove('selected');
+            });
+            for (let i = 0; i < selectedRating; i++) {
+                document.querySelectorAll('.review-rating .star')[i].innerHTML = '&#9733;';
+                document.querySelectorAll('.review-rating .star')[i].classList.add('selected');
+            }
+            // Gán giá trị rating vào input ẩn
+            document.getElementById('rating').value = selectedRating;
         });
     });
-</script>
 
+    // Xử lý submit form
+    document.getElementById('reviewForm').addEventListener('submit', function(event) {
+        const comment = document.getElementById('reviewComment').value.trim();
+        if (comment === '' || selectedRating === 0) {
+            event.preventDefault(); // Dừng submit nếu không hợp lệ
+            document.getElementById('reviewMessage').style.backgroundColor = '#FF6B6B';
+            document.getElementById('reviewMessage').innerText = 'Vui lòng điền đầy đủ thông tin và chọn sao!';
+            document.getElementById('reviewMessage').style.display = 'block';
+        }
+    });
+</script>
 
 </html>

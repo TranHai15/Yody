@@ -36,6 +36,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/history" => fn() => require_once FRONTEND__CLIENT . "history.php",
         $urlPath === "{$basePath}/pay" => fn() => require_once FRONTEND__CLIENT . "pay.php",
         $urlPath === "{$basePath}/form" => fn() => require_once FRONTEND__CLIENT . "form.php",
+        $urlPath === "{$basePath}/formProductView" => fn() => $Client->productView(),
 
 
         // Kiểm tra query string với $_GET

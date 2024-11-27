@@ -244,4 +244,10 @@ class Model_Client
     {
         return update($table, $data, $Where);
     }
+    public function rateProduct($table, $data){
+        return insert($table, $data);
+    }
+
+
+    
 }

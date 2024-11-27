@@ -19,7 +19,7 @@
             <span class="past__product--category"></span>
         </div>
         <div class="grid wide name__category ">
-            Nam
+
         </div>
         <div class="grid wide">
             <div class="intro__products row">

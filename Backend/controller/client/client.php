@@ -216,4 +216,71 @@ class Controller_Client
     }
 
     // 
+    public function productView()
+    {
+        // checkloi($_POST);
+    
+        if (isPost()) {
+            $data = filter();
+            // checkloi($data);
+    
+            // Lấy các giá trị từ form
+            $productId = trim($data['productId'] ?? '');
+            $userId = trim($data['userId'] ?? '');
+            $content = trim($data['content'] ?? '');
+            $rating = intval($data['rating'] ?? 0);
+            $file_anh = $_FILES['image'] ?? null;
+            $createAt = date('Y-m-d H:i:s'); // Lấy thời gian hiện tại
+            $image_new = '';
+    
+            // Xử lý upload file ảnh nếu có
+            if (!empty($file_anh) && $file_anh['error'] === 0) {
+                $image_new = xuLyUploadFile($file_anh, 'Image/comments');
+            }
+    
+            // Kiểm tra dữ liệu hợp lệ
+            // if (strlen(removespace($content)) === 0) {
+            //     setsession('errorContent', 'Nội dung không được để trống.');
+            //     header('Location: /Yody/admin?AddComment');
+            //     exit;
+            // }
+    
+            // if ($rating < 1 || $rating > 5) {
+            //     setsession('errorRating', 'Đánh giá phải nằm trong khoảng từ 1 đến 5.');
+            //     header('Location: /Yody/admin?AddComment');
+            //     exit;
+            // }
+    
+            // Chuẩn bị dữ liệu để chèn vào database
+            $data_new = [
+                'productId' => $productId,
+                'userId' => $userId,
+                'content' => $content,
+                'image' => $image_new,
+                'createAt' => $createAt,
+                'rating' => $rating,
+            ];
+        
+            
+
+    
+            // Thêm dữ liệu vào bảng comments
+            $kq = (new Model_Client)->rateProduct('comments', $data_new);
+            checkloi($kq);
+    
+            if ($kq) {
+                setsession('messageDuyetComment', "Thêm bình luận thành công.");
+            } else {
+                setsession('messageDuyetComment', "Thêm bình luận thất bại.");
+            }
+    
+            // Điều hướng sau khi hoàn thành
+            header('Location: /Yody/');
+            exit;
+        }
+    }
+    
+    
 }
+
+
