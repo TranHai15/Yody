@@ -213,3 +213,25 @@ if (isPost()) {
         echo json_encode(array('status' => 'error', 'message' => 'KHong có sản phẩm'));
     }
 }
+
+
+if (isset($_GET['form2'])) {
+    $id = $_GET['form2'] ?? "";
+    $kq = (new Model_Client)->getAllDistrict($id);
+
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'data' => $kq));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
+    }
+}
+if (isset($_GET['form3'])) {
+    $id = $_GET['form3'] ?? "";
+    $kq = (new Model_Client)->getAllWards($id);
+
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'data' => $kq));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
+    }
+}
