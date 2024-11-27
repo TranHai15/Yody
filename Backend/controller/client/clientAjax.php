@@ -37,14 +37,15 @@ if (isset($_GET['addcart'])) {
             if ($variationIdcheck == $variationId && $sizeIdcheck == $sizeId) {
                 // Nếu trùng, cập nhật số lượng và giá
                 $quantity_new = $quantity + $value['quantity'];
-                $price_new = $price + $value['price'];
+                $price_new = $price;
 
                 $data_new = [
                     'cartId' => $cartid,
                     'variationId' => $variationId,
                     'sizeId' => $sizeId,
                     'quantity' => $quantity_new,
-                    'price' => $price_new
+                    'price' => $price_new,
+                    'selects' => 1,
                 ];
 
                 $dk = 'cartitemId=' . $value['cartitemId'];
@@ -62,7 +63,8 @@ if (isset($_GET['addcart'])) {
                 'variationId' => $variationId,
                 'sizeId' => $sizeId,
                 'quantity' => $quantity,
-                'price' => $price
+                'price' => $price,
+                'selects' => 1,
             ];
             $kq = $gioHang->cartItem('cartitems', $data);
         }

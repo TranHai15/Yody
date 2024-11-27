@@ -12,6 +12,7 @@
 <body>
     <?php require_once(HF . "header.php")  ?>
     <!-- past -->
+
     <div class="grid wide row align-items-center">
         <span><a class="past__product" href="<?= P ?>/">Trang Chủ </a></span>
         <span class="past__icon--next"><img src="Frontend/public/svg/next.svg" alt=""></span>
@@ -59,18 +60,36 @@
                         <a href="#" class="rating-count">(120)</a>
                         <span class="sold-count">Đã bán 964</span>
                     </div>
-                    <div class="detail__right--price row align-items-center">
-                        <div class="detail__right--price--new">
-                            <?php $sale = $OneVariations["price"] - ($OneVariations["price"] * ($OneVariations["sale"] / 100)); ?>
-                            <?= $OneVariations['sale'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : $OneVariations["price"] ?>
-                            <span></span><br>
 
+                    <div class="detail__right--price row align-items-center">
+                        <?php
+                        // Tính giá sau khi giảm
+                        $hasSale = $OneVariations['sale'] > 0;
+                        $salePrice = $hasSale
+                            ? $OneVariations['price'] - ($OneVariations['price'] * ($OneVariations['sale'] / 100))
+                            : $OneVariations['price'];
+                        ?>
+
+                        <!-- Hiển thị giá mới -->
+                        <div class="detail__right--price--new" data-price="<?= $salePrice ?>">
+                            <?= number_format($salePrice, 0, ',', '.') . "đ" ?>
+                            <span></span><br>
                         </div>
-                        <div class="detail__right--price--old" data-price="<?= $sale ?>">
-                            <?= $OneVariations['sale'] > 0 ? number_format($OneVariations['price'], 0, ',', '.') . "đ" : "" ?>
-                        </div>
-                        <?= $OneVariations['sale'] > 0 ? "<div class=detail__right--price--sale><span> - $OneVariations[sale] </span></div>" : "" ?>
+
+                        <!-- Hiển thị giá cũ nếu có giảm giá -->
+                        <?php if ($hasSale): ?>
+                            <div class="detail__right--price--old" data-price="<?= $salePrice ?>">
+                                <?= number_format($OneVariations['price'], 0, ',', '.') . "đ" ?>
+                            </div>
+
+                            <!-- Hiển thị phần trăm giảm giá -->
+                            <div class="detail__right--price--sale">
+                                <span>-<?= $OneVariations['sale'] ?>%</span>
+                            </div>
+                        <?php endif; ?>
                     </div>
+
+
                     <div class="color__selector mt-4">
                         <span class="color-label">Màu sắc: <?= $OneVariations['color'] ?></span>
                         <div class="row align-items-center">
@@ -92,7 +111,8 @@
                         <div class="row align-items-center">
                             <?php foreach ($AllSize as $size): ?>
                                 <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
-                                    class="size-option <?= $size['sizeId'] == $OneVariations['sizeId'] ? "active__size" : "" ?>">
+                                    class="size-option <?= $size['sizeId'] == $OneVariations['sizeId'] ? "active__size" : "" ?>"
+                                    data-quantity="<?= $size['sizeId'] == $OneVariations['sizeId'] ? "$size[quantity]" : 0 ?>">
                                     <?= $size['size'] ?></div>
                             <?php endforeach; ?>
                         </div>
@@ -101,9 +121,9 @@
                         <h3 class="detail__number">Số lượng</h3>
                         <div class="row justify-content-between align-items-center">
                             <div class="number row align-items-center">
-                                <button id="decrease" class="btn" onclick="updateSoLuongChon(-1)">-</button>
-                                <span id="soluongchon">1</span>
-                                <button id="increase" class="btn" onclick="updateSoLuongChon(1)">+</button>
+                                <button id="decrease giam" class="btn" onclick="updateSoLuongChon(-1)">-</button>
+                                <span id="soluongchon" class="hienthi">1</span>
+                                <button id="increase " class="btn tang" onclick="updateSoLuongChon(1)">+</button>
                             </div>
                             <div class="add__cart l-9 ">
                                 Thêm giỏ hàng
