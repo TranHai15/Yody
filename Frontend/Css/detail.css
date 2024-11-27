@@ -339,30 +339,6 @@
 }
 
 /* =======================commetn======== */
-<<<<<<< HEAD
-.comment {
-  margin: 5rem 0;
-}
-
-/*  */
-
-.notification.error {
-  background-color: #f44336; /* Màu đỏ cho lỗi */
-}
-
-.notification div {
-  display: flex;
-  align-items: center;
-}
-
-.notification p {
-  margin: 0;
-}
-
-.notification.hidden {
-  opacity: 0;
-  transform: translateY(-20px);
-=======
 /* .comment{
   margin: 10rem 10rem;
 }
@@ -380,14 +356,13 @@
   padding-right: 20px;
 } */
 /* Bố cục tổng thể */
-.comment{
+.comment {
   margin: 10rem 10rem;
 }
-.comment__detail{
+.comment__detail {
   font-size: 2rem;
   font-weight: 600;
   margin: 5rem 2rem 2rem 0;
-
 }
 .comment__item {
   display: flex;
@@ -486,6 +461,5 @@
 }
 .star:hover,
 .star:hover ~ .star {
-    color: #FFA500; /* Màu cam khi hover */
->>>>>>> 60b17eaa98693f644f31950102052ad9ee3aab3a
+  color: #ffa500; /* Màu cam khi hover */
 }

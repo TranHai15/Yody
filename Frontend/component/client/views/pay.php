@@ -48,20 +48,15 @@
                         </form>
                     </div>
 
-                    <div class="checkout__delivery">
-                        <h2 class="checkout__delivery-title">Hình thức nhận hàng</h2>
-                        <div class="checkout__delivery-options">
-                            <button class="checkout__delivery-option checkout__delivery-option--selected">Giao tới
-                                nhà</button>
-                            <button class="checkout__delivery-option checkout__delivery-option--select">Lấy tại cửa
-                                hàng</button>
-                        </div>
-                    </div>
+
                     <div class="checkout__address">
                         <label for="address" class="checkout__address-label">Địa chỉ của bạn</label>
                         <select id="address" class="checkout__address-select">
-                            <option>Chọn Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã</option>
+                            <?php foreach ($dataAllProvince as $Pro):  ?>
+                                <option value="<?= $Pro['province_id'] ?>"><?= $Pro['name'] ?></option>
+                            <?php endforeach  ?>
                         </select>
+
                         <input type="text" class="checkout__address-home"
                             placeholder="Nhập địa chỉ (ví dụ 90 Nguyễn Tuân) ">
                         <input type="text" class="checkout__address-note"
@@ -74,16 +69,19 @@
                                 <span class="checkout__shippingmethod-span"><input type="radio"
                                         class="checkout__shippingmethod-standard">Tiêu chuẩn <br></span>
                             </div>
-                            <div class="box2"><span class="checkout__shippingmethod-ensure">Đảm bảo nhận hàng từ 3 - 5 ngày</span></div>
+                            <div class="box2"><span class="checkout__shippingmethod-ensure">Đảm bảo nhận hàng từ 3 - 5
+                                    ngày</span></div>
                         </div>
                         <div class="checkout__paymentMethod">
                             <h2 class="checkout__paymentMethod-title">Phương thức thanh toán</h2>
 
                             <label>
-                                <input type="radio" name="paymentMethod" value="cod" class="checkout__paymentMethod-cod"> Tiền mặt
+                                <input type="radio" name="paymentMethod" value="cod"
+                                    class="checkout__paymentMethod-cod"> Tiền mặt
                             </label>
                             <label>
-                                <input type="radio" name="paymentMethod" value="bank" class="checkout__paymentMethod-cod"> Chuyển khoản
+                                <input type="radio" name="paymentMethod" value="bank"
+                                    class="checkout__paymentMethod-cod"> Chuyển khoản
                             </label>
 
                         </div>
@@ -116,13 +114,15 @@
                         <h2 class="checkout__product-info-title">Thông tin sản phẩm</h2>
                         <?php foreach ($dulieu as $data) : ?>
                             <div class="checkout__product">
-                                <img src="<?= $data['image'] ?>"
-                                    alt="T-shirt Nữ" class="checkout__product-image">
+                                <img src="<?= $data['image'] ?>" alt="T-shirt Nữ" class="checkout__product-image">
                                 <div class="checkout__product-details">
                                     <p class="checkout__product-name"><?= $data['product_name'] ?></p>
-                                    <p class="checkout__product-color"><?= $data['color'] . ',' . ' ' . $data['size'] ?> </p>
+                                    <p class="checkout__product-color"><?= $data['color'] . ',' . ' ' . $data['size'] ?>
+                                    </p>
                                     <div class="tongtien">
-                                        <p class="checkout__product-price"><?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?> <span
+                                        <p class="checkout__product-price">
+                                            <?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?>
+                                            <span
                                                 class="checkout__product-price--original"><?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></span>
                                         </p>
                                         <hr>
@@ -156,6 +156,6 @@
     </main>
 
 </body>
-
+<script src="Frontend/Js/pay.js"></script>
 
 </html>

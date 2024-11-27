@@ -231,13 +231,16 @@ class Model_Client
         $sql = " SELECT 
     ci.cartitemId,
     ci.cartId,
+    ci.selects,
     ci.quantity AS total_quantity,
     ci.price AS total_price,
     v.image,
     v.price AS variation_price,
     v.sale AS variation_sale,
     v.color,
+    v.variationId,
     p.name AS product_name,
+    sv.sizeId,
     sv.size
     FROM 
         cartitems ci
@@ -248,14 +251,45 @@ class Model_Client
     JOIN 
         sizevariations sv ON ci.sizeId = sv.sizeId
     WHERE 
-        ci.cartId = $cartid;
+        ci.cartId = $cartid  ;
+    ";
+        return getRaw($sql);
+    }
+    public function getCartItemsWithProductNameId($cartid)
+    {
+        $sql = " SELECT 
+    ci.cartitemId,
+    ci.cartId,
+    ci.selects,
+    ci.quantity AS total_quantity,
+    ci.price AS total_price,
+    v.image,
+    v.price AS variation_price,
+    v.sale AS variation_sale,
+    v.color,
+    v.variationId,
+    p.name AS product_name,
+    sv.sizeId,
+    sv.size
+    FROM 
+        cartitems ci
+    JOIN 
+        variations v ON ci.variationId = v.variationId
+    JOIN 
+        products p ON v.productId = p.productId
+    JOIN 
+        sizevariations sv ON ci.sizeId = sv.sizeId
+    WHERE 
+        ci.cartId = $cartid AND ci.selects =1 ;
     ";
         return getRaw($sql);
     }
     public function tongtienTrongtotal_price($cartid)
     {
-        $sql = " SELECT SUM(price) AS total
-    FROM cartitems WHERE cartId = $cartid";
+        $sql = "SELECT SUM(quantity * price) AS total
+        FROM cartitems
+        WHERE cartId = $cartid AND selects = 1;
+        ";
         return getOne($sql);
     }
     public function getRaCartIdTrongCart($id)
@@ -266,5 +300,37 @@ class Model_Client
     public function updateCartItem($table, $data, $Where)
     {
         return update($table, $data, $Where);
+    }
+    public function updateCheckCartitem($where, $check, $value)
+    {
+        if ($check === 'all') {
+            $data = [
+                'selects' => $value
+            ];
+            $dk = 'cartId=' . $where;
+            return update('cartitems', $data, $dk);
+        } else {
+            $data = [
+                'selects' => $value
+            ];
+            $dk = 'cartitemId=' . $where;
+            return update('cartitems', $data, $dk);
+        }
+    }
+    // 
+    public function getAllProvince()
+    {
+        $sql = "SELECT * FROM province";
+        return getRaw($sql);
+    }
+    public function getAllDistrict($id)
+    {
+        $sql = "SELECT * FROM district WHERE province_id = $id";
+        return getRaw($sql);
+    }
+    public function getAllWards($id)
+    {
+        $sql = "SELECT * FROM wards WHERE district_id = $id";
+        return getRaw($sql);
     }
 }
