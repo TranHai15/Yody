@@ -112,7 +112,7 @@
                             <?php foreach ($AllSize as $size): ?>
                                 <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
                                     class="size-option <?= $size['sizeId'] == $OneVariations['sizeId'] ? "active__size" : "" ?>"
-                                    data-quantity="<?= $size['sizeId'] == $OneVariations['sizeId'] ? "$size[quantity]" : 0 ?>">
+                                    data-quantity="<?= $size['sizeId'] == $OneVariations['sizeId'] ? $size['quantity'] : 0 ?>">
                                     <?= $size['size'] ?></div>
                             <?php endforeach; ?>
                         </div>
@@ -121,7 +121,7 @@
                         <h3 class="detail__number">Số lượng</h3>
                         <div class="row justify-content-between align-items-center">
                             <div class="number row align-items-center">
-                                <button id="decrease giam" class="btn" onclick="updateSoLuongChon(-1)">-</button>
+                                <button id="decrease " class="btn giam" onclick="updateSoLuongChon(-1)">-</button>
                                 <span id="soluongchon" class="hienthi">1</span>
                                 <button id="increase " class="btn tang" onclick="updateSoLuongChon(1)">+</button>
                             </div>
