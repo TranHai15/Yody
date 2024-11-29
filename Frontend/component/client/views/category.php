@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <?php require_once(HF . "header.php")  ?>
     <div>
         <div class="grid wide row align-items-center">
@@ -19,7 +20,12 @@
             <span class="past__product--category"></span>
         </div>
         <div class="grid wide name__category ">
-            Nam
+            <?php foreach ($category as $cap1):    ?>
+                <?php if ($cap1['categoryId'] === $kq[0]['categoryId']):   ?>
+                    <a style="cursor: pointer;" href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"><?= $cap1['name'] ?></a>
+                <?php endif  ?>
+            <?php endforeach   ?>
+
         </div>
         <div class="grid wide">
             <div class="intro__products row">
