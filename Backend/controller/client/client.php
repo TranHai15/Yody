@@ -32,11 +32,12 @@ class Controller_Client
         $Client = new Model_Client;
         $TopProduct = $Client->getAllProducts();
         // $TopProduct = $Client->getAllProducts();
-
+        $getAllSp = $Client->getAll();
+        // checkloi($getAllSp);
         $slides =  $Client->get_Slide_Imgs();
         // $slides =  $Client->get_Slide_Imgs();
 
-        View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct]);
+        View(FRONTEND__CLIENT, $file, ["slides" => $slides, "TopProduct" => $TopProduct, "getAllSp" => $getAllSp]);
     }
 
 
@@ -249,9 +250,10 @@ class Controller_Client
         $past = $_GET['name'];
         // checkloi($past);
         $event = new Model_Client;
+        $TopProduct = $event->getAllProducts();
         $dulieulayra = $event->goiEventtheoPast($past);
         // checkloi($dulieulayra);
-        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
+        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra, "TopProduct" => $TopProduct]);
     }
     public function order($file = 'message')
     {

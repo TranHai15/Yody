@@ -18,38 +18,45 @@
                 <p>Đơn hàng</p>
             </div>
             <div class="order-list">
-                <?php foreach ($dulieulayra as $dd) : ?>
-                    <div class="order-item">
-                        <input type="checkbox" checked disabled>
-                        <img src="<?= $dd['variationImage'] ?>" alt="T-shirt">
-                        <div class="order-detail">
-                            <p><?= $dd['productName'] ?></p>
-                            <div class="order-price">
-                                <?= $dd['variationPrice'] - ($dd['variationPrice'] * $dd['variationSale'] / 100) ?>
-                                <?php if ($dd['variationSale'] > 0): ?>
-                                    <span><del><?= $dd['variationPrice'] ?></del></span>
-                                <?php endif; ?>
+                <?php if (!empty($dulieulayra)) : ?>
+                    <?php foreach ($dulieulayra as $dd) : ?>
+                        <div class="order-item">
+                            <input type="checkbox" checked disabled>
+                            <img src="<?= $dd['variationImage'] ?>" alt="T-shirt">
+                            <div class="order-detail">
+                                <p><?= $dd['productName'] ?></p>
+                                <div class="order-price">
+                                    <?= $dd['variationPrice'] - ($dd['variationPrice'] * $dd['variationSale'] / 100) ?>
+                                    <?php if ($dd['variationSale'] > 0): ?>
+                                        <span><del><?= $dd['variationPrice'] ?></del></span>
+                                    <?php endif; ?>
+                                </div>
+                                <p>Màu: <?= $dd['variationColor'] ?></p>
+                                <p>Trạng thái: <span class="status"><?= $dd['orderStatusDescription'] ?></span></p>
                             </div>
-
-                            <p>Màu: <?= $dd['variationColor'] ?></p>
-
-                            <p>Trạng thái: <span class="status"><?= $dd['orderStatusDescription'] ?></span></p>
+                            <button class="btn-detail" onclick="showDetails(event)">Chi tiết</button>
+                            <div class="popup hidden">
+                                <p><strong>Trạng thái:</strong> <?= $dd['orderStatusDescription'] ?></p>
+                                <p><strong>Ngày đặt hàng:</strong> <?= $dd['orderCreateAt'] ?></p>
+                                <p><strong>Tên sản phẩm:</strong> <?= $dd['productName'] ?></p>
+                                <p><strong>Màu:</strong> <?= $dd['variationColor'] ?></p>
+                                <p><strong>Size:</strong> <?= $dd['sizeName'] ?></p>
+                                <p><strong>Số lượng:</strong> <?= $dd['quantity'] ?></p>
+                                <p><strong>Số tiền phải trả:</strong> <?= $dd['sumPrice'] ?></p>
+                                <button class="close-btn" onclick="closePopup(event)">Đóng</button>
+                            </div>
                         </div>
-                        <button class="btn-detail" onclick="showDetails(event)">Chi tiết</button>
-                        <div class="popup hidden">
-                            <p><strong>Trạng thái:</strong> <?= $dd['orderStatusDescription'] ?></p>
-                            <p><strong>Ngày đặt hàng:</strong> <?= $dd['orderCreateAt'] ?></p>
-                            <p><strong>Tên sản phẩm:</strong> <?= $dd['productName'] ?></p>
-                            <p><strong>Màu:</strong> <?= $dd['variationColor'] ?></p>
-                            <p><strong>Size:</strong> <?= $dd['sizeName'] ?></p>
-                            <p><strong>Số lượng:</strong> <?= $dd['quantity'] ?></p>
-                            <p><strong>Số tiền phải trả:</strong> <?= $dd['sumPrice'] ?></p>
-                            <button class="close-btn" onclick="closePopup(event)">Đóng</button>
-                        </div>
+                    <?php endforeach ?>
+                <?php else: ?>
+                    <!-- Hiển thị nút nếu không có dữ liệu -->
+                    <div class="no-order">
+                        <p>Bạn chưa có đơn hàng nào!</p>
+                        <a href="<?= P ?>" class="btn-order-now">Hãy đặt hàng ngay</a>
                     </div>
-                <?php endforeach ?>
+                <?php endif; ?>
             </div>
         </main>
+
 
         <!-- Lịch sử mua hàng -->
         <main class="history-section grid wide">
