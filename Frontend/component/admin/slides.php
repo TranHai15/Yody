@@ -23,10 +23,9 @@
                         <td><img src="<?= $sl['url'] ?>" alt="" width="50%"></td>
                         <td><?= $sl['title'] ?></td>
                         <td><?= $sl['past'] ?></td>
-                        <td class="action-buttons">
-                            <a class="btn btn-primary btn-sm" href="<?= P ?>/admin?EditSlide=<?= $sl['sildeId'] ?>">Chỉnh Sửa</a>
+                        <td class="action-buttons" style="width: 100px;">
+                            <a class="btn btn-primary btn-sm" href="<?= P ?>/admin?EditSlide=<?= $sl['sildeId'] ?>">Sửa</a>
                             <a class="btn btn-danger btn-sm" href="<?= P ?>/admin?DeleteSlide=<?= $sl['sildeId'] ?>" onclick="return confirm('Bạn chắc chắn muốn xóa không?')">Xoa</a>
-
                         </td>
                     </tr>
                 <?php endforeach ?>
