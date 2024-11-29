@@ -233,3 +233,5 @@ function clearError(input) {
     input.classList.remove("invalid");
   }
 }
+
+const phuongthuc = document.querySelector(".checkout__paymentMethod-input-2");
