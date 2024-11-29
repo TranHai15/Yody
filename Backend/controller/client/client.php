@@ -52,6 +52,12 @@ class Controller_Client
         $AllVariation = $Client->getAllVariationWhereProductId($productId);
         $AllSize = $Client->getAllSizeWhereProductIdWhereVariationId($idVariation);
         $AllImage = $Client->getAllImageWhereProductIdWhereVariationId($idVariation);
+
+        $category = $Client->getAllCategories();
+        // var_dump($category)
+        // var_dump($category)
+        // lấy toàn bộ child category
+        $child = $Client->getAllChildCategories();
         // checkloi($OneVariations);
         // checkloi($OneVariations['productId']);
 
@@ -65,6 +71,8 @@ class Controller_Client
                 "AllImage" => $AllImage,
                 "AllSize" => $AllSize,
                 "AllVariation" => $AllVariation,
+                "category" => $category,
+                "child" => $child,
             ]
         );
     }
@@ -74,17 +82,17 @@ class Controller_Client
         $search = trim(htmlspecialchars($_GET['sr'] ?? ""));
 
         $kq = (new Model_Client)->searchProducts($search);
-
+        $category = (new Model_Client)->getAllCategories();
 
         // checkloi($kq);
-        View(FRONTEND__CLIENT, $file, ["search" => $search, "kq" => $kq]);
+        View(FRONTEND__CLIENT, $file, ["search" => $search, "kq" => $kq,  "category" => $category]);
     }
     public function locCategory($file = 'category')
     {
         $id = $_GET['id'] ?? '';
         $kq = (new Model_Client)->categoryLoc($id);
-
-        View(FRONTEND__CLIENT, $file, ["kq" => $kq]);
+        $category = (new Model_Client)->getAllCategories();
+        View(FRONTEND__CLIENT, $file, ["kq" => $kq, "category" => $category]);
     }
 
     public function dodulieuraCart($file = 'cart')
@@ -92,11 +100,16 @@ class Controller_Client
 
         $giohang = new Model_Client;
         $id = $_GET['id'] ?? "";
+        if ($id === 'vodanh') {
+            $cartId = [];
+            $dulieu = [];
+            $tongTienPhaiTra = ['total' => null];
+            View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+        }
         $cartId = $giohang->getRaCartIdTrongCart($id);
         $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
         // checkloi($cartId);
         $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
-        // checkloi($tongTienPhaiTra);
         View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
     }
     public function dodulieuraPay($file = 'pay')
@@ -337,12 +350,15 @@ class Controller_Client
                         break; // Dừng vòng lặp nếu có lỗi
                     }
                 endfor;
+                $kq = (new Model_Client)->getNumber($userId);
+                $sl = $kq[0]['total_quantity'];
+                // checkloi($sl);
                 // checkloi($sanpham);
                 setsession('order', 'Thanh Toán thành công');
             } else {
                 setsession('order',  'Thanh Toán thất bại');
             }
-            View(FRONTEND__CLIENT, $file, []);
+            View(FRONTEND__CLIENT, $file, ['sl' => $sl]);
         }
     }
     public function getOrder($file = 'history')

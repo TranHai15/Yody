@@ -62,3 +62,22 @@ if (isPost()) {
         }
     }
 }
+
+if (isset($_GET['checkquan'])) {
+    $id = $_GET['checkquan'] ?? "";
+    $soluong = getOne("SELECT quantity FROM cartitems WHERE cartitemId = $id");
+    if ($soluong) {
+        echo json_encode(array('status' => 'success', 'soluong' => $soluong));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'KHong có sản phẩm'));
+    }
+}
+if (isset($_GET['deleteCartItemr'])) {
+    $id = $_GET['deleteCartItemr'] ?? "";
+    $soluong = (new Model_Client())->deleteCartitem($id);
+    if ($soluong) {
+        echo json_encode(array('status' => 'success', 'message' => "xoa thanh cong"));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'KHong có sản phẩm'));
+    }
+}

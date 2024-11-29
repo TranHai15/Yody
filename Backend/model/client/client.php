@@ -371,6 +371,12 @@ class Model_Client
         $dk = 'sizeId=' . $sizeId;
         return update('sizevariations', ['quantity' => $numberNew], $dk);
     }
+
+
+    public function deleteCartitem($id)
+    {
+        return delete('cartitems', "cartitemId=$id");
+    }
     public function getOrdersandOrderItem($userId)
     {
         $sql = "SELECT 

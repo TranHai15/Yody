@@ -1,5 +1,6 @@
 <?php
 //  kiem tra xem phuong thuc gui la phuong thuc nao
+
 function isGet()
 {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {

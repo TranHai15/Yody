@@ -94,3 +94,55 @@ autoSlideInterval = setInterval(goToNextSlide, 3000);
 
 // Cập nhật slide ban đầu
 updateSlide();
+
+const lichsuluulia = localStorage.getItem("dangnhapmuahang");
+console.log(lichsuluulia);
+if (lichsuluulia !== null) {
+  window.location.href = lichsuluulia;
+  localStorage.removeItem("dangnhapmuahang");
+}
+document.querySelectorAll(".product__variation-link").forEach((link) => {
+  let lastHoveredImg = null; // Biến lưu trữ ảnh hover gần nhất
+  let lastActiveItem = null; // Biến lưu trữ phần tử active trước đó
+
+  link.addEventListener("mouseenter", (event) => {
+    // Lấy ảnh từ thuộc tính data-images và thay đổi ảnh chính
+    const imgSrc = event.target.closest("a").getAttribute("data-images");
+    const mainImage = event.target
+      .closest(".product")
+      .querySelector(".product__image img");
+    mainImage.setAttribute("src", imgSrc); // Thay đổi ảnh chính
+
+    // Cập nhật ảnh hover
+    lastHoveredImg = imgSrc; // Lưu lại ảnh vừa hover
+
+    // Di chuyển trạng thái active lên phần tử mới
+    const currentItem = event.target.closest(".product__variation--item");
+
+    // Xóa bỏ trạng thái active từ phần tử trước đó
+    if (lastActiveItem) {
+      lastActiveItem.classList.remove("active__product--variation");
+    }
+
+    // Thêm trạng thái active vào phần tử mới
+    currentItem.classList.add("active__product--variation");
+
+    // Cập nhật phần tử active
+    lastActiveItem = currentItem;
+  });
+
+  link.addEventListener("mouseleave", (event) => {
+    // Giữ lại ảnh hover gần nhất khi chuột rời khỏi
+    const mainImage = event.target
+      .closest(".product")
+      .querySelector(".product__image img");
+    if (lastHoveredImg) {
+      mainImage.setAttribute("src", lastHoveredImg); // Giữ lại ảnh đã hover
+    }
+
+    // Giữ trạng thái active ở phần tử cuối cùng khi chuột rời
+    if (lastActiveItem) {
+      lastActiveItem.classList.add("active__product--variation");
+    }
+  });
+});

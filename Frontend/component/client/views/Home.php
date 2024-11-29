@@ -44,7 +44,6 @@
                 </section>
 
                 <section class="products row  justify-content-between grid wide">
-
                     <?php foreach ($TopProduct as $Product): ?>
                         <?php $name = replaceSpacesWithHyphen($Product['name']); ?>
                         <article class="product l-3 m-4 c-12">
@@ -56,29 +55,18 @@
                                 <div class="product__price row align-items-center">
                                     <?php
                                     $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100));
-
                                     ?>
                                     <span class='price__new'>
-                                        <?=
-                                        $Product['old_price'] > 0
-                                            ?  number_format($sale, 0, ',', '.') . "đ"
-                                            : number_format($Product['new_price'], 0, ',', '.') . "đ";
-                                        ?>
+                                        <?= $Product['old_price'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : number_format($Product['new_price'], 0, ',', '.') . "đ"; ?>
                                     </span>
-                                    <?=
-                                    $Product['old_price'] > 0
-                                        ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>"
-                                        : "";
-                                    ?>
-
+                                    <?= $Product['old_price'] > 0 ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>" : ""; ?>
                                 </div>
                                 <div class="product__variation row align-items-center">
-
                                     <?php
-                                    $variations = json_decode($Product['variations'], true); ?>
-                                    <?php foreach ($variations as $key => $variation) : ?>
+                                    $variations = json_decode($Product['variations'], true);
+                                    foreach ($variations as $key => $variation): ?>
                                         <a href="<?= P ?>/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
-                                            data-images="<?= $variation['image'] ?>">
+                                            data-images="<?= $variation['image'] ?>" class="product__variation-link">
                                             <span
                                                 class="product__variation--item <?= $variation['variationId'] == $Product['colorId'] ? 'active__product--variation' : '' ?>"
                                                 style="background-color: <?= $variation['anhColor'] ?>">
@@ -90,6 +78,7 @@
                             </a>
                         </article>
                     <?php endforeach; ?>
+
                 </section>
                 <button class="row btn__view">Xem thêm</button>
             </div>
@@ -484,6 +473,7 @@
 
     <?php require_once(HF . "footer.php")  ?>
 </body>
-<script src="Frontend/Js/home.js" defer></script>
+<script src="Frontend/Js/home.js"></script>
+<!-- <script src="Frontend/Js/detail.js"></script> -->
 
 </html>

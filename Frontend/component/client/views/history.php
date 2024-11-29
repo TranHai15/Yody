@@ -17,13 +17,11 @@
             <div class="section-title">
                 <p>Đơn hàng</p>
             </div>
-
             <div class="order-list">
                 <?php foreach ($dulieulayra as $dd) : ?>
                     <div class="order-item">
                         <input type="checkbox" checked disabled>
-                        <img src="<?= $dd['variationImage'] ?>"
-                            alt="T-shirt">
+                        <img src="<?= $dd['variationImage'] ?>" alt="T-shirt">
                         <div class="order-detail">
                             <p><?= $dd['productName'] ?></p>
                             <div class="order-price">

@@ -2,11 +2,15 @@
 <link rel="stylesheet" href="Frontend/Css/grid.css?ver=3">
 <?php
 session_start();
+require_once("./Backend/common/sendMail.php");
 
 require_once("config.php");
+require_once('./Backend/common/function.php');
 require_once("./Backend/controller/client/client.php");
 require_once("./Backend/controller/admin/admin.php");
 
+
+// sendMail('thangle12112005@gmail.com', 'HẢi gửi ', 'test quen mat khau');
 // Get URI path
 $basePath = P;
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

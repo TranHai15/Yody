@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     numberCartElement.innerText = cartLoca;
   };
 
+  let idCartItemsss = "";
   // Xử lý sự kiện tăng/giảm số lượng
   const updateQuantity = async (button, change) => {
     const cartQuantityElement = button.closest(".cart__quantity");
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const product__item = document
       .querySelector(".product__item")
       .getAttribute("data-cartId");
+    idCartItemsss = cartQuantityElement.dataset.cartitem;
     const data = {
       productId: cartQuantityElement.dataset.cartitem,
       variationId: cartQuantityElement.dataset.variationid,
@@ -66,7 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(result.message);
       }
     } else {
-      alert("Số lượng không thể nhỏ hơn 1!");
+      if (confirm("ban co muon xoa no ko")) {
+        deleteCartItem(idCartItemsss);
+        // const idC = checkbox.closest(".product__item").dataset.cartitem;
+        // console.log(idCartItemsss);
+        window.location.href = window.location.href;
+      } else {
+        alert("df");
+      }
     }
   };
 
@@ -127,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
   productCheckboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
       const productId = checkbox.closest(".product__item").dataset.cartitem;
+
       const isChecked = checkbox.checked;
       const cartId = document
         .querySelector(".product__item")
@@ -195,3 +205,27 @@ document.querySelector("#btn__confirm").addEventListener("click", (e) => {
     alert("vui long chon 1 san pham");
   }
 });
+
+async function deleteCartItem(id) {
+  try {
+    const response = await fetch(
+      `Backend/controller/client/cartAjax.php?deleteCartItemr=${id}`
+    );
+
+    // Kiểm tra phản hồi từ backend
+    if (!response.ok) {
+      throw new Error("Yêu cầu không thành công");
+    }
+
+    // const result = await response.json();
+    // console.log(result.data.total);
+    // const price = result.data.total;
+    // console.log(price);
+    // updateTotalPrice(price);
+    // return result; // Trả về kết quả JSON nhận được từ backend
+    console.log(response);
+  } catch (error) {
+    console.error("Lỗi khi cập nhật giỏ hàng:", error);
+    return { status: false, message: "Không thể cập nhật giỏ hàng." };
+  }
+}

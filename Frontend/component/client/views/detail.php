@@ -16,11 +16,23 @@
     <div class="grid wide row align-items-center">
         <span><a class="past__product" href="<?= P ?>/">Trang Chủ </a></span>
         <span class="past__icon--next"><img src="Frontend/public/svg/next.svg" alt=""></span>
-        <span class="past__product--category"> Nam</span> <span class="past__icon--next"><img
-                src="Frontend/public/svg/next.svg" alt=""></span>
-        <span class="past__product--category"> Quần nam </span> <span class="past__icon--next"><img
-                src="Frontend/public/svg/next.svg" alt=""></span>
-        <span class="past__product--category"> Quần Jeans Nam Tapered Lycra Thêu Túi</span>
+        <span class="past__product--category">
+
+            <?php foreach ($category as $cap1):    ?>
+                <?php if ($cap1['categoryId'] === $OneVariations['categoryId']):   ?>
+                    <a style="cursor: pointer;" href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"><?= $cap1['name'] ?></a>
+                <?php endif  ?>
+            <?php endforeach   ?>
+
+        </span> <span class="past__icon--next"><img src="Frontend/public/svg/next.svg" alt=""></span>
+        <span class="past__product--category">
+            <?php foreach ($child as $cap2):    ?>
+                <?php if ($cap2['childId'] === $OneVariations['childId']):   ?>
+                    <?= $cap2['name'] ?>
+                <?php endif  ?>
+            <?php endforeach   ?>
+        </span> <span class="past__icon--next"><img src="Frontend/public/svg/next.svg" alt=""></span>
+        <span class="past__product--category"> <?= $OneVariations['name'] ?></span>
     </div>
     <!-- main -->
     <div>
@@ -397,6 +409,7 @@
     </div>
     <?php require_once(HF . "footer.php")  ?>
     <script src="Frontend/Js/detail.js"></script>
+
 
 </body>
 
