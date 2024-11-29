@@ -100,21 +100,19 @@
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1): ?>
                             <ul class="user-options">
                                 <li><a href="<?= P ?>/admin">Vào trang quản trị</a></li>
-                                <li><a href="/change-password">Thay đổi mật khẩu</a></li>
+                                <li><a href="/<?= P ?>/forgot">Thay đổi mật khẩu</a></li>
                                 <li><a href="/settings">Cài đặt</a></li>
                                 <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
                             </ul>
                         <?php else: ?>
                             <ul class="user-options">
                                 <li><a href="<?= P ?>/history">Lịch sử mua hàng</a></li>
-                                <li><a href="/change-password">Thay đổi mật khẩu</a></li>
+                                <li><a href="<?= P ?>/forgot">Thay đổi mật khẩu</a></li>
                                 <li><a href="/settings">Cài đặt</a></li>
                                 <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
                             </ul>
                         <?php endif; ?>
-
                     </div>
-
                 </div>
             </span>
         </div>

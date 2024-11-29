@@ -191,7 +191,8 @@
                     <article class="comment__item">
                         <div class="comment__profile">
                             <img src="<?= $data['userAvatar'] ?>" alt="User Profile">
-                            <p class="comment__profile-username"><?= $data['userName'] ?></p>
+                            <p class="comment__profile-username" style="  overflow:hidden; width: 90px; ">
+                                <?= $data['userName'] ?></p>
                         </div>
                         <div class="comment__body">
                             <div class="comment__header">

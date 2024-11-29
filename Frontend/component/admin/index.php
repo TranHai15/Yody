@@ -196,6 +196,7 @@
             $urlPath === "{$basePath}/admin"  && $query === "themProduct" => fn() => $AdminCtl->Product(),
             // Xóa người dùng
             $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteProduct']) => fn() => $AdminCtl->deleteProduct(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['FilterCategory']) => fn() => $AdminCtl->FilterCategory(),
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Product"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

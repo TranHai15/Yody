@@ -204,6 +204,12 @@ class Model_Admin
     {
         return delete($table, $id);
     }
+    public function getAllProductByCategoryId($id)
+    {
+
+        $sql = "SELECT * FROM products where categoryId=$id";
+        return getRaw($sql);
+    }
 }
 
 // 

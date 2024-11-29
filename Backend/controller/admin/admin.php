@@ -462,6 +462,21 @@ class Controller__Admin
         ]);
     }
 
+    public function FilterCategory($file = 'products')
+    {
+        $Admin = new Model_Admin;
+        $id = $_GET['FilterCategory'] ?? "";
+        $Client = new Model_Client;
+        $category = $Client->getAllCategories();
+        $child = $Client->getAllChildCategories();
+        $dataAllProduct = $Admin->getAllProductByCategoryId($id);
+        View(FRONTEND__ADMIN, $file, [
+            'dataAllProduct' => $dataAllProduct,
+            "category" => $category,
+            "child" => $child,
+        ]);
+    }
+
     public function ProductView($file = "viewProduct")
     {
         $Admin = new Model_Admin;
