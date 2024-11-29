@@ -338,4 +338,37 @@ class Model_Client
         $sql = "SELECT * FROM slides WHERE past = '$past' ";
         return getOne($sql);
     }
+    public function getAddress($province_id, $district_id, $wards_id)
+    {
+        $sql = "SELECT p.name AS Tp , d.name AS Huyen , w.name AS Xa  FROM province AS p JOIN district AS d ON p.province_id = d.province_id 
+        JOIN wards AS w ON d.district_id = w.district_id WHERE p.province_id =$province_id AND d.district_id=$district_id AND w.wards_id=$wards_id";
+        return getOne($sql);
+    }
+    public function insertOrder($table, $data)
+    {
+        return insert($table, $data);
+    }
+    public function getAllcartItemByuserId($id, $dk = 1)
+    {
+        if ($dk === 1) {
+            $sql = "SELECT * FROM cartitems WHERE cartId = (SELECT cartId FROM carts WHERE userId= $id) AND selects=1";
+            return getRaw($sql);
+        } else {
+            $sql = "SELECT * FROM cartitems WHERE cartId = (SELECT cartId FROM carts WHERE userId= $id) AND selects=1";
+            return getRaw($sql);
+        }
+    }
+    public function insertOrderItem($table, $data)
+    {
+        return insert($table, $data);
+    }
+    public function deleteQuatitySize($sizeId, $soluong)
+    {
+        $sql = "SELECT quantity FROM sizevariations WHERE sizeId = $sizeId";
+        $dataNumber = getOne($sql);
+        // checkloi($dataNumber['quantity']);
+        $numberNew = (int)($dataNumber['quantity'] - $soluong);
+        $dk = 'sizeId=' . $sizeId;
+        return update('sizevariations', ['quantity' => $numberNew], $dk);
+    }
 }

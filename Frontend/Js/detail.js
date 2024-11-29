@@ -24,13 +24,13 @@ let soluongchon = 1; // Giá trị mặc định ban đầu
 let getNumberSanpham = document
   .querySelector(".size-option")
   .getAttribute("data-quantity");
-
+console.log(getNumberSanpham);
 // Hàm cập nhật số lượng
 function updateSoLuongChon(change) {
   const soluongchonElement = document.getElementById("soluongchon");
   const decreaseButton = document.getElementById("decrease");
 
-  if (soluongchon > getNumberSanpham) {
+  if (soluongchon < getNumberSanpham) {
     // Cập nhật số lượng (không cho phép số lượng nhỏ hơn 1)
     soluongchon = Math.max(1, soluongchon + change);
 

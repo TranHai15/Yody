@@ -240,4 +240,108 @@ class Controller_Client
         // checkloi($dulieulayra);
         View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
     }
+    public function order($file = 'message')
+    {
+        if (isPost()) {
+            $data = filter();
+            // checkloi($data);
+            $userId = $data['userId'];
+            $statusId = $data['statusId'];
+            $payStatusId = $data['payStatusId'];
+            $customer_name = $data['customer_name'];
+            $phone_number = $data['phone_number'];
+            $email = $data['email'];
+            $province_id = $data['province_id'];
+            $district = $data['district'];
+            $ward = $data['ward'];
+            $note = $data['note'];
+            $payment_method = $data['payment_method'];
+            $street_address = $data['street_address'];
+            $sumprice = $data['sumprice'];
+            $date = date('Y-m-d H:i:s');
+
+            // checkloi($diachi);
+            $address = (new Model_Client)->getAddress($province_id, $district, $ward);
+            $xong = $address['Tp'] . ', ' . $address['Huyen'] . ', ' . $address['Xa'] . ', ' . $street_address;
+            // checkloi($xong);
+            $data_new = [
+                'statusId' => $statusId,
+                'userId' => $userId,
+                'sumprice' => $sumprice,
+                'address' => $xong,
+                'phone' => $phone_number,
+                'payId' => $payment_method,
+                'payStatusId' => $payStatusId,
+                'updateAt' => $date,
+                'createAt' => $date,
+            ];
+            $sql = "INSERT INTO orders (statusId, userId, sumprice, address, phone, payId, payStatusId, updateAt, createAt)
+            VALUES (:statusId, :userId, :sumprice, :address, :phone, :payId, :payStatusId, :updateAt, :createAt)";
+            $pdo = Connect();
+            // Chuẩn bị statement
+            $stmt = $pdo->prepare($sql);
+
+            // Gán giá trị vào các tham số
+            $stmt->bindParam(':statusId', $data_new['statusId']);
+            $stmt->bindParam(':userId', $data_new['userId']);
+            $stmt->bindParam(':sumprice', $data_new['sumprice']);
+            $stmt->bindParam(':address', $data_new['address']);
+            $stmt->bindParam(':phone', $data_new['phone']);
+            $stmt->bindParam(':payId', $data_new['payId']);
+            $stmt->bindParam(':payStatusId', $data_new['payStatusId']);
+            $stmt->bindParam(':updateAt', $data_new['updateAt']);
+            $stmt->bindParam(':createAt', $data_new['createAt']);
+
+            // Thực hiện câu lệnh
+            $stmt->execute();
+
+            // Lấy ID của đơn hàng vừa thêm
+            $order_id = $pdo->lastInsertId();
+            // checkloi($order_id);
+
+            if ($order_id > 0) {
+                $sanpham = (new Model_Client)->getAllcartItemByuserId($userId);
+                for ($i = 0; $i < count($sanpham); $i++):
+
+                    $dataNew = [
+                        'orderId' => $order_id,
+                        'variationId' => $sanpham[$i]['variationId'],
+                        'sizeId' => $sanpham[$i]['sizeId'],
+                        'quantity' => $sanpham[$i]['quantity'],
+                        'price' => $sanpham[$i]['price'],
+                    ];
+                    $sizeId = $sanpham[$i]['sizeId'];
+                    $quantity = $sanpham[$i]['quantity'];
+
+                    try {
+                        // Thêm dữ liệu vào bảng orderitems
+                        (new Model_Client)->insertOrderItem('orderitems', $dataNew);
+                        (new Model_Client())->deleteQuatitySize($sizeId, $quantity);
+                    } catch (Exception $e) {
+                        // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
+                        echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
+                        break; // Dừng vòng lặp nếu có lỗi
+                    }
+
+                endfor;
+
+                for ($i = 0; $i < count($sanpham); $i++):
+                    $dk =   'cartitemId=' .  $sanpham[$i]['cartitemId'];
+                    try {
+                        // Thêm dữ liệu vào bảng orderitems
+                        delete('cartitems', $dk);
+                    } catch (Exception $e) {
+                        // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
+                        echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
+                        break; // Dừng vòng lặp nếu có lỗi
+                    }
+                endfor;
+                // checkloi($sanpham);
+                setsession('order', 'Thanh Toán thành công');
+            } else {
+                setsession('order',  'Thanh Toán thất bại');
+            }
+            View(FRONTEND__CLIENT, $file, []);
+        }
+    }
 }
