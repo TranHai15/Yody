@@ -223,6 +223,36 @@ class Model_Client
         ORDER BY p.productId LIMIT 15";
         return getRaw($sql);
     }
+
+    //************************** */ Lấy 4 sp có view cao***************************
+    public function get4productsWhereViewDesc()
+    {
+        $sql = "SELECT 
+    p.productId,
+    p.name,
+    MIN(v.price) AS new_price,
+    MIN(v.sale) AS old_price,
+    MIN(v.image) AS ImageMain,
+    MIN(v.variationId) AS colorId,
+    JSON_ARRAYAGG(
+        JSON_OBJECT(
+            'anhColor', v.anhColor,
+            'image', v.image,
+            'variationId', v.variationId
+        )
+    ) AS variations
+FROM 
+    products AS p
+JOIN 
+    variations AS v ON p.productId = v.productId
+GROUP BY 
+    p.productId
+ORDER BY 
+    p.view DESC
+LIMIT 4
+";
+        return getRaw($sql);
+    }
     // *********************Thêm giỏ hàng******************************************
     // *********************Thêm giỏ hàng******************************************
     // *********************Thêm giỏ hàng******************************************
@@ -434,6 +464,32 @@ class Model_Client
     INNER JOIN products p ON v.productId = p.productId
     WHERE o.userId = $userId;
     ";
+        return getRaw($sql);
+    }
+    // ******************************* Đổ comment ra*************************
+    public function getAllCommentWhereProductId($productId)
+    {
+        $sql = "SELECT 
+    c.commentId,
+    c.content,
+    c.image AS commentImage,
+    c.createAt AS commentCreatedAt,
+    c.rating,
+    u.name AS userName,
+    u.avata AS userAvatar,
+    p.name AS productName,
+    MIN(v.image) AS variationImage
+FROM 
+    comments c
+LEFT JOIN users u ON c.userId = u.userId
+LEFT JOIN products p ON c.productId = p.productId
+LEFT JOIN variations v ON p.productId = v.productId
+WHERE 
+    c.productId = $productId
+GROUP BY 
+    c.commentId, c.content, c.image, c.createAt, c.rating, u.name, u.avata, p.name;
+
+";
         return getRaw($sql);
     }
 }

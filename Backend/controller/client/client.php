@@ -53,7 +53,7 @@ class Controller_Client
         $AllVariation = $Client->getAllVariationWhereProductId($productId);
         $AllSize = $Client->getAllSizeWhereProductIdWhereVariationId($idVariation);
         $AllImage = $Client->getAllImageWhereProductIdWhereVariationId($idVariation);
-
+        $TopProduct = $Client->get4productsWhereViewDesc();
         $category = $Client->getAllCategories();
         // var_dump($category)
         // var_dump($category)
@@ -62,7 +62,8 @@ class Controller_Client
         // checkloi($OneVariations);
         // checkloi($OneVariations['productId']);
 
-
+        $comment = $Client->getAllCommentWhereProductId($productId);
+        // checkloi($comment);
         View(
             FRONTEND__CLIENT,
 
@@ -74,6 +75,8 @@ class Controller_Client
                 "AllVariation" => $AllVariation,
                 "category" => $category,
                 "child" => $child,
+                "TopProduct" => $TopProduct,
+                "comment" => $comment
             ]
         );
     }

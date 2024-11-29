@@ -183,120 +183,48 @@
         </main>
 
         <!-- comment -->
+
         <section class="comment grid wide">
             <h2 class="comment__detail">Đánh giá sản phẩm</h2>
-            <article class="comment__item">
-                <div class="comment__profile">
-                    <img src="https://file.hstatic.net/200000503583/file/cach-tao-dang-diu-dang__3__1f0d93d7940c4a25adf1ceb1355b33eb.jpg"
-                        alt="User Profile">
-                    <p class="comment__profile-username">Lê Trà My</p>
-                </div>
-                <div class="comment__body">
-                    <div class="comment__header">
-                        <p class="comment__profile-date">25-11-2024 17:23</p>
-                    </div>
-                    <div class="comment__rating">
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9734;</span>
-                    </div>
-                    <div class="comment__content">
-                        <p>"Mình rất hài lòng với sản phẩm của shop! Chất vải mềm mịn, mặc rất thoải mái, đường may chắc
-                            chắn và thiết kế lại cực kỳ đẹp mắt. Giá cả thì hợp lý, mà chất lượng thì vượt ngoài mong
-                            đợi. Giao hàng nhanh, đóng gói cẩn thận, đúng size và form, mặc lên tôn dáng vô cùng. Sau
-                            nhiều lần giặt vẫn không phai màu hay bị nhăn, cảm giác mặc cả ngày cũng rất dễ chịu. Mẫu mã
-                            hiện đại, trẻ trung, phối đồ cũng dễ dàng. Cảm ơn shop vì sản phẩm tuyệt vời!"
-                        </p>
-                    </div>
-                    <div class="comment__image">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
-                            alt="">
-                    </div>
-                </div>
-            </article>
-            <article class="comment__item">
-                <div class="comment__profile">
-                    <img src="https://i.pinimg.com/564x/83/85/82/838582f7cafcbb7c1cd596865ab8075c.jpg"
-                        alt="User Profile">
-                    <p class="comment__profile-username">Nguyễn Hương Giang</p>
-                </div>
-                <div class="comment__body">
-                    <div class="comment__header">
-                        <p class="comment__profile-date">25-11-2024 17:23</p>
-                    </div>
-                    <div class="comment__rating">
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9734;</span>
-                    </div>
-                    <div class="comment__content">
-                        <p>"Chất lượng sản phẩm thực sự làm mình bất ngờ! Từ chất liệu vải co giãn tốt, mềm mại đến màu
-                            sắc sống động đúng như mô tả. Thiết kế cực kỳ đẹp, sang trọng và rất hợp thời trang, ai cũng
-                            hỏi mua ở đâu khi thấy mình mặc. Giá cả thì phải chăng mà dịch vụ chăm sóc khách hàng của
-                            shop cũng cực kỳ tốt, tư vấn nhiệt tình và giao hàng đúng hẹn. Lần tới mình sẽ tiếp tục ủng
-                            hộ và giới thiệu cho bạn bè mua nữa!"</p>
-                    </div>
-                    <div class="comment__image">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
-                            alt="">
-                    </div>
-                </div>
-            </article>
-            <article class="comment__item">
-                <div class="comment__profile">
-                    <img src="https://chontruong.org/wp-content/uploads/2024/09/anh-gai-xinh-che-mat-2.jpg"
-                        alt="User Profile">
-                    <p class="comment__profile-username">Cao Thùy Dương</p>
-                </div>
-                <div class="comment__body">
-                    <div class="comment__header">
-                        <p class="comment__profile-date">25-11-2024 17:23</p>
-                    </div>
-                    <div class="comment__rating">
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9733;</span>
-                        <span class="star">&#9734;</span>
-                    </div>
-                    <div class="comment__content">
-                        <p>"Quần áo của shop thực sự quá tuyệt! Mình mua thử một chiếc nhưng khi nhận hàng thì bất ngờ
-                            với chất lượng, vải rất mềm, đường may tỉ mỉ, không có chỉ thừa, mặc cực kỳ vừa vặn và tôn
-                            dáng. Mẫu mã đẹp, đa dạng, màu sắc lại chuẩn không cần chỉnh. Đặc biệt, giá thành hợp lý,
-                            mua xong mà cảm thấy như săn được hàng chất lượng cao với giá rẻ. Giao hàng nhanh, đóng gói
-                            gọn gàng, rất hài lòng về dịch vụ của shop. Chắc chắn sẽ quay lại mua thêm!"</p>
-                    </div>
-                    <div class="comment__image">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m0a21lo5gr1p43@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-m074ky8t95nxdf@resize_w72_nl.webp"
-                            alt="">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134103-7r98o-lzhkwn9h2yq52a@resize_w72_nl.webp"
-                            alt="">
-                    </div>
-                </div>
-            </article>
+            <?php if (!empty($comment)): ?>
+                <?php foreach ($comment as $data): ?>
+                    <article class="comment__item">
+                        <div class="comment__profile">
+                            <img src="<?= $data['userAvatar'] ?>" alt="User Profile">
+                            <p class="comment__profile-username"><?= $data['userName'] ?></p>
+                        </div>
+                        <div class="comment__body">
+                            <div class="comment__header">
+                                <p class="comment__profile-date"><?= $data['commentCreatedAt'] ?></p>
+                            </div>
+                            <div class="comment__rating">
+                                <?php
+                                $sosao = $data['rating'];
+                                $tongso_sao = 5;
 
+                                for ($i = 1; $i <= $tongso_sao; $i++):
+                                    if ($i <= $sosao): ?>
+                                        <span class="star">&#9733;</span> <!-- Sao đầy -->
+                                    <?php else: ?>
+                                        <span class="star">&#9734;</span> <!-- Sao rỗng -->
+                                <?php endif;
+                                endfor;
+                                ?>
+                            </div>
+
+                            <div class="comment__content">
+                                <p><?= $data['content'] ?></p>
+                            </div>
+                            <div class="comment__image">
+                                <img src="<?= $data['variationImage'] ?>" alt="">
+                            </div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p style="color: green;" class="no-comment">Sản phẩm chưa có đánh giá nào!</p>
+            <?php endif; ?>
         </section>
-
 
 
         <!-- Cos theer ban se thich -->
@@ -304,104 +232,41 @@
             <h2>
                 Có thể bạn sẽ thích
             </h2>
-            <section class="products row  justify-content-between ">
-
-                <article class="product l-3 m-4 c-12">
-                    <a href="<?= P ?>/detail">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                            <div class="overlay__image">
-                                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png"
-                                    alt="">
+            <section class="products row  justify-content-between grid wide">
+                <?php foreach ($TopProduct as $Product): ?>
+                    <?php $name = replaceSpacesWithHyphen($Product['name']); ?>
+                    <article class="product l-3 m-4 c-12">
+                        <a href="<?= P ?>/product?<?= $name ?>&color=<?= $Product['colorId'] ?>">
+                            <div class="product__image">
+                                <img loading="lazy" src="<?= $Product['ImageMain'] ?>" alt="" />
                             </div>
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </a>
-                </article>
-
-                <article class="product l-3 m-4 c-12">
-                    <div class="product__image">
-                        <img loading="lazy"
-                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                            alt="" />
-                        <div class="overlay__image">
-                            <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png"
-                                alt="">
-                        </div>
-                    </div>
-                    <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                    <div class="product__price row align-items-center  ">
-                        <span class="price__new">599.000 đ</span>
-                        <span class="price__old">3333</span>
-                    </div>
-                    <div class="product__variation row align-items-center">
-                        <span class="product__variation--item active__product--variation "></span>
-                        <span class="product__variation--item"></span>
-                        <span class="product__variation--item"></span>
-                        <span class="product__variation--item"></span>
-                    </div>
-                    <div class="product__logo--sale row align-items-center justify-content-center">
-                        <span>-</span>5%
-                    </div>
-                </article>
-                <article class="product l-3 m-4 c-12">
-                    <div class="product__image">
-                        <img loading="lazy"
-                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                            alt="" />
-                    </div>
-                    <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                    <div class="product__price row align-items-center  ">
-                        <span class="price__new">599.000 đ</span>
-                        <span class="price__old">3333</span>
-                    </div>
-                    <div class="product__variation row align-items-center">
-                        <span class="product__variation--item active__product--variation "></span>
-                        <span class="product__variation--item"></span>
-                        <span class="product__variation--item"></span>
-                        <span class="product__variation--item"></span>
-                    </div>
-                    <div class="product__logo--sale row align-items-center justify-content-center">
-                        <span>-</span>5%
-                    </div>
-                </article>
-                <article class="product l-3 m-4 c-12">
-                    <div class="product__image">
-                        <img loading="lazy"
-                            src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                            alt="" />
-                    </div>
-                    <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                    <div class="product__price row align-items-center  ">
-                        <span class="price__new">599.000 đ</span>
-                        <span class="price__old">3333</span>
-                    </div>
-                    <div class="product__variation row align-items-center">
-                        <span class="product__variation--item active__product--variation "></span>
-                        <span class="product__variation--item"></span>
-                        <span class="product__variation--item"></span>
-                        <span class="product__variation--item"></span>
-                    </div>
-                    <div class="product__logo--sale row align-items-center justify-content-center">
-                        <span>-</span>5%
-                    </div>
-                </article>
-
+                            <span class="product__name"><?= $Product['name'] ?></span>
+                            <div class="product__price row align-items-center">
+                                <?php
+                                $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100));
+                                ?>
+                                <span class='price__new'>
+                                    <?= $Product['old_price'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : number_format($Product['new_price'], 0, ',', '.') . "đ"; ?>
+                                </span>
+                                <?= $Product['old_price'] > 0 ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>" : ""; ?>
+                            </div>
+                            <div class="product__variation row align-items-center">
+                                <?php
+                                $variations = json_decode($Product['variations'], true);
+                                foreach ($variations as $key => $variation): ?>
+                                    <a href="<?= P ?>/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
+                                        data-images="<?= $variation['image'] ?>" class="product__variation-link">
+                                        <span
+                                            class="product__variation--item <?= $variation['variationId'] == $Product['colorId'] ? 'active__product--variation' : '' ?>"
+                                            style="background-color: <?= $variation['anhColor'] ?>">
+                                        </span>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                            <?= $Product['old_price'] > 0 ? "<div class='product__logo--sale row align-items-center justify-content-center'><span>-$Product[old_price]%</span></div>" : "" ?>
+                        </a>
+                    </article>
+                <?php endforeach; ?>
 
             </section>
 
