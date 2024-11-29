@@ -34,7 +34,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/cart" && $_GET['id']  => fn() => $Client->dodulieuraCart(),
         $urlPath === "{$basePath}/pay" && $_GET['id']  => fn() => $Client->dodulieuraPay('pay'),
         $urlPath === "{$basePath}/event" && $_GET['name']  => fn() => $Client->goiEvent('event'),
-        $urlPath === "{$basePath}/history" => fn() => require_once FRONTEND__CLIENT . "history.php",
+        $urlPath === "{$basePath}/history" => fn() => $Client->getOrder(),
         $urlPath === "{$basePath}/pay" => fn() => require_once FRONTEND__CLIENT . "pay.php",
         $urlPath === "{$basePath}/form" => fn() => require_once FRONTEND__CLIENT . "form.php",
         $urlPath === "{$basePath}/message" => fn() => require_once FRONTEND__CLIENT . "message.php",

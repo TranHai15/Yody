@@ -371,4 +371,41 @@ class Model_Client
         $dk = 'sizeId=' . $sizeId;
         return update('sizevariations', ['quantity' => $numberNew], $dk);
     }
+    public function getOrdersandOrderItem($userId)
+    {
+        $sql = "SELECT 
+    o.orderId,
+    o.statusId,
+    os.name AS orderStatusName,
+    os.description AS orderStatusDescription,
+    o.userId,
+    o.sumPrice,
+    o.address,
+    o.phone,
+    o.payId,
+    o.payStatusId,
+    o.updateAt AS orderUpdateAt,
+    o.createAt AS orderCreateAt,
+    oi.orderitemId,
+    oi.variationId,
+    oi.sizeId,
+    oi.quantity,
+    oi.price AS itemPrice,
+    v.image AS variationImage,
+    v.color AS variationColor,
+    v.price AS variationPrice,
+    v.sale AS variationSale,
+    v.descripe AS variationDescripe,
+    p.name AS productName,
+    sz.size AS sizeName
+    FROM orders o
+    INNER JOIN orderstatus os ON o.statusId = os.statusId
+    INNER JOIN orderitems oi ON o.orderId = oi.orderId
+    INNER JOIN variations v ON oi.variationId = v.variationId
+    INNER JOIN sizevariations sz ON oi.sizeId = sz.sizeId
+    INNER JOIN products p ON v.productId = p.productId
+    WHERE o.userId = $userId;
+    ";
+        return getRaw($sql);
+    }
 }

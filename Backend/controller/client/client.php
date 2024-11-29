@@ -301,6 +301,7 @@ class Controller_Client
 
             if ($order_id > 0) {
                 $sanpham = (new Model_Client)->getAllcartItemByuserId($userId);
+                // checkloi($sanpham);
                 for ($i = 0; $i < count($sanpham); $i++):
 
                     $dataNew = [
@@ -312,7 +313,7 @@ class Controller_Client
                     ];
                     $sizeId = $sanpham[$i]['sizeId'];
                     $quantity = $sanpham[$i]['quantity'];
-
+                    // checkloi($quantity);
                     try {
                         // Thêm dữ liệu vào bảng orderitems
                         (new Model_Client)->insertOrderItem('orderitems', $dataNew);
@@ -343,5 +344,15 @@ class Controller_Client
             }
             View(FRONTEND__CLIENT, $file, []);
         }
+    }
+    public function getOrder($file = 'history')
+    {
+        $userId = $_SESSION['userId'];
+        // checkloi($userId);
+        $giohang = (new Model_Client);
+        $dulieulayra = $giohang->getOrdersandOrderItem($userId);
+        // checkloi($dulieulayra);
+        // checkloi
+        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
     }
 }

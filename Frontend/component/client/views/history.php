@@ -17,32 +17,39 @@
             <div class="section-title">
                 <p>Đơn hàng</p>
             </div>
+            <?php var_dump($dulieulayra) ?>
             <div class="order-list">
-                <div class="order-item">
-                    <input type="checkbox" checked disabled>
-                    <img src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-polo-nam-apm3519-tit-8-yodyvn-37aff9b7-3131-4177-9d37-85ff05249575.jpg"
-                        alt="T-shirt">
-                    <div class="order-detail">
-                        <p>T-shirt Kid Bé In Khủng Long</p>
-                        <div class="order-price">
-                            125.000 đ <span><del>169.000 đ</del></span>
-                        </div>
-                        <p>Màu: Vàng</p>
+                <?php foreach ($dulieulayra as $dd) : ?>
+                    <div class="order-item">
+                        <input type="checkbox" checked disabled>
+                        <img src="<?= $dd['variationImage'] ?>"
+                            alt="T-shirt">
+                        <div class="order-detail">
+                            <p><?= $dd['productName'] ?></p>
+                            <div class="order-price">
+                                <?= $dd['variationPrice'] - ($dd['variationPrice'] * $dd['variationSale'] / 100) ?>
+                                <?php if ($dd['variationSale'] > 0): ?>
+                                    <span><del><?= $dd['variationPrice'] ?></del></span>
+                                <?php endif; ?>
+                            </div>
 
-                        <p>Trạng thái: <span class="status">Đang chờ duyệt</span></p>
+                            <p>Màu: <?= $dd['variationColor'] ?></p>
+
+                            <p>Trạng thái: <span class="status"><?= $dd['orderStatusDescription'] ?></span></p>
+                        </div>
+                        <button class="btn-detail" onclick="showDetails(event)">Chi tiết</button>
+                        <div class="popup hidden">
+                            <p><strong>Trạng thái:</strong> <?= $dd['orderStatusDescription'] ?></p>
+                            <p><strong>Ngày đặt hàng:</strong> <?= $dd['orderCreateAt'] ?></p>
+                            <p><strong>Tên sản phẩm:</strong> <?= $dd['productName'] ?></p>
+                            <p><strong>Màu:</strong> <?= $dd['variationColor'] ?></p>
+                            <p><strong>Size:</strong> <?= $dd['sizeName'] ?></p>
+                            <p><strong>Số lượng:</strong> <?= $dd['quantity'] ?></p>
+                            <p><strong>Số tiền phải trả:</strong> <?= $dd['sumPrice'] ?></p>
+                            <button class="close-btn" onclick="closePopup(event)">Đóng</button>
+                        </div>
                     </div>
-                    <button class="btn-detail" onclick="showDetails(event)">Chi tiết</button>
-                    <div class="popup hidden">
-                        <p><strong>Trạng thái:</strong> Đang chờ xác nhận</p>
-                        <p><strong>Ngày đặt hàng:</strong> 27/11/2024</p>
-                        <p><strong>Tên sản phẩm:</strong> T-shirt Kid Bé In Khủng Long</p>
-                        <p><strong>Màu:</strong> Vàng</p>
-                        <p><strong>Size:</strong> XL</p>
-                        <p><strong>Số lượng:</strong> 3</p>
-                        <p><strong>Số tiền phải trả:</strong> 300.000đ</p>
-                        <button class="close-btn" onclick="closePopup(event)">Đóng</button>
-                    </div>
-                </div>
+                <?php endforeach ?>
             </div>
         </main>
 
