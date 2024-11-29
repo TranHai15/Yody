@@ -36,9 +36,9 @@
                 <div class="detail__left l-11">
                     <div class="detail__left--img l-1">
                         <?php foreach ($AllImage as $variation_img): ?>
-                            <div class="detail__left--item active--detail__left--item">
-                                <img loading="lazy" src="<?= $variation_img['image'] ?>" alt="">
-                            </div>
+                        <div class="detail__left--item active--detail__left--item">
+                            <img loading="lazy" src="<?= $variation_img['image'] ?>" alt="">
+                        </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="detail__right--img l-10-9">
@@ -78,14 +78,14 @@
 
                         <!-- Hiển thị giá cũ nếu có giảm giá -->
                         <?php if ($hasSale): ?>
-                            <div class="detail__right--price--old" data-price="<?= $salePrice ?>">
-                                <?= number_format($OneVariations['price'], 0, ',', '.') . "đ" ?>
-                            </div>
+                        <div class="detail__right--price--old" data-price="<?= $salePrice ?>">
+                            <?= number_format($OneVariations['price'], 0, ',', '.') . "đ" ?>
+                        </div>
 
-                            <!-- Hiển thị phần trăm giảm giá -->
-                            <div class="detail__right--price--sale">
-                                <span>-<?= $OneVariations['sale'] ?>%</span>
-                            </div>
+                        <!-- Hiển thị phần trăm giảm giá -->
+                        <div class="detail__right--price--sale">
+                            <span>-<?= $OneVariations['sale'] ?>%</span>
+                        </div>
                         <?php endif; ?>
                     </div>
 
@@ -95,13 +95,13 @@
                         <div class="row align-items-center">
                             <?php $name = replaceSpacesWithHyphen($OneVariations['name']); ?>
                             <?php foreach ($AllVariation as $color): ?>
-                                <a href="<?= P ?>/product?<?= $name ?>&color=<?= $color['variationId'] ?>">
-                                    <div style="background-color: <?= $color['anhColor'] ?>"
-                                        data-colorCode="<?= $color['variationCode'] ?>"
-                                        data-variationId="<?= $color['variationId'] ?>"
-                                        class="color-option <?= $color['variationId'] == $OneVariations['variationId'] ? "selected" : "" ?>">
-                                    </div>
-                                </a>
+                            <a href="<?= P ?>/product?<?= $name ?>&color=<?= $color['variationId'] ?>">
+                                <div style="background-color: <?= $color['anhColor'] ?>"
+                                    data-colorCode="<?= $color['variationCode'] ?>"
+                                    data-variationId="<?= $color['variationId'] ?>"
+                                    class="color-option <?= $color['variationId'] == $OneVariations['variationId'] ? "selected" : "" ?>">
+                                </div>
+                            </a>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -110,10 +110,10 @@
                                 class="size__value"><?= $OneVariations['size'] ?></span></span>
                         <div class="row align-items-center">
                             <?php foreach ($AllSize as $size): ?>
-                                <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
-                                    class="size-option <?= $size['sizeId'] == $OneVariations['sizeId'] ? "active__size" : "" ?>"
-                                    data-quantity="<?= $size['sizeId'] == $OneVariations['sizeId'] ? $size['quantity'] : 0 ?>">
-                                    <?= $size['size'] ?></div>
+                            <div data-sizeId="<?= $size['sizeId'] ?>" data-size="<?= $size['size'] ?>"
+                                class="size-option <?= $size['sizeId'] == $OneVariations['sizeId'] ? "active__size" : "" ?>"
+                                data-quantity="<?= $size['sizeId'] == $OneVariations['sizeId'] ? $size['quantity'] : 0 ?>">
+                                <?= $size['size'] ?></div>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -397,6 +397,7 @@
     </div>
     <?php require_once(HF . "footer.php")  ?>
     <script src="Frontend/Js/detail.js"></script>
+
 
 </body>
 

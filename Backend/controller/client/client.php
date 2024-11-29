@@ -92,11 +92,16 @@ class Controller_Client
 
         $giohang = new Model_Client;
         $id = $_GET['id'] ?? "";
+        if ($id === 'vodanh') {
+            $cartId = [];
+            $dulieu = [];
+            $tongTienPhaiTra = ['total' => null];
+            View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+        }
         $cartId = $giohang->getRaCartIdTrongCart($id);
         $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
         // checkloi($cartId);
         $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
-        // checkloi($tongTienPhaiTra);
         View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
     }
     public function dodulieuraPay($file = 'pay')
@@ -336,12 +341,15 @@ class Controller_Client
                         break; // Dừng vòng lặp nếu có lỗi
                     }
                 endfor;
+                $kq = (new Model_Client)->getNumber($userId);
+                $sl = $kq[0]['total_quantity'];
+                // checkloi($sl);
                 // checkloi($sanpham);
                 setsession('order', 'Thanh Toán thành công');
             } else {
                 setsession('order',  'Thanh Toán thất bại');
             }
-            View(FRONTEND__CLIENT, $file, []);
+            View(FRONTEND__CLIENT, $file, ['sl' => $sl]);
         }
     }
 }

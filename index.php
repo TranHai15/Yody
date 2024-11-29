@@ -2,11 +2,15 @@
 <link rel="stylesheet" href="Frontend/Css/grid.css?ver=3">
 <?php
 session_start();
+require_once("./Backend/common/sendMail.php");
 
 require_once("config.php");
+require_once('./Backend/common/function.php');
 require_once("./Backend/controller/client/client.php");
 require_once("./Backend/controller/admin/admin.php");
 
+
+// sendMail('thangle12112005@gmail.com', 'HẢi gửi ', 'test quen mat khau');
 // Get URI path
 $basePath = P;
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -35,7 +39,6 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/pay" && $_GET['id']  => fn() => $Client->dodulieuraPay('pay'),
         $urlPath === "{$basePath}/event" && $_GET['name']  => fn() => $Client->goiEvent('event'),
         $urlPath === "{$basePath}/history" => fn() => require_once FRONTEND__CLIENT . "history.php",
-        $urlPath === "{$basePath}/pay" => fn() => require_once FRONTEND__CLIENT . "pay.php",
         $urlPath === "{$basePath}/form" => fn() => require_once FRONTEND__CLIENT . "form.php",
         $urlPath === "{$basePath}/message" => fn() => require_once FRONTEND__CLIENT . "message.php",
         $urlPath === "{$basePath}/order" => fn() => $Client->order(),

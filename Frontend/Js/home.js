@@ -94,3 +94,10 @@ autoSlideInterval = setInterval(goToNextSlide, 3000);
 
 // Cập nhật slide ban đầu
 updateSlide();
+
+const lichsuluulia = localStorage.getItem("dangnhapmuahang");
+console.log(lichsuluulia);
+if (lichsuluulia !== null) {
+  window.location.href = lichsuluulia;
+  localStorage.removeItem("dangnhapmuahang");
+}
