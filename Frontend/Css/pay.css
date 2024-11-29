@@ -38,12 +38,15 @@ main {
   width: 15px;
   top: 105;
   left: 20px;
+
 }
 .checkout__receiver-email {
   position: absolute;
   width: 15px;
   top: 180;
   left: 20px;
+  overflow: hidden;
+
 }
 
 .checkout__receiver-input {
@@ -230,8 +233,7 @@ main {
   font-weight: 600;
   /* color: #e14337; */
 }
-.tongtien {
-}
+
 
 .form2,
 .form3 {
@@ -275,7 +277,10 @@ main {
 }
 .oooo {
   width: 100%;
+  position: relative;
+
 }
+
 .checkout__paymentMethod-input {
   accent-color: #007bff; /* Đổi màu của radio button */
   width: 18px; /* Kích thước radio */
