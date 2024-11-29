@@ -82,7 +82,7 @@ class Model_Client
         $sql = "SELECT * FROM variationimages WHERE variationId = $idVariations";
         return getRaw($sql);
     }
-
+    // ****************************Slide***********************
     public function get_Slide_Imgs()
     {
         $sql = "SELECT * FROM slides";
@@ -176,7 +176,7 @@ class Model_Client
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+    // ***********************Lấy 4sp*************************88
     public function getAllProducts()
     {
         $sql = "SELECT p.productId,
@@ -199,6 +199,28 @@ class Model_Client
  LIMIT 4;
  ";
 
+        return getRaw($sql);
+    }
+    // ***********************Lấy ra 15 sản phẩm đổ bên dưới****************************
+    public function getAll()
+    {
+        $sql  = "SELECT p.productId,
+        p.name,
+        MIN(v.price) AS new_price,
+        MIN(v.sale) AS old_price,
+        MIN(v.image) AS ImageMain,
+        MIN(v.variationId) AS colorId,
+        JSON_ARRAYAGG(
+            JSON_OBJECT(
+                'anhColor', v.anhColor,
+                'image', v.image,
+                'variationId', v.variationId
+            )
+        ) AS variations
+        FROM products AS p
+        JOIN variations AS v ON p.productId = v.productId
+        GROUP BY p.productId
+        ORDER BY p.productId LIMIT 15";
         return getRaw($sql);
     }
     // *********************Thêm giỏ hàng******************************************
