@@ -1,10 +1,13 @@
 <body>
 
     <?php require_once(HF . "header.php") ?>
-    <?= getsession('chaggePassword') ?? "" ?>
+
     <div class="baoboc">
         <div class="content">
             <p class="text-align-center">Chào mừng bạn đến với Yody</p>
+            <p class="text-align-center" style="color: green;">
+                <?= getsession('changeMessage') ?? "" ?>
+            </p>
             <h1 class="text-align-center"><span>Đặt lại mật khẩu</span></h1>
             <form action="<?= P ?>/auth?action=reset_password" method="POST" onsubmit="return validatePassword()"
                 class="form__login">
@@ -16,7 +19,7 @@
                         <div class="error__con" id="error__password"></div>
                     </div>
                 </div>
-
+                <input type="hidden" name="userId" value="<?= $data ?? "" ?>" id="">
                 <div class="input-container">
                     <div class="form">
                         <input type="password" name="confirm_password" id="confirm_password" class="form_input"
@@ -29,9 +32,7 @@
 
                 <button class="btn__summit" type="submit">Đặt lại mật khẩu</button>
             </form>
-            <a style="margin-top: 20px; display: block;" href="<?= P ?>/auth?action=login">
-                <button class="btn__summit">Đăng nhập</button>
-            </a>
+
         </div>
     </div>
     <?php require_once(HF . "footer.php") ?>

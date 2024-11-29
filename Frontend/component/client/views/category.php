@@ -22,7 +22,8 @@
         <div class="grid wide name__category ">
             <?php foreach ($category as $cap1):    ?>
                 <?php if ($cap1['categoryId'] === $kq[0]['categoryId']):   ?>
-                    <a style="cursor: pointer;" href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"><?= $cap1['name'] ?></a>
+                    <a style="cursor: pointer;"
+                        href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"><?= $cap1['name'] ?? "" ?></a>
                 <?php endif  ?>
             <?php endforeach   ?>
 

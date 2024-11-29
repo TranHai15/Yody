@@ -44,6 +44,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/message" => fn() => require_once FRONTEND__CLIENT . "message.php",
         $urlPath === "{$basePath}/thank" => fn() => require_once FRONTEND__CLIENT . "thank.php",
         $urlPath === "{$basePath}/forgot" => fn() => require_once FRONTEND__CLIENT . "forgot.php",
+        // $urlPath === "{$basePath}/change" => fn() => $Client->change(),
         $urlPath === "{$basePath}/order" => fn() => $Client->order(),
 
 
@@ -54,7 +55,10 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/auth" && $_GET['action'] === "dangki" => fn() => $Client->register(),
         $urlPath === "{$basePath}/auth" && $_GET['action'] === "dangnhap" => fn() => $Client->login(),
         $urlPath === "{$basePath}/auth" && $_GET['action'] === "forgot" => fn() => $Client->forgot(),
+        $urlPath === "{$basePath}/auth" && $_GET['action'] === "change" => fn() => $Client->change(),
+        $urlPath === "{$basePath}/auth" && $_GET['action'] === "reset_password" => fn() => $Client->reset_password(),
         $urlPath === "{$basePath}/logout" => fn() => $Client->logout(),
+            // $urlPath === "{$basePath}/reset_password" => fn() => $Client->reset_password(),
         default => fn() => print("Client page not found!"),
     };
 }

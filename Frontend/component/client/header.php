@@ -74,7 +74,10 @@
 
 
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] >= 0): ?>
-                        <div class="header__user if_login_ok ">
+
+                        <div class="header__user if_login_ok  " style=" display: flex; align-items: center;">
+                            <span
+                                style="width: 30px; padding:0 5px 0 5px ; margin-left: 10px; display:block; overflow: hidden; ">Welcome</span>
                             <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
                         </div>
                     <?php else: ?>

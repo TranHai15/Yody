@@ -477,13 +477,64 @@ class Controller_Client
                 if ($upadetForrgot) {
                     setsession('chaggePassword', 'Vui long nhap Mã đã gửi về Email bạn');
                     setsession('hienthi', 100);
-                    View(FRONTEND__CLIENT, 'forgot', []);
+                    View(FRONTEND__CLIENT, 'forgot', ['dataUser' => $dataUser]);
                 } else {
                     setsession('chaggePassword', 'Lỗi Kĩ thuật');
                 }
             } else {
                 checkloi($data);
             }
+        }
+    }
+
+    public function change()
+    {
+        if (isPost()) {
+            $data = filter();
+            $userId = $data['userId'] ?? "";
+            $cdoe = $data['CODE'] ?? "";
+
+            $check = getOne("select forgots from users where userId=$userId");
+            // checkloi($check);
+            if (strlen($check['forgots']) < 2) {
+                setsession('change', 'Vui Long thu lai');
+                setsession('hienthi', 100);
+                View(FRONTEND__CLIENT, 'forgot', []);
+                return;
+            } else {
+                if ($cdoe == $check['forgots']) {
+                    setsession('changeMessage', 'vui long nhap mat khau moi');
+                    View(FRONTEND__CLIENT, 'chaggePassword', ['data' => $userId]);
+                    return;
+                } else {
+                    setsession('change', 'Vui Long thu lai');
+                    setsession('hienthi', 100);
+                    View(FRONTEND__CLIENT, 'forgot', []);
+                }
+            }
+        }
+    }
+
+    public function reset_password()
+    {
+        if (isPost()) {
+            $data = filter();
+            // checkloi($data);
+            $userId = $data['userId'] ?? '';
+            $password = $data['confirm_password'] ?? '';
+
+            $pass = password_hash($password, PASSWORD_DEFAULT);
+            $data_new = [
+                'password' => $pass,
+                'forgots' => null
+            ];
+            $kq = update('users', $data_new, "userId=$userId");
+            if ($kq) {
+                setsession('acount', 'Đổi mật khẩu thành công');
+            } else {
+                setsession('acount',  'Đổi mật khẩu thất bại');
+            }
+            View(FRONTEND__CLIENT, 'login', []);
         }
     }
 }

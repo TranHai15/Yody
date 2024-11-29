@@ -5,16 +5,17 @@
 
         <?php if (getsession('hienthi') > 5):  ?>
             <div class="content">
-                <p class="text-align-center">Chào mừng bạn đến với Yody</p>\
-                <?= getsession("chaggePassword") ?? "" ?>
+                <p class="text-align-center">Chào mừng bạn đến với Yody</p>
+                <p class="text-align-center" style="color: green;"> <?= getsession("chaggePassword") ?? "" ?></p>
                 <h1 class="text-align-center"><span>Quển mật khẩu</span></h1>
-                <form action="<?= P ?>/auth?action=forgot" method="POST" onsubmit="return validate__login()"
+                <form action="<?= P ?>/auth?action=change" method="POST" onsubmit="return validate__login()"
                     class="form__login">
                     <div class="input-container">
+                        <input type="hidden" name="userId" id="userid" value="<?= $dataUser['userId'] ?? "" ?>">
                         <div class="form">
                             <input type="text" name="CODE" id="text" class="form_input" autocomplete="off" placeholder=" ">
                             <label for="email" class="form_label">MÃ Code</label>
-                            <div class="error__con" id="error__email"></div>
+                            <div class="error__con" id="error__email"><?= getsession('change') ?? "" ?></div>
                         </div>
                     </div>
 
@@ -34,7 +35,7 @@
                                 onchange="validateInput('email')" onfocus="clearError('email')"
                                 onblur="validateInput('email')" value="<?= getsession('login__email') ?? ""  ?>">
                             <label for="email" class="form_label">Email</label>
-                            <div class="error__con" id="error__email"><?= getsession("login__emailError") ?? "" ?></div>
+                            <div class="error__con" id="error__email"><?= getsession("forgot") ?? "" ?></div>
                         </div>
                     </div>
 
