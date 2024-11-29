@@ -43,6 +43,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/form" => fn() => require_once FRONTEND__CLIENT . "form.php",
         $urlPath === "{$basePath}/message" => fn() => require_once FRONTEND__CLIENT . "message.php",
         $urlPath === "{$basePath}/thank" => fn() => require_once FRONTEND__CLIENT . "thank.php",
+        $urlPath === "{$basePath}/forgot" => fn() => require_once FRONTEND__CLIENT . "forgot.php",
         $urlPath === "{$basePath}/order" => fn() => $Client->order(),
 
 
@@ -52,6 +53,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/auth" && $_GET['action'] === "register" => fn() => require_once FRONTEND__CLIENT . "register.php",
         $urlPath === "{$basePath}/auth" && $_GET['action'] === "dangki" => fn() => $Client->register(),
         $urlPath === "{$basePath}/auth" && $_GET['action'] === "dangnhap" => fn() => $Client->login(),
+        $urlPath === "{$basePath}/auth" && $_GET['action'] === "forgot" => fn() => $Client->forgot(),
         $urlPath === "{$basePath}/logout" => fn() => $Client->logout(),
         default => fn() => print("Client page not found!"),
     };

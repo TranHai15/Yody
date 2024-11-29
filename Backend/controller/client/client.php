@@ -452,4 +452,35 @@ class Controller_Client
         // checkloi
         View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
     }
+    public function forgot()
+    {
+        if (isPost()) {
+            $data = filter();
+            if ($data['email']) {
+                $email = $data['email'];
+                $kq = get_user_data($email);
+                // checkloi($kq);
+                if ($kq === 0) {
+                    setsession('forgot', 'Email không tồn tại');
+                    View(FRONTEND__CLIENT, 'forgot', []);
+                    return;
+                }
+                $dataUser = get_user_data($email, 999);
+                // checkloi($dataUser['userId']);
+                $dulieu = [
+                    'forgots' => '000000'
+                ];
+                $upadetForrgot = update('users', $dulieu, "userId=$dataUser[userId]");
+                if ($upadetForrgot) {
+                    setsession('chaggePassword', 'Vui long nhap Mã đã gửi về Email bạn');
+                    setsession('hienthi', 100);
+                    View(FRONTEND__CLIENT, 'forgot', []);
+                } else {
+                    setsession('chaggePassword', 'Lỗi Kĩ thuật');
+                }
+            } else {
+                checkloi($data);
+            }
+        }
+    }
 }
