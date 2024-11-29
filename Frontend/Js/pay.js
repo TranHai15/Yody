@@ -235,3 +235,13 @@ function clearError(input) {
 }
 
 const phuongthuc = document.querySelector(".checkout__paymentMethod-input-2");
+const phuongthuc2 = document.querySelector(".checkout__paymentMethod-input");
+
+phuongthuc.addEventListener("click", () => {
+  document.querySelector(".checkout__pay").style.display = "none";
+  document.querySelector(".checkout__pay-onine").style.display = "block";
+});
+phuongthuc2.addEventListener("click", () => {
+  document.querySelector(".checkout__pay").style.display = "block";
+  document.querySelector(".checkout__pay-onine").style.display = "none";
+});

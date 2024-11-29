@@ -42,6 +42,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/pay" => fn() => require_once FRONTEND__CLIENT . "pay.php",
         $urlPath === "{$basePath}/form" => fn() => require_once FRONTEND__CLIENT . "form.php",
         $urlPath === "{$basePath}/message" => fn() => require_once FRONTEND__CLIENT . "message.php",
+        $urlPath === "{$basePath}/thank" => fn() => require_once FRONTEND__CLIENT . "thank.php",
         $urlPath === "{$basePath}/order" => fn() => $Client->order(),
 
 

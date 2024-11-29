@@ -50,7 +50,7 @@
                         <label class="romm--title" for="province">Tỉnh Thành Phố</label>
                         <select id="address" name="province_id" class="checkout__address-select">
                             <?php foreach ($dataAllProvince as $Pro): ?>
-                                <option value="<?= $Pro['province_id'] ?>"><?= $Pro['name'] ?></option>
+                            <option value="<?= $Pro['province_id'] ?>"><?= $Pro['name'] ?></option>
                             <?php endforeach ?>
                         </select>
 
@@ -90,6 +90,11 @@
                             <p>Thanh toán</p>
                         </button>
                     </div>
+                    <div class="checkout__pay-onine">
+                        <button type="submit" name="payUrl" class="checkout__pay-cod">
+                            <p>Thanh toán</p>
+                        </button>
+                    </div>
 
                     <div class="checkout__card">
                         <img src="https://yody.vn/images/trust-badge/zalopay.png" alt="">
@@ -112,28 +117,28 @@
                     <div class="checkout__product-info">
                         <h2 class="checkout__product-info-title">Thông tin sản phẩm</h2>
                         <?php foreach ($dulieu as $data) : ?>
-                            <div class="checkout__product">
-                                <img src="<?= $data['image'] ?>" alt="T-shirt Nữ" class="checkout__product-image">
-                                <div class="checkout__product-details">
-                                    <p class="checkout__product-name"><?= $data['product_name'] ?></p>
-                                    <p class="checkout__product-color"><?= $data['color'] . ',' . ' ' . $data['size'] ?>
+                        <div class="checkout__product">
+                            <img src="<?= $data['image'] ?>" alt="T-shirt Nữ" class="checkout__product-image">
+                            <div class="checkout__product-details">
+                                <p class="checkout__product-name"><?= $data['product_name'] ?></p>
+                                <p class="checkout__product-color"><?= $data['color'] . ',' . ' ' . $data['size'] ?>
+                                </p>
+                                <div class="tongtien">
+                                    <p class="checkout__product-price">
+                                        <?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?>
+                                        <span
+                                            class="checkout__product-price--original"><?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></span>
                                     </p>
-                                    <div class="tongtien">
-                                        <p class="checkout__product-price">
-                                            <?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?>
-                                            <span
-                                                class="checkout__product-price--original"><?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></span>
-                                        </p>
-                                        <hr>
-                                        <p>
-                                            <?= number_format($data['total_price'], 0, ',', '.') . "đ" ?>
-                                        </p>
-                                    </div>
-
+                                    <hr>
+                                    <p>
+                                        <?= number_format($data['total_price'], 0, ',', '.') . "đ" ?>
+                                    </p>
                                 </div>
-                                <span class="checkout__product-quantity">x<?= $data['total_quantity'] ?></span>
+
                             </div>
-                            <hr>
+                            <span class="checkout__product-quantity">x<?= $data['total_quantity'] ?></span>
+                        </div>
+                        <hr>
 
                         <?php endforeach ?>
                         <!-- Repeat similar structure for other products -->
