@@ -17,7 +17,7 @@
             <div class="section-title">
                 <p>Đơn hàng</p>
             </div>
-            <?php var_dump($dulieulayra) ?>
+
             <div class="order-list">
                 <?php foreach ($dulieulayra as $dd) : ?>
                     <div class="order-item">
