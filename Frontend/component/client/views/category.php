@@ -20,12 +20,15 @@
             <span class="past__product--category"></span>
         </div>
         <div class="grid wide name__category ">
+<<<<<<< HEAD
             <?php foreach ($category as $cap1):    ?>
                 <?php if ($cap1['categoryId'] === $kq[0]['categoryId']):   ?>
                     <a style="cursor: pointer;"
                         href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"><?= $cap1['name'] ?? "" ?></a>
                 <?php endif  ?>
             <?php endforeach   ?>
+=======
+>>>>>>> 1cf7d5f16acbbb022e4bbd1615dbfd9e50ce5375
 
         </div>
         <div class="grid wide">
