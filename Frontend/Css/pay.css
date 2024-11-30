@@ -27,23 +27,24 @@ main {
   flex-direction: column;
   position: relative;
 }
+
 .checkout__receiver-user {
   position: absolute;
   width: 15px;
-  top: 26;
+  top: 88px;
   left: 20px;
 }
 .checkout__receiver-phone {
   position: absolute;
   width: 15px;
-  top: 105;
+  top: 164;
   left: 20px;
 
 }
 .checkout__receiver-email {
   position: absolute;
   width: 15px;
-  top: 180;
+  top: 239;
   left: 20px;
   overflow: hidden;
 
@@ -233,7 +234,6 @@ main {
   font-weight: 600;
   /* color: #e14337; */
 }
-
 
 .form2,
 .form3 {

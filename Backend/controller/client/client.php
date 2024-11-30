@@ -92,11 +92,16 @@ class Controller_Client
 
         $giohang = new Model_Client;
         $id = $_GET['id'] ?? "";
+        if ($id === 'vodanh') {
+            $cartId = [];
+            $dulieu = [];
+            $tongTienPhaiTra = ['total' => null];
+            View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
+        }
         $cartId = $giohang->getRaCartIdTrongCart($id);
         $dulieu = $giohang->getCartItemsWithProductName($cartId['cartid']);
         // checkloi($cartId);
         $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
-        // checkloi($tongTienPhaiTra);
         View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra]);
     }
     public function dodulieuraPay($file = 'pay')
@@ -231,74 +236,122 @@ class Controller_Client
         header('Location: /Yody/');
     }
 
-    public function order() {}
-
-    // 
-    public function productView()
+    public function goiEvent($file = 'event')
     {
-        // checkloi($_POST);
-    
+        $past = $_GET['name'];
+        // checkloi($past);
+        $event = new Model_Client;
+        $dulieulayra = $event->goiEventtheoPast($past);
+        // checkloi($dulieulayra);
+        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
+    }
+    public function order($file = 'message')
+    {
         if (isPost()) {
             $data = filter();
             // checkloi($data);
-    
-            // Lấy các giá trị từ form
-            $productId = trim($data['productId'] ?? '');
-            $userId = trim($data['userId'] ?? '');
-            $content = trim($data['content'] ?? '');
-            $rating = intval($data['rating'] ?? 0);
-            $file_anh = $_FILES['image'] ?? null;
-            $createAt = date('Y-m-d H:i:s'); // Lấy thời gian hiện tại
-            $image_new = '';
-    
-            // Xử lý upload file ảnh nếu có
-            if (!empty($file_anh) && $file_anh['error'] === 0) {
-                $image_new = xuLyUploadFile($file_anh, 'Image/comments');
-            }
-    
-            // Kiểm tra dữ liệu hợp lệ
-            // if (strlen(removespace($content)) === 0) {
-            //     setsession('errorContent', 'Nội dung không được để trống.');
-            //     header('Location: /Yody/admin?AddComment');
-            //     exit;
-            // }
-    
-            // if ($rating < 1 || $rating > 5) {
-            //     setsession('errorRating', 'Đánh giá phải nằm trong khoảng từ 1 đến 5.');
-            //     header('Location: /Yody/admin?AddComment');
-            //     exit;
-            // }
-    
-            // Chuẩn bị dữ liệu để chèn vào database
-            $data_new = [
-                'productId' => $productId,
-                'userId' => $userId,
-                'content' => $content,
-                'image' => $image_new,
-                'createAt' => $createAt,
-                'rating' => $rating,
-            ];
-        
-            
+            $userId = $data['userId'];
+            $statusId = $data['statusId'];
+            $payStatusId = $data['payStatusId'];
+            $customer_name = $data['customer_name'];
+            $phone_number = $data['phone_number'];
+            $email = $data['email'];
+            $province_id = $data['province_id'];
+            $district = $data['district'];
+            $ward = $data['ward'];
+            $note = $data['note'];
+            $payment_method = $data['payment_method'];
+            $street_address = $data['street_address'];
+            $sumprice = $data['sumprice'];
+            $date = date('Y-m-d H:i:s');
 
-    
-            // Thêm dữ liệu vào bảng comments
-            $kq = (new Model_Client)->rateProduct('comments', $data_new);
-            checkloi($kq);
-    
-            if ($kq) {
-                setsession('messageDuyetComment', "Thêm bình luận thành công.");
+            // checkloi($diachi);
+            $address = (new Model_Client)->getAddress($province_id, $district, $ward);
+            $xong = $address['Tp'] . ', ' . $address['Huyen'] . ', ' . $address['Xa'] . ', ' . $street_address;
+            // checkloi($xong);
+            $data_new = [
+                'statusId' => $statusId,
+                'userId' => $userId,
+                'sumprice' => $sumprice,
+                'address' => $xong,
+                'phone' => $phone_number,
+                'payId' => $payment_method,
+                'payStatusId' => $payStatusId,
+                'updateAt' => $date,
+                'createAt' => $date,
+            ];
+            $sql = "INSERT INTO orders (statusId, userId, sumprice, address, phone, payId, payStatusId, updateAt, createAt)
+            VALUES (:statusId, :userId, :sumprice, :address, :phone, :payId, :payStatusId, :updateAt, :createAt)";
+            $pdo = Connect();
+            // Chuẩn bị statement
+            $stmt = $pdo->prepare($sql);
+
+            // Gán giá trị vào các tham số
+            $stmt->bindParam(':statusId', $data_new['statusId']);
+            $stmt->bindParam(':userId', $data_new['userId']);
+            $stmt->bindParam(':sumprice', $data_new['sumprice']);
+            $stmt->bindParam(':address', $data_new['address']);
+            $stmt->bindParam(':phone', $data_new['phone']);
+            $stmt->bindParam(':payId', $data_new['payId']);
+            $stmt->bindParam(':payStatusId', $data_new['payStatusId']);
+            $stmt->bindParam(':updateAt', $data_new['updateAt']);
+            $stmt->bindParam(':createAt', $data_new['createAt']);
+
+            // Thực hiện câu lệnh
+            $stmt->execute();
+
+            // Lấy ID của đơn hàng vừa thêm
+            $order_id = $pdo->lastInsertId();
+            // checkloi($order_id);
+
+            if ($order_id > 0) {
+                $sanpham = (new Model_Client)->getAllcartItemByuserId($userId);
+                for ($i = 0; $i < count($sanpham); $i++):
+
+                    $dataNew = [
+                        'orderId' => $order_id,
+                        'variationId' => $sanpham[$i]['variationId'],
+                        'sizeId' => $sanpham[$i]['sizeId'],
+                        'quantity' => $sanpham[$i]['quantity'],
+                        'price' => $sanpham[$i]['price'],
+                    ];
+                    $sizeId = $sanpham[$i]['sizeId'];
+                    $quantity = $sanpham[$i]['quantity'];
+
+                    try {
+                        // Thêm dữ liệu vào bảng orderitems
+                        (new Model_Client)->insertOrderItem('orderitems', $dataNew);
+                        (new Model_Client())->deleteQuatitySize($sizeId, $quantity);
+                    } catch (Exception $e) {
+                        // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
+                        echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
+                        break; // Dừng vòng lặp nếu có lỗi
+                    }
+
+                endfor;
+
+                for ($i = 0; $i < count($sanpham); $i++):
+                    $dk =   'cartitemId=' .  $sanpham[$i]['cartitemId'];
+                    try {
+                        // Thêm dữ liệu vào bảng orderitems
+                        delete('cartitems', $dk);
+                    } catch (Exception $e) {
+                        // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
+                        echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
+                        break; // Dừng vòng lặp nếu có lỗi
+                    }
+                endfor;
+                $kq = (new Model_Client)->getNumber($userId);
+                $sl = $kq[0]['total_quantity'];
+                // checkloi($sl);
+                // checkloi($sanpham);
+                setsession('order', 'Thanh Toán thành công');
             } else {
-                setsession('messageDuyetComment', "Thêm bình luận thất bại.");
+                setsession('order',  'Thanh Toán thất bại');
             }
-    
-            // Điều hướng sau khi hoàn thành
-            header('Location: /Yody/');
-            exit;
+            View(FRONTEND__CLIENT, $file, ['sl' => $sl]);
         }
     }
-    
-    
 }
 
 

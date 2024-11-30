@@ -81,6 +81,7 @@ const renderViewForm2 = (data) => {
   select.addEventListener("change", function () {
     console.log(this.value);
     form3Html(this.value);
+    document.getElementById("district").value = this.value;
   });
 
   const container = document.querySelector(".form2");
@@ -113,6 +114,7 @@ const renderViewForm3 = (data) => {
   select.addEventListener("change", function () {
     // alert(`ID bạn đã chọn là: ${this.value}`);
     console.log(this.value);
+    document.getElementById("ward").value = this.value;
   });
 
   const container = document.querySelector(".form3");
@@ -120,71 +122,114 @@ const renderViewForm3 = (data) => {
   container.appendChild(select);
 };
 // Gọi hàm render với dữ liệu mẫu
+document.querySelector(".checkout").addEventListener("submit", function (e) {
+  let isValid = true;
+  document.getElementById("sumPrice").value = document
+    .querySelector(".thanhtoan")
+    .getAttribute("data-sumPrice");
+  // Validate tên khách hàng
+  const nameInput = document.querySelector('[name="customer_name"]');
+  if (!validateName(nameInput)) isValid = false;
+
+  // Validate số điện thoại
+  const phoneInput = document.querySelector('[name="phone_number"]');
+  if (!validatePhone(phoneInput)) isValid = false;
+
+  // Validate Tỉnh/Thành phố
+  const provinceSelect = document.querySelector('[name="province_id"]');
+  if (!validateProvince(provinceSelect)) isValid = false;
+
+  // Validate Địa chỉ chi tiết
+  const streetInput = document.querySelector('[name="street_address"]');
+  if (!validateStreet(streetInput)) isValid = false;
+
+  // Nếu có lỗi, ngăn không cho gửi form
+  if (!isValid) {
+    e.preventDefault();
+  }
+});
+
+// Gán sự kiện onblur cho từng input
+document
+  .querySelector('[name="customer_name"]')
+  .addEventListener("blur", function () {
+    validateName(this);
+  });
 
 document
-  .querySelector(".checkout__pay-cod")
-  .addEventListener("click", function (e) {
-    e.preventDefault();
-
-    // Lấy các giá trị từ biểu mẫu
-    const name = document.querySelector(
-      ".checkout__receiver-form input[placeholder='Tên khách hàng']"
-    );
-    const phone = document.querySelector(
-      ".checkout__receiver-form input[placeholder='Số điện thoại']"
-    );
-    const address = document.querySelector(".checkout__address-home");
-
-    let isValid = true;
-
-    // Hàm hiển thị lỗi
-    function showError(input, message) {
-      const errorSpan = input.nextElementSibling; // Thẻ span kế tiếp
-      if (errorSpan && errorSpan.classList.contains("error-message")) {
-        errorSpan.textContent = message; // Cập nhật nội dung lỗi
-      } else {
-        const span = document.createElement("span");
-        span.className = "error-message";
-        span.style.color = "red";
-        span.style.fontSize = "12px";
-        span.textContent = message;
-        input.parentElement.appendChild(span); // Thêm thẻ span vào DOM
-      }
-      isValid = false;
-    }
-
-    // Hàm xóa lỗi
-    function clearError(input) {
-      const errorSpan = input.nextElementSibling;
-      if (errorSpan && errorSpan.classList.contains("error-message")) {
-        errorSpan.remove(); // Xóa thẻ span lỗi
-      }
-    }
-
-    // Kiểm tra tên
-    if (name.value.trim() === "") {
-      showError(name, "Tên không được để trống.");
-    } else {
-      clearError(name);
-    }
-
-    // Kiểm tra số điện thoại
-    const phoneRegex = /^0\d{9}$/;
-    if (!phoneRegex.test(phone.value.trim())) {
-      showError(phone, "Số điện thoại không hợp lệ. Ví dụ: 0123456789");
-    } else {
-      clearError(phone);
-    }
-
-    // Kiểm tra địa chỉ
-    if (address.value.trim() === "") {
-      showError(address, "Địa chỉ không được để trống.");
-    } else {
-      clearError(address);
-    }
-
-    // Nếu hợp lệ, xử lý tiếp
-    if (isValid) {
-      window.location.href = "/Yody/message";
-    }
+  .querySelector('[name="phone_number"]')
+  .addEventListener("blur", function () {
+    validatePhone(this);
   });
+
+document
+  .querySelector('[name="province_id"]')
+  .addEventListener("blur", function () {
+    validateProvince(this);
+  });
+
+document
+  .querySelector('[name="street_address"]')
+  .addEventListener("blur", function () {
+    validateStreet(this);
+  });
+
+// Các hàm validate
+function validateName(input) {
+  if (input.value.trim() === "") {
+    displayError(input, "Tên khách hàng không được để trống");
+    return false;
+  } else {
+    clearError(input);
+    return true;
+  }
+}
+
+function validatePhone(input) {
+  const phonePattern = /^[0-9]{10,11}$/;
+  if (!phonePattern.test(input.value.trim())) {
+    displayError(input, "Số điện thoại không hợp lệ (10-11 chữ số)");
+    return false;
+  } else {
+    clearError(input);
+    return true;
+  }
+}
+
+function validateProvince(input) {
+  if (!input.value) {
+    displayError(input, "Vui lòng chọn Tỉnh/Thành phố");
+    return false;
+  } else {
+    clearError(input);
+    return true;
+  }
+}
+
+function validateStreet(input) {
+  if (input.value.trim() === "") {
+    displayError(input, "Vui lòng nhập địa chỉ chi tiết");
+    return false;
+  } else {
+    clearError(input);
+    return true;
+  }
+}
+
+// Hiển thị lỗi
+function displayError(input, message) {
+  const errorSpan = input.nextElementSibling;
+  if (errorSpan && errorSpan.classList.contains("error-message")) {
+    errorSpan.textContent = message;
+    input.classList.add("invalid");
+  }
+}
+
+// Xóa lỗi
+function clearError(input) {
+  const errorSpan = input.nextElementSibling;
+  if (errorSpan && errorSpan.classList.contains("error-message")) {
+    errorSpan.textContent = "";
+    input.classList.remove("invalid");
+  }
+}
