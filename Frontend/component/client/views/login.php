@@ -30,10 +30,10 @@
             </form>
             <div class="layout ">
                 <hr>
-                <p>Hoặc đăng nhập bằng</p>
+                <p><a href="<?= P ?>/forgot">Quên mật khẩu?</a></p>
                 <hr>
             </div>
-            <div class="face__gg">
+            <!-- <div class="face__gg">
                 <div class="google">
                     <img src="https://bizweb.dktcdn.net/100/438/408/themes/949050/assets/ic_btn_google.svg?1714530454667"
                         alt="Google">
@@ -42,7 +42,7 @@
                     <img src="https://bizweb.dktcdn.net/100/438/408/themes/949050/assets/ic_btn_facebook.svg?1714530454667"
                         alt="Facebook">
                 </div>
-            </div>
+            </div> -->
             <div class="location">
                 <h1>Bạn chưa có tài khoản? <a href="<?= P ?>/auth?action=register">Đăng Ký Ngay!</a></h1>
             </div>

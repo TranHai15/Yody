@@ -82,7 +82,7 @@ class Model_Client
         $sql = "SELECT * FROM variationimages WHERE variationId = $idVariations";
         return getRaw($sql);
     }
-
+    // ****************************Slide***********************
     public function get_Slide_Imgs()
     {
         $sql = "SELECT * FROM slides";
@@ -176,7 +176,7 @@ class Model_Client
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+    // ***********************Lấy 4sp*************************88
     public function getAllProducts()
     {
         $sql = "SELECT p.productId,
@@ -199,6 +199,58 @@ class Model_Client
  LIMIT 4;
  ";
 
+        return getRaw($sql);
+    }
+    // ***********************Lấy ra 15 sản phẩm đổ bên dưới****************************
+    public function getAll()
+    {
+        $sql  = "SELECT p.productId,
+        p.name,
+        MIN(v.price) AS new_price,
+        MIN(v.sale) AS old_price,
+        MIN(v.image) AS ImageMain,
+        MIN(v.variationId) AS colorId,
+        JSON_ARRAYAGG(
+            JSON_OBJECT(
+                'anhColor', v.anhColor,
+                'image', v.image,
+                'variationId', v.variationId
+            )
+        ) AS variations
+        FROM products AS p
+        JOIN variations AS v ON p.productId = v.productId
+        GROUP BY p.productId
+        ORDER BY p.productId LIMIT 15";
+        return getRaw($sql);
+    }
+
+    //************************** */ Lấy 4 sp có view cao***************************
+    public function get4productsWhereViewDesc()
+    {
+        $sql = "SELECT 
+    p.productId,
+    p.name,
+    MIN(v.price) AS new_price,
+    MIN(v.sale) AS old_price,
+    MIN(v.image) AS ImageMain,
+    MIN(v.variationId) AS colorId,
+    JSON_ARRAYAGG(
+        JSON_OBJECT(
+            'anhColor', v.anhColor,
+            'image', v.image,
+            'variationId', v.variationId
+        )
+    ) AS variations
+FROM 
+    products AS p
+JOIN 
+    variations AS v ON p.productId = v.productId
+GROUP BY 
+    p.productId
+ORDER BY 
+    p.view DESC
+LIMIT 4
+";
         return getRaw($sql);
     }
     // *********************Thêm giỏ hàng******************************************
@@ -379,8 +431,72 @@ class Model_Client
         return update('sizevariations', ['quantity' => $numberNew], $dk);
     }
 
+
     public function deleteCartitem($id)
     {
         return delete('cartitems', "cartitemId=$id");
+    }
+    public function getOrdersandOrderItem($userId)
+    {
+        $sql = "SELECT 
+    o.orderId,
+    o.statusId,
+    os.name AS orderStatusName,
+    os.description AS orderStatusDescription,
+    o.userId,
+    o.sumPrice,
+    o.address,
+    o.phone,
+    o.payId,
+    o.payStatusId,
+    o.updateAt AS orderUpdateAt,
+    o.createAt AS orderCreateAt,
+    oi.orderitemId,
+    oi.variationId,
+    oi.sizeId,
+    oi.quantity,
+    oi.price AS itemPrice,
+    v.image AS variationImage,
+    v.color AS variationColor,
+    v.price AS variationPrice,
+    v.sale AS variationSale,
+    v.descripe AS variationDescripe,
+    p.name AS productName,
+    sz.size AS sizeName
+    FROM orders o
+    INNER JOIN orderstatus os ON o.statusId = os.statusId
+    INNER JOIN orderitems oi ON o.orderId = oi.orderId
+    INNER JOIN variations v ON oi.variationId = v.variationId
+    INNER JOIN sizevariations sz ON oi.sizeId = sz.sizeId
+    INNER JOIN products p ON v.productId = p.productId
+    WHERE o.userId = $userId;
+    ";
+        return getRaw($sql);
+    }
+    // ******************************* Đổ comment ra*************************
+    public function getAllCommentWhereProductId($productId)
+    {
+        $sql = "SELECT 
+    c.commentId,
+    c.content,
+    c.image AS commentImage,
+    c.createAt AS commentCreatedAt,
+    c.rating,
+    u.name AS userName,
+    u.avata AS userAvatar,
+    p.name AS productName,
+    MIN(v.image) AS variationImage
+FROM 
+    comments c
+LEFT JOIN users u ON c.userId = u.userId
+LEFT JOIN products p ON c.productId = p.productId
+LEFT JOIN variations v ON p.productId = v.productId
+WHERE 
+    c.productId = $productId
+GROUP BY 
+    c.commentId, c.content, c.image, c.createAt, c.rating, u.name, u.avata, p.name;
+
+";
+        return getRaw($sql);
     }
 }

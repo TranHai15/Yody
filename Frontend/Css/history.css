@@ -96,7 +96,7 @@ body {
   padding: 16px;
   z-index: 1001;
   max-width: 90%;
-  width: 400px;
+  width: 500px;
   display: none;
 }
 
@@ -204,4 +204,31 @@ p {
 }
 .history-list {
   margin-bottom: 100px;
+}
+.no-order {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.no-order p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.btn-order-now {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--key); /* Màu chủ đạo của bạn */
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-order-now:hover {
+  background-color: darken(var(--key), 10%);
+  color: #fff;
 }

@@ -30,103 +30,40 @@
                 </section>
 
                 <section class="products row  justify-content-between grid wide">
-
-                    <article class="product l-3 m-4 c-12">
-                        <a href="<?= P ?>/detail">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+                    <?php foreach ($TopProduct as $Product): ?>
+                        <?php $name = replaceSpacesWithHyphen($Product['name']); ?>
+                        <article class="product l-3 m-4 c-12">
+                            <a href="<?= P ?>/product?<?= $name ?>&color=<?= $Product['colorId'] ?>">
+                                <div class="product__image">
+                                    <img loading="lazy" src="<?= $Product['ImageMain'] ?>" alt="" />
                                 </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </a>
-                    </article>
-
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                            <div class="overlay__image">
-                                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png"
-                                    alt="">
-                            </div>
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-
+                                <span class="product__name"><?= $Product['name'] ?></span>
+                                <div class="product__price row align-items-center">
+                                    <?php
+                                    $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100));
+                                    ?>
+                                    <span class='price__new'>
+                                        <?= $Product['old_price'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : number_format($Product['new_price'], 0, ',', '.') . "đ"; ?>
+                                    </span>
+                                    <?= $Product['old_price'] > 0 ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>" : ""; ?>
+                                </div>
+                                <div class="product__variation row align-items-center">
+                                    <?php
+                                    $variations = json_decode($Product['variations'], true);
+                                    foreach ($variations as $key => $variation): ?>
+                                        <a href="<?= P ?>/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
+                                            data-images="<?= $variation['image'] ?>" class="product__variation-link">
+                                            <span
+                                                class="product__variation--item <?= $variation['variationId'] == $Product['colorId'] ? 'active__product--variation' : '' ?>"
+                                                style="background-color: <?= $variation['anhColor'] ?>">
+                                            </span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?= $Product['old_price'] > 0 ? "<div class='product__logo--sale row align-items-center justify-content-center'><span>-$Product[old_price]%</span></div>" : "" ?>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
 
                 </section>
                 <button class="row btn__view">Xem thêm</button>
@@ -151,103 +88,40 @@
                 </section>
 
                 <section class="products row  justify-content-between grid wide">
-
-                    <article class="product l-3 m-4 c-12">
-                        <a href="<?= P ?>/detail">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+                    <?php foreach ($TopProduct as $Product): ?>
+                        <?php $name = replaceSpacesWithHyphen($Product['name']); ?>
+                        <article class="product l-3 m-4 c-12">
+                            <a href="<?= P ?>/product?<?= $name ?>&color=<?= $Product['colorId'] ?>">
+                                <div class="product__image">
+                                    <img loading="lazy" src="<?= $Product['ImageMain'] ?>" alt="" />
                                 </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </a>
-                    </article>
-
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                            <div class="overlay__image">
-                                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png"
-                                    alt="">
-                            </div>
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-
+                                <span class="product__name"><?= $Product['name'] ?></span>
+                                <div class="product__price row align-items-center">
+                                    <?php
+                                    $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100));
+                                    ?>
+                                    <span class='price__new'>
+                                        <?= $Product['old_price'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : number_format($Product['new_price'], 0, ',', '.') . "đ"; ?>
+                                    </span>
+                                    <?= $Product['old_price'] > 0 ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>" : ""; ?>
+                                </div>
+                                <div class="product__variation row align-items-center">
+                                    <?php
+                                    $variations = json_decode($Product['variations'], true);
+                                    foreach ($variations as $key => $variation): ?>
+                                        <a href="<?= P ?>/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
+                                            data-images="<?= $variation['image'] ?>" class="product__variation-link">
+                                            <span
+                                                class="product__variation--item <?= $variation['variationId'] == $Product['colorId'] ? 'active__product--variation' : '' ?>"
+                                                style="background-color: <?= $variation['anhColor'] ?>">
+                                            </span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?= $Product['old_price'] > 0 ? "<div class='product__logo--sale row align-items-center justify-content-center'><span>-$Product[old_price]%</span></div>" : "" ?>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
 
                 </section>
                 <button class="row btn__view">Xem thêm</button>
@@ -271,103 +145,40 @@
                 </section>
 
                 <section class="products row  justify-content-between grid wide">
-
-                    <article class="product l-3 m-4 c-12">
-                        <a href="<?= P ?>/detail">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+                    <?php foreach ($TopProduct as $Product): ?>
+                        <?php $name = replaceSpacesWithHyphen($Product['name']); ?>
+                        <article class="product l-3 m-4 c-12">
+                            <a href="<?= P ?>/product?<?= $name ?>&color=<?= $Product['colorId'] ?>">
+                                <div class="product__image">
+                                    <img loading="lazy" src="<?= $Product['ImageMain'] ?>" alt="" />
                                 </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </a>
-                    </article>
-
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                            <div class="overlay__image">
-                                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png"
-                                    alt="">
-                            </div>
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-                    <article class="product l-3 m-4 c-12">
-                        <div class="product__image">
-                            <img loading="lazy"
-                                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                alt="" />
-                        </div>
-                        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                        <div class="product__price row align-items-center  ">
-                            <span class="price__new">599.000 đ</span>
-                            <span class="price__old">3333</span>
-                        </div>
-                        <div class="product__variation row align-items-center">
-                            <span class="product__variation--item active__product--variation "></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                            <span class="product__variation--item"></span>
-                        </div>
-                        <div class="product__logo--sale row align-items-center justify-content-center">
-                            <span>-</span>5%
-                        </div>
-                    </article>
-
+                                <span class="product__name"><?= $Product['name'] ?></span>
+                                <div class="product__price row align-items-center">
+                                    <?php
+                                    $sale = $Product['new_price'] - ($Product['new_price'] * ($Product['old_price'] / 100));
+                                    ?>
+                                    <span class='price__new'>
+                                        <?= $Product['old_price'] > 0 ? number_format($sale, 0, ',', '.') . "đ" : number_format($Product['new_price'], 0, ',', '.') . "đ"; ?>
+                                    </span>
+                                    <?= $Product['old_price'] > 0 ? "<span class='price__old'>" . number_format($Product['new_price'], 0, ',', '.') . "đ</span>" : ""; ?>
+                                </div>
+                                <div class="product__variation row align-items-center">
+                                    <?php
+                                    $variations = json_decode($Product['variations'], true);
+                                    foreach ($variations as $key => $variation): ?>
+                                        <a href="<?= P ?>/product?<?= $name ?>&color=<?= $variation['variationId'] ?>"
+                                            data-images="<?= $variation['image'] ?>" class="product__variation-link">
+                                            <span
+                                                class="product__variation--item <?= $variation['variationId'] == $Product['colorId'] ? 'active__product--variation' : '' ?>"
+                                                style="background-color: <?= $variation['anhColor'] ?>">
+                                            </span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?= $Product['old_price'] > 0 ? "<div class='product__logo--sale row align-items-center justify-content-center'><span>-$Product[old_price]%</span></div>" : "" ?>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
 
                 </section>
                 <button class="row btn__view">Xem thêm</button>

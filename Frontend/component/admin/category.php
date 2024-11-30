@@ -20,69 +20,71 @@
             </thead>
             <tbody>
                 <?php foreach ($category as $cap1): ?>
-                    <tr>
-                        <td><?= $cap1['categoryId'] ?></td>
-                        <td><?= $cap1['name'] ?></td>
-                        <td><?= $cap1['past'] ?></td>
+                <tr>
+                    <td><?= $cap1['categoryId'] ?></td>
+                    <td><?= $cap1['name'] ?></td>
+                    <td><?= $cap1['past'] ?></td>
 
-                        <td>
-                            <?php if (!empty($cap1['image'])): ?>
-                                <img src="<?= $cap1['image'] ?>" alt="Hình ảnh" style="width: 50px; height: 50px;">
-                            <?php else: ?>
+                    <td>
+                        <?php if (!empty($cap1['image'])): ?>
+                        <img src="<?= $cap1['image'] ?>" alt="Hình ảnh" style="width: 50px; height: 50px;">
+                        <?php else: ?>
 
-                            <?php endif; ?>
-                        </td>
-
-                        </td>
-                        <td class="action-buttons">
-                            <a href="<?= P ?>/admin?EditCategory=<?= $cap1['categoryId'] ?>"
-                                class="btn btn-primary btn-sm">Chỉnh Sửa</a>
-                            <a href="<?= P ?>/admin?deleteCategory=<?= $cap1['categoryId'] ?>"
-                                onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
-                                <button class="btn btn-danger btn-sm">Xóa</button>
-                            </a>
-
-                        </td>
-                    </tr>
-
-                    <!-- Danh sách cấp 2 -->
-                    <?php foreach ($child as $cap2): ?>
-                        <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
-                            <tr class="table-secondary">
-                                <td>&nbsp;&nbsp;— <?= $cap2['childId'] ?></td>
-                                <td>&nbsp;&nbsp;— <?= $cap2['name'] ?></td>
-                                <td><?= $cap2['past'] ?></td>
-                                <td></td>
-                                <td class="action-buttons">
-                                    <a href="<?= P ?>/admin?EditCategory=<?= $cap2['childId'] ?>" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
-                                    <a href="<?= P ?>/admin?deleteChildCategory=<?= $cap2['childId'] ?>"
-                                        onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
-                                        <button class="btn btn-danger btn-sm">Xóa</button>
-                                    </a>
-
-                                </td>
-                            </tr>
-
-                            <!-- Danh sách cấp 3 -->
-                            <?php foreach ($common as $cap3): ?>
-                                <?php if ($cap2['childId'] == $cap3['childId']): ?>
-                                    <tr class="table-light">
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;— <?= $cap3['commonId'] ?></td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;— <?= $cap3['name'] ?></td>
-                                        <td><?= $cap3['past'] ?></td>
-                                        <td></td>
-                                        <td class="action-buttons">
-                                            <a href="<?= P ?>/admin?EditCategory=<?= $cap2['childId'] ?>" class="btn btn-primary btn-sm">Chỉnh Sửa</a>
-                                            <a href="<?= P ?>/admin?deleteCommontCategory=<?= $cap3['commonId'] ?>"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
-                                                <button class="btn btn-danger btn-sm">Xóa</button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
                         <?php endif; ?>
-                    <?php endforeach; ?>
+                    </td>
+
+                    </td>
+                    <td class="action-buttons">
+                        <a href="<?= P ?>/admin?EditCategory=<?= $cap1['categoryId'] ?>"
+                            class="btn btn-primary btn-sm">Chỉnh Sửa</a>
+                        <a href="<?= P ?>/admin?deleteCategory=<?= $cap1['categoryId'] ?>"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
+                            <button class="btn btn-danger btn-sm">Xóa</button>
+                        </a>
+
+                    </td>
+                </tr>
+
+                <!-- Danh sách cấp 2 -->
+                <?php foreach ($child as $cap2): ?>
+                <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
+                <tr class="table-secondary">
+                    <td>&nbsp;&nbsp;— <?= $cap2['childId'] ?></td>
+                    <td>&nbsp;&nbsp;— <?= $cap2['name'] ?></td>
+                    <td><?= $cap2['past'] ?></td>
+                    <td></td>
+                    <td class="action-buttons">
+                        <a href="<?= P ?>/admin?EditCategory=<?= $cap2['childId'] ?>"
+                            class="btn btn-primary btn-sm">Chỉnh Sửa</a>
+                        <a href="<?= P ?>/admin?deleteChildCategory=<?= $cap2['childId'] ?>"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
+                            <button class="btn btn-danger btn-sm">Xóa</button>
+                        </a>
+
+                    </td>
+                </tr>
+
+                <!-- Danh sách cấp 3 -->
+                <?php foreach ($common as $cap3): ?>
+                <?php if ($cap2['childId'] == $cap3['childId']): ?>
+                <tr class="table-light">
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;— <?= $cap3['commonId'] ?></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;— <?= $cap3['name'] ?></td>
+                    <td><?= $cap3['past'] ?></td>
+                    <td></td>
+                    <td class="action-buttons">
+                        <a href="<?= P ?>/admin?EditCategory=<?= $cap2['childId'] ?>"
+                            class="btn btn-primary btn-sm">Chỉnh Sửa</a>
+                        <a href="<?= P ?>/admin?deleteCommontCategory=<?= $cap3['commonId'] ?>"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
+                            <button class="btn btn-danger btn-sm">Xóa</button>
+                        </a>
+                    </td>
+                </tr>
+                <?php endif; ?>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <?php endforeach; ?>
                 <?php endforeach; ?>
             </tbody>
         </table>

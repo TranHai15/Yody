@@ -20,7 +20,7 @@
                         <th>STT</th>
                         <th>Tên người dùng</th>
                         <th>Email</th>
-                        <th>Password</th>
+                        <!-- <th>Password</th> -->
                         <th>Avata</th>
                         <th>Vai trò</th>
                         <th>Hành động</th>
@@ -33,7 +33,6 @@
                             <td><?= $user['userId'] ?></td>
                             <td><?= $user['name'] ?></td>
                             <td><?= $user['email'] ?></td>
-                            <td><?= $user['password'] ?></td>
                             <td><img loading="lazy" src="<?= $user['avata'] ?>" alt=""
                                     class=" rounded-circle img-thumbnail avatar-img"
                                     style="width: 40px; height: 40px; object-fit: cover;">

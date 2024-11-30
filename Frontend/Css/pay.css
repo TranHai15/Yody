@@ -58,6 +58,9 @@ main {
   padding-left: 50px;
   width: 100%;
 }
+.checkout__pay-onine {
+  display: none;
+}
 /* =================hehe======== */
 .checkout__delivery-options {
   display: flex;

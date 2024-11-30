@@ -2,6 +2,7 @@
 <div class="header__kc">
 <!-- <a href="<?=P?>/form">form</a> -->
     <header>
+
         <div class="header grid wide">
             <nav class="header__left row align-items-center">
                 <a href="<?= P ?>">
@@ -73,7 +74,10 @@
 
 
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] >= 0): ?>
-                        <div class="header__user if_login_ok ">
+
+                        <div class="header__user if_login_ok  " style=" display: flex; align-items: center;">
+                            <span
+                                style="width: 30px; padding:0 5px 0 5px ; margin-left: 10px; display:block; overflow: hidden; ">Welcome</span>
                             <img src="Frontend/public/svg/account.svg" alt="User Avatar" />
                         </div>
                     <?php else: ?>
@@ -96,21 +100,19 @@
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1): ?>
                             <ul class="user-options">
                                 <li><a href="<?= P ?>/admin">Vào trang quản trị</a></li>
-                                <li><a href="/change-password">Thay đổi mật khẩu</a></li>
+                                <li><a href="/<?= P ?>/forgot">Thay đổi mật khẩu</a></li>
                                 <li><a href="/settings">Cài đặt</a></li>
                                 <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
                             </ul>
                         <?php else: ?>
                             <ul class="user-options">
                                 <li><a href="<?= P ?>/history">Lịch sử mua hàng</a></li>
-                                <li><a href="/change-password">Thay đổi mật khẩu</a></li>
+                                <li><a href="<?= P ?>/forgot">Thay đổi mật khẩu</a></li>
                                 <li><a href="/settings">Cài đặt</a></li>
                                 <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
                             </ul>
                         <?php endif; ?>
-
                     </div>
-
                 </div>
             </span>
         </div>
