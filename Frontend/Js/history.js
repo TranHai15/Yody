@@ -1,42 +1,58 @@
 // Hiển thị chi tiết đơn hàng
 function showDetails(event) {
-  const popup = event.target.nextElementSibling; // Popup gần nút Chi tiết
+  const parent = event.target.closest(".order-item"); // Tìm phần tử cha chứa popup
+  const popup = parent.querySelector(".popup"); // Tìm popup chi tiết trong phần tử cha
   const overlay = document.querySelector(".overlay"); // Lớp phủ
 
-  // Hiển thị popup và lớp phủ
-  popup.classList.remove("hidden");
-  popup.style.display = "block";
-  overlay.classList.add("active");
+  if (popup) {
+    popup.classList.remove("hidden");
+    popup.style.display = "block";
+    overlay.classList.add("active");
+  } else {
+    console.error("Không tìm thấy popup chi tiết");
+  }
 }
 
-// Đóng popup khi nhấn nút "Đóng"
+// Hiển thị popup form hủy đơn
+function showCancelForm(event) {
+  const parent = event.target.closest(".order-item"); // Tìm phần tử cha chứa popup
+  const popupCancel = parent.querySelector(".popup-cancel"); // Tìm popup hủy đơn trong phần tử cha
+  const overlay = document.querySelector(".overlay"); // Lớp phủ
+
+  if (popupCancel) {
+    popupCancel.classList.remove("hidden");
+    popupCancel.style.display = "block";
+    overlay.classList.add("active");
+  } else {
+    console.error("Không tìm thấy popup hủy đơn");
+  }
+}
+
+// Đóng popup
 function closePopup(event) {
-  const popup = event.target.parentElement; // Popup hiện tại
-  const overlay = document.querySelector(".overlay"); // Lớp phủ
+  const popup = event.target.closest(".popup, .popup-cancel"); // Tìm popup gốc cần đóng
+  const overlay = document.querySelector(".overlay");
 
-  // Ẩn popup và lớp phủ
-  popup.classList.add("hidden");
-  popup.style.display = "none";
-  overlay.classList.remove("active");
+  if (popup) {
+    popup.classList.add("hidden");
+    popup.style.display = "none";
+    overlay.classList.remove("active");
+  } else {
+    console.error("Không tìm thấy popup để đóng");
+  }
 }
 
-// Đóng popup khi click ra ngoài popup
+// Đóng popup khi click ra ngoài
 function closePopupOutside() {
-  const popup = document.querySelector(".popup:not(.hidden)"); // Popup đang hiển thị
-  const overlay = document.querySelector(".overlay"); // Lớp phủ
+  const popup = document.querySelector(
+    ".popup:not(.hidden), .popup-cancel:not(.hidden)"
+  );
+  const overlay = document.querySelector(".overlay");
 
   if (popup) {
     popup.classList.add("hidden");
     popup.style.display = "none";
   }
 
-  // Ẩn lớp phủ
   overlay.classList.remove("active");
 }
-
-// Ngăn sự kiện click bên trong popup lan ra lớp phủ
-document.querySelectorAll(".popup").forEach((popup) => {
-  popup.addEventListener("click", (event) => {
-    event.stopPropagation(); // Ngăn sự kiện lan ra ngoài
-  });
-});

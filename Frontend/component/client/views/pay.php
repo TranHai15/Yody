@@ -90,7 +90,11 @@
                             <p>Thanh toán</p>
                         </button>
                     </div>
-
+                    <div class="checkout__pay-onine">
+                        <button type="submit" name="payUrl" class="checkout__pay-cod">
+                            <p>Thanh toán</p>
+                        </button>
+                    </div>
 
                     <div class="checkout__card">
                         <img src="https://yody.vn/images/trust-badge/zalopay.png" alt="">
