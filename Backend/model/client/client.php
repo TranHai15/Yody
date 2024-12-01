@@ -492,4 +492,21 @@ GROUP BY
 ";
         return getRaw($sql);
     }
+    // cap nhat ly do huy don
+    public function huydon($data, $orderId)
+    {
+        // Chuyển mảng lý do thành chuỗi
+        $cancelReasons = implode(", ", $data);
+
+        // Sử dụng chuẩn PDO để tránh SQL Injection
+        $sql = "UPDATE orders SET lydomuonhuydon = :cancelReasons, statusId = 9 WHERE orderId = :orderId";
+        $stmt = $this->conn->prepare($sql);
+
+        // Liên kết tham số với giá trị
+        $stmt->bindParam(':cancelReasons', $cancelReasons);
+        $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+
+        // Thực thi câu lệnh
+        return $stmt->execute();
+    }
 }

@@ -295,3 +295,9 @@ p {
 .submit-btn:hover {
   background-color: #0056b3;
 }
+.btn-cancel:disabled {
+  background-color: #d3d3d3; /* Màu xám nhạt */
+  color: #808080; /* Màu chữ xám */
+  cursor: not-allowed; /* Con trỏ chuột bị vô hiệu hóa */
+  border: 1px solid #a9a9a9; /* Viền màu xám */
+}
