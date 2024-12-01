@@ -22,8 +22,8 @@ function sendMail($to, $subject, $content)
         $mail->Host       = 'smtp.gmail.com'; // Máy chủ SMTP Gmail
         $mail->SMTPAuth   = true; // Bật xác thực SMTP
         $mail->Username   = 'hai@gmail.com'; // Địa chỉ email đúng
-        $mail->Password   = 'llty ntea jmye hvfp'; // Mật khẩu ứng dụng
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Password   = 'lltynteajmyehvfp'; // Mật khẩu ứng dụng
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
         // Recipients

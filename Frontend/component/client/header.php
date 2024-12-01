@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="Frontend/Css/hf.css?ver=434">
 <div class="header__kc">
-<a href="<?=P?>/form">form</a>
+    <a href="<?= P ?>/form?idUser=1&idProduct=26">form</a>
     <header>
 
         <div class="header grid wide">
