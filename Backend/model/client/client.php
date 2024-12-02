@@ -93,8 +93,7 @@ class Model_Client
     // =============================Thắng làm 21/11/2024==================
     public function searchProducts($keyword)
     {
-        $sql = "
-    SELECT 
+        $sql = "SELECT 
         p.productId,
         p.name,
         MIN(v.price) AS new_price,
@@ -113,8 +112,7 @@ class Model_Client
     WHERE p.name LIKE :keyword
     GROUP BY p.productId
     ORDER BY p.productId
-    LIMIT 12;
-";
+    LIMIT 12;";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
