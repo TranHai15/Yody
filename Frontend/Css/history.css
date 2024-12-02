@@ -188,7 +188,7 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  z-index: 1000; /* Đảm bảo overlay dưới popup */
+  z-index: 100; /* Đảm bảo overlay dưới popup */
   display: none;
 }
 p {
@@ -231,4 +231,73 @@ p {
 .btn-order-now:hover {
   background-color: darken(var(--key), 10%);
   color: #fff;
+}
+/* Nút "Hủy đơn" */
+.btn-cancel {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-cancel:hover {
+  background-color: #c62828;
+}
+
+/* Popup form hủy đơn */
+.popup-cancel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  z-index: 1001;
+  max-width: 90%;
+  width: 500px;
+  display: none;
+}
+
+.popup-cancel form {
+  margin-top: 8px;
+}
+
+.popup-cancel textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: none;
+}
+
+.popup-buttons {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+.btn-cancel:disabled {
+  background-color: #d3d3d3; /* Màu xám nhạt */
+  color: #808080; /* Màu chữ xám */
+  cursor: not-allowed; /* Con trỏ chuột bị vô hiệu hóa */
+  border: 1px solid #a9a9a9; /* Viền màu xám */
 }
