@@ -579,6 +579,14 @@ function getRows($sql)
     }
 }
 
+function generateRandomNumber()
+{
+    // Tạo một số ngẫu nhiên từ 0 đến 999999
+    $randomNumber = rand(0, 999999);
+
+    // Đảm bảo số có 6 chữ số, nếu ít hơn thì thêm các số 0 phía trước
+    return str_pad($randomNumber, 6, "0", STR_PAD_LEFT);
+}
 
 // lay du lieu va dem dong 
 function get_user_data($email, $check = 0)
@@ -594,6 +602,48 @@ function get_user_data($email, $check = 0)
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+
+
+
+
+
+function sendResetPasswordMail($to, $resetCode)
+{
+    $subject = 'Yêu cầu đặt lại mật khẩu';
+    $content = '
+    <html>
+    <head>
+        <title>Yêu cầu đặt lại mật khẩu</title>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            .container { background-color: #f4f4f4; padding: 20px; }
+            .content { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+            .footer { font-size: 12px; color: #777; text-align: center; padding: 10px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">
+                <h2>Chào bạn!</h2>
+                <p>Chúng tôi nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.</p>
+                <p>Để hoàn tất quá trình, vui lòng sử dụng mã dưới đây:</p>
+                <h3 style="color: #007BFF;">Mã đặt lại mật khẩu: <strong>' . $resetCode . '</strong></h3>
+                <p>Hãy nhập mã vào trang đặt lại mật khẩu của chúng tôi để tiếp tục.</p>
+                <p>Nếu bạn không yêu cầu thay đổi mật khẩu, vui lòng bỏ qua email này.</p>
+                <p>Trân trọng,<br>Đội ngũ hỗ trợ</p>
+            </div>
+            <div class="footer">
+                <p>Đây là email tự động, vui lòng không trả lời.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ';
+
+    // Gọi hàm sendMail để gửi email
+    sendMail($to, $subject, $content);
+}
+
 
 // kiem tra mat khau nhap vao =va ma hoa mat khau vao dataabae
 
