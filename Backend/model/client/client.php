@@ -351,6 +351,13 @@ LIMIT 4
     {
         return update($table, $data, $Where);
     }
+
+    public function rateProduct($table, $data)
+    {
+        return insert($table, $data);
+    }
+
+
     public function updateCheckCartitem($where, $check, $value)
     {
         if ($check === 'all') {

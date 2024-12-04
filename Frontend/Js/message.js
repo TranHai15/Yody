@@ -4,6 +4,7 @@ localStorage.setItem("cartNumber", soluonrtyertyg);
 document.querySelector(".numberCart").innerText = soluong;
 
 setTimeout(() => {
-  console.log("aaa");
-  window.location.href = "/Yody/";
+  // console.log("aaa");
+  // alert("chuyen trang");
+  window.location.href = "/Yody/history";
 }, 1000);

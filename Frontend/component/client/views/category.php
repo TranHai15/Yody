@@ -20,6 +20,8 @@
             <span class="past__product--category"></span>
         </div>
         <div class="grid wide name__category ">
+
+
             <?php foreach ($category as $cap1): ?>
                 <?php if (isset($cap1['categoryId']) && isset($kq[0]['categoryId']) && $cap1['categoryId'] === $kq[0]['categoryId']): ?>
                     <a style="cursor: pointer;"
@@ -39,8 +41,8 @@
                     <button class="dropbtn row align-items-center ">
                         <span>Sắp xếp theo</span>
                         <span class="icon__bottom"><img src="Frontend/public/svg/buttonnext.svg" alt=""></span>
-                        <span class="icon__top icon__bottom display__none"><img
-                                src="Frontend/public/svg/topnext.svg" alt=""></span>
+                        <span class="icon__top icon__bottom display__none"><img src="Frontend/public/svg/topnext.svg"
+                                alt=""></span>
                     </button>
                     <div class="dropdown__content display__none">
                         <a href="">Nổi bật</a>
@@ -155,8 +157,8 @@
                                     <li class="color-item">
 
                                         <div class="color-circle"
-                                            style="background-color: white; border: 1px solid black;"
-                                            data-color="T"></div>
+                                            style="background-color: white; border: 1px solid black;" data-color="T">
+                                        </div>
                                         <p>Trắng</p>
 
                                     </li>
