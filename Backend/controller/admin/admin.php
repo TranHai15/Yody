@@ -311,6 +311,20 @@ class Controller__Admin
         $getOne = (new Model_Admin)->getOneCategoryById($idCategory);
         View(FRONTEND__ADMIN, $file, ['getOne' => $getOne]);
     }
+    // thắng mới làm ============================ 1/12/2024 =============
+    public function getChildCategoryById($file = 'editChildCategory')
+    {
+        $idChildCategory = $_GET['editChildCategory'] ?? '';
+        $getOne = (new Model_Admin)->getOneChildCategoryById($idChildCategory);
+        View(FRONTEND__ADMIN, $file, ['getOne' => $getOne]);
+    }
+    // 3/12
+    public function getCommontCategory($file = 'editCommoncategorys')
+    {
+        $idCommentId = $_GET['editCommoncategorys'] ?? '';
+        $getOne = (new Model_Admin)->getOneCommontCategoryById($idCommentId);
+        View(FRONTEND__ADMIN, $file, ['getOne' => $getOne]);
+    }
 
 
 
@@ -410,23 +424,86 @@ class Controller__Admin
         exit;
     }
 
+    // phần cập nhật category
     public function UpdateCategory()
     {
         if (isPost()) {
+            $data = $_POST;
+
+            // Lấy dữ liệu từ form
+            $name = trim($data['name'] ?? '');
+            $past = trim($data['past'] ?? '');
+            $categoryId = $data['categoryId'] ?? 0;
+            $file_anh = $_FILES['image'] ?? null;
+            $image_new = '';
+            $getOne = (new Model_Admin)->getOneCategoryById($categoryId);
+
+
+            // Kiểm tra xem ảnh có được upload hay không
+            if (!empty($file_anh) && $file_anh['error'] == 0) {
+                $image_new = xuLyUploadFile($file_anh, 'Image/category');
+            } else {
+                $image_new = $data['image'] ?? ''; // Giữ nguyên ảnh cũ nếu không upload ảnh mới
+            }
+
+            // Validate các trường dữ liệu
+            if (strlen(removespace($name)) == 0) {
+                setsession('errorNameCategory', 'Tên danh mục không được để trống.');
+                View(FRONTEND__ADMIN, 'editCategory', ['getOne' => $getOne]);
+                exit;
+            }
+
+            if (strlen(removespace($past)) == 0) {
+                setsession('errorPastCategory', 'Trường "past" không được để trống.');
+                View(FRONTEND__ADMIN, 'editCategory', ['getOne' => $getOne]);
+                exit;
+            }
+
+            if (!is_numeric($categoryId) || $categoryId <= 0) {
+                setsession('errorCategoryId', 'ID danh mục không hợp lệ.');
+                View(FRONTEND__ADMIN, 'editCategory', ['getOne' => $getOne]);
+                exit;
+            }
+
+            // Chuẩn bị dữ liệu để cập nhật
+            $data_update = [
+                'name' => $name,
+                'past' => $past,
+                'image' => $image_new,
+            ];
+
+            // Điều kiện cập nhật
+            $condition = 'categoryId=' . (int)$categoryId;
+
+            // Thực hiện cập nhật
+            $result = (new Model_Admin)->updateOneCategoryWhereById('categorys', $data_update, $condition);
+
+            if ($result) {
+                setsession('messageEditCategory', "Cập nhật thành công.");
+            } else {
+                setsession('messageEditCategory', "Cập nhật thất bại.");
+            }
+
+            // Chuyển hướng sau khi xử lý
+            header('Location: /Yody/admin?Category');
+            exit;
+        }
+    }
+
+    public function updateChildCategory()
+    {
+        if (isPost()) {
             $data = filter();
-            $image = $data['image'];
+            $childId = $data['childId'];
             $name = $data['name'];
             $past = $data['past'];
-            $categoryId = $data['categoryId'];
-            $new_image = $_FILES['image'];
-            $xulyImage = xuLyUploadFile($new_image, 'Image/category/', $image);
             $new_data = [
-                'image' => $xulyImage,
                 'name' => $name,
                 'past' => $past,
             ];
-            $dk = 'categoryId=' . $categoryId;
-            $ketqua = (new Model_Admin)->updateOneCategoryWhereById('categorys', $new_data, $dk);
+            $dk = 'childId=' . $childId;
+
+            $ketqua = (new Model_Admin)->updateOneChildCategoryWhereById('childcategorys', $new_data, $dk);
             if ($ketqua === true) {
                 setsession('messageEditSlides', "Cập nhật thành công!");
                 header("Location: /Yody/admin?Category");
@@ -438,12 +515,96 @@ class Controller__Admin
             }
         }
     }
+    public function updateCommontCategory()
+    {
+        if (isPost()) {
+            $data = filter();
+            $name = $data['name'];
+            $past = $data['past'];
+            $commonId = $data['commonId'];
+            $new_data = [
+                'name' => $name,
+                'past' => $past,
+            ];
 
+            $dk = 'commonId=' . $commonId;
 
+            $ketqua = (new Model_Admin)->updateOneCommontCategoryWhereById('commoncategorys', $new_data, $dk);
+            if ($ketqua === true) {
+                setsession('messageEditSlides', "Cập nhật thành công!");
+                header("Location: /Yody/admin?Category");
+                exit;
+            } else {
+                setsession('messageEditSlides', "Cập nhật không thành công!");
+                header("Location: /Yody/admin?Category");
+                exit;
+            }
+        }
+    }
+    public function  headerAddchild()
+    {
+        $data = filter();
+        // checkloi($data/;
+        $id = $data['addchild'];
+        View(FRONTEND__ADMIN, 'addChildCategory', ['id' => $id]);
+    }
+    public function  headerAddCommont()
+    {
+        $data = filter();
+        $id = $data['addCommont'];
+        View(FRONTEND__ADMIN, 'addCommontCategory', ['id' => $id]);
+    }
+    // 
+    public function addChild()
+    {
+        $data = filter();
+        $name = $data['name'];
+        $past = $data['past'];
+        $id = $data['categoryId'];
 
+        $data_new = [
+            'name'=> $name,
+            'past' => $past,
+            'categoryId' => $id
+        ];
 
+        $kq = (new Model_Admin)->addChild('childcategorys', $data_new);
+        if ($kq) {
+            setsession('messageDuyetComment', "Thêm thành công");
+        } else {
+            setsession('messageDuyetComment', "Thêm thất bại");
+        }
 
+        // Redirect after completion
+        header('Location: /Yody/admin?Category');
+        exit;
+       
+    }
+    public function addComment()
+    {
+        $data = filter();
+        $name = $data['name'];
+        $past = $data['past'];
+        $id = $data['childId'];
 
+        $data_new = [
+            'name'=> $name,
+            'past' => $past,
+            'childId' => $id
+        ];
+
+        $kq = (new Model_Admin)->addCommont('commoncategorys', $data_new);
+        if ($kq) {
+            setsession('messageDuyetComment', "Thêm thành công");
+        } else {
+            setsession('messageDuyetComment', "Thêm thất bại");
+        }
+
+        // Redirect after completion
+        header('Location: /Yody/admin?Category');
+        exit;
+       
+    }
 
 
     public function Product($file = "products")

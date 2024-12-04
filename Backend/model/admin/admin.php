@@ -174,7 +174,16 @@ class Model_Admin
 
 
     // ============================================= Thắng mới làm ====================================
+    // ================================================================================================
     public function addCategory($table, $data)
+    {
+        return insert($table, $data);
+    }
+    public function addChild($table, $data)
+    {
+        return insert($table, $data);
+    }
+    public function addCommont($table, $data)
     {
         return insert($table, $data);
     }
@@ -183,12 +192,36 @@ class Model_Admin
         $sql = "SELECT * From categorys WHere categoryId = $id";
         return getOne($sql);
     }
+    // 12/1/2024
+    public function getOneChildCategoryById($id)
+    {
+        $sql = "SELECT * From childcategorys WHere childId = $id";
+        return getOne($sql);
+    }
+    public function getOneCommontCategoryById($id)
+    {
+        $sql = "SELECT * From commoncategorys WHere commonId = $id";
+        return getOne($sql);
+    }
 
     public function updateOneCategoryWhereById($table, $data, $Where)
     {
         return update($table, $data, $Where);
     }
-    // 
+    public function updateOneChildCategoryWhereById($table, $data, $Where)
+    {
+        return update($table, $data, $Where);
+    }
+    public function updateOneCommontCategoryWhereById($table, $data, $Where)
+    {
+        return update($table, $data, $Where);
+    }
+
+
+
+
+
+    // ========================== product=====================
     public  function  addProduct($table, $data)
     {
         return insert($table, $data);

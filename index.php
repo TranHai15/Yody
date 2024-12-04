@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="Frontend/Css/reset.css?ver=2">
 <link rel="stylesheet" href="Frontend/Css/grid.css?ver=3">
+<link rel="stylesheet" href="Frontend/Css/hf.css">
 <?php
 session_start();
 require_once("./Backend/common/sendMail.php");
