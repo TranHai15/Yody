@@ -655,12 +655,12 @@ class Controller_Client
             die();
         } else {
             // // checkloi($userId);
-            // $giohang = (new Model_Client);
-            // $dulieulayra = $giohang->getAllOrder($userId);
+            $giohang = (new Model_Client);
+            $dulieulayra = $giohang->getAlldulieudoraorderItemDetail($idOrder);
             // // checkloi($dulieulayra);
             // // checkloi
             // checkloi($idOrder);
         }
-        View(FRONTEND__CLIENT, $file, []);
+        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
     }
 }
