@@ -471,6 +471,12 @@ LIMIT 4
     ";
         return getRaw($sql);
     }
+
+    public function getAllOrder($userId)
+    {
+        $sql = "SELECT o.*,pa.name AS paymethod, os.name AS statusDonhang, p.paymentStatus AS phuongthucTT from orders AS o JOIN pay AS pa ON o.payId = pa.payId    JOIN orderstatus  AS os ON o.statusId = os.statusId  JOIN paystatus AS p ON o.payStatusId = p.payStatusId where userId = $userId;";
+        return getRaw($sql);
+    }
     // ******************************* Đổ comment ra*************************
     public function getAllCommentWhereProductId($productId)
     {
@@ -498,20 +504,11 @@ GROUP BY
         return getRaw($sql);
     }
     // cap nhat ly do huy don
-    public function huydon($data, $orderId)
+    public function huydon($orderId)
     {
-        // Chuyển mảng lý do thành chuỗi
-        $cancelReasons = implode(", ", $data);
-
-        // Sử dụng chuẩn PDO để tránh SQL Injection
-        $sql = "UPDATE orders SET lydomuonhuydon = :cancelReasons, statusId = 9 WHERE orderId = :orderId";
+        $sql = "UPDATE orders SET  statusId = 2 WHERE orderId = :orderId";
         $stmt = $this->conn->prepare($sql);
-
-        // Liên kết tham số với giá trị
-        $stmt->bindParam(':cancelReasons', $cancelReasons);
         $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
-
-        // Thực thi câu lệnh
         return $stmt->execute();
     }
 }

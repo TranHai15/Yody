@@ -11,47 +11,52 @@
                     </div>
                 </a>
                 <div class="menu">
-                    <?php foreach ($category as $cap1): ?>
-                        <?php
-                        // Kiểm tra xem mục cha này có mục con nào không
-                        $hasSubmenu = false;
-                        foreach ($child as $cap2) {
-                            if ($cap1['categoryId'] == $cap2['categoryId']) {
-                                $hasSubmenu = true;
-                                break;
+                    <?php if (!empty($category)): // Kiểm tra xem $category có giá trị hay không 
+                    ?>
+                        <?php foreach ($category as $cap1): ?>
+                            <?php
+                            // Kiểm tra xem mục cha này có mục con nào không
+                            $hasSubmenu = false;
+                            foreach ($child as $cap2) {
+                                if ($cap1['categoryId'] == $cap2['categoryId']) {
+                                    $hasSubmenu = true;
+                                    break;
+                                }
                             }
-                        }
-                        ?>
-                        <!-- Thêm lớp 'has-submenu' nếu có mục con -->
-                        <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
-                            <a href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"
-                                class="menu-item-a"><?= $cap1['name'] ?></a>
-                            <?php if ($hasSubmenu): ?>
-                                <div class="menu__list--cha">
-                                    <div class="menu__list grid wide row">
-                                        <?php foreach ($child as $cap2): ?>
-                                            <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
-                                                <div class="item__list">
-                                                    <div class="child__category"><a href="#"><?= $cap2['name'] ?></a></div>
-                                                    <?php foreach ($common as $cap3): ?>
-                                                        <?php if ($cap2['childId'] == $cap3['childId']): ?>
-                                                            <div>
-                                                                <div class="commont__category"><a href="#"><?= $cap3['name'] ?></a></div>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                        <div class="item__list--img">
-                                            <img src="<?= $cap1['image'] ?>" alt="">
+                            ?>
+                            <!-- Thêm lớp 'has-submenu' nếu có mục con -->
+                            <span class="menu-item menu-item-hover <?= $hasSubmenu ? 'has-submenu' : '' ?>">
+                                <a href="<?= P ?>/category?id=<?= $cap1['categoryId'] ?>"
+                                    class="menu-item-a"><?= $cap1['name'] ?></a>
+                                <?php if ($hasSubmenu): ?>
+                                    <div class="menu__list--cha">
+                                        <div class="menu__list grid wide row">
+                                            <?php foreach ($child as $cap2): ?>
+                                                <?php if ($cap1['categoryId'] == $cap2['categoryId']): ?>
+                                                    <div class="item__list">
+                                                        <div class="child__category"><a href="#"><?= $cap2['name'] ?></a></div>
+                                                        <?php foreach ($common as $cap3): ?>
+                                                            <?php if ($cap2['childId'] == $cap3['childId']): ?>
+                                                                <div>
+                                                                    <div class="commont__category"><a href="#"><?= $cap3['name'] ?></a></div>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                            <div class="item__list--img">
+                                                <img src="<?= $cap1['image'] ?>" alt="">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php endif; ?>
-                        </span>
-                    <?php endforeach ?>
-
+                                <?php endif; ?>
+                            </span>
+                        <?php endforeach; ?>
+                    <?php else:
+                    ?>
+                        <span class="menu-item"></span>
+                    <?php endif; ?>
                 </div>
 
             </nav>
@@ -102,14 +107,14 @@
                                 <li><a href="<?= P ?>/admin">Vào trang quản trị</a></li>
                                 <li><a href="/<?= P ?>/forgot">Thay đổi mật khẩu</a></li>
                                 <li><a href="/settings">Cài đặt</a></li>
-                                <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
+                                <li><a href="<?= P ?>/logout?id=<?= $_SESSION['userId'] ?? null ?>">Đăng xuất</a></li>
                             </ul>
                         <?php else: ?>
                             <ul class="user-options">
                                 <li><a href="<?= P ?>/history">Lịch sử mua hàng</a></li>
                                 <li><a href="<?= P ?>/forgot">Thay đổi mật khẩu</a></li>
                                 <li><a href="/settings">Cài đặt</a></li>
-                                <li><a href="<?= P ?>/logout">Đăng xuất</a></li>
+                                <li><a href="<?= P ?>/logout?id=<?= $_SESSION['userId'] ?? null ?>">Đăng xuất</a></li>
                             </ul>
                         <?php endif; ?>
                     </div>

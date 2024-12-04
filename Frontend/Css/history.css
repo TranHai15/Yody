@@ -1,303 +1,159 @@
-/* File: history.css */
 
-/* Reset */
-body,
-html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+.container {
+    width: 90%;
+    margin: 40px auto;
 }
 
-body {
-  background-color: #f4f4f4;
-  color: #333;
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 30px;
 }
 
-.history-container {
-  padding: 16px;
+.orders-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
 
-/* Common section title */
-.section-title {
-  text-align: center;
-  background-color: #486380;
-  color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  font-size: 1.5em;
+.order-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    /* Điều chỉnh padding để tạo khoảng cách hợp lý */
+    width: calc(33.333% - 20px);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    /* Điều chỉnh chiều cao tự động */
 }
 
-/* Order Section */
-.order-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.order-card:hover {
+    transform: translateY(-5px);
 }
 
-.order-item {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  gap: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
+.order-card h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    /* Giảm khoảng cách dưới tiêu đề */
 }
 
-.order-item img {
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
-  object-fit: contain;
+.info {
+    font-size: 13px;
+    /* Giảm font size một chút */
+    color: #555;
+    margin-bottom: 10px;
+    /* Tăng khoảng cách giữa các dòng để dễ nhìn hơn */
+    line-height: 1.5;
+    /* Tăng line-height cho dễ đọc */
 }
 
-.order-detail {
-  flex: 1;
+.info span {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
 }
 
-.order-price {
-  color: #e53935;
-  font-weight: bold;
+.price {
+    font-size: 1.2em;
+    color: #007BFF;
+    font-weight: 600;
+    margin-top: auto;
+    margin-bottom: 15px;
+    /* Tăng khoảng cách dưới phần tổng tiền */
 }
 
-.order-price span {
-  color: #999;
-  margin-left: 8px;
-  text-decoration: line-through;
+.status,
+.payment-status {
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-align: center;
+    width: auto;
+    font-size: 13px;
+    display: inline-block;
+    /* Để các trạng thái hiển thị gọn gàng */
 }
 
-.btn-detail {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.status {
+    background-color: #f1f1f1;
+    color: #333;
 }
 
-.btn-detail:hover {
-  background-color: #0056b3;
+.status.pending {
+    background-color: #ffeb3b;
+    color: #c9a000;
 }
 
-/* Popup styles */
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  z-index: 1001;
-  max-width: 90%;
-  width: 500px;
-  display: none;
+.status.completed {
+    background-color: #4caf50;
+    color: white;
 }
 
-.popup p {
-  margin: 8px 0;
+.payment-status {
+    background-color: #e0ffe0;
+    color: #28a745;
 }
 
-.close-btn {
-  background-color: #e53935;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: block;
-  margin-top: 16px;
+.payment-status.unpaid {
+    background-color: #ffe0e0;
+    color: #f44336;
 }
 
-.close-btn:hover {
-  background-color: #c62828;
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 15px;
 }
 
-/* Overlay */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  display: none;
+.btn {
+    padding: 6px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
 }
 
-.hidden {
-  display: none !important;
-}
-
-/* History Section */
-.history-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.history-item {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  gap: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.history-item img {
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
-  object-fit: contain;
-}
-
-.history-detail {
-  flex: 1;
-}
-
-.history-price {
-  color: #e53935;
-  font-weight: bold;
-}
-
-.history-price span {
-  color: #999;
-  margin-left: 8px;
-  text-decoration: line-through;
-}
-.history-section {
-  margin-top: 20px;
-}
-/* Overlay (lớp phủ nền) */
-/* Popup */
-
-/* Overlay */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 100; /* Đảm bảo overlay dưới popup */
-  display: none;
-}
-p {
-  line-height: 27px;
-}
-
-.popup.hidden {
-  display: none !important;
-}
-
-.overlay.active {
-  display: block !important;
-}
-.history-list {
-  margin-bottom: 100px;
-}
-.no-order {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.no-order p {
-  font-size: 18px;
-  font-weight: 500;
-  color: #666;
-  margin-bottom: 1rem;
-}
-
-.btn-order-now {
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: var(--key); /* Màu chủ đạo của bạn */
-  color: #fff;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.btn-order-now:hover {
-  background-color: darken(var(--key), 10%);
-  color: #fff;
-}
-/* Nút "Hủy đơn" */
 .btn-cancel {
-  background-color: #e53935;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    background-color: #f44336;
+    color: white;
 }
 
-.btn-cancel:hover {
-  background-color: #c62828;
+.btn-details {
+    background-color: #007BFF;
+    color: white;
 }
 
-/* Popup form hủy đơn */
-.popup-cancel {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  z-index: 1001;
-  max-width: 90%;
-  width: 500px;
-  display: none;
+.btn:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
 }
 
-.popup-cancel form {
-  margin-top: 8px;
+.btn:active {
+    transform: scale(1);
 }
 
-.popup-cancel textarea {
-  width: 100%;
-  margin-top: 8px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  resize: none;
+@media (max-width: 1024px) {
+    .order-card {
+        width: calc(50% - 20px);
+    }
 }
 
-.popup-buttons {
-  margin-top: 16px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.submit-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-  background-color: #0056b3;
-}
-.btn-cancel:disabled {
-  background-color: #d3d3d3; /* Màu xám nhạt */
-  color: #808080; /* Màu chữ xám */
-  cursor: not-allowed; /* Con trỏ chuột bị vô hiệu hóa */
-  border: 1px solid #a9a9a9; /* Viền màu xám */
+@media (max-width: 768px) {
+    .order-card {
+        width: 100%;
+    }
 }
