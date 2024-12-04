@@ -12,9 +12,10 @@ require_once("../../model/client/client.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Lấy thông tin lý do
     $orderId = (int)$_POST['orderId'];
-    $reasons = isset($_POST['reason']) ? $_POST['reason'] : []; // Mảng lý do từ checkbox
-    $additionalReason = isset($_POST['additionalReason']) ? trim($_POST['additionalReason']) : ''; // Lý do bổ sung
+    $reasons = isset($_POST['reason']) ? $_POST['reason'] : [];
+    $additionalReason = isset($_POST['additionalReason']) ? trim($_POST['additionalReason']) : '';
 
+    // checkloi($additionalReason);
     // Kiểm tra nếu `$reasons` không phải mảng
     if (!is_array($reasons)) {
         $reasons = [$reasons]; // Chuyển chuỗi thành mảng
@@ -30,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Gộp tất cả các lý do thành một chuỗi
-    $cancelReasons = implode(", ", $reasons); // Ghép các lý do từ checkbox
+    // Ghép các lý do từ checkbox
     if (!empty($additionalReason)) {
         $cancelReasons .= $cancelReasons ? ", $additionalReason" : $additionalReason; // Thêm lý do bổ sung
     }
-    // checkloi($reasons);
-    // checkloi($orderId);
+
     $updateLydo = (new Model_Client)->huydon($reasons, $orderId);
+    // checkloi($updateLydo);
     if ($updateLydo) {
         echo json_encode([
             'success' => true,

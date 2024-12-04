@@ -115,6 +115,7 @@ function replaceSpacesWithHyphen(str) {
 
 // Container để render danh sách sản phẩm
 const container = document.querySelector(".products");
+console.log("🚀 ~ container:", container);
 
 // Hàm render sản phẩm
 function renderProducts(products) {

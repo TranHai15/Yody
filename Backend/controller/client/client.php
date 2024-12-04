@@ -226,7 +226,10 @@ class Controller_Client
                             setsession('avataUser', $avata);
                             setsession('role', $role);
                             setsession('userId', $userId);
-
+                            $data = [
+                                'active' => 1
+                            ];
+                            $kq = update('users', $data, "userId=$userId");
                             setsession('loginaccoun', 'Đăng nhập thành công');
                             header(header: 'Location: /Yody/');
                             exit;
@@ -244,7 +247,13 @@ class Controller_Client
 
     public function logout()
     {
+        $id = $_GET['id'] ?? '';
+        // checkloi($id);
         session_destroy();
+        $data = [
+            'active' => 0
+        ];
+        $kq = update('users', $data, "userId=$id");
         header('Location: /Yody/');
     }
 
@@ -284,15 +293,15 @@ class Controller_Client
     }
 
 
-    public function order($file = 'message')
+    public function order()
     {
         if (isPost()) {
             $datas = filter();
 
             if (isset($_POST['payUrl']) && $_POST) {
                 $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-                // checkloi($datas);
 
+                // Các thông tin khác
                 $partnerCode = 'MOMOBKUN20180529';
                 $accessKey = 'klm05TvNBzhg7h7j';
                 $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
@@ -303,22 +312,15 @@ class Controller_Client
                 $ipnUrl = "http://localhost/Yody/thank";
                 $extraData = "";
 
-                $partnerCode = $partnerCode;
-                $accessKey = $accessKey;
-                $serectkey = $secretKey;
-                $orderId = $orderId; // Mã đơn hàng
-                $orderInfo = $orderInfo;
-                $amount = $datas['sumprice'];
-                $ipnUrl = $ipnUrl;
-                $redirectUrl = $redirectUrl;
-                $extraData = $extraData;
-
+                // Dữ liệu yêu cầu
                 $requestId = time() . "";
                 $requestType = "payWithATM";
-                // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-                //before sign HMAC SHA256 signature
+
+                // Trước khi ký chữ ký HMAC SHA256
                 $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-                $signature = hash_hmac("sha256", $rawHash, $serectkey);
+                $signature = hash_hmac("sha256", $rawHash, $secretKey);
+
+                // Dữ liệu gửi đến MoMo
                 $data = array(
                     'partnerCode' => $partnerCode,
                     'partnerName' => "Test",
@@ -334,230 +336,162 @@ class Controller_Client
                     'requestType' => $requestType,
                     'signature' => $signature
                 );
+
+                // Gửi yêu cầu và nhận kết quả
                 $result = $this->execPostRequest($endpoint, json_encode($data));
-                $jsonResult = json_decode($result, true);  // decode json
+                $jsonResult = json_decode($result, true);
 
-                // 
+                // Ghi log kết quả trả về từ MoMo
+                // file_put_contents('log_momo_result.txt', "Result: " . $result . "\n", FILE_APPEND);
 
-                $userId = $datas['userId'] ?? "";
-                $statusId = $datas['statusId'] ?? "";
-                $payStatusId = 14 ?? "";
-                $customer_name = $datas['customer_name'] ?? "";
-                $phone_number = $datas['phone_number'] ?? "";
-                $email = $datas['email'] ?? "";
-                $province_id = $datas['province_id'] ?? "";
-                $district = $datas['district'] ?? "";
-                $ward = $datas['ward'] ?? "";
-                $note = $datas['note'] ?? "";
-                $payment_method = 2 ?? "";
-                $street_address = $datas['street_address'] ?? "";
-                $sumprice = $datas['sumprice'] ?? "";
-                $date = date('Y-m-d H:i:s') ?? "";
+                // Kiểm tra kết quả trả về từ MoMo
+                // if (isset($jsonResult['payUrl'])) {
+                //     file_put_contents('log_redirect_url.txt', "Redirecting to: " . $jsonResult['payUrl'] . "\n", FILE_APPEND);
+                // } else {
+                //     file_put_contents('log_error.txt', "Error in MoMo response: " . json_encode($jsonResult) . "\n", FILE_APPEND);
+                // }
 
-                // checkloi($diachi);
-                $address = (new Model_Client)->getAddress($province_id, $district, $ward);
-                $xong = $address['Tp'] . ', ' . $address['Huyen'] . ', ' . $address['Xa'] . ', ' . $street_address;
-                // checkloi($xong);
-                $data_new = [
-                    'statusId' => $statusId,
-                    'userId' => $userId,
-                    'sumprice' => $sumprice,
-                    'address' => $xong,
-                    'phone' => $phone_number,
-                    'payId' => $payment_method,
-                    'payStatusId' => $payStatusId,
-                    'updateAt' => $date,
-                    'createAt' => $date,
-                ];
-                $sql = "INSERT INTO orders (statusId, userId, sumprice, address, phone, payId, payStatusId, updateAt, createAt)
-            VALUES (:statusId, :userId, :sumprice, :address, :phone, :payId, :payStatusId, :updateAt, :createAt)";
-                $pdo = Connect();
-                // Chuẩn bị statement
-                $stmt = $pdo->prepare($sql);
+                // Tiến hành lưu đơn hàng
+                $this->inserOrder($datas, 3);
 
-                // Gán giá trị vào các tham số
-                $stmt->bindParam(':statusId', $data_new['statusId']);
-                $stmt->bindParam(':userId', $data_new['userId']);
-                $stmt->bindParam(':sumprice', $data_new['sumprice']);
-                $stmt->bindParam(':address', $data_new['address']);
-                $stmt->bindParam(':phone', $data_new['phone']);
-                $stmt->bindParam(':payId', $data_new['payId']);
-                $stmt->bindParam(':payStatusId', $data_new['payStatusId']);
-                $stmt->bindParam(':updateAt', $data_new['updateAt']);
-                $stmt->bindParam(':createAt', $data_new['createAt']);
-
-                // Thực hiện câu lệnh
-                $stmt->execute();
-
-                // Lấy ID của đơn hàng vừa thêm
-                $order_id = $pdo->lastInsertId();
-                // checkloi($order_id);
-
-                if ($order_id > 0) {
-                    $sanpham = (new Model_Client)->getAllcartItemByuserId($userId);
-                    // checkloi($sanpham);
-                    for ($i = 0; $i < count($sanpham); $i++):
-
-                        $dataNew = [
-                            'orderId' => $order_id,
-                            'variationId' => $sanpham[$i]['variationId'],
-                            'sizeId' => $sanpham[$i]['sizeId'],
-                            'quantity' => $sanpham[$i]['quantity'],
-                            'price' => $sanpham[$i]['price'],
-                        ];
-                        $sizeId = $sanpham[$i]['sizeId'];
-                        $quantity = $sanpham[$i]['quantity'];
-                        // checkloi($quantity);
-                        try {
-                            // Thêm dữ liệu vào bảng orderitems
-                            (new Model_Client)->insertOrderItem('orderitems', $dataNew);
-                            (new Model_Client())->deleteQuatitySize($sizeId, $quantity);
-                        } catch (Exception $e) {
-                            // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
-                            echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
-                            break; // Dừng vòng lặp nếu có lỗi
-                        }
-
-                    endfor;
-
-                    for ($i = 0; $i < count($sanpham); $i++):
-                        $dk =   'cartitemId=' .  $sanpham[$i]['cartitemId'];
-                        try {
-                            // Thêm dữ liệu vào bảng orderitems
-                            delete('cartitems', $dk);
-                        } catch (Exception $e) {
-                            // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
-                            echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
-                            break; // Dừng vòng lặp nếu có lỗi
-                        }
-                    endfor;
-                    $kq = (new Model_Client)->getNumber($userId);
-                    $sl = $kq[0]['total_quantity'];
-                    // checkloi($sl);
-                    // checkloi($sanpham);
-                    setsession('order', 'Thanh Toán thành công');
-                } else {
-                    setsession('order',  'Thanh Toán thất bại');
-                }
-                setsession('sl', $sl);
-                //Just a example, please check more in there
-
+                // Chuyển hướng đến MoMo thanh toán
+                // checkloi($result);
                 header('Location: ' . $jsonResult['payUrl']);
+                exit;
             } else {
-                $userId = $datas['userId'];
-                $statusId = $datas['statusId'];
-                $payStatusId = $datas['payStatusId'];
-                $customer_name = $datas['customer_name'];
-                $phone_number = $datas['phone_number'];
-                $email = $datas['email'];
-                $province_id = $datas['province_id'];
-                $district = $datas['district'];
-                $ward = $datas['ward'];
-                $note = $datas['note'];
-                $payment_method = $datas['payment_method'];
-                $street_address = $datas['street_address'];
-                $sumprice = $datas['sumprice'];
-                $date = date('Y-m-d H:i:s');
-
-                // checkloi($diachi);
-                $address = (new Model_Client)->getAddress($province_id, $district, $ward);
-                $xong = $address['Tp'] . ', ' . $address['Huyen'] . ', ' . $address['Xa'] . ', ' . $street_address;
-                // checkloi($xong);
-                $data_new = [
-                    'statusId' => $statusId,
-                    'userId' => $userId,
-                    'sumprice' => $sumprice,
-                    'address' => $xong,
-                    'phone' => $phone_number,
-                    'payId' => $payment_method,
-                    'payStatusId' => $payStatusId,
-                    'updateAt' => $date,
-                    'createAt' => $date,
-                ];
-                $sql = "INSERT INTO orders (statusId, userId, sumprice, address, phone, payId, payStatusId, updateAt, createAt)
-            VALUES (:statusId, :userId, :sumprice, :address, :phone, :payId, :payStatusId, :updateAt, :createAt)";
-                $pdo = Connect();
-                // Chuẩn bị statement
-                $stmt = $pdo->prepare($sql);
-
-                // Gán giá trị vào các tham số
-                $stmt->bindParam(':statusId', $data_new['statusId']);
-                $stmt->bindParam(':userId', $data_new['userId']);
-                $stmt->bindParam(':sumprice', $data_new['sumprice']);
-                $stmt->bindParam(':address', $data_new['address']);
-                $stmt->bindParam(':phone', $data_new['phone']);
-                $stmt->bindParam(':payId', $data_new['payId']);
-                $stmt->bindParam(':payStatusId', $data_new['payStatusId']);
-                $stmt->bindParam(':updateAt', $data_new['updateAt']);
-                $stmt->bindParam(':createAt', $data_new['createAt']);
-
-                // Thực hiện câu lệnh
-                $stmt->execute();
-
-                // Lấy ID của đơn hàng vừa thêm
-                $order_id = $pdo->lastInsertId();
-                // checkloi($order_id);
-
-                if ($order_id > 0) {
-                    $sanpham = (new Model_Client)->getAllcartItemByuserId($userId);
-                    // checkloi($sanpham);
-                    for ($i = 0; $i < count($sanpham); $i++):
-
-                        $dataNew = [
-                            'orderId' => $order_id,
-                            'variationId' => $sanpham[$i]['variationId'],
-                            'sizeId' => $sanpham[$i]['sizeId'],
-                            'quantity' => $sanpham[$i]['quantity'],
-                            'price' => $sanpham[$i]['price'],
-                        ];
-                        $sizeId = $sanpham[$i]['sizeId'];
-                        $quantity = $sanpham[$i]['quantity'];
-                        // checkloi($quantity);
-                        try {
-                            // Thêm dữ liệu vào bảng orderitems
-                            (new Model_Client)->insertOrderItem('orderitems', $dataNew);
-                            (new Model_Client())->deleteQuatitySize($sizeId, $quantity);
-                        } catch (Exception $e) {
-                            // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
-                            echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
-                            break; // Dừng vòng lặp nếu có lỗi
-                        }
-
-                    endfor;
-
-                    for ($i = 0; $i < count($sanpham); $i++):
-                        $dk =   'cartitemId=' .  $sanpham[$i]['cartitemId'];
-                        try {
-                            // Thêm dữ liệu vào bảng orderitems
-                            delete('cartitems', $dk);
-                        } catch (Exception $e) {
-                            // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
-                            echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
-                            break; // Dừng vòng lặp nếu có lỗi
-                        }
-                    endfor;
-                    $kq = (new Model_Client)->getNumber($userId);
-                    $sl = $kq[0]['total_quantity'];
-                    // checkloi($sl);
-                    // checkloi($sanpham);
-                    setsession('order', 'Thanh Toán thành công');
-                } else {
-                    setsession('order',  'Thanh Toán thất bại');
-                }
-                View(FRONTEND__CLIENT, $file, ['sl' => $sl]);
+                $this->inserOrder($datas);
             }
+        }
+    }
+
+    public function inserOrder($datas, $check = 0)
+    {
+        $userId = $datas['userId'] ?? "";
+        $statusId = $datas['statusId'] ?? "";
+        $payStatusId =  $check == 0 ? 12 : 14;
+        $customer_name = $datas['customer_name'] ?? "";
+        $phone_number = $datas['phone_number'] ?? "";
+        $email = $datas['email'] ?? "";
+        $province_id = $datas['province_id'] ?? "";
+        $district = $datas['district'] ?? "";
+        $ward = $datas['ward'] ?? "";
+        $note = $datas['note'] ?? "";
+        $payment_method = $check == 0 ? 1 : 2;
+        $street_address = $datas['street_address'] ?? "";
+        $sumprice = $datas['sumprice'] ?? "";
+        $date = date('Y-m-d H:i:s') ?? "";
+
+        // checkloi($diachi);
+        $address = (new Model_Client)->getAddress($province_id, $district, $ward);
+        $xong = $address['Tp'] . ', ' . $address['Huyen'] . ', ' . $address['Xa'] . ', ' . $street_address;
+        // checkloi($xong);
+        $data_new = [
+            'statusId' => $statusId,
+            'userId' => $userId,
+            'sumprice' => $sumprice,
+            'address' => $xong,
+            'phone' => $phone_number,
+            'payId' => $payment_method,
+            'payStatusId' => $payStatusId,
+            'updateAt' => $date,
+            'createAt' => $date,
+        ];
+
+        $sql = "INSERT INTO orders (statusId, userId, sumprice, address, phone, payId, payStatusId, updateAt, createAt)
+    VALUES (:statusId, :userId, :sumprice, :address, :phone, :payId, :payStatusId, :updateAt, :createAt)";
+        $pdo = Connect();
+        // Chuẩn bị statement
+        $stmt = $pdo->prepare($sql);
+
+        // Gán giá trị vào các tham số
+        $stmt->bindParam(':statusId', $data_new['statusId']);
+        $stmt->bindParam(':userId', $data_new['userId']);
+        $stmt->bindParam(':sumprice', $data_new['sumprice']);
+        $stmt->bindParam(':address', $data_new['address']);
+        $stmt->bindParam(':phone', $data_new['phone']);
+        $stmt->bindParam(':payId', $data_new['payId']);
+        $stmt->bindParam(':payStatusId', $data_new['payStatusId']);
+        $stmt->bindParam(':updateAt', $data_new['updateAt']);
+        $stmt->bindParam(':createAt', $data_new['createAt']);
+
+        // Thực hiện câu lệnh
+        $stmt->execute();
+
+        // Lấy ID của đơn hàng vừa thêm
+        $order_id = $pdo->lastInsertId();
+        // checkloi($order_id);
+
+        if ($order_id > 0) {
+            $sanpham = (new Model_Client)->getAllcartItemByuserId($userId);
+            // checkloi($sanpham);
+            for ($i = 0; $i < count($sanpham); $i++):
+
+                $dataNew = [
+                    'orderId' => $order_id,
+                    'variationId' => $sanpham[$i]['variationId'],
+                    'sizeId' => $sanpham[$i]['sizeId'],
+                    'quantity' => $sanpham[$i]['quantity'],
+                    'price' => $sanpham[$i]['price'],
+                    'statusId' =>  2,
+                    'payStatusId' => $check == 0 ? 12 : 14,
+                ];
+                // checkloi($dataNew);
+                $sizeId = $sanpham[$i]['sizeId'];
+                $quantity = $sanpham[$i]['quantity'];
+                // checkloi($quantity);
+                try {
+                    // Thêm dữ liệu vào bảng orderitems
+                    (new Model_Client)->insertOrderItem('orderitems', $dataNew);
+                    (new Model_Client())->deleteQuatitySize($sizeId, $quantity);
+                } catch (Exception $e) {
+                    // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
+                    echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
+                    break; // Dừng vòng lặp nếu có lỗi
+                }
+
+            endfor;
+
+            for ($i = 0; $i < count($sanpham); $i++):
+                $dk =   'cartitemId=' .  $sanpham[$i]['cartitemId'];
+                try {
+                    // Thêm dữ liệu vào bảng orderitems
+                    delete('cartitems', $dk);
+                } catch (Exception $e) {
+                    // Nếu có lỗi xảy ra, in ra thông báo lỗi và dừng vòng lặp
+                    echo 'Lỗi khi thêm sản phẩm vào đơn hàng: ' . $e->getMessage();
+                    break; // Dừng vòng lặp nếu có lỗi
+                }
+            endfor;
+            $kq = (new Model_Client)->getNumber($userId);
+            $sl = $kq[0]['total_quantity'];
+            // checkloi($sl);
+            // checkloi($sanpham);
+            setsession('order', 'Thanh Toán thành công');
+        } else {
+            setsession('order',  'Thanh Toán thất bại');
+        }
+
+        setsession('sl', $sl);
+        if ($check == 0) {
+            View(FRONTEND__CLIENT, "message", ['sl' => $sl]);
         }
     }
 
     public function getOrder($file = 'history')
     {
-        $userId = $_SESSION['userId'];
-        // checkloi($userId);
-        $giohang = (new Model_Client);
-        $dulieulayra = $giohang->getOrdersandOrderItem($userId);
-        // checkloi($dulieulayra);
-        // checkloi
-        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
+        $userId = $_SESSION['userId'] ?? null;
+        if ($userId === null) {
+            echo "KHong tim thay nguoi dung 
+            ";
+            die();
+        } else {
+            // checkloi($userId);
+            $giohang = (new Model_Client);
+            $dulieulayra = $giohang->getAllOrder($userId);
+            // checkloi($dulieulayra);
+            // checkloi
+            View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
+        }
     }
     public function forgot()
     {
@@ -709,5 +643,24 @@ class Controller_Client
             header('Location: /Yody/');
             exit;
         }
+    }
+
+    public function itemOrder($file = 'orderItemDetail')
+    {
+        // echo ('2');
+        $idOrder = $_GET['id'] ?? null;
+        if ($idOrder === null) {
+            echo "KHong tim thay nguoi dung 
+            ";
+            die();
+        } else {
+            // // checkloi($userId);
+            // $giohang = (new Model_Client);
+            // $dulieulayra = $giohang->getAllOrder($userId);
+            // // checkloi($dulieulayra);
+            // // checkloi
+            // checkloi($idOrder);
+        }
+        View(FRONTEND__CLIENT, $file, []);
     }
 }

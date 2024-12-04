@@ -234,13 +234,27 @@ body {
   border-radius: 5px; /* Bo góc */
   text-decoration: none; /* Bỏ gạch chân */
   cursor: pointer; /* Thay đổi con trỏ thành hình tay */
-  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover và to nhỏ */
+  animation: pulse 0.8s infinite ease-in-out; /* Hiệu ứng to nhỏ liên tục */
 }
 
 .btn-add:hover {
-  background-color: #0056b3; /* Đổi màu nền khi hover */
+  background-color: #ff8c00; /* Đổi màu nền khi hover thành màu cam */
+  transform: scale(1.1); /* Tăng kích thước khi hover */
 }
 
 .btn-add:active {
-  background-color: #003f7f; /* Màu nền khi nhấn */
+  background-color: #ff4500; /* Màu nền khi nhấn thành màu cam đậm */
+  transform: scale(0.95); /* Giảm kích thước nhẹ khi nhấn */
+}
+
+/* Keyframes cho hiệu ứng to nhỏ */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1); /* Kích thước ban đầu */
+  }
+  50% {
+    transform: scale(1.05); /* Phồng to hơn 5% */
+  }
 }

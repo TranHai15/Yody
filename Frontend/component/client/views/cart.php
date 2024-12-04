@@ -16,11 +16,12 @@
         <div class="products__carts l-11  ">
             <div class="cart__products-lists ">
                 <div class="cart__product--items">
-                    <div class="products__check--all row align-items-center">
-                        <input type="checkbox" class="check" name="" id="check__sale">
-                        <p>Chọn toàn bộ</p>
-                    </div>
-
+                    <?php if (!empty($dulieu)) : ?>
+                        <div class="products__check--all row align-items-center">
+                            <input type="checkbox" class="check" name="" id="check__sale">
+                            <p>Chọn toàn bộ</p>
+                        </div>
+                    <?php endif ?>
                     <?php if (!empty($dulieu)) : ?>
                         <?php foreach ($dulieu as $data): ?>
                             <article class="product__item row" data-cartId="<?= $data['cartId'] ?> "
@@ -93,12 +94,12 @@
                                 <span class="sumPricess"><?= number_format($tongTienPhaiTra['total'], 0, ',', '.') . "đ" ?>
                                 </span>
                             </div>
-                            <div class="cart__ship  row justify-content-between align-items-center">
+                            <!-- <div class="cart__ship  row justify-content-between align-items-center">
                                 <p>Vận chuyển </p><span>20.000 đ</span>
                             </div>
                             <div class="cart__ship row justify-content-between align-items-center">
                                 <p>Giảm giá vận chuyển</p><span class="sale__cart">- 20.000 đ</span>
-                            </div>
+                            </div> -->
                         </div>
                         <hr>
                         <div class="cart__title row justify-content-between align-items-center  ">

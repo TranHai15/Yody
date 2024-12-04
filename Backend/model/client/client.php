@@ -471,6 +471,12 @@ LIMIT 4
     ";
         return getRaw($sql);
     }
+
+    public function getAllOrder($userId)
+    {
+        $sql = "SELECT o.*,pa.name AS paymethod, os.name AS statusDonhang, p.paymentStatus AS phuongthucTT from orders AS o JOIN pay AS pa ON o.payId = pa.payId    JOIN orderstatus  AS os ON o.statusId = os.statusId  JOIN paystatus AS p ON o.payStatusId = p.payStatusId where userId = $userId;";
+        return getRaw($sql);
+    }
     // ******************************* Đổ comment ra*************************
     public function getAllCommentWhereProductId($productId)
     {
@@ -498,20 +504,33 @@ GROUP BY
         return getRaw($sql);
     }
     // cap nhat ly do huy don
-    public function huydon($data, $orderId)
+    public function huydon($lydo, $orderId)
     {
-        // Chuyển mảng lý do thành chuỗi
-        $cancelReasons = implode(", ", $data);
+        if (is_array($lydo)) {
+            $lydo = implode(", ", $lydo);
+        }
 
-        // Sử dụng chuẩn PDO để tránh SQL Injection
-        $sql = "UPDATE orders SET lydomuonhuydon = :cancelReasons, statusId = 9 WHERE orderId = :orderId";
+        $sql = "UPDATE orders SET statusId = 8, lydomuonhuydon = :lydo WHERE orderId = :orderId";
         $stmt = $this->conn->prepare($sql);
-
-        // Liên kết tham số với giá trị
-        $stmt->bindParam(':cancelReasons', $cancelReasons);
+        $stmt->bindParam(':lydo', $lydo, PDO::PARAM_STR);
         $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
 
-        // Thực thi câu lệnh
+        // Debug SQL
+        // $debugSQL = str_replace([':lydo', ':orderId'], [$lydo, $orderId], $sql);
+        // echo $debugSQL;
+
         return $stmt->execute();
+    }
+    //*********************************************** */ Lấy dữ liệu đổ ra orderItemDetail******************************************
+    public function getAlldulieudoraorderItemDetail($idOrder)
+    {
+        $sql = "SELECT o.*, v.image as anhsp,v.color as mausp , s.size , os.name as trangthaidonhang , pa.paymentStatus as trangthaithanhtoan , p.name FROM `orderitems` as o JOIN variations as v on o.variationId = v.variationId 
+        JOIN sizevariations as s on o.sizeId = s.sizeId 
+        JOIN products as p on (SELECT pr.name FROM products as pr JOIN variations as va on va.productId = p.productId) 
+        JOIN orderstatus as os on o.statusId = os.statusId
+        JOIN paystatus as pa on o.payStatusId = pa.payStatusId
+
+        WHERE `orderId` = $idOrder ";
+        return getRaw($sql);
     }
 }
