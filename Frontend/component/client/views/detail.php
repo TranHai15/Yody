@@ -183,26 +183,100 @@
         </main>
 
         <!-- comment -->
+        <div class="lichsuphanhoi grid wide">
+            <button class="btn-bl active" data-view="comment">Bình luận</button>
+            <button class="btn-bl" data-view="feedback">Phản hồi sản phẩm</button>
+        </div>
+
 
         <section class="comment grid wide">
-            <h2 class="comment__detail">Đánh giá sản phẩm</h2>
+
+
+
             <?php if (!empty($comment)): ?>
-                <?php foreach ($comment as $data): ?>
+                <?php foreach ($comment as $com): ?>
+
                     <article class="comment__item">
                         <div class="comment__profile">
-                            <img src="<?= $data['userAvatar'] ?>" alt="User Profile">
-                            <p class="comment__profile-username" style="  overflow:hidden; width: 90px; ">
-                                <?= $data['userName'] ?></p>
+                            <img loading="lazy" src="<?= $com['avata'] ?>" alt="User Profile">
+                            <div>
+                                <p class="comment__profile-username"><?= $com['nameuser'] ?></p>
+
+                                <div class="comment__header">
+                                    <p class="comment__profile-date"><?= $com['createAt'] ?></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="comment__body">
-                            <div class="comment__header">
-                                <p class="comment__profile-date"><?= $data['commentCreatedAt'] ?></p>
+
+                            <div class="comment__content">
+                                <p><?= $com['content'] ?></p>
                             </div>
-                            <div class="comment__rating">
+                            <!-- <div class="comment__reply">
+                                <span>-></span>
+                                <span class="admin-reply">Phản hồi từ Admin: Cảm ơn bạn đã đánh giá!</span>
+                            </div> -->
+
+                            <!-- Like button -->
+                            <div class="comment__like">
+                                <button class="like-button">👍</button>
+                                <span class="like-count"><?= $com['likes'] ?></span> <!-- Lượt thích -->
+                            </div>
+                        </div>
+                    </article>
+
+                <?php endforeach ?>
+            <?php else: ?>
+                <p style="color: green;" class="no-feedback">Sản phẩm chưa có comment nào!</p>
+            <?php endif; ?>
+
+
+
+            <!-- Bình luận 1 -->
+
+
+
+
+            <!-- Form Bình luận Mới -->
+            <div class="comment__form">
+                <h3>Thêm bình luận</h3>
+                <textarea id="commentText" placeholder="Nhập bình luận của bạn..." rows="4"></textarea>
+                <div class="comment__actions">
+                    <button class="submit-comment" onclick="submitComment()">Gửi Bình luận</button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- enddđ -->
+
+        <section class="feedback grid wide">
+
+
+            <?php if (!empty($feedback)): ?>
+                <?php foreach ($feedback as $data): ?>
+                    <article class="feedback__item">
+                        <div class="feedback__profile">
+                            <img src="<?= $data['avata'] ?>" alt="User Profile">
+                            <div>
+                                <div>
+                                    <p class="feedback__profile-username" style="overflow:hidden; width: 90px;">
+                                        <?= $data['nameuser'] ?>
+                                    </p>
+
+                                    <p class="feedback__profile-date"><?= $data['createAt'] ?></p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="feedback__rating">
+
+                            <?php if (!$data['rating'] == null):  ?>
                                 <?php
                                 $sosao = $data['rating'];
                                 $tongso_sao = 5;
-
                                 for ($i = 1; $i <= $tongso_sao; $i++):
                                     if ($i <= $sosao): ?>
                                         <span class="star">&#9733;</span> <!-- Sao đầy -->
@@ -211,19 +285,25 @@
                                 <?php endif;
                                 endfor;
                                 ?>
-                            </div>
+                            <?php endif ?>
 
-                            <div class="comment__content">
-                                <p><?= $data['content'] ?></p>
+                        </div>
+                        <div class="feedback__body">
+
+
+                            <div class="feedback__content">
+                                <p><?= $data['reviewText'] ?></p>
                             </div>
-                            <div class="comment__image">
-                                <img src="<?= $data['variationImage'] ?>" alt="">
+                            <div class="feedback__image">
+                                <?php if ($data['image'] !== null):  ?>
+                                    <img src="<?= $data['image'] ?>" alt="">
+                                <?php endif ?>
                             </div>
                         </div>
                     </article>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p style="color: green;" class="no-comment">Sản phẩm chưa có đánh giá nào!</p>
+                <p style="color: green;" class="no-feedback">Sản phẩm chưa có phản hồi nào!</p>
             <?php endif; ?>
         </section>
 

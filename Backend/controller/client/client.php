@@ -56,15 +56,11 @@ class Controller_Client
         $AllImage = $Client->getAllImageWhereProductIdWhereVariationId($idVariation);
         $TopProduct = $Client->get4productsWhereViewDesc();
         $category = $Client->getAllCategories();
-        // var_dump($category)
-        // var_dump($category)
-        // lấy toàn bộ child category
-        $child = $Client->getAllChildCategories();
-        // checkloi($OneVariations);
-        // checkloi($OneVariations['productId']);
 
-        $comment = $Client->getAllCommentWhereProductId($productId);
-        // checkloi($comment);
+        $child = $Client->getAllChildCategories();
+
+        $feedback = $Client->getAllphanhoiWhereProductId($productId);
+        $comment = $Client->getAllCommentByProductId($productId);
         View(
             FRONTEND__CLIENT,
 
@@ -77,6 +73,7 @@ class Controller_Client
                 "category" => $category,
                 "child" => $child,
                 "TopProduct" => $TopProduct,
+                "feedback" => $feedback,
                 "comment" => $comment
             ]
         );
@@ -616,22 +613,19 @@ class Controller_Client
             //     exit;
             // }
 
-            // Chuẩn bị dữ liệu để chèn vào database
+
             $data_new = [
                 'productId' => $productId,
                 'userId' => $userId,
-                'content' => $content,
+                'rating' => $rating,
+                'reviewText' => $content,
                 'image' => $image_new,
                 'createAt' => $createAt,
-                'rating' => $rating,
             ];
 
-
-
-
             // Thêm dữ liệu vào bảng comments
-            $kq = (new Model_Client)->rateProduct('comments', $data_new);
-            checkloi($kq);
+            $kq = (new Model_Client)->rateProduct('productrivews', $data_new);
+            // checkloi($kq);
 
             if ($kq) {
                 setsession('messageDuyetComment', "Thêm bình luận thành công.");

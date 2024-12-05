@@ -183,3 +183,58 @@ document.querySelector(".cate__new").addEventListener("click", () => {
       console.error("Error connecting to server:", error);
     });
 });
+
+//
+
+function submitComment() {
+  var commentText = document.getElementById("commentText").value;
+  // console.log("🚀 ~ submitComment ~ commentText:", commentText);
+  const productId = document
+    .querySelector(".detail")
+    .getAttribute("data-productId");
+  const userId = document.querySelector(".detail").getAttribute("data-userId");
+
+  if (commentText) {
+    // console.log("Đã gửi bình luận: ", commentText);
+    document.getElementById("commentText").value = ""; // Xóa ô nhập sau khi gửi
+    fetch(
+      `Backend/controller/client/clientAjax.php?addComment=${productId}&content=${commentText}&userId=${userId}`
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error(`Fetch error: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        // showNotification(data.message, data.status);
+        if (data.status === "success") {
+          location.reload();
+        }
+      })
+      .catch((error) => {
+        console.error("Error connecting to server:", error);
+      });
+  } else {
+    return;
+  }
+}
+
+//
+// Lấy tất cả các nút và các phần nội dung
+const buttons = document.querySelectorAll(".btn-bl");
+const sections = document.querySelectorAll(".comment, .feedback");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // Loại bỏ class "active" của tất cả các nút
+    buttons.forEach((btn) => btn.classList.remove("active"));
+    // Thêm class "active" cho nút hiện tại
+    button.classList.add("active");
+
+    // Ẩn tất cả các phần nội dung
+    sections.forEach((section) => (section.style.display = "none"));
+
+    // Hiển thị phần nội dung tương ứng
+    const btn = button.getAttribute("data-view");
+    document.querySelector(`.${btn}`).style.display = "block";
+  });
+});

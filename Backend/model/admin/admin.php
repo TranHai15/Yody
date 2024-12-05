@@ -243,6 +243,18 @@ class Model_Admin
         $sql = "SELECT * FROM products where categoryId=$id";
         return getRaw($sql);
     }
+
+    // 
+    public function phanhoi()
+    {
+
+        $sql = "SELECT pr.*, u.name as nameUser,p.name as nameProduct FROM productrivews AS pr JOIN users AS u ON pr.userId = u.userId JOIN products AS p ON pr.productId = p.productId";
+        return   getRaw($sql);
+    }
+    public function Deletefeedbackss($table, $dk)
+    {
+        return delete($table, $dk);
+    }
 }
 
 // 

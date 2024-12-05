@@ -339,127 +339,248 @@
 }
 
 /* =======================commetn======== */
-/* .comment{
-  margin: 10rem 10rem;
-}
-.comment__detail{
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 5rem 0;
-}
+/* Cả hai giao diện sử dụng chung style */
 
-.comment__profile{
-  display: flex;
-}
-.comment__profile img{
-  max-width: 100px;
-  padding-right: 20px;
-} */
-/* Bố cục tổng thể */
-.comment {
-  margin: 10rem 10rem;
+.comment__item {
+  margin-top: 30px;
+  margin-left: 10px;
 }
 .comment__detail {
-  font-size: 2rem;
+  font-size: 24px;
   font-weight: 600;
-  margin: 5rem 2rem 2rem 0;
+  margin-bottom: 30px;
 }
-.comment__item {
-  display: flex;
-  gap: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
-}
-
-/* Phần ảnh đại diện */
 .comment__profile {
-  flex-shrink: 0;
-  text-align: center;
-  width: 100px; /* Chiều rộng cố định */
-}
-
-.comment__profile img {
-  width: 80px; /* Kích thước ảnh đại diện */
-  height: 80px;
-  border-radius: 50%; /* Bo tròn ảnh */
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.comment__profile-username {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Phần nội dung bình luận */
-.comment__body {
-  flex: 1; /* Chiếm phần còn lại */
-  display: flex;
-  flex-direction: column;
-}
-
-.comment__header {
-  margin-bottom: 10px;
-  color: #888;
-  font-size: 12px;
-}
-
-.comment__content {
-  margin-bottom: 15px;
-  font-size: 14px;
-  color: #555;
-  line-height: 1.5;
-}
-
-/* Hình ảnh đính kèm */
-.comment__image {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  align-items: center;
 }
-.comment__image img:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
+.comment__profile > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+.comment__profile > div {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+.comment__profile-username {
+  font-size: 14px;
+  font-weight: 600;
+}
+.comment__profile-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+}
+.comment__body {
+  margin-left: 40px;
+  width: max-content;
+}
+.comment__content {
+  font-size: 13px;
+  margin-top: 10px;
+}
+.comment__reply {
+  margin-left: 20px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+.comment__like {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+  align-items: end;
+}
+.like-button {
+  width: 30px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  cursor: pointer;
+}
+.like-count {
+  font-size: 10px;
+  font-weight: 600;
+}
+/* Cập nhật CSS cho phần nhập bình luận */
+.comment__form {
+  margin-top: 30px;
 }
 
-.comment__image img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+.comment__form h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
 }
-@media (max-width: 768px) {
-  .comment__item {
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .comment__profile {
-    width: auto;
-  }
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  outline: none;
 }
-/* Định dạng phần đánh giá sao */
-.comment__rating {
+
+.comment__actions {
+  text-align: right;
+}
+
+.submit-comment {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-comment:hover {
+  background-color: #45a049;
+}
+
+/*  */
+
+/* Cập nhật CSS cho phần phản hồi */
+.feedback__item {
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+.feedback__profile {
   display: flex;
   align-items: center;
-  margin: 5px 5px 5px 0;
+}
+.feedback__profile > div > div {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+
+.feedback__profile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.feedback__profile-username {
+  font-weight: bold;
+  font-size: 14px;
+}
+.feedback__profile-date {
+  font-size: 10px;
+  color: #888;
+  font-weight: 600;
+}
+
+.feedback__rating {
+  margin-left: 40px;
 }
 
 .star {
-  font-size: 18px;
-  color: #ffd900; /* Màu vàng cho sao */
-  margin-right: 3px;
+  color: #ffbc00;
 }
 
-.star:last-child {
-  margin-right: 0; /* Sao cuối cùng không cần khoảng cách */
+.feedback__body {
+  margin-left: 40px;
+  font-size: 12px;
 }
-.star:hover,
-.star:hover ~ .star {
-  color: #ffa500; /* Màu cam khi hover */
+.feedback__content > p {
+  font-size: 12px;
+}
+
+.feedback__content {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.feedback__image img {
+  width: 70px;
+  object-fit: cover;
+  height: 70px;
+  background-color: transparent;
+  margin-top: 10px;
+}
+
+.no-feedback {
+  color: green;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+  background-color: #e1f7d5;
+  border-radius: 8px;
+}
+
+.feedback__detail {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feedback__profile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feedback__profile-username {
+    font-size: 12px;
+  }
+
+  .feedback__header {
+    font-size: 10px;
+  }
+
+  .feedback__content {
+    font-size: 12px;
+  }
+
+  .feedback__image img {
+    max-width: 80%;
+  }
+}
+/*  */
+.lichsuphanhoi {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  padding-top: 40px;
+}
+
+/* Phong cách chung cho các nút */
+.btn-bl {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #ccc; /* Màu nhạt mặc định */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Nút active */
+.btn-bl.active {
+  background-color: #6d6d6d; /* Màu xanh đậm hơn */
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hiệu ứng hover */
+.btn-bl:hover {
+  background-color: #555555;
+  color: white;
+}
+.feedback {
+  display: none; /* Ẩn tất cả mặc định */
 }

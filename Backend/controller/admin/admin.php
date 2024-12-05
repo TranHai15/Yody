@@ -858,4 +858,30 @@ class Controller__Admin
             checkloi('khong tim thayid don hang');
         }
     }
+
+    public function feedback($file = 'feedback')
+    {
+        $kq = (new Model_Admin())->phanhoi();
+        View(FRONTEND__ADMIN, $file, ['kq' => $kq]);
+    }
+
+    public function Deletefeedback()
+    {
+        $idUser = $_GET['Deletefeedback'] ?? '';
+        $dk = "reviewsId=" . $idUser;
+
+
+        $kq = (new Model_Admin)->Deletefeedbackss('productrivews', $dk);
+
+        if ($kq) {
+
+            setsession('messageDeletefeedback', "Xóa thành công");
+            header('Location: /Yody/admin?feedback');
+            exit;
+        } else {
+            setsession('messageDeletefeedback', "Xóa thất bại");
+            header('Location: /Yody/admin?feedback');
+            exit;
+        }
+    }
 }

@@ -109,6 +109,12 @@
 
 
             <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= P ?>/admin?feedback">
+                    <i class="bi bi-person"></i>
+                    <span>Phản hồi</span>
+                </a>
+            </li><!-- End Binh luán Page Nav -->
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="<?= P ?>/admin?Comment">
                     <i class="bi bi-person"></i>
                     <span>Bình luận</span>
@@ -160,9 +166,11 @@
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Comment"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
             $urlPath === "{$basePath}/admin"  && $query === "Comment" => fn() => $AdminCtl->Comment(),
+            $urlPath === "{$basePath}/admin"  && $query === "feedback" => fn() => $AdminCtl->feedback(),
             $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DuyetComment']) => fn() => $AdminCtl->DuyetComment(),
             // Xóa người dùng
             $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteComment']) => fn() => $AdminCtl->DeleteComment(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['Deletefeedback']) => fn() => $AdminCtl->Deletefeedback(),
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Order"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

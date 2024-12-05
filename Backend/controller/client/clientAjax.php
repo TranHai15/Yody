@@ -235,3 +235,30 @@ if (isset($_GET['form3'])) {
         echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
     }
 }
+
+if (isset($_GET['addComment'])) {
+    $userId = $_GET['userId'] ?? null;
+    $productid = $_GET['addComment'] ?? null;
+
+    $content = $_GET['content'] ?? null;
+
+    if ($productid && $content && $userId) {
+        $dataNew = [
+            'productId' => $productid,
+            'userId' => $userId,
+            'content' => $content,
+            'createAt' => (date('Y-m-d H:i:s')),
+            'status' => 1,
+            'likes' => 1,
+        ];
+
+        $kq = insert('comments', $dataNew);
+        if ($kq) {
+            echo json_encode(array('status' => 'success', 'message' => ' thành công'));
+        } else {
+            echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
+        }
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'Lỗi kĩ thuật'));
+    }
+}

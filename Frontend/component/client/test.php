@@ -132,387 +132,439 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
 
 
 ?>
-         <section class="products row mt-4  justify-content-between grid">
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
+<section class="products row mt-4  justify-content-between grid">
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
 
 
-                    </section>
-                    <section class="products row mt-4  justify-content-between grid">
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
+</section>
+<section class="products row mt-4  justify-content-between grid">
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
 
 
-                    </section>
-                    <section class="products row mt-4  justify-content-between grid">
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
+</section>
+<section class="products row mt-4  justify-content-between grid">
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
 
 
-                    </section>
-                    <section class="products row mt-4  justify-content-between grid">
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                                <div class="overlay__image">
-                                    <img loading="lazy"
-                                        src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
-                                </div>
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
-                        <article class="product l-3 m-4 c-12">
-                            <div class="product__image">
-                                <img loading="lazy"
-                                    src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
-                                    alt="" />
-                            </div>
-                            <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
-                            <div class="product__price row align-items-center  ">
-                                <span class="price__new">599.000 đ</span>
-                                <span class="price__old">3333</span>
-                            </div>
-                            <div class="product__variation row align-items-center">
-                                <span class="product__variation--item active__product--variation "></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                                <span class="product__variation--item"></span>
-                            </div>
-                            <div class="product__logo--sale row align-items-center justify-content-center">
-                                <span>-</span>5%
-                            </div>
-                        </article>
+</section>
+<section class="products row mt-4  justify-content-between grid">
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+            <div class="overlay__image">
+                <img loading="lazy" src="https://m.yodycdn.com/products/donggia_m1yi17yavizhqdvliui.png" alt="">
+            </div>
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
+    <article class="product l-3 m-4 c-12">
+        <div class="product__image">
+            <img loading="lazy"
+                src="https://m.yodycdn.com/fit-in/filters:format(webp)/products/ao-khoac-the-thao-nu-SKN7007-GNH%20(10).JPG"
+                alt="" />
+        </div>
+        <span class="product__name">Áo Khoác Thể Thao Nữ Siêu Nhẹ Chống Tia UV</span>
+        <div class="product__price row align-items-center  ">
+            <span class="price__new">599.000 đ</span>
+            <span class="price__old">3333</span>
+        </div>
+        <div class="product__variation row align-items-center">
+            <span class="product__variation--item active__product--variation "></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+            <span class="product__variation--item"></span>
+        </div>
+        <div class="product__logo--sale row align-items-center justify-content-center">
+            <span>-</span>5%
+        </div>
+    </article>
 
 
-                    </section>
+</section>
+<!--  -->
+
+
+
+<section class="review grid wide">
+    <h2 class="review__detail">Đánh giá sản phẩm</h2>
+
+    <!-- Đánh giá 1 -->
+    <article class="review__item">
+        <div class="review__profile">
+            <img src="https://via.placeholder.com/50" alt="User Profile">
+            <p class="review__profile-username">Người dùng 1</p>
+        </div>
+        <div class="review__body">
+            <div class="review__header">
+                <p class="review__profile-date">12/12/2024</p>
+            </div>
+            <div class="review__rating">
+                <span class="star">&#9733;</span> <!-- Sao đầy -->
+                <span class="star">&#9733;</span> <!-- Sao đầy -->
+                <span class="star">&#9733;</span> <!-- Sao đầy -->
+                <span class="star">&#9734;</span> <!-- Sao rỗng -->
+                <span class="star">&#9734;</span> <!-- Sao rỗng -->
+            </div>
+            <div class="review__content">
+                <p>Sản phẩm rất tốt, tôi thích chất lượng và thiết kế!</p>
+            </div>
+            <div class="review__image">
+                <img src="https://via.placeholder.com/150" alt="Product Image">
+            </div>
+        </div>
+    </article>
+
+    <!-- Đánh giá 2 -->
+    <article class="review__item">
+        <div class="review__profile">
+            <img src="https://via.placeholder.com/50" alt="User Profile">
+            <p class="review__profile-username">Người dùng 2</p>
+        </div>
+        <div class="review__body">
+            <div class="review__header">
+                <p class="review__profile-date">13/12/2024</p>
+            </div>
+            <div class="review__rating">
+                <span class="star">&#9733;</span> <!-- Sao đầy -->
+                <span class="star">&#9733;</span> <!-- Sao đầy -->
+                <span class="star">&#9734;</span> <!-- Sao rỗng -->
+                <span class="star">&#9734;</span> <!-- Sao rỗng -->
+                <span class="star">&#9734;</span> <!-- Sao rỗng -->
+            </div>
+            <div class="review__content">
+                <p>Sản phẩm đẹp nhưng có chút vấn đề về kích thước.</p>
+            </div>
+            <div class="review__image">
+                <img src="https://via.placeholder.com/150" alt="Product Image">
+            </div>
+        </div>
+    </article>
+
+</section>

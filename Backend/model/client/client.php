@@ -480,28 +480,9 @@ LIMIT 4
         return getRaw($sql);
     }
     // ******************************* Đổ comment ra*************************
-    public function getAllCommentWhereProductId($productId)
+    public function getAllphanhoiWhereProductId($productId)
     {
-        $sql = "SELECT 
-    c.commentId,
-    c.content,
-    c.image AS commentImage,
-    c.createAt AS commentCreatedAt,
-    c.rating,
-    u.name AS userName,
-    u.avata AS userAvatar,
-    p.name AS productName,
-    MIN(v.image) AS variationImage
-FROM 
-    comments c
-LEFT JOIN users u ON c.userId = u.userId
-LEFT JOIN products p ON c.productId = p.productId
-LEFT JOIN variations v ON p.productId = v.productId
-WHERE 
-    c.productId = $productId
-GROUP BY 
-    c.commentId, c.content, c.image, c.createAt, c.rating, u.name, u.avata, p.name;
-
+        $sql = "SELECT pr.*, u.name AS nameuser, u.avata,p.name FROM productrivews AS pr JOIN users AS u ON pr.userId = u.userId JOIN products AS p ON pr.productId = p.productId WHERE pr.productId = $productId
 ";
         return getRaw($sql);
     }
@@ -566,5 +547,13 @@ GROUP BY
         $stmt->bindParam(':lydo', $lydo, PDO::PARAM_STR);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
+    }
+    public function getAllCommentByProductId($id)
+    {
+        $sql = "SELECT pr.*, u.name AS nameuser,u.avata,
+        p.name FROM comments AS pr JOIN users AS u ON pr.userId = u.userId JOIN products AS p ON pr.productId = p.productId WHERE pr.productId = $id";
+        return getRaw(
+            $sql
+        );
     }
 }
