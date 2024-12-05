@@ -13,9 +13,11 @@
     <div class="container">
         <h1>Chi Tiết Đơn Hàng</h1>
         <div class="order-details">
+
             <?php if (!empty($dulieulayra)) : ?>
                 <?php foreach ($dulieulayra as $data): ?>
                     <div class="item-card">
+
                         <img src="<?= $data['anhsp'] ?>" alt="Tên sản phẩm">
                         <div class="item-info">
                             <h3><?= $data['tensanpham'] ?></h3>
@@ -29,15 +31,24 @@
                                     </option>
                                 </select>
                             </p>
-                            <p>
-                                Đơn hàng: <?= $data['trangthaidonhang'] ?>
+                            <p class="<?= $data['idtrangthaidonhang'] == 8 ? 'do' : 'xanh' ?>">
+                                Đơn hàng: <?= htmlspecialchars($data['trangthaidonhang']) ?>
                             </p>
+
                             <p>Tình trạng: <?= $data['trangthaithanhtoan'] ?></p>
                         </div>
-                        <button class="btn btn-cancel" data-item-id="<?= $data['orderitemId'] ?>">Hủy Mặt Hàng</button>
-                    </div>
 
+                        <!-- Nút hủy mặt hàng -->
+                        <button
+                            class="btn btn-cancel"
+                            data-item-id="<?= $data['orderitemId'] ?>"
+                            <?= $data['idtrangthaidonhang'] == 8 ? 'disabled' : '' ?>>
+                            Hủy Mặt Hàng
+                        </button>
+
+                    </div>
                 <?php endforeach ?>
+
             <?php else : ?>
 
             <?php endif  ?>

@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          alert("Hủy mặt hàng thành công!");
+          alert("Gửi lý do thành công! Vui lòng đợi phản hồi!");
           // Ẩn popup và cập nhật UI nếu cần
           popup.classList.remove("show");
           overlay.classList.remove("show");

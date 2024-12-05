@@ -152,3 +152,16 @@ textarea:focus {
 #overlay.show {
   display: block; /* Đảm bảo overlay hiển thị khi popup mở */
 }
+.do {
+  color: red !important;
+  font-weight: bold;
+}
+
+.xanh {
+  color: green !important;
+  font-weight: normal;
+}
+.btn-danger {
+  background-color: red;
+  color: #fff;
+}

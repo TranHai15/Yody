@@ -532,7 +532,9 @@ GROUP BY
     v.color AS mausp, 
     s.size, 
     os.name AS trangthaidonhang, 
+    os.statusId AS idtrangthaidonhang,
     pa.paymentStatus AS trangthaithanhtoan, 
+    pa.payStatusId AS idtrangthaithanhtoan, 
     p.name AS tensanpham
     FROM 
         orderitems AS o
@@ -548,6 +550,7 @@ GROUP BY
         paystatus AS pa ON o.payStatusId = pa.payStatusId
     WHERE 
         o.orderId = $idOrder;
+
     ";
         return getRaw($sql);
     }
