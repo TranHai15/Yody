@@ -812,14 +812,18 @@ class Controller__Admin
 
     public function orderItem()
     {
+        $Admin = new Model_Admin;
         $id = $_GET['orderItem'] ?? null;
-
+        $dataAllOrderStatus = $Admin->getAllOrderStatus();
+        $dataAllPay = $Admin->getAllPay();
+        $dataAllPayStatus = $Admin->getAllPayStatus();
         if (!$id == null) {
             $sql = "SELECT 
             o.*, 
             v.image AS anhsp, 
             v.color AS mausp, 
             s.size, 
+            s.quantity AS soluongton,
             os.name AS trangthaidonhang, 
             pa.paymentStatus AS trangthaithanhtoan, 
             p.name AS tensanpham
@@ -841,7 +845,14 @@ class Controller__Admin
             // checkloi($kq);
             if ($kq) {
 
-                View(FRONTEND__ADMIN, 'orderitem', ['kq' => $kq]);
+                View(FRONTEND__ADMIN, 'orderitem', [
+                    'kq' => $kq,
+                    'dataAllOrderStatus' => $dataAllOrderStatus,
+                    'dataAllPay' => $dataAllPay,
+                    'dataAllPayStatus' => $dataAllPayStatus,
+
+
+                ]);
             }
         } else {
             checkloi('khong tim thayid don hang');
