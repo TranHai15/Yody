@@ -563,7 +563,7 @@ class Controller__Admin
         $id = $data['categoryId'];
 
         $data_new = [
-            'name'=> $name,
+            'name' => $name,
             'past' => $past,
             'categoryId' => $id
         ];
@@ -578,7 +578,6 @@ class Controller__Admin
         // Redirect after completion
         header('Location: /Yody/admin?Category');
         exit;
-       
     }
     public function addComment()
     {
@@ -588,7 +587,7 @@ class Controller__Admin
         $id = $data['childId'];
 
         $data_new = [
-            'name'=> $name,
+            'name' => $name,
             'past' => $past,
             'childId' => $id
         ];
@@ -603,7 +602,6 @@ class Controller__Admin
         // Redirect after completion
         header('Location: /Yody/admin?Category');
         exit;
-       
     }
 
 
@@ -840,7 +838,9 @@ class Controller__Admin
             WHERE 
                 o.orderId = $id";
             $kq = getRaw($sql);
+            // checkloi($kq);
             if ($kq) {
+
                 View(FRONTEND__ADMIN, 'orderitem', ['kq' => $kq]);
             }
         } else {
