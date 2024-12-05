@@ -116,31 +116,33 @@
                 <div class="checkout">
                     <div class="checkout__product-info">
                         <h2 class="checkout__product-info-title">Thông tin sản phẩm</h2>
-                        <?php foreach ($dulieu as $data) : ?>
-                            <div class="checkout__product">
-                                <img src="<?= $data['image'] ?>" alt="T-shirt Nữ" class="checkout__product-image">
-                                <div class="checkout__product-details">
-                                    <p class="checkout__product-name"><?= $data['product_name'] ?></p>
-                                    <p class="checkout__product-color"><?= $data['color'] . ',' . ' ' . $data['size'] ?>
-                                    </p>
-                                    <div class="tongtien">
-                                        <p class="checkout__product-price">
-                                            <?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?>
-                                            <span
-                                                class="checkout__product-price--original"><?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></span>
+                        <?php if (!empty($dulieu)): ?>
+                            <?php foreach ($dulieu as $data) : ?>
+                                <div class="checkout__product">
+                                    <img src="<?= $data['image'] ?>" alt="T-shirt Nữ" class="checkout__product-image">
+                                    <div class="checkout__product-details">
+                                        <p class="checkout__product-name"><?= $data['product_name'] ?></p>
+                                        <p class="checkout__product-color"><?= $data['color'] . ',' . ' ' . $data['size'] ?>
                                         </p>
-                                        <hr>
-                                        <p>
-                                            <?= number_format($data['total_price'], 0, ',', '.') . "đ" ?>
-                                        </p>
+                                        <div class="tongtien">
+                                            <p class="checkout__product-price">
+                                                <?= number_format($data['variation_price'] - ($data['variation_price'] * ($data['variation_sale'] / 100)), 0, ',', '.') . "đ" ?>
+                                                <span
+                                                    class="checkout__product-price--original"><?= number_format($data['variation_price'], 0, ',', '.') . "đ" ?></span>
+                                            </p>
+                                            <hr>
+                                            <p>
+                                                <?= number_format($data['total_price'], 0, ',', '.') . "đ" ?>
+                                            </p>
+                                        </div>
+
                                     </div>
-
+                                    <span class="checkout__product-quantity">x<?= $data['total_quantity'] ?></span>
                                 </div>
-                                <span class="checkout__product-quantity">x<?= $data['total_quantity'] ?></span>
-                            </div>
-                            <hr>
+                                <hr>
 
-                        <?php endforeach ?>
+                            <?php endforeach ?>
+                        <?php endif ?>
                         <!-- Repeat similar structure for other products -->
                     </div>
 

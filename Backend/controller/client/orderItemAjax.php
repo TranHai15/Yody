@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Kiểm tra và thực hiện xử lý hủy mặt hàng
         // Ví dụ: gọi hàm hủy mặt hàng trong DB
         $gioHang = new Model_Client;
-        $result = $gioHang->cancelOrderItem($orderItemId, $reason); // Giả sử bạn có hàm này
+        $result = $gioHang->cancelOrderItem($orderItemId, $reason);
         // checkloi($result);
         if ($result) {
             echo json_encode(['success' => true]);
