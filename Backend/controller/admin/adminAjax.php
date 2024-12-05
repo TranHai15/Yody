@@ -16,6 +16,7 @@ if (isset($_GET['payStatus'], $_GET['statusId'], $_GET['orderId'])) {
         "statusId" => $statusId,
         "orderId" => $orderId,
     ];
+    // checkloi($data);
     $dk = "orderId=" . $orderId;
     $kq = (new Model_Admin)->updateOrder('orders', $data, $dk);
     // $sizeId = $_GET['size'];

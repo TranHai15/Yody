@@ -651,4 +651,39 @@ class Controller__Admin
     }
     // ************************Thêm giỏ hàng ************************************88
 
+    public function orderItem()
+    {
+        $id = $_GET['orderItem'] ?? null;
+
+        if (!$id == null) {
+            $sql = "SELECT 
+            o.*, 
+            v.image AS anhsp, 
+            v.color AS mausp, 
+            s.size, 
+            os.name AS trangthaidonhang, 
+            pa.paymentStatus AS trangthaithanhtoan, 
+            p.name AS tensanpham
+            FROM 
+                orderitems AS o
+            JOIN 
+                variations AS v ON o.variationId = v.variationId
+            JOIN 
+                products AS p ON v.productId = p.productId
+            JOIN 
+                sizevariations AS s ON o.sizeId = s.sizeId
+            JOIN 
+                orderstatus AS os ON o.statusId = os.statusId
+            JOIN 
+                paystatus AS pa ON o.payStatusId = pa.payStatusId
+            WHERE 
+                o.orderId = $id";
+            $kq = getRaw($sql);
+            if ($kq) {
+                View(FRONTEND__ADMIN, 'orderitem', ['kq' => $kq]);
+            }
+        } else {
+            checkloi('khong tim thayid don hang');
+        }
+    }
 }

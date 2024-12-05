@@ -401,6 +401,7 @@
             $urlPath === "{$basePath}/admin"  && $query === "themOrder" => fn() => $AdminCtl->Order(),
             // Xóa người dùng
             $urlPath === "{$basePath}/admin"  &&  isset($queryParams['DeleteOrder']) => fn() => $AdminCtl->Order(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['orderItem']) => fn() => $AdminCtl->orderItem(),
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Order"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
