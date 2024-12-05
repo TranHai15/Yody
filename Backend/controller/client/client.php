@@ -269,7 +269,6 @@ class Controller_Client
         View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra, "TopProduct" => $TopProduct]);
     }
 
-
     public function execPostRequest($url, $data)
     {
         $ch = curl_init($url);

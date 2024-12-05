@@ -429,8 +429,16 @@
             $urlPath === "{$basePath}/admin"  && $query === "Category" => fn() => $AdminCtl->Category(),
             // Lấy ra người dùng muốn sửa
             $urlPath === "{$basePath}/admin"  && isset($queryParams['EditCategory']) => fn() => $AdminCtl->getCategoryById('editCategory'),
+            // Danh mục con của category
+            $urlPath === "{$basePath}/admin"  && isset($queryParams['editChildCategory']) => fn() => $AdminCtl->getChildCategoryById('editChildCategory'),
+
+            $urlPath === "{$basePath}/admin"  && isset($queryParams['editCommoncategorys']) => fn() => $AdminCtl->getCommontCategory('editCommoncategorys'),
             // Cập nhật người dùng
             $urlPath === "{$basePath}/admin"  && $query === "UpdateCategory" => fn() => $AdminCtl->UpdateCategory(),
+            
+            $urlPath === "{$basePath}/admin"  && $query === "updateChildCategory" => fn() => $AdminCtl->updateChildCategory(),
+
+            $urlPath === "{$basePath}/admin"  && $query === "updateCommontCategory" => fn() => $AdminCtl->updateCommontCategory(),
             // chueyern đến trang thêm người dùng
             $urlPath === "{$basePath}/admin"  && $query === "AddCategory" => fn() => $AdminCtl->Category('addCategory'),
             // Thêm người dùng vào database
@@ -439,6 +447,12 @@
             $urlPath === "{$basePath}/admin"  &&  isset($queryParams['deleteCategory']) => fn() => $AdminCtl->deleteCategory(),
             $urlPath === "{$basePath}/admin"  &&  isset($queryParams['deleteChildCategory']) => fn() => $AdminCtl->deleteCategory(),
             $urlPath === "{$basePath}/admin"  &&  isset($queryParams['deleteCommontCategory']) => fn() => $AdminCtl->deleteCategory(),
+            // 
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['addchild']) => fn() => $AdminCtl->headerAddchild(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['addChilds']) => fn() => $AdminCtl->addChild(),
+
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['addCommont']) => fn() => $AdminCtl->headerAddCommont(),
+            $urlPath === "{$basePath}/admin"  &&  isset($queryParams['addCommonts']) => fn() => $AdminCtl->addComment(),
 
 
             // """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""CRUD Category"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -481,9 +495,6 @@
     $page();
     ?>
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-
-    </footer><!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>

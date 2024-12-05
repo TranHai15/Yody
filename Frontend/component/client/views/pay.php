@@ -61,7 +61,7 @@
 
                         <div class="form3">
                             <label class="romm--title" for="ward">Xã</label>
-                            <input type="hidden" id="ward" name="ward" placeholder="Nhập Xã">
+<input type="hidden" id="ward" name="ward" placeholder="Nhập Xã">
                         </div>
 
                         <input type="text" class="checkout__address-home" name="street_address"
@@ -117,7 +117,7 @@
                     <div class="checkout__product-info">
                         <h2 class="checkout__product-info-title">Thông tin sản phẩm</h2>
                         <?php foreach ($dulieu as $data) : ?>
-                            <div class="checkout__product">
+<div class="checkout__product">
                                 <img src="<?= $data['image'] ?>" alt="T-shirt Nữ" class="checkout__product-image">
                                 <div class="checkout__product-details">
                                     <p class="checkout__product-name"><?= $data['product_name'] ?></p>
