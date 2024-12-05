@@ -48,6 +48,7 @@ if (strpos($urlPath, "{$basePath}/admin") === 0) {
         $urlPath === "{$basePath}/forgot" => fn() => require_once FRONTEND__CLIENT . "forgot.php",
         // $urlPath === "{$basePath}/change" => fn() => $Client->change(),
         $urlPath === "{$basePath}/order" => fn() => $Client->order(),
+        $urlPath === "{$basePath}/itemOrder" => fn() => $Client->itemOrder(),
 
 
 

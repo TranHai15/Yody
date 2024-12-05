@@ -93,8 +93,7 @@ class Model_Client
     // =============================Thắng làm 21/11/2024==================
     public function searchProducts($keyword)
     {
-        $sql = "
-    SELECT 
+        $sql = "SELECT 
         p.productId,
         p.name,
         MIN(v.price) AS new_price,
@@ -113,8 +112,7 @@ class Model_Client
     WHERE p.name LIKE :keyword
     GROUP BY p.productId
     ORDER BY p.productId
-    LIMIT 12;
-";
+    LIMIT 12;";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
@@ -473,6 +471,12 @@ LIMIT 4
     ";
         return getRaw($sql);
     }
+
+    public function getAllOrder($userId)
+    {
+        $sql = "SELECT o.*,pa.name AS paymethod, os.name AS statusDonhang, p.paymentStatus AS phuongthucTT from orders AS o JOIN pay AS pa ON o.payId = pa.payId    JOIN orderstatus  AS os ON o.statusId = os.statusId  JOIN paystatus AS p ON o.payStatusId = p.payStatusId where userId = $userId;";
+        return getRaw($sql);
+    }
     // ******************************* Đổ comment ra*************************
     public function getAllCommentWhereProductId($productId)
     {
@@ -498,5 +502,13 @@ GROUP BY
 
 ";
         return getRaw($sql);
+    }
+    // cap nhat ly do huy don
+    public function huydon($orderId)
+    {
+        $sql = "UPDATE orders SET  statusId = 2 WHERE orderId = :orderId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }
