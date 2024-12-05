@@ -48,6 +48,7 @@ class Controller_Client
         $idProduct = $Client->viewProduct($idVariation);
         // checkloi($idProduct);
         $Client->updateViewProduct($idProduct['productId']);
+        // checkloi($kq);
         $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idVariation);
         $productId = $OneVariations['productId'];
         $AllVariation = $Client->getAllVariationWhereProductId($productId);
@@ -655,12 +656,12 @@ class Controller_Client
             die();
         } else {
             // // checkloi($userId);
-            // $giohang = (new Model_Client);
-            // $dulieulayra = $giohang->getAllOrder($userId);
+            $giohang = (new Model_Client);
+            $dulieulayra = $giohang->getAlldulieudoraorderItemDetail($idOrder);
             // // checkloi($dulieulayra);
             // // checkloi
             // checkloi($idOrder);
         }
-        View(FRONTEND__CLIENT, $file, []);
+        View(FRONTEND__CLIENT, $file, ['dulieulayra' => $dulieulayra]);
     }
 }

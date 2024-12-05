@@ -161,11 +161,13 @@ class Model_Client
     {
         $sql = "SELECT p.view FROM products as p WHERE p.productId =$id";
         $soluong = getOne($sql);
-
+        // checkloi($id);
+        // checkloi($soluong);
         // $sql = "UPDATE products AS p SET p.`view` = $soluong+1 WHERE p.productId=$id";
         $dk = 'productId=' . $id;
-        $view = (int)$soluong + 1;
-
+        // checkloi($dk);
+        $view = (int)$soluong['view'] + 1;
+        // checkloi($view);
         $data = [
             'view' => $view
         ];
@@ -524,13 +526,42 @@ GROUP BY
     //*********************************************** */ Lấy dữ liệu đổ ra orderItemDetail******************************************
     public function getAlldulieudoraorderItemDetail($idOrder)
     {
-        $sql = "SELECT o.*, v.image as anhsp,v.color as mausp , s.size , os.name as trangthaidonhang , pa.paymentStatus as trangthaithanhtoan , p.name FROM `orderitems` as o JOIN variations as v on o.variationId = v.variationId 
-        JOIN sizevariations as s on o.sizeId = s.sizeId 
-        JOIN products as p on (SELECT pr.name FROM products as pr JOIN variations as va on va.productId = p.productId) 
-        JOIN orderstatus as os on o.statusId = os.statusId
-        JOIN paystatus as pa on o.payStatusId = pa.payStatusId
-
-        WHERE `orderId` = $idOrder ";
+        $sql = "SELECT 
+    o.*, 
+    v.image AS anhsp, 
+    v.color AS mausp, 
+    s.size, 
+    os.name AS trangthaidonhang, 
+    pa.paymentStatus AS trangthaithanhtoan, 
+    p.name AS tensanpham
+    FROM 
+        orderitems AS o
+    JOIN 
+        variations AS v ON o.variationId = v.variationId
+    JOIN 
+        products AS p ON v.productId = p.productId
+    JOIN 
+        sizevariations AS s ON o.sizeId = s.sizeId
+    JOIN 
+        orderstatus AS os ON o.statusId = os.statusId
+    JOIN 
+        paystatus AS pa ON o.payStatusId = pa.payStatusId
+    WHERE 
+        o.orderId = $idOrder;
+    ";
         return getRaw($sql);
+    }
+    // Hủy sản phẩm trong đơn hàng
+    public function cancelOrderItem($id, $lydo)
+    {
+        if (is_array($lydo)) {
+            $lydo = implode(", ", $lydo);
+        }
+
+        $sql = "UPDATE orderitems SET statusId = 8, lydo = :lydo WHERE orderitemId = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':lydo', $lydo, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }
