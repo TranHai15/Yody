@@ -48,6 +48,7 @@ class Controller_Client
         $idProduct = $Client->viewProduct($idVariation);
         // checkloi($idProduct);
         $Client->updateViewProduct($idProduct['productId']);
+        // checkloi($kq);
         $OneVariations = $Client->getAllVariationsWhereProductIdWhereVariationId($idVariation);
         $productId = $OneVariations['productId'];
         $AllVariation = $Client->getAllVariationWhereProductId($productId);

@@ -161,11 +161,13 @@ class Model_Client
     {
         $sql = "SELECT p.view FROM products as p WHERE p.productId =$id";
         $soluong = getOne($sql);
-
+        // checkloi($id);
+        // checkloi($soluong);
         // $sql = "UPDATE products AS p SET p.`view` = $soluong+1 WHERE p.productId=$id";
         $dk = 'productId=' . $id;
-        $view = (int)$soluong + 1;
-
+        // checkloi($dk);
+        $view = (int)$soluong['view'] + 1;
+        // checkloi($view);
         $data = [
             'view' => $view
         ];
