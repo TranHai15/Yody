@@ -197,3 +197,26 @@ if (isset($_GET['DeleteImageVariation'])) {
         echo json_encode(array('status' => 'error', 'message' => 'Xóa Không thành công'));
     }
 }
+
+if (isset($_GET['orderitemId'])) {
+    $orderID = $_GET['orderitemId'] ?? "";
+    $payStatus = $_GET['payStatus'] ?? "";
+    $statusId = $_GET['statusId'] ?? "";
+
+    $data = [
+        'statusId' => $statusId,
+        'payStatusId' => $payStatus
+    ];
+    $dk = "orderitemId=" . $orderID;
+
+    // echo $dk;
+    // checkloi($data);
+
+
+    $kq = update('orderitems', $data, $dk);
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'message' => 'Cập thành công'));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'Cập Không thành công'));
+    }
+}

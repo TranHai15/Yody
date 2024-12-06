@@ -164,7 +164,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
-                        alert('Cập nhật thành công!');
+                        // alert('Cập nhật thành công!');
+                        showNotification("Cập Nhật Thành Công")
                         document.getElementById(`update-btn-${orderitemId}`).classList.add('d-none');
                         document.getElementById(`cancel-btn-${orderitemId}`).classList.add('d-none');
 
@@ -193,5 +194,18 @@
         // Ẩn nút "Cập nhật" và "Hủy"
         updateButton.classList.add('d-none');
         cancelButton.classList.add('d-none');
+    }
+
+    function showNotification(message, type = "success") {
+        const notification = document.createElement("section");
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `<div><p>${message}</p></div>`;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.opacity = "0";
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
     }
 </script>

@@ -5,7 +5,9 @@
         <p class="text-center text-muted">Danh sách các tài khoản hiện có trên hệ thống</p>
     </div>
 
-
+    <?php showNotification('messageAddUser')  ?>
+    <?php showNotification('messageEditUser')  ?>
+    <?php showNotification('messageDeleteUser')  ?>
 
 
     <!-- Bảng quản lý tài khoản -->

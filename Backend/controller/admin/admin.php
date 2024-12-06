@@ -228,6 +228,7 @@ class Controller__Admin
 
             $data['url'] = $anh;
             (new Model_Admin)->addSlide('Slides', $data);
+            setsession('addSlide', 'Thêm thành công');
             header('Location: /Yody/admin?Slides');
         }
     }
@@ -238,6 +239,7 @@ class Controller__Admin
         $dk = "sildeId=" . $idSlide;
         $ketqua = delete('slides', $dk);
         if ($ketqua === true) {
+            setsession('deleteSlide', 'xoa thanh cong');
             header("Location:/Yody/admin?Slides ");
         };
     }
@@ -672,10 +674,10 @@ class Controller__Admin
             $idp = $id['maxProductId'];
 
             if ($kq) {
-                setsession('messageDeleteComment', "Thêm thành công");
+                setsession('messageAddProduct', "Thêm thành công");
                 header('Location: /Yody/admin?ViewProduct=' . $idp);
             } else {
-                setsession('messageDeleteComment', "Thêm Khồng thành công");
+                setsession('messageAddProduct', "Thêm Khồng thành công");
                 header('Location: /Yody/admin?ViewProduct=' . $idp);
             }
         }
@@ -814,6 +816,7 @@ class Controller__Admin
     {
         $Admin = new Model_Admin;
         $id = $_GET['orderItem'] ?? null;
+        // checkloi($id);
         $dataAllOrderStatus = $Admin->getAllOrderStatus();
         $dataAllPay = $Admin->getAllPay();
         $dataAllPayStatus = $Admin->getAllPayStatus();

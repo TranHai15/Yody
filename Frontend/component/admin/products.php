@@ -1,4 +1,6 @@
 <main id="main" class="main">
+    <?php showNotification('messageAddProduct')  ?>
+
     <div class="container mt-5">
         <h2 class="text-center mb-4">Danh Sách Sản Phẩm</h2>
 

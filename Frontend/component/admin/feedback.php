@@ -1,7 +1,7 @@
 <main id="main" class="main">
     <div class="container mt-5">
         <h2 class="text-center mb-4">Quản Lý Phản Hồi</h2>
-
+        <?php showNotification('messageDeletefeedback') ?>
         <!-- Bảng bình luận -->
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">

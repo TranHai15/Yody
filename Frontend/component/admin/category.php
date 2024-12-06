@@ -4,6 +4,9 @@
     }
 </style>
 <main id="main" class="main">
+    <?php showNotification('messageEditCategory')  ?>
+    <?php showNotification('messageDuyetComment')  ?>
+    <?php showNotification('messagedeleteCategory')  ?>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Danh Sách Danh Mục Sản Phẩm</h2>
 
@@ -60,7 +63,9 @@
                                         <th>Tên Danh Mục Cấp 2</th>
                                         <th>Đường dẫn</th>
                                         <th>Hành Động</th>
-                                        <th><a name="" id="" class="btn btn-primary" href="<?= P ?>/admin?addchild=<?= $cap1['categoryId'] ?>" role="button">Thêm</a>
+                                        <th><a name="" id="" class="btn btn-primary"
+                                                href="<?= P ?>/admin?addchild=<?= $cap1['categoryId'] ?>"
+                                                role="button">Thêm</a>
                                             </a>
                                         </th>
                                     </tr>
@@ -89,7 +94,8 @@
 
                                             </tr>
                                             <!-- Danh sách cấp 3 sẽ được ẩn và hiển thị khi nhấn vào nút Chi Tiết của cấp 2 -->
-                                            <tr class="common-category" id="common-category-<?= $cap2['childId'] ?>" style="display: none;">
+                                            <tr class="common-category" id="common-category-<?= $cap2['childId'] ?>"
+                                                style="display: none;">
                                                 <td colspan="5">
                                                     <table class="table table-bordered table-sm">
                                                         <thead class="thead-light">
@@ -98,7 +104,9 @@
                                                                 <th>Tên Danh Mục Cấp 3</th>
                                                                 <th>Đường dẫn</th>
                                                                 <th>Hành Động</th>
-                                                                <th><a name="" id="" class="btn btn-primary" href="<?= P ?>/admin?addCommont=<?= $cap2['childId'] ?>" role="button">Thêm</a>
+                                                                <th><a name="" id="" class="btn btn-primary"
+                                                                        href="<?= P ?>/admin?addCommont=<?= $cap2['childId'] ?>"
+                                                                        role="button">Thêm</a>
                                                                     </a>
                                                                 </th>
                                                             </tr>
