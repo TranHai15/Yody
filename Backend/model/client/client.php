@@ -553,6 +553,67 @@ LIMIT 4
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    public function UpdateQuantitykhihuydonhang($orderitemId)
+    {
+        $sql = " UPDATE sizevariations sv
+            JOIN (
+                SELECT sizeId, quantity
+                FROM orderitems
+                WHERE orderitemId = :orderitemId 
+            ) oi ON sv.sizeId = oi.sizeId
+            SET sv.quantity = sv.quantity + oi.quantity;
+        ";
+
+        // Chuẩn bị và thực thi truy vấn
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute(['orderitemId' => $orderitemId]);
+    }
+
+    public function cancelOrderAndUpdateQuantity($orderId)
+    {
+        // Bước 1: Lấy tất cả orderitemId, sizeId, quantity từ bảng orderitems với orderId
+        $sql = "
+        SELECT orderitemId, sizeId, quantity
+        FROM orderitems
+        WHERE orderId = :orderId
+    ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['orderId' => $orderId]);
+        $orderItems = $stmt->fetchAll();
+
+        // Bước 2: Duyệt qua các orderitemId để lấy sizeId và quantity, sau đó cập nhật bảng sizevariations
+        foreach ($orderItems as $item) {
+            $sizeId = $item['sizeId'];
+            $quantity = $item['quantity'];
+
+            // Bước 3: Lấy sizevariations và cộng quantity
+            $updateSql = "
+            UPDATE sizevariations
+            SET quantity = quantity + :quantity
+            WHERE sizeId = :sizeId
+        ";
+
+            $updateStmt = $this->conn->prepare($updateSql);
+            $updateStmt->execute([
+                'quantity' => $quantity,
+                'sizeId' => $sizeId
+            ]);
+        }
+
+        // Bước 4: (Tùy chọn) Cập nhật trạng thái đơn hàng trong bảng orders nếu cần
+        $updateOrderSql = "  UPDATE orders
+        SET statusId = 8, lydomuonhuydon = 'Đơn hàng bị hủy'
+        WHERE orderId = :orderId
+    ";
+
+        $updateOrderStmt = $this->conn->prepare($updateOrderSql);
+        $updateOrderStmt->execute(['orderId' => $orderId]);
+
+        return true; // Trả về true nếu mọi thứ thành công
+    }
+
+
     public function getAllCommentByProductId($id)
     {
         $sql = "SELECT pr.*, u.name AS nameuser,u.avata,

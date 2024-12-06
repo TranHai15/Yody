@@ -57,14 +57,18 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          alert("Gửi lý do thành công! Vui lòng đợi phản hồi!");
           // Ẩn popup và cập nhật UI nếu cần
+          showNotification("Gửi lý do thành công! Vui lòng đợi phản hồi!");
           popup.classList.remove("show");
           overlay.classList.remove("show");
-          location.reload();
+
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
           // Reload danh sách mặt hàng hoặc xóa trực tiếp mặt hàng trong giao diện
         } else {
-          alert("Hủy mặt hàng thất bại. Vui lòng thử lại!");
+          // alert("Hủy mặt hàng thất bại. Vui lòng thử lại!");
+          showNotification("Gửi lý do thất bại", "error");
         }
       })
       .catch((error) => {
@@ -73,3 +77,15 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+function showNotification(message, type = "success") {
+  const notification = document.createElement("section");
+  notification.className = `notification ${type}`;
+  notification.innerHTML = `<div><p>${message}</p></div>`;
+
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.style.opacity = "0";
+    setTimeout(() => notification.remove(), 300);
+  }, 5000);
+}

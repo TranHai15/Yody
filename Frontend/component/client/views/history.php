@@ -124,7 +124,7 @@
         </div>
     </div>
     <div id="overlay" class="hidden"></div>
-
+    <?php require_once(HF . "footer.php")  ?>
 </body>
 <script src="Frontend/Js/history.js"></script>
 

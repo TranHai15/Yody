@@ -75,6 +75,7 @@
 
     </div>
 
+    <?php require_once(HF . "footer.php")  ?>
 </body>
 <script src="Frontend/Js/orderItemDetail.js"></script>
 

@@ -37,8 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $updateLydo = (new Model_Client)->huydon($reasons, $orderId);
+    $kq = (new Model_Client)->cancelOrderAndUpdateQuantity($orderId);
     // checkloi($updateLydo);
-    if ($updateLydo) {
+    if ($updateLydo && $kq) {
         echo json_encode([
             'success' => true,
             'message' => 'Đã gửi yêu cầu hủy đơn hàng!'
