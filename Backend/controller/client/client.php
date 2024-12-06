@@ -120,10 +120,18 @@ class Controller_Client
         $id = $_GET['id'] ?? "";
         $cartId = $giohang->getRaCartIdTrongCart($id);
         $dulieu = $giohang->getCartItemsWithProductNameId($cartId['cartid']);
+        $iduser = $_SESSION['userId'] ?? null;
+
+        if ($iduser == null) {
+            echo " Loi khong lay dc id nguoi dun g";
+            return false;
+        }
+        $dulieuUser = getOne("select * from users where userId = $iduser");
+
         // checkloi($cartId);
         $tongTienPhaiTra = $giohang->tongtienTrongtotal_price($cartId['cartid']);
         $dataAllProvince = $giohang->getAllProvince();
-        View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra, 'dataAllProvince' => $dataAllProvince]);
+        View(FRONTEND__CLIENT, $file, ["cartId" => $cartId, "dulieu" => $dulieu, "tongTienPhaiTra" => $tongTienPhaiTra, 'dataAllProvince' => $dataAllProvince, 'dulieuUser' => $dulieuUser]);
     }
     public function register()
     {
@@ -506,8 +514,8 @@ class Controller_Client
                 $dataUser = get_user_data($email, 999);
                 // checkloi($dataUser['userId']);
                 $Code = generateRandomNumber();
-
-
+                $idUser = $dataUser["userId"];
+                setsession('forgotuserId', $idUser);
                 $dulieu = [
                     'forgots' => $Code
                 ];
@@ -516,7 +524,7 @@ class Controller_Client
                 if ($upadetForrgot) {
                     setsession('chaggePassword', 'Vui long nhap Mã đã gửi về Email bạn');
                     setsession('hienthi', 100);
-                    View(FRONTEND__CLIENT, 'forgot', ['dataUser' => $dataUser]);
+                    View(FRONTEND__CLIENT, 'forgot', ['idUser' => $idUser]);
                 } else {
                     setsession('chaggePassword', 'Lỗi Kĩ thuật');
                 }
@@ -529,27 +537,72 @@ class Controller_Client
     public function change()
     {
         if (isPost()) {
-            $data = filter();
-            $userId = $data['userId'] ?? "";
-            $cdoe = $data['CODE'] ?? "";
+            $data = filter(); // Lấy dữ liệu từ filter() (giả sử bạn đã định nghĩa filter)
+            $userId = $data['userId'] ?? null;  // Lấy userId từ data, nếu không có thì gán giá trị rỗng
 
-            $check = getOne("select forgots from users where userId=$userId");
-            // checkloi($check);
-            if (strlen($check['forgots']) < 2) {
-                setsession('change', 'Vui Long thu lai');
-                setsession('hienthi', 100);
-                View(FRONTEND__CLIENT, 'forgot', []);
-                return;
-            } else {
-                if ($cdoe == $check['forgots']) {
-                    setsession('changeMessage', 'vui long nhap mat khau moi');
-                    View(FRONTEND__CLIENT, 'chaggePassword', ['data' => $userId]);
-                    return;
-                } else {
-                    setsession('change', 'Vui Long thu lai');
+            $cdoe = $data['CODE'] ?? ""; // Lấy CODE từ data, nếu không có thì gán giá trị rỗng
+            $idUser =  $userId ?? $_SESSION['forgotuserId'];
+            $db = Connect();
+
+            // checkloi($data);
+            if (!empty($userId)) {
+                try {
+
+
+                    // Câu lệnh SQL an toàn với prepared statement
+                    $query = "SELECT forgots FROM users WHERE userId = ?";
+                    $stmt = $db->prepare($query);
+                    $stmt->execute([$idUser]);
+                    $check = $stmt->fetch(PDO::FETCH_ASSOC);
+                    // checkloi($check);
+                    // Kiểm tra nếu có dữ liệu trả về
+                    if ($check && isset($check['forgots'])) {
+                        $forgots = $check['forgots'];
+                        $dodai = strlen($forgots); // Kiểm tra độ dài chuỗi forgots
+
+                        // Kiểm tra độ dài mã xác nhận
+                        if ($dodai != 6) {
+                            checkloi($idUser);
+                            // Nếu độ dài không phải là 6, thông báo lỗi
+                            setsession('change', 'Vui lòng thử lại');
+                            setsession('hienthi', 100);
+                            View(FRONTEND__CLIENT, 'forgot', ['idUser' => $idUser]);
+                            return;
+                        } else {
+                            // Kiểm tra mã CODE người dùng nhập vào có khớp với mã forgots không
+                            if ($cdoe == $forgots) {
+                                // Nếu mã khớp, yêu cầu nhập mật khẩu mới
+                                setsession('changeMessage', 'Vui lòng nhập mật khẩu mới');
+                                View(FRONTEND__CLIENT, 'chaggePassword', ['data' => $userId]);
+                                return;
+                            } else {
+                                // Nếu mã không khớp, thông báo lỗi
+                                setsession('change', 'Mã không đúng, vui lòng thử lại');
+                                setsession('hienthi', 100);
+                                View(FRONTEND__CLIENT, 'forgot', []);
+                                return;
+                            }
+                        }
+                    } else {
+                        // Trường hợp không tìm thấy dữ liệu trong cơ sở dữ liệu
+                        setsession('change', 'Lỗi kĩ thuật, Vui lòng thử lại');
+                        setsession('hienthi', 100);
+                        View(FRONTEND__CLIENT, 'forgot', ['idUser' => $idUser]);
+                        return;
+                    }
+                } catch (PDOException $e) {
+                    // Xử lý lỗi khi truy vấn SQL thất bại
+                    setsession('change', 'Lỗi cơ sở dữ liệu: ' . $e->getMessage());
                     setsession('hienthi', 100);
-                    View(FRONTEND__CLIENT, 'forgot', []);
+                    View(FRONTEND__CLIENT, 'forgot', ['idUser' => $idUser]);
+                    return;
                 }
+            } else {
+                // Trường hợp không có userId
+                setsession('change', 'Thiếu thông tin người dùng');
+                setsession('hienthi', 100);
+                View(FRONTEND__CLIENT, 'forgot', ['idUser' => $idUser]);
+                return;
             }
         }
     }

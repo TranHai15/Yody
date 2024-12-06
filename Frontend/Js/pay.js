@@ -143,6 +143,8 @@ document.querySelector(".checkout").addEventListener("submit", function (e) {
   const streetInput = document.querySelector('[name="street_address"]');
   if (!validateStreet(streetInput)) isValid = false;
 
+  const aaa = document.querySelector("#district").value;
+
   // Nếu có lỗi, ngăn không cho gửi form
   if (!isValid) {
     e.preventDefault();

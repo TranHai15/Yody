@@ -60,7 +60,7 @@ overlay.addEventListener("click", function () {
 const soluong = localStorage.getItem("cartNumber");
 if (soluong) {
   document.querySelector(".soluongCart").style.display = "block";
-  console.log(soluong);
-  const aa = (document.querySelector(".numberCart").innerText = soluong);
-  console.log(aa);
+  // console.log(soluong);
+  document.querySelector(".numberCart").innerText = soluong;
+  // console.log(aa);
 }

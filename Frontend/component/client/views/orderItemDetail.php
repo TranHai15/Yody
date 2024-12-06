@@ -22,7 +22,8 @@
                         <div class="item-info">
                             <h3><?= $data['tensanpham'] ?></h3>
                             <p>Số Lượng: <?= $data['quantity'] ?></p>
-                            <p>Đơn Giá: <?= $data['price'] > 0 ? "" . number_format($data['price'], 0, ',', '.') . "đ" : ""; ?></p>
+                            <p>Đơn Giá: <?= $data['price'] > 0 ? "" . number_format($data['price'], 0, ',', '.') . "đ" : ""; ?>
+                            </p>
                             <p>
                                 <select name="" id="" disabled>
                                     <option value="">
@@ -39,9 +40,7 @@
                         </div>
 
                         <!-- Nút hủy mặt hàng -->
-                        <button
-                            class="btn btn-cancel"
-                            data-item-id="<?= $data['orderitemId'] ?>"
+                        <button class="btn btn-cancel" data-item-id="<?= $data['orderitemId'] ?>"
                             <?= $data['idtrangthaidonhang'] == 8 ? 'disabled' : '' ?>>
                             Hủy Mặt Hàng
                         </button>

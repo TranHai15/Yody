@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
         deleteCartItem(idCartItemsss);
         // const idC = checkbox.closest(".product__item").dataset.cartitem;
         // console.log(idCartItemsss);
-        window.location.href = window.location.href;
       } else {
         alert("df");
       }
@@ -196,7 +195,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.querySelector("#btn__confirm").addEventListener("click", (e) => {
   e.preventDefault();
-  console.log();
   const check = document.querySelector(".sumPricess").innerText;
   console.log(check.length > 3);
   if (check.length > 3) {
@@ -214,18 +212,27 @@ async function deleteCartItem(id) {
 
     // Kiểm tra phản hồi từ backend
     if (!response.ok) {
+      showNotification("Xóa không thành công", "error");
       throw new Error("Yêu cầu không thành công");
     }
+    showNotification("Xóa thành công");
 
-    // const result = await response.json();
-    // console.log(result.data.total);
-    // const price = result.data.total;
-    // console.log(price);
-    // updateTotalPrice(price);
-    // return result; // Trả về kết quả JSON nhận được từ backend
-    console.log(response);
+    // console.log(response);
   } catch (error) {
     console.error("Lỗi khi cập nhật giỏ hàng:", error);
     return { status: false, message: "Không thể cập nhật giỏ hàng." };
   }
+}
+function showNotification(message, type = "success") {
+  const notification = document.createElement("section");
+  notification.className = `notification ${type}`;
+  notification.innerHTML = `<div><p>${message}</p></div>`;
+
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.style.opacity = "0";
+    window.location.href = window.location.href;
+    setTimeout(() => notification.remove(), 300);
+  }, 5000);
 }

@@ -24,7 +24,7 @@
                             <div class="ooooo">
 
                                 <input type="text" class="checkout__receiver-input ooooo" name="customer_name"
-                                    placeholder="Tên khách hàng">
+                                    value="<?= $dulieuUser['name'] ?? "" ?>" placeholder="Tên khách hàng">
                                 <span class="error-message"></span>
                             </div>
                         </div>
@@ -41,14 +41,16 @@
                         <div class="ooooo">
 
                             <input type="email" class="checkout__receiver-input ooooo" name="email"
-                                placeholder="Địa chỉ email (không bắt buộc)">
+                                value="<?= $dulieuUser['email'] ?? "" ?>" placeholder="Địa chỉ email (không bắt buộc)">
                         </div>
                     </div>
 
                     <div class="checkout__address">
                         <label for="address" class="checkout__receiver-title">Địa chỉ của bạn</label>
                         <label class="romm--title" for="province">Tỉnh Thành Phố</label>
-                        <select id="address" name="province_id" class="checkout__address-select">
+                        <select id="address" name="province_id" class="checkout__address-select"
+                            placeholder="Chọn Tỉnh">
+                            <option value="chuchon" placeholder="Chọn Tỉnh">Chọn Tỉnh</option>
                             <?php foreach ($dataAllProvince as $Pro): ?>
                                 <option value="<?= $Pro['province_id'] ?>"><?= $Pro['name'] ?></option>
                             <?php endforeach ?>

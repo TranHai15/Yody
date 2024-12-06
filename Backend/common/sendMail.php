@@ -25,6 +25,7 @@ function sendMail($to, $subject, $content)
         $mail->Password   = 'okkthrszxabehnmt'; // Mật khẩu ứng dụng
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
+        $mail->CharSet    = 'UTF-8';
 
         // Recipients
         $mail->setFrom('tranvanhai52005@gmail.com', 'Hai'); // Email và tên hiển thị

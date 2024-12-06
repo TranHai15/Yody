@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <?php require_once(HF . "header.php")  ?>
     <!-- past -->
 
@@ -70,7 +71,13 @@
                         </span>
                         <span class="rating">4.8</span>
                         <a href="#" class="rating-count">(120)</a>
-                        <span class="sold-count">Đã bán 964</span>
+                        <span class="sold-count">Số lượng
+                            <span id="soluongsizeId">
+                                <?php foreach ($AllSize as $size): ?>
+                                    <?= $size['sizeId'] == $OneVariations['sizeId'] ? $size['quantity'] : '' ?>
+                                <?php endforeach; ?>
+                            </span>
+                        </span>
                     </div>
 
                     <div class="detail__right--price row align-items-center">
@@ -131,7 +138,7 @@
                     </div>
                     <div>
                         <h3 class="detail__number">Số lượng</h3>
-                        <div class="row justify-content-between align-items-center">
+                        <div class="row justify-content-between align-items-center  ">
                             <div class="number row align-items-center">
                                 <button id="decrease " class="btn giam" onclick="updateSoLuongChon(-1)">-</button>
                                 <span id="soluongchon" class="hienthi">1</span>

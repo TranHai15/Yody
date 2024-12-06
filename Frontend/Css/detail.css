@@ -215,7 +215,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 1.2rem 2rem;
+  padding: 0.8rem 2rem;
   border: 1px solid rgb(219, 219, 219);
   border-radius: 10px;
 }
@@ -507,6 +507,12 @@ textarea {
   height: 70px;
   background-color: transparent;
   margin-top: 10px;
+}
+.soluongkhongcon {
+  color: #888 !important;
+  border: 1px solid #888;
+  pointer-events: none;
+  user-select: none; /* Ngừng chọn văn bản */
 }
 
 .no-feedback {

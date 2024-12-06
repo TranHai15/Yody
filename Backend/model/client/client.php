@@ -152,6 +152,11 @@ class Model_Client
         $sql = "SELECT SUM(ca.quantity) as total_quantity FROM carts AS c JOIN cartitems AS ca ON c.cartId = ca.cartId  WHERE userId = $id";
         return getRaw($sql);
     }
+    public function getNumberbysizeID($iduser, $sizeId)
+    {
+        $sql = "SELECT SUM(ca.quantity) as total_quantity FROM carts AS c JOIN cartitems AS ca ON c.cartId = ca.cartId  WHERE userId = $iduser AND sizeId = $sizeId";
+        return getOne($sql);
+    }
     public function viewProduct($id)
     {
         $sql = "SELECT p.productId FROM products as p JOIN variations as v on p.productId = v.productId WHERE v.variationId =$id ";
@@ -476,7 +481,7 @@ LIMIT 4
 
     public function getAllOrder($userId)
     {
-        $sql = "SELECT o.*,pa.name AS paymethod, os.name AS statusDonhang, p.paymentStatus AS phuongthucTT from orders AS o JOIN pay AS pa ON o.payId = pa.payId    JOIN orderstatus  AS os ON o.statusId = os.statusId  JOIN paystatus AS p ON o.payStatusId = p.payStatusId where userId = $userId;";
+        $sql = "SELECT o.*,pa.name AS paymethod, os.name AS statusDonhang, p.paymentStatus AS phuongthucTT from orders AS o JOIN pay AS pa ON o.payId = pa.payId    JOIN orderstatus  AS os ON o.statusId = os.statusId  JOIN paystatus AS p ON o.payStatusId = p.payStatusId where userId = $userId ORDER BY o.orderId DESC;";
         return getRaw($sql);
     }
     // ******************************* Đổ comment ra*************************
