@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Frontend/Css/detail.css">
+    <link rel="stylesheet" href="Frontend/Css/detail.css?ver=2">
     <title>detail</title>
 
 </head>
