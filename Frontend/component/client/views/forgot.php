@@ -11,7 +11,7 @@
                 <form action="<?= P ?>/auth?action=change" method="POST" onsubmit="return validate__login()"
                     class="form__login">
                     <div class="input-container">
-                        <input type="hidden" name="userId" id="userid" value="<?= $dataUser['userId'] ?? "" ?>">
+                        <input type="hidden" name="userId" id="userid" value="<?= $idUser ?? $_SESSION['forgotuserId'] ?>">
                         <div class="form">
                             <input type="text" name="CODE" id="text" class="form_input" autocomplete="off" placeholder=" ">
                             <label for="email" class="form_label">MÃ Code</label>

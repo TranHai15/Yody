@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Ví dụ: gọi hàm hủy mặt hàng trong DB
         $gioHang = new Model_Client;
         $result = $gioHang->cancelOrderItem($orderItemId, $reason);
+        $gioHang->UpdateQuantitykhihuydonhang($orderItemId);
+
         // checkloi($result);
         if ($result) {
             echo json_encode(['success' => true]);

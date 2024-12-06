@@ -224,6 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json(); // Đọc phản hồi JSON từ server
 
       if (result.success) {
+        // alert("thanhcong");
+        showNotification("Hủy Thành Công");
         hidePopup(); // Ẩn popup sau khi xử lý thành công
 
         // Cập nhật trạng thái nút
@@ -232,13 +234,16 @@ document.addEventListener("DOMContentLoaded", () => {
             button.setAttribute("disabled", "true"); // Thêm thuộc tính disabled
             button.classList.add("disabled"); // Thêm class để thay đổi giao diện
             button.textContent = "Đã hủy"; // Thay đổi nội dung nút (nếu cần)
-            location.reload();
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
           }
         });
 
         // Option: location.reload(); Nếu cần làm mới trang
       } else {
         alert(result.message || "Đã xảy ra lỗi!");
+        showNotification("Hủy Thất bại", "error");
       }
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
@@ -250,3 +255,15 @@ document.addEventListener("DOMContentLoaded", () => {
   closeFormButton.addEventListener("click", hidePopup);
   overlayElement.addEventListener("click", hidePopup);
 });
+function showNotification(message, type = "success") {
+  const notification = document.createElement("section");
+  notification.className = `notification ${type}`;
+  notification.innerHTML = `<div><p>${message}</p></div>`;
+
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.style.opacity = "0";
+    setTimeout(() => notification.remove(), 300);
+  }, 5000);
+}

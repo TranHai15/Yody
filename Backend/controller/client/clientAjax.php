@@ -120,6 +120,17 @@ if (isset($_GET['soluong'])) {
         echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
     }
 }
+if (isset($_GET['soluongsizeId'])) {
+    $id = $_GET['soluongsizeId'] ?? "";
+    $sizeId = $_GET['sizeId'] ?? "";
+    $kq = (new Model_Client)->getNumberbysizeID($id, $sizeId);
+    $sl = $kq['total_quantity'];
+    if ($kq) {
+        echo json_encode(array('status' => 'success', 'soluong' => $sl));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'loi Không thành công'));
+    }
+}
 if (isPost()) {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -260,5 +271,21 @@ if (isset($_GET['addComment'])) {
         }
     } else {
         echo json_encode(array('status' => 'error', 'message' => 'Lỗi kĩ thuật'));
+    }
+}
+
+if (isset($_GET['checksoluongsize'])) {
+    $sizeid = $_GET['checksoluongsize'] ?? null;
+    if (!$sizeid == null) {
+        $sql = "SELECT quantity FROM sizevariations WHERE sizeId = $sizeid";
+        $kq = getOne($sql);
+        // checkloi($kq);
+        if ($kq) {
+            echo json_encode(array('status' => 'success', 'soluong' => $kq['quantity']));
+        } else {
+            echo json_encode(array('status' => 'error', 'message' => 'Lỗi lấy số lượng sản phẩm'));
+        }
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'Lỗi lấy số lượng sản phẩm'));
     }
 }

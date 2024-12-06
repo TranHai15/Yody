@@ -152,6 +152,11 @@ class Model_Client
         $sql = "SELECT SUM(ca.quantity) as total_quantity FROM carts AS c JOIN cartitems AS ca ON c.cartId = ca.cartId  WHERE userId = $id";
         return getRaw($sql);
     }
+    public function getNumberbysizeID($iduser, $sizeId)
+    {
+        $sql = "SELECT SUM(ca.quantity) as total_quantity FROM carts AS c JOIN cartitems AS ca ON c.cartId = ca.cartId  WHERE userId = $iduser AND sizeId = $sizeId";
+        return getOne($sql);
+    }
     public function viewProduct($id)
     {
         $sql = "SELECT p.productId FROM products as p JOIN variations as v on p.productId = v.productId WHERE v.variationId =$id ";
@@ -476,7 +481,7 @@ LIMIT 4
 
     public function getAllOrder($userId)
     {
-        $sql = "SELECT o.*,pa.name AS paymethod, os.name AS statusDonhang, p.paymentStatus AS phuongthucTT from orders AS o JOIN pay AS pa ON o.payId = pa.payId    JOIN orderstatus  AS os ON o.statusId = os.statusId  JOIN paystatus AS p ON o.payStatusId = p.payStatusId where userId = $userId;";
+        $sql = "SELECT o.*,pa.name AS paymethod, os.name AS statusDonhang, p.paymentStatus AS phuongthucTT from orders AS o JOIN pay AS pa ON o.payId = pa.payId    JOIN orderstatus  AS os ON o.statusId = os.statusId  JOIN paystatus AS p ON o.payStatusId = p.payStatusId where userId = $userId ORDER BY o.orderId DESC;";
         return getRaw($sql);
     }
     // ******************************* Đổ comment ra*************************
@@ -548,6 +553,67 @@ LIMIT 4
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    public function UpdateQuantitykhihuydonhang($orderitemId)
+    {
+        $sql = " UPDATE sizevariations sv
+            JOIN (
+                SELECT sizeId, quantity
+                FROM orderitems
+                WHERE orderitemId = :orderitemId 
+            ) oi ON sv.sizeId = oi.sizeId
+            SET sv.quantity = sv.quantity + oi.quantity;
+        ";
+
+        // Chuẩn bị và thực thi truy vấn
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute(['orderitemId' => $orderitemId]);
+    }
+
+    public function cancelOrderAndUpdateQuantity($orderId)
+    {
+        // Bước 1: Lấy tất cả orderitemId, sizeId, quantity từ bảng orderitems với orderId
+        $sql = "
+        SELECT orderitemId, sizeId, quantity
+        FROM orderitems
+        WHERE orderId = :orderId
+    ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['orderId' => $orderId]);
+        $orderItems = $stmt->fetchAll();
+
+        // Bước 2: Duyệt qua các orderitemId để lấy sizeId và quantity, sau đó cập nhật bảng sizevariations
+        foreach ($orderItems as $item) {
+            $sizeId = $item['sizeId'];
+            $quantity = $item['quantity'];
+
+            // Bước 3: Lấy sizevariations và cộng quantity
+            $updateSql = "
+            UPDATE sizevariations
+            SET quantity = quantity + :quantity
+            WHERE sizeId = :sizeId
+        ";
+
+            $updateStmt = $this->conn->prepare($updateSql);
+            $updateStmt->execute([
+                'quantity' => $quantity,
+                'sizeId' => $sizeId
+            ]);
+        }
+
+        // Bước 4: (Tùy chọn) Cập nhật trạng thái đơn hàng trong bảng orders nếu cần
+        $updateOrderSql = "  UPDATE orders
+        SET statusId = 8, lydomuonhuydon = 'Đơn hàng bị hủy'
+        WHERE orderId = :orderId
+    ";
+
+        $updateOrderStmt = $this->conn->prepare($updateOrderSql);
+        $updateOrderStmt->execute(['orderId' => $orderId]);
+
+        return true; // Trả về true nếu mọi thứ thành công
+    }
+
+
     public function getAllCommentByProductId($id)
     {
         $sql = "SELECT pr.*, u.name AS nameuser,u.avata,
