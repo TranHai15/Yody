@@ -17,7 +17,6 @@
             <input type="text" class="form-control" id="name" name="past" value="<?= $getOne['past'] ?>">
             <span class="error-message text-danger"
                 id="nameError"><?= getsession('errorPastCategory') ?? "" ?></span>
-
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Images</label>
