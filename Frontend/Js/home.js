@@ -96,9 +96,12 @@ autoSlideInterval = setInterval(goToNextSlide, 3000);
 updateSlide();
 
 const lichsuluulia = localStorage.getItem("dangnhapmuahang");
-// console.log(lichsuluulia);
+console.log(lichsuluulia);
+
 if (lichsuluulia !== null) {
-  window.location.href = lichsuluulia;
+  setTimeout(() => {
+    window.location.href = lichsuluulia;
+  }, 2000);
   localStorage.removeItem("dangnhapmuahang");
 }
 document.querySelectorAll(".product__variation-link").forEach((link) => {

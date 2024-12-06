@@ -111,8 +111,10 @@
                         </div>
                         <span class="product__name"><?= $data['name'] ?></span>
                         <div class="product__price row align-items-center">
-                            <span class="price__new"><?= number_format($data['new_price'] - ($data['new_price'] * ($data['old_price'] / 100)), 0, ',', '.') ?>đ</span>
-                            <span class="price__old"><?= $data['old_price'] > 0 ? number_format($data['new_price'], 0, ',', '.') . "đ" : ""; ?></span>
+                            <span
+                                class="price__new"><?= number_format($data['new_price'] - ($data['new_price'] * ($data['old_price'] / 100)), 0, ',', '.') ?>đ</span>
+                            <span
+                                class="price__old"><?= $data['old_price'] > 0 ? number_format($data['new_price'], 0, ',', '.') . "đ" : ""; ?></span>
                         </div>
                         <div class="product__variation row align-items-center">
                             <?php $variations = json_decode($data['variations'], true);

@@ -135,13 +135,18 @@ document.querySelector(".add__cart").addEventListener("click", () => {
     showNotification("Số lượng tồn kho không đủ", "error");
     return;
   }
+  let timeOut;
 
   if (!userId) {
-    alert("Vui lòng đăng nhập!");
+    // alert("Vui lòng đăng nhập!");
+    showNotification("Vui lòng đăng nhập", "error");
     localStorage.setItem("dangnhapmuahang", window.location.href);
-    window.location.href = "/Yody/auth?action=login";
+    timeOut = setTimeout(() => {
+      window.location.href = "/Yody/auth?action=login";
+    }, 1000);
     return;
   }
+  clearTimeout(timeOut);
 
   fetch(
     `Backend/controller/client/clientAjax.php?addcart=${userId}&variationId=${variationId}&sizeId=${getSizeValue}&quantity=${soluongchon}&price=${tonggia}`
@@ -182,13 +187,18 @@ document.querySelector(".cate__new").addEventListener("click", () => {
     showNotification("Số lượng tồn kho không đủ", "error");
     return;
   }
+  let timeOut;
 
   if (!userId) {
-    alert("Vui lòng đăng nhập!");
+    // alert("Vui lòng đăng nhập!");
+    showNotification("Vui lòng đăng nhập", "error");
     localStorage.setItem("dangnhapmuahang", window.location.href);
-    window.location.href = "/Yody/auth?action=login";
+    timeOut = setTimeout(() => {
+      window.location.href = "/Yody/auth?action=login";
+    }, 1000);
     return;
   }
+  clearTimeout(timeOut);
 
   fetch(
     `Backend/controller/client/clientAjax.php?addcart=${userId}&variationId=${variationId}&sizeId=${getSizeValue}&quantity=${soluongchon}&price=${tonggia}`
@@ -265,10 +275,19 @@ function getnumberbyorderitem(userId, sizeid) {
     });
 }
 //
-
+let idnguoidung = userId;
 function submitComment() {
+  if (!idnguoidung) {
+    // alert("Vui lòng đăng nhập!");
+    showNotification("Vui lòng đăng nhập", "error");
+    localStorage.setItem("dangnhapmuahang", window.location.href);
+    timeOut = setTimeout(() => {
+      window.location.href = "/Yody/auth?action=login";
+    }, 1000);
+  }
   var commentText = document.getElementById("commentText").value;
-  // console.log("🚀 ~ submitComment ~ commentText:", commentText);
+  console.log("🚀 ~ submitComment ~ commentText:", commentText);
+
   const productId = document
     .querySelector(".detail")
     .getAttribute("data-productId");

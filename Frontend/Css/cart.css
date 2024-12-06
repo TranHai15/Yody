@@ -211,10 +211,10 @@ body {
   align-items: center; /* Căn giữa theo chiều ngang */
   text-align: center; /* Căn giữa nội dung text */
   min-height: 200px; /* Chiều cao tối thiểu */
-  background-color: #f9f9f9; /* Màu nền tùy chọn */
+  background-color: #fff; /* Màu nền tùy chọn */
   padding: 20px; /* Khoảng cách bên trong */
-  border-radius: 8px; /* Bo góc cho đẹp */
-  border: 1px solid #ddd; /* Viền nhạt */
+  /* border-radius: 8px; Bo góc cho đẹp */
+  /* border: 1px solid #ddd; Viền nhạt */
 }
 
 .themgioHang p {

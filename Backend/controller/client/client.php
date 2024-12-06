@@ -177,13 +177,14 @@ class Controller_Client
 
                             $ketQua = insert('users',  $data_user);
 
-                            View(FRONTEND__CLIENT, 'login', []);
+
 
                             if ($ketQua) {
                                 setsession('acount', 'Tạo tài khoản thành công');
                             } else {
                                 setsession('acount',  'Tạo tài khoản thất bại');
                             }
+                            View(FRONTEND__CLIENT, 'login', []);
                         } else {
                             setsession('errorPass',  "Mật khẩu phải dài hơn 6 kí tự");
                         }
@@ -260,7 +261,11 @@ class Controller_Client
             'active' => 0
         ];
         $kq = update('users', $data, "userId=$id");
-        header('Location: /Yody/');
+        setsession('loginaccoun', 'Đăng xuất thành công');
+        // header('Location: /Yody/');
+        // View(FRONTEND__CLIENT, 'Home', []);
+        $this->List();
+        exit;
     }
 
     public function goiEvent($file = 'event')
