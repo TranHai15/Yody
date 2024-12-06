@@ -509,6 +509,18 @@ LIMIT 4
 
         return $stmt->execute();
     }
+
+    // **********************************************Cập nhật lại trạng thái khi hủy ở ngoài*************************************************
+    public function updateTrangthaiTrongKhihuyBenNgoai($orderId)
+    {
+        $sql = "UPDATE orderitems
+        SET statusId = 8
+        WHERE orderId = $orderId;
+        ";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
+
     //*********************************************** */ Lấy dữ liệu đổ ra orderItemDetail******************************************
     public function getAlldulieudoraorderItemDetail($idOrder)
     {
@@ -613,7 +625,27 @@ LIMIT 4
         return true; // Trả về true nếu mọi thứ thành công
     }
 
+    public function getOneOrderIDByOrderItem($orderitemId)
+    {
+        $sql = "SELECT orderId FROM orderitems WHERE orderitemId = :orderitemId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['orderitemId' => $orderitemId]);
+        return $stmt->fetch();
+    }
+    public function kiemtraOrderId($orderId)
+    {
+        $sql = "SELECT COUNT(*) FROM orderitems WHERE orderId = :orderId AND statusId != 8";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['orderId' => $orderId]);
 
+        return $stmt->fetchColumn();
+    }
+    public function updateLaiKhihuyhetbentrong($orderId)
+    {
+        $sql = "UPDATE orders SET statusId = 8 WHERE orderId = :orderId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['orderId' => $orderId]);
+    }
     public function getAllCommentByProductId($id)
     {
         $sql = "SELECT pr.*, u.name AS nameuser,u.avata,

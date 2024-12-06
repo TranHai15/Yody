@@ -38,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $updateLydo = (new Model_Client)->huydon($reasons, $orderId);
     $kq = (new Model_Client)->cancelOrderAndUpdateQuantity($orderId);
+    (new Model_Client)->updateTrangthaiTrongKhihuyBenNgoai($orderId);
+
     // checkloi($updateLydo);
     if ($updateLydo && $kq) {
         echo json_encode([

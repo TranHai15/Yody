@@ -245,3 +245,35 @@ textarea:focus {
     font-size: 20px;
   }
 }
+.top-title a {
+  display: inline-block;
+  font-size: 18px;
+  padding: 12px 25px;
+  background-color: #3498db; /* Màu xanh đẹp */
+  color: white;
+  text-decoration: none;
+  border-radius: 30px; /* Bo tròn góc */
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho nút */
+}
+
+.top-title a:hover {
+  background-color: #2980b9; /* Màu tối hơn khi hover */
+  transform: translateY(-3px); /* Di chuyển lên khi hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng đẹp */
+}
+
+.top-title a:active {
+  transform: translateY(1px); /* Hiệu ứng khi click */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-title a::before {
+  content: "←"; /* Thêm biểu tượng mũi tên */
+  margin-right: 8px;
+  font-size: 20px;
+  font-weight: normal;
+}

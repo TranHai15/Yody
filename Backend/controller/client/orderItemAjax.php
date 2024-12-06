@@ -20,6 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $gioHang = new Model_Client;
         $result = $gioHang->cancelOrderItem($orderItemId, $reason);
         $gioHang->UpdateQuantitykhihuydonhang($orderItemId);
+        $orderId = (new Model_Client)->getOneOrderIDByOrderItem($orderItemId);
+        $idkk = $orderId['orderId'];
+        $kt = (new Model_Client)->kiemtraOrderId($idkk);
+        // checkloi($kt);
+        if ($kt === 0) {
+            (new Model_Client)->updateLaiKhihuyhetbentrong($idkk);
+        }
 
         // checkloi($result);
         if ($result) {

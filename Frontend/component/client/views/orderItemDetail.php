@@ -11,7 +11,11 @@
 <body>
 
     <div class="container">
-        <h1>Chi Tiết Đơn Hàng</h1>
+        <div class="top-title">
+            <a href="<?= P ?>/history">Quay lại</a>
+            <h1>Chi Tiết Đơn Hàng</h1>
+
+        </div>
         <div class="order-details">
 
             <?php if (!empty($dulieulayra)) : ?>
